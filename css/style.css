@@ -20,27 +20,13 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #003366;
+    background-color: #06509f;
     color: #fff;
     padding: 10px 20px;
 }
 
 header h1 {
     font-size: 1.5em;
-}
-
-.header-buttons button {
-    margin-left: 10px;
-    padding: 8px 12px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.header-buttons button:hover {
-    background-color: #0056b3;
 }
 
 /* Container */
@@ -69,19 +55,6 @@ header h1 {
     border-radius: 4px;
 }
 
-.search-container button {
-    padding: 5px;
-    border: none;
-    background-color: #007BFF;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.search-container button:hover {
-    background-color: #0056b3;
-}
-
 .side-menu ul {
     list-style-type: none;
 }
@@ -106,6 +79,31 @@ header h1 {
     padding: 20px;
 }
 
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-buttons button {
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+}
+
+.table-buttons button a {
+    display: inline-block;
+}
+
+hr {
+    color: #d5d8dc;
+}
+
+.proposals {
+    padding-top: 2em;
+}
 table {
     width: 100%;
     border-collapse: collapse;

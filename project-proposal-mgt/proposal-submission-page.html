@@ -19,9 +19,6 @@
     <div class="container">
         <!-- Side Menu -->
         <nav class="side-menu">
-            <div class="search-container">
-                <input type="text" id="search-bar" placeholder="Search">
-            </div>
             <ul>
                 <li><a href="#">Create New Proposal</a></li>
                 <li><a href="#">All Proposals</a></li>
@@ -170,6 +167,9 @@
 
             // show the form data in a pop-up message
             alert(`Proposal submitted successfully!\n\n${displayMessage}`);
+
+            // reload page after successful submission
+            location.reload();
         });
     </script>
 </body>

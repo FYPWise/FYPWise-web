@@ -1,0 +1,83 @@
+/* Styling for Forms */
+.content .form-title {
+    color: #06509f;
+    margin-bottom: 0.5em;
+}
+
+.content hr{
+    margin-bottom: 1em;
+}
+
+.proposal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    background-color: #f9f9f9;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-group label {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: #06509f;
+    width: 20%;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 0.15em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 80%;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+}
+
+.radio-group input {
+    margin-right: 0.2em;
+}
+
+.radio-group label {
+    width: 15em;
+    white-space: nowrap;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1em;
+    justify-content: flex-start;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #fff;
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+}
+
+.reset-btn {
+    background-color: #e74c3c;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}

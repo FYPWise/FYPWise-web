@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proposal Submission</title>
     <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <link rel="stylesheet" href="../css/form-style.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -32,9 +33,10 @@
         <!-- Proposal Submission Form -->
         <div class="content">
             <h2 class="form-title">Proposals Submission</h2>
+            <hr />
             <form class="proposal-form" id="proposalForm">
-                <!-- Auto-Generated Proposal ID -->
-                <div class="form-group">
+                <!-- auto-generated Proposal ID -->
+                <div class="form-group ">
                     <label for="proposal-id">Proposal ID</label>
                     <p id="proposal-id" class="proposal-id"></p>
                 </div>
@@ -85,7 +87,7 @@
                     <input type="text" id="supervisor-id" name="supervisor-id" required>
                 </div>
 
-                <!-- Submit and Reset Buttons -->
+                <!-- submit and reset buttons -->
                 <div class="form-buttons">
                     <button type="submit" class="btn submit-btn">Submit</button>
                     <button type="reset" class="btn reset-btn">Reset</button>
@@ -94,22 +96,19 @@
         </div>
     </div>
 
-    <!-- JavaScript to Auto-Generate Proposal ID and Handle Submission -->
+    <!-- JavaScript to auto-generate Proposal ID and simulate submission -->
     <script>
-        // Function to auto-generate Proposal ID
+        // function to auto-generate Proposal ID
         function generateProposalID() {
             const prefix = "P";
             const maxID = 9999; // limit to P9999
 
-            // Retrieve the last Proposal ID from localStorage
+            // retrieve the last Proposal ID from localStorage
             let lastID = localStorage.getItem("lastProposalID");
 
-            // Log the value of lastID to debug
-            console.log("Last ID from LocalStorage: ", lastID);
-
-            // If no lastID is found, initialize to "1000"
+            // if no lastID is found, start with "1"
             if (!lastID) {
-                lastID = "1000"; // Starting point if no ID exists yet
+                lastID = "1"; // Starting point if no ID exists yet
                 localStorage.setItem("lastProposalID", lastID);
             }
 
@@ -119,7 +118,7 @@
             // Check if parsing was successful
             if (isNaN(nextID)) {
                 console.error("Error: Unable to parse lastID into a number!");
-                return `${prefix}1000`; // Return a default value if error occurs
+                return `${prefix}1`; // Return a default value if error occurs
             }
 
             // Ensure the ID doesn't exceed the maxID
@@ -135,7 +134,7 @@
             return `${prefix}${nextID}`;
         }
 
-        // Assign auto-generated Proposal ID on page load
+        // assign auto-generated Proposal ID every page load to simulate auto-generation
         window.onload = function () {
             const proposalIDField = document.getElementById("proposal-id");
             if (proposalIDField) {
@@ -143,11 +142,11 @@
             }
         };
 
-        // Form Submission Handler Demonstration
+        // form submission demo
         document.getElementById("proposalForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent actual form submission
+            event.preventDefault(); // prevent actual form submission, only for display
             
-            // Retrieve form data
+            // retrieve form data
             const formData = {
                 proposalID: document.getElementById("proposal-id").textContent,
                 title: document.getElementById("proposal-title").value,
@@ -158,7 +157,7 @@
                 supervisorID: document.getElementById("supervisor-id").value
             };
 
-            // Format the form data for display in an alert
+            // display submitted proposal data in an alert
             let displayMessage = `
             Proposal ID: ${formData.proposalID}
             Proposal Title: ${formData.title}
@@ -169,7 +168,7 @@
             Supervisor ID: ${formData.supervisorID}
             `;
 
-            // Show the form data in a pop-up message
+            // show the form data in a pop-up message
             alert(`Proposal submitted successfully!\n\n${displayMessage}`);
         });
     </script>

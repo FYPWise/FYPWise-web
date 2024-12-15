@@ -81,3 +81,10 @@
 .btn:hover {
     opacity: 0.8;
 }
+
+.form-group p {
+    padding: 0.15em;
+    font-size: 1em;
+    width: 80%;
+    margin: 0;
+}

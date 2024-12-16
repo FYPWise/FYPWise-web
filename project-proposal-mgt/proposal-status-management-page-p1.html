@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal Submission</title>
+    <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <link rel="stylesheet" href="../css/form-style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <button id="user-side-menu"><a href="#"><img src="../assets/user_side_menu.png" alt="Menu"></a></button>
+        <h2>Proposal Management</h2>
+        <button id="home"><a href="#"><img src="../assets/home.png" alt="Home"></a></button>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Side Menu -->
+        <nav class="side-menu">
+            <ul>
+                <li><a href="#">New Proposals</a></li>
+                <li><a href="proposal-management-page.html">All Proposals</a></li>
+                <li><a href="pending-proposals-management-page.html">Pending Proposals</a></li>
+            </ul>
+        </nav>
+
+        <!-- Proposal Submission Form -->
+        <div class="content">
+            <h2 class="form-title">Proposals Submission</h2>
+            <hr />
+            <form class="proposal-form" id="proposalForm">
+                <!-- auto-generated Proposal ID -->
+                <div class="form-group ">
+                    <label for="proposal-id">Proposal ID</label>
+                    <p id="proposal-id" class="proposal-id">P1</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="proposal-title">Proposal Title</label>
+                    <p id="proposal-title" name="proposal-title">Sentiment Analysis Software for Businesses</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <p id="description" name="description">
+                        This project focuses on developing an advanced Sentiment Analysis Software tailored for businesses to analyze customer feedback, 
+                        social media comments, and online reviews. The software leverages natural language processing (NLP) and machine learning algorithms
+                        to classify text as positive, negative, or neutral. By providing businesses with actionable insights into customer sentiment, 
+                        this tool can help enhance customer service, improve product development, and refine marketing strategies. 
+                        The system will feature a user-friendly dashboard with visual analytics, trend tracking, and detailed sentiment reports to aid decision-making. 
+                        Designed to support diverse industries, the software ensures scalability and real-time data processing capabilities.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="submission-date">Submission Date</label>
+                    <p id="submission-date" name="submission-date">2024-10-29</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialisation">Specialisation</label>
+                    <p id="specialisation" name="specialisation">Data Science</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <div class="radio-group">
+                        <input type="radio" id="research-based" name="category" value="research" disabled>
+                        <label for="research-based">Research-based</label>
+
+                        <input type="radio" id="application-based" name="category" value="application" disabled>
+                        <label for="application-based">Application-based</label>
+
+                        <input type="radio" id="both" name="category" value="research-application" checked="false" disabled>
+                        <label for="both">Research & Application-based</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="supervisor-id">Supervisor ID</label>
+                    <p id="supervisor-id" name="supervisor-id">M093</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <p id="status" name="status">Approved</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea id="comment" name="comment" rows="6" disabled></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="admin-id">Admin ID</label>
+                    <p id="admin-id" name="admin-id">A001</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

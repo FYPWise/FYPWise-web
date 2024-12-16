@@ -20,9 +20,8 @@
         <!-- Side Menu -->
         <nav class="side-menu">
             <ul>
-                <li><a href="#">Create New Proposal</a></li>
-                <li><a href="#">All Proposals</a></li>
-                <li><a href="#">Approved Proposals</a></li>
+                <li><a href="#">New Proposals</a></li>
+                <li><a href="proposal-management-page.html">All Proposals</a></li>
                 <li><a href="#">Pending Proposals</a></li>
             </ul>
         </nav>
@@ -35,34 +34,32 @@
                 <!-- auto-generated Proposal ID -->
                 <div class="form-group ">
                     <label for="proposal-id">Proposal ID</label>
-                    <p id="proposal-id" class="proposal-id">P1</p>
+                    <p id="proposal-id" class="proposal-id">P2</p>
                 </div>
 
                 <div class="form-group">
                     <label for="proposal-title">Proposal Title</label>
-                    <p id="proposal-title" name="proposal-title">Sentiment Analysis Software for Businesses</p>
+                    <p id="proposal-title" name="proposal-title">Personalized Calorie Tracking through Deep Learning and Food Image Recognition</p>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
                     <p id="description" name="description">
-                        This project focuses on developing an advanced Sentiment Analysis Software tailored for businesses to analyze customer feedback, 
-                        social media comments, and online reviews. The software leverages natural language processing (NLP) and machine learning algorithms
-                        to classify text as positive, negative, or neutral. By providing businesses with actionable insights into customer sentiment, 
-                        this tool can help enhance customer service, improve product development, and refine marketing strategies. 
-                        The system will feature a user-friendly dashboard with visual analytics, trend tracking, and detailed sentiment reports to aid decision-making. 
-                        Designed to support diverse industries, the software ensures scalability and real-time data processing capabilities.
+                        As health consciousness has grown, accurate calorie tracking has become crucial for diet management and 
+                        promoting healthier eating practices. Current calorie tracking apps available often rely on manual input, 
+                        leading to inaccuracies and frustration for users. The integration of deep learning and food image recognition 
+                        can automate this process, enhancing accuracy and user experience. 
                     </p>
                 </div>
 
                 <div class="form-group">
                     <label for="submission-date">Submission Date</label>
-                    <p id="submission-date" name="submission-date">2024-10-29</p>
+                    <p id="submission-date" name="submission-date">2024-10-30</p>
                 </div>
 
                 <div class="form-group">
                     <label for="specialisation">Specialisation</label>
-                    <p id="specialisation" name="specialisation">Data Science</p>
+                    <p id="specialisation" name="specialisation">Software Engineering</p>
                 </div>
 
                 <div class="form-group">
@@ -71,26 +68,25 @@
                         <input type="radio" id="research-based" name="category" value="research" disabled>
                         <label for="research-based">Research-based</label>
 
-                        <input type="radio" id="application-based" name="category" value="application" disabled>
+                        <input type="radio" id="application-based" name="category" value="application" checked="false" disabled>
                         <label for="application-based">Application-based</label>
 
-                        <input type="radio" id="both" name="category" value="research-application" checked="false" disabled>
+                        <input type="radio" id="both" name="category" value="research-application" disabled>
                         <label for="both">Research & Application-based</label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="supervisor-id">Supervisor ID</label>
-                    <p id="supervisor-id" name="supervisor-id">M093</p>
+                    <p id="supervisor-id" name="supervisor-id">M001</p>
                 </div>
 
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select id="status" name="status" required>
-                        <option value="" disabled selected>Select Status</option>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Rejected">Rejected</option>
                         <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
                     </select>
                 </div>
 

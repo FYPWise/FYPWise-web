@@ -181,7 +181,7 @@
                 url: document.getElementById("url").value
             };
 
-            // display submitted proposal data in an alert
+            // display submitted meeting data in an alert
             let displayMessage = `
                 Meeting ID: ${formData.meetingID}
                 Meeting Title: ${formData.title}
@@ -195,7 +195,7 @@
             `;
 
             // show the form data in a pop-up message
-            alert(`Proposal submitted successfully!\n\n${displayMessage}`);
+            alert(`Meeting scheduled successfully!\n\n${displayMessage}`);
 
             // reload page after successful submission
             location.reload();

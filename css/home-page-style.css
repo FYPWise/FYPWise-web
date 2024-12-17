@@ -68,14 +68,68 @@ header {
     margin-bottom: 0.5em;
 }
 
-.announcement-box{
+.announcement-box {
+    border: 2px solid black;
+    border-radius: 3px;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border: 1px solid black;
-    border-radius: 5px
+    padding: 1em;
+    box-shadow: 1px 6px 10px grey;
+    background-color:rgb(238, 238, 238);
 }
 
+/* Header Section with Image */
+.announcement-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    color: grey;
+}
+
+.user-name {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: black;
+}
+
+.announcement-time {
+    font-size: 0.8rem;
+    color: grey;
+}
+
+/* Announcement Content */
+.announcement-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.announcement-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: black;
+}
+
+.announcement-text {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Access */
 .container {
     display: flex;
     flex-direction: column;

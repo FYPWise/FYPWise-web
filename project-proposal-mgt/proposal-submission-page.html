@@ -31,7 +31,7 @@
         <div class="content">
             <h2 class="form-title">Proposals Submission</h2>
             <hr />
-            <form class="proposal-form" id="proposalForm">
+            <form class="form" id="proposalForm">
                 <!-- auto-generated Proposal ID -->
                 <div class="form-group ">
                     <label for="proposal-id">Proposal ID</label>
@@ -156,13 +156,13 @@
 
             // display submitted proposal data in an alert
             let displayMessage = `
-            Proposal ID: ${formData.proposalID}
-            Proposal Title: ${formData.title}
-            Description: ${formData.description}
-            Submission Date: ${formData.submissionDate}
-            Specialisation: ${formData.specialisation}
-            Category: ${formData.category}
-            Supervisor ID: ${formData.supervisorID}
+                Proposal ID: ${formData.proposalID}
+                Proposal Title: ${formData.title}
+                Description: ${formData.description}
+                Submission Date: ${formData.submissionDate}
+                Specialisation: ${formData.specialisation}
+                Category: ${formData.category}
+                Supervisor ID: ${formData.supervisorID}
             `;
 
             // show the form data in a pop-up message

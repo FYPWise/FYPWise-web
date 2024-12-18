@@ -1,0 +1,158 @@
+@import url(https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md);
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'ITC Avant Garde Gothic W02 Md', Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #06509f;
+    border: 1px solid #043870;
+    color: #fff;
+    position: relative;
+    padding: 1.5em;
+}
+
+#notification {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    right: 20px;
+}
+
+.notification-image {
+    width: 1.5em;
+    transition: 0.2s ease;
+}
+
+.notification-image:hover {
+    width: 1.7em;
+}
+
+/* Sidebar */
+.sidebar {
+    margin: 0;
+    padding-top: 15em;
+    width: 70px;
+    background-color: #06509f;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+#sidebar-btn, #logout-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#sidebar-btn {
+    padding: 0 0.7em;
+}
+
+#logout-btn{
+    padding: 16em 0.7em 0 0.7em;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.sidebar img, .logout img {
+    width: 1.5em;
+    transition: 0.2s ease;
+}
+
+.sidebar img:hover, .logout img:hover{
+    width: 1.7em;
+}
+
+/* Content */
+div.content {
+    margin-left: 70px;
+    padding: 1px 16px;
+    height: 100vh;
+}
+
+/* Title */
+h2 {
+    padding: 1em 1em;
+    color: #06509f;
+    font-weight: lighter;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 2%;
+    border: none;
+    border-radius: 10px;
+    width: 92%;
+    height: 75%;
+    overflow: hidden;
+    box-shadow: 0 0 10px 5px rgb(205, 205, 205);
+    transition: 0.3s ease;
+}
+
+.profile-image img {
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+table {
+    border: 1px solid rgb(200, 197, 197);
+    border-radius: 15px;
+    box-shadow: 0 0 10px 5px rgb(205, 205, 205);
+    width: 100%;
+    border-spacing: 10px 50px;
+
+}
+
+table td {
+    padding: 5px 10px;
+}
+
+.edit-btn {
+    background-color: #06509f;
+    width: 20%;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #053f80;
+}
+
+
+
+

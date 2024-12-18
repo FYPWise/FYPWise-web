@@ -1,56 +1,68 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
-        <link rel="stylesheet" href="../css/student-profile-mgt-style.css">
-    </head>
-    <body>
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <button id="sidebar-btn"><a href="home-page.html"><img src="../assets/home.png" alt="home" class="home-image"></a></button>
-            <button id="sidebar-btn"><a href="#"><img src="../assets/messages.png" alt="messages" class="messages-image"></a></button>
-            <button id="sidebar-btn"><a href="#"><img src="../assets/calendar.png" alt="calendar" class="calendar-image"></a></button>
-            <button id="logout-btn"><a href="#"><img src="../assets/logout.png" alt="logout" class="logout-image"></a></button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Management</title>
+    <link rel="stylesheet" href="../css/student-profile-mgt-style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="../assets/main_logo_white.png" alt="Logo" class="logo">
+        <div class="nav-icons">
+            <button id="sidebar-btn"><a href="home-page.html"><img src="../assets/home.png" alt="home"></a></button>
+            <button id="sidebar-btn"><a href="#"><img src="../assets/messages.png" alt="messages"></a></button>
+            <button id="sidebar-btn"><a href="#"><img src="../assets/notification.png" alt="notification"></a></button>
+            <button id="logout-btn"><a href="#"><img src="../assets/logout.png" alt="logout"></a></button>
         </div>
-        
-        <!-- Header -->
-        <header>
-            <button id="notification"><a href="#"><img src="../assets/notification.png" alt="notification" class="notification-image"></a></button>
-        </header>
+    </div>
 
-        <!-- Content -->
-        <div class="content">
-            <h2>User Profile</h2>
-            <hr>
-            <div class="profile">
-                <div class="profile-image">
-                    <img src="../assets/Imran.jpg" class="profile-picture">
-                </div>
-                <div class="details">
+    <!-- Main Container -->
+    <div class="container">
+
+        <h1>User Profile</h1>
+        <hr>
+
+        <!-- Profile -->
+        <div class="profile">
+            <div class="profile-image">
+                <img src="../assets/Imran.jpg" alt="Profile Image">
+            </div>
+            <div class="details">
+                <form action="http://www.randyconnolly.com/tests/process.php" method="GET" id="testform">
                     <table>
                         <tr>
-                            <td><strong>Name :</strong></td>
-                            <td>Muhammad Firzan Ruzain Bin Firdus</td>
+                            <td><label for="name"><strong>Name:</strong></label></td>
+                            <td>
+                                <input type="text" id="name" name="name" value="Mohamed Imran Bin Mohamed Yunus" readonly>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Student ID :</strong></td>
-                            <td>1211103220</td>
-                            <td><strong>Email :</strong></td>
-                            <td>1211103220@student.mmu.edu.my</td>
+                            <td><label for="student-id"><strong>Student ID:</strong></label></td>
+                            <td>
+                                <input type="text" id="student-id" name="student_id" value="121111935" readonly>
+                            </td>
+                            <td><label for="email"><strong>Email:</strong></label></td>
+                            <td>
+                                <input type="email" id="email" name="email" value="121111935@student.mmu.edu.my" readonly>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>Faculty :</strong></td>
-                            <td>Faculty of Computing and Information</td>
-                            <td><strong>Year of study :</strong></td>
-                            <td>1</td>
+                            <td><label for="faculty"><strong>Faculty:</strong></label></td>
+                            <td>
+                                <input type="text" id="faculty" name="faculty" value="Faculty of Computing and Information" readonly>
+                            </td>
+                            <td><label for="year"><strong>Year of study:</strong></label></td>
+                            <td>
+                                <input type="number" id="year" name="year" value="3" readonly>
+                            </td>
                         </tr>
                     </table>
-                    <button class="edit-btn">Edit Profile</button>
-                </div>
+                    <button type="submit" class="edit-btn">Edit Profile</button>
+                </form>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

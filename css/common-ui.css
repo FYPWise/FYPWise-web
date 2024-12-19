@@ -1,3 +1,10 @@
+/* variables */
+:root {
+  --primary-color: #06509f;
+  --secondary-color: #ec2227;
+  --white: #fff;
+}
+
 /* font */
 @import url(https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md);
 
@@ -22,7 +29,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #06509f;
+  background-color: var(--primary-color);
   color: #fff;
   padding: 10px 20px;
   position: fixed;
@@ -38,6 +45,10 @@ header h2 {
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.5em;
+}
+
+#logo {
+  height: 50px;
 }
 
 #user-side-menu {
@@ -94,6 +105,10 @@ header h2 {
   border-radius: 4px;
 }
 
+.search-container input: {
+  border-color: var(--secondary-color);
+}
+
 .side-menu ul {
   list-style-type: none;
 }
@@ -109,7 +124,7 @@ header h2 {
 }
 
 .side-menu a:hover {
-  color: #06509f;
+  color: var(--secondary-color);
 }
 
 body:has(.menubutton > input:checked) .side-menu {
@@ -126,16 +141,20 @@ body:has(.menubutton > input:checked) .side-menu {
 }
 
 @media screen and ((max-height: 450px) or (max-width: 650px)) {
-  header, footer{
+  header,
+  footer {
     font-size: x-small;
+  }
+  #logo {
+    height: 2rem;
   }
 }
 
 /* footer styling */
 footer {
   width: 100%;
-  background-color: #06509f;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--white);
   padding: 20px;
   height: max-content;
   align-content: center;
@@ -145,17 +164,23 @@ footer {
 }
 
 footer a {
-  color: #fff;
+  color: var(--white);
 }
 
 footer > * {
   margin-bottom: 15px;
 }
 
+#side {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
 .link {
   text-decoration: none;
-  background-color: #fff;
-  color: #06509f;
+  background-color: var(--white);
+  color: var(--primary-color);
   border-radius: 2px;
   margin: 2px;
   padding: 5px;
@@ -163,4 +188,5 @@ footer > * {
 
 .link:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: var(--secondary-color);
 }

@@ -127,25 +127,26 @@ table td {
     padding: 15px 10px;
 }
 
-table input {
+table input, table select {
     width: 100%;
     padding: 12px;
     border: none;
     border-radius: 5px;
 }
 
-.edit-btn {
+#edit-btn, #imageUploadButton {
+    display: flex;
     background-color: #06509f;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 8px 15px;
     cursor: pointer;
-    margin-top: 15px;
+    margin: 15px auto 0 auto;
     transition: background-color 0.3s ease;
 }
 
-.edit-btn:hover {
+#edit-btn:hover, #imageUploadButton:hover {
     background-color: #053f80;
 }
 @media (max-width: 768px) {
@@ -178,9 +179,6 @@ table input {
     }
 
     @media (max-width: 480px) {
-        .top-bar {
-            font-size: 1.2em;
-        }
 
         .sidebar {
             width: 50px;

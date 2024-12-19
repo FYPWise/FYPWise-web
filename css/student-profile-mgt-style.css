@@ -161,6 +161,7 @@ table input {
         flex-direction: column;
         text-align: center;
         padding: 20px;
+        box-shadow: none;
     }
 
     .profile-image img {
@@ -182,5 +183,28 @@ table input {
     .edit-btn {
         width: 100%;
         padding: 10px;
+    }
+
+    @media (max-width: 480px) {
+        .top-bar {
+            font-size: 1.2em;
+        }
+
+        .sidebar {
+            width: 50px;
+        }
+
+        .main-container {
+            margin-left: 50px;
+        }
+
+        .profile-section {
+            padding: 15px;
+        }
+
+        .profile-image img {
+            width: 120px;
+            height: 120px;
+        }
     }
 }

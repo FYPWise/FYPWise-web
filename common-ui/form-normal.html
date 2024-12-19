@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposal Submission</title>
+    <title>Form Example</title>
     <link rel="stylesheet" href="../css/proposal-management-style.css">
-    <link rel="stylesheet" href="../css/form-style.css">
     <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/form-style.css">
 </head>
 <body>
     <!-- Header Section -->
     <header>
-        <button id="user-side-menu"><a href="#"><img src="../assets/user_side_menu.png" alt="Menu"></a></button>
-        <h2>Proposal Management</h2>
-        <button id="home"><a href="#"><img src="../assets/home.png" alt="Home"></a></button>
+        <button id="user-side-menu"><a href="#"><img src="../assets/user_side_menu.png" alt="user side menu"></a></button>
+        <h2>Example of Form</h2>
+        <button id="home"><a href="#"><img src="../assets/home.png" alt="home icon"></a></button>
     </header>
 
     <!-- Main Content -->
     <div class="container">
         <!-- Side Menu -->
         <nav class="side-menu">
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search">
+            </div>
             <ul>
-                <li><a href="proposal-submission-page.html">Create New Proposal</a></li>
-                <li><a href="#">All Proposals</a></li>
-                <li><a href="#">Approved Proposals</a></li>
-                <li><a href="#">Pending Proposals</a></li>
+                <li><a href="#">Shortcut 1</a></li>
+                <li><a href="#">Shortcut 2</a></li>
+                <li><a href="#">Shortcut 3</a></li>
             </ul>
         </nav>
 
@@ -34,9 +36,9 @@
             <hr />
             <form class="form" id="proposalForm">
                 <!-- auto-generated Proposal ID -->
-                <div class="form-group ">
+                <div class="form-group">
                     <label for="proposal-id">Proposal ID</label>
-                    <p id="proposal-id" class="proposal-id"></p>
+                    <input type="text" id="proposal-id" name="proposal-id" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -106,59 +108,15 @@
         FYP Wise &copy; <em id="date"></em>Career Karma
     </footer>
 
-    <!-- JavaScript to auto-generate Proposal ID and simulate submission -->
+    <!-- JavaScript to simulate submission -->
     <script>
-        // function to auto-generate Proposal ID
-        function generateProposalID() {
-            const prefix = "P";
-            const maxID = 9999; // limit to P9999
-
-            // retrieve the last Proposal ID from localStorage
-            let lastID = localStorage.getItem("lastProposalID");
-
-            // if no lastID is found, start with "1"
-            if (!lastID) {
-                lastID = "1"; // Starting point if no ID exists yet
-                localStorage.setItem("lastProposalID", lastID);
-            }
-
-            // Increment the ID (parse with radix 10)
-            let nextID = parseInt(lastID, 10) + 1;
-
-            // Check if parsing was successful
-            if (isNaN(nextID)) {
-                console.error("Error: Unable to parse lastID into a number!");
-                return `${prefix}1`; // Return a default value if error occurs
-            }
-
-            // Ensure the ID doesn't exceed the maxID
-            if (nextID > maxID) {
-                alert("Maximum Proposal ID reached!");
-                return `${prefix}${maxID}`;
-            }
-
-            // Save the new ID back to localStorage
-            localStorage.setItem("lastProposalID", nextID.toString());
-
-            // Return the full Proposal ID with the prefix
-            return `${prefix}${nextID}`;
-        }
-
-        // assign auto-generated Proposal ID every page load to simulate auto-generation
-        window.onload = function () {
-            const proposalIDField = document.getElementById("proposal-id");
-            if (proposalIDField) {
-                proposalIDField.textContent = generateProposalID();
-            }
-        };
-
         // form submission demo
         document.getElementById("proposalForm").addEventListener("submit", function(event) {
             event.preventDefault(); // prevent actual form submission, only for display
             
             // retrieve form data
             const formData = {
-                proposalID: document.getElementById("proposal-id").textContent,
+                proposalID: document.getElementById("proposal-id").value,
                 title: document.getElementById("proposal-title").value,
                 description: document.getElementById("description").value,
                 submissionDate: document.getElementById("submission-date").value,

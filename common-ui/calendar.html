@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Example</title>
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/proposal-management-style.css"> <!-- uses same css -->
+    <link rel="stylesheet" href="../css/calendar-style.css">
+    <link rel="stylesheet" href="../css/form-style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <button id="user-side-menu"><a href="#"><img src="../assets/user_side_menu.png" alt="Menu"></a></button>
+        <h2>Example of Calendar</h2>
+        <button id="home"><a href="#"><img src="../assets/home.png" alt="Home"></a></button>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+    <!-- Side Menu -->
+        <div class="side-menu">
+            <ul>
+                <li><a href="#">Shortcut 1</a></li>
+                <li><a href="#">Shortcut 2</a></li>
+                <li><a href="#">Shortcut 3</a></li>
+            </ul>
+        </div>
+
+        <!-- Calendar in Form -->
+        <div class="content">
+            <h2 class="form-title">Meeting Scheduler</h2>
+            <hr />
+            <form class="form" id="meetingForm">
+                <div class="form-group">
+                    <label for="date">Meeting Date</label>
+                    <div class="calendar-section">
+                        <!-- Calendar Header -->
+                        <div class="calendar-header">
+                            <button id="prev-month" class="nav-btn">&lt;</button>
+                            <span id="month-display" class="month-display"></span>
+                            <button id="next-month" class="nav-btn">&gt;</button>
+                        </div>
+                
+                        <!-- Calendar Table -->
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>T</th>
+                                    <th>W</th>
+                                    <th>T</th>
+                                    <th>F</th>
+                                    <th>S</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calendar"></tbody>
+                        </table>
+                    </div>
+                    <!-- Hidden input to store selected date -->
+                    <input type="hidden" id="date" name="date">
+                </div>
+                
+                <!-- submit and reset buttons -->
+                <div class="form-buttons">
+                    <button type="submit" class="btn submit-btn">Submit</button>
+                    <button type="reset" class="btn reset-btn">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../scripts/calendar.js"></script>
+    <script>
+        // form submission demo
+        document.getElementById("meetingForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // prevent actual form submission, only for display
+            
+            // retrieve form data
+            const formData = {
+                date: document.getElementById("date").value,
+            };
+
+            // display submitted meeting data in an alert
+            let displayMessage = `Selected Date: ${formData.date}`;
+
+            // show the form data in a pop-up message
+            alert(`${displayMessage}`);
+
+            // reload page after successful submission
+            location.reload();
+        });
+    </script>
+</body>
+</html>

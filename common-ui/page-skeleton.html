@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,19 @@
     <link rel="stylesheet" href="../css/proposal-management-style.css">
     <link rel="stylesheet" href="../css/common-ui.css">
 </head>
+
 <body>
     <!-- Header Section -->
     <header>
-        <button id="user-side-menu"><a href="#"><img src="../assets/user_side_menu.png" alt="user side menu"></a></button>
+        <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label for="user-side-menu" class="fas"></label></div>
         <h2>Example of Page</h2>
-        <button id="home"><a href="#"><img src="../assets/home.png" alt="home icon"></a></button>
+        <button id="home"><img src="../assets/home.png" alt="home icon"></a></button>
     </header>
 
     <!-- Main Content -->
+
+    <!-- Side Menu -->
     <div class="container">
-        <!-- Side Menu -->
         <nav class="side-menu">
             <div class="search-container">
                 <input type="text" id="search-bar" placeholder="Search">
@@ -28,6 +31,11 @@
                 <li><a href="#">Shortcut 3</a></li>
             </ul>
         </nav>
+
+        <section class="main">
+            <h1>Welcome!</h1>
+        </section>
+
     </div>
 
     <footer>
@@ -42,4 +50,5 @@
         FYP Wise &copy; <em id="date"></em>Career Karma
     </footer>
 </body>
+
 </html>

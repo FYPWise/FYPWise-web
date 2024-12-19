@@ -20,53 +20,134 @@
 </head>
 
 <body>
-    <div class="center">
-        <div id="top-bar">
-            <span><button title="search" class="search-btn" type="button"><i class="fa fa-search"></i></button></span>
-            <span><button title="more" class="more-btn" type="button">⋮</button></span>
-            <span><button class="create-new-btn" type="button">Create New</button></span>
+    <!-- Header Section -->
+    <header>
+        <button id="user-side-menu"><img src="../assets/user_side_menu.png" alt="user side menu"></a></button>
+        <h2>Announcement Management</h2>
+        <button id="home"><img src="../assets/home.png" alt="home icon"></a></button>
+    </header>
+
+    <div id="container">
+        <div class="center">
+            <div id="top-bar">
+                <span><button title="search" class="search-btn" type="button"><i
+                            class="fa fa-search"></i></button></span>
+                <span><button title="more" class="more-btn" type="button">⋮</button></span>
+                <span><button class="create-new-btn" type="button">Create New</button></span>
+            </div>
+            <table>
+                <tr>
+                    <th><input type="checkbox" title="select-all" onClick="toggle(this);"></th>
+                    <th>Announcement Title</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Project Approval</a></td>
+                    <td>16/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Unpublished</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" title="select" name="foo" value="id"></td>
+                    <td><a href="#">Blabalblalba</a></td>
+                    <td>21/12/2024-9AM</td>
+                    <td>The project approval will be released in two weeks...</td>
+                    <td>
+                        <p class="status">Published</p>
+                    </td>
+                    <td><button class="more-btn" type="button">⋮</button></td>
+                </tr>
+            </table>
         </div>
-        <table>
-            <tr>
-                <th><input type="checkbox" title="select-all" onClick="toggle(this);"></th>
-                <th>Announcement Title</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>
-            </tr>
-            <tr>
-                <td><input type="checkbox" title="select" name="foo" value="id"></td>
-                <td><a href="#">Project Approval</a></td>
-                <td>16/12/2024-9AM</td>
-                <td>The project approval will be released in two weeks...</td>
-                <td>
-                    <p class="status">Published</p>
-                </td>
-                <td><button class="more-btn" type="button">⋮</button></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" title="select" name="foo" value="id"></td>
-                <td><a href="#">Blabalblalba</a></td>
-                <td>21/12/2024-9AM</td>
-                <td>The project approval will be released in two weeks...</td>
-                <td>
-                    <p class="status">Unpublished</p>
-                </td>
-                <td><button class="more-btn" type="button">⋮</button></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" title="select" name="foo" value="id"></td>
-                <td><a href="#">Blabalblalba</a></td>
-                <td>21/12/2024-9AM</td>
-                <td>The project approval will be released in two weeks...</td>
-                <td>
-                    <p class="status">Published</p>
-                </td>
-                <td><button class="more-btn" type="button">⋮</button></td>
-            </tr>
-        </table>
     </div>
+
 
     <script>
         document.querySelectorAll('.status').forEach(cell => {

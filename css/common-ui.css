@@ -125,6 +125,12 @@ body:has(.menubutton > input:checked) .side-menu {
   }
 }
 
+@media screen and ((max-height: 450px) or (max-width: 650px)) {
+  header, footer{
+    font-size: x-small;
+  }
+}
+
 /* footer styling */
 footer {
   width: 100%;

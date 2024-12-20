@@ -8,6 +8,30 @@
 /* font */
 @import url(https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md);
 
+@keyframes slideDown {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.slideDown {
+  transform-origin: top center;
+
+  animation-name: slideDown;
+  -webkit-animation-name: slideDown;
+
+  animation-duration: 300ms;
+  -webkit-animation-duration: 300ms;
+
+  animation-timing-function:ease-out;
+  -webkit-animation-timing-function: ease-out;
+
+  visibility: visible !important;
+}
+
 /* general reset */
 * {
   margin: 0;
@@ -148,13 +172,15 @@ header h2 {
 
 .menu-button:hover {
   background-color: #ccc;
+  color: var(--secondary-color);
 }
 
 .menu-button {
   border-style: none;
   text-decoration: none;
-  color: #333;
+  font-size: 1rem;
   font-weight: bold;
+  color: #333;
   background-color: transparent;
   display: flex;
   justify-content: space-between;
@@ -181,24 +207,24 @@ header h2 {
   padding: 3px;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+  transition: transform 300ms;
   cursor: pointer;
 }
 
-.expanded > .menu-button {
-  background-color: #585858;
-  color: #fff;
-  border: none;
+.expanded > button > .expand-icon::before {
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
+.expanded > .menu-button,
 .expanded > * :hover {
-  background-color: #585858;
-  color: #fff;
+  background-color: #ccc;
   border: none;
 }
 
 .inner-dropdown {
-  background-color: #585858;
   display: none;
+  background-color: #ccc;
 }
 
 body:has(.menubutton > input:checked) #side-menu {

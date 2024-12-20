@@ -27,8 +27,10 @@
             </div>
             <ul id="side-menu-shortcuts">
                 <li class="side-menu-dropdown-list">
-                    <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
-                            class="expand-icon"></span></button>
+                    <button class="menu-button">
+                        <span class="menu-label">Shortcut 1</span>
+                        <span class="expand-icon"></span>
+                    </button>
                     <ul class="inner-dropdown">
                         <li class="inner-dropdown-list"><a class="menu-button" href="#lancau">Inner Shortcut</a></li>
                     </ul>
@@ -62,6 +64,7 @@
             dropdown[i].addEventListener("click", function () {
                 this.parentNode.classList.toggle("expanded");
                 var dropdownContent = this.parentNode.querySelector('ul.inner-dropdown');
+                dropdownContent.classList.toggle("slideDown");
                 if (dropdownContent.style.display === "block") {
                     dropdownContent.style.display = "none";
                 } else {

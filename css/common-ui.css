@@ -201,7 +201,6 @@ footer > * {
 
 .content {
   flex: 1;
-  padding: 20px;
 }
 
 .table-header-container {
@@ -209,7 +208,9 @@ footer > * {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: solid 1px #818181;
+  margin: 0 20px;
 }
 
 .table-buttons button {
@@ -219,13 +220,12 @@ footer > * {
   background: transparent;
 }
 
-.table-buttons button a {
-  display: inline-block;
-}
-
 .table-name {
   padding-top: 2em;
+  padding-bottom: 2em;
+  margin: 0 20px;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -253,4 +253,27 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: #ddd;
+}
+
+@media screen and (max-width: 600px) {
+  .table-header-container {
+    position: fixed;
+    width: 100%;
+    font-size: 0.7rem;
+    border: none;
+    background-color: #fff;
+    margin: 0;
+  }
+  .table-buttons button img {
+    height: 15px;
+  }
+  .table-name {
+    margin: 30px 0;
+  }
+  td,
+  th {
+    padding: 10px 7px;
+    margin: 0;
+    font-size: 0.7rem;
+  }
 }

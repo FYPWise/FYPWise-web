@@ -11,23 +11,31 @@
 <body>
     <!-- Header Section -->
     <header>
-        <button id="user-side-menu"><a href="#"><img src="../assets/user_side_menu.png"
-                    alt="user side menu"></a></button>
-        <h2>Example of Table</h2>
-        <button id="home"><a href="#"><img src="../assets/home.png" alt="home icon"></a></button>
+        <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label for="user-side-menu"
+                class="fas"></label></div>
+        <h2><img id="logo" src="../assets/horizontal_logo_white.png" alt=""></h2>
+        <button id="home"><img src="../assets/home.png" alt="home icon"></a></button>
     </header>
 
     <!-- Main Content -->
     <div id="main-container">
-
+        <nav id="side-menu">
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search">
+            </div>
+            <ul>
+                <li><a href="#">Shortcut 1</a></li>
+                <li><a href="#">Shortcut 2</a></li>
+                <li><a href="#">Shortcut 3</a></li>
+            </ul>
+        </nav>
         <!-- Proposal Table Section -->
         <div class="content">
             <div class="table-header-container">
                 <h2>Proposals</h2>
 
                 <div class="table-buttons">
-                    <button id="edit-btn"><img
-                                src="../assets/edit.png" alt="edit"></a></button>
+                    <button id="edit-btn"><img src="../assets/edit.png" alt="edit"></a></button>
                     <button id="filter-btn"><img src="../assets/filter.png" alt="filter"></a></button>
                 </div>
             </div>
@@ -62,7 +70,8 @@
                             <td>M034</td>
                             <td>Pending</td>
                             <td>2024-10-30</td>
-                        </tr><tr>
+                        </tr>
+                        <tr>
                             <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
                             <td>P2</td>
                             <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking through
@@ -76,7 +85,8 @@
                             <td>M034</td>
                             <td>Pending</td>
                             <td>2024-10-30</td>
-                        </tr><tr>
+                        </tr>
+                        <tr>
                             <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
                             <td>P2</td>
                             <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking through
@@ -90,7 +100,8 @@
                             <td>M034</td>
                             <td>Pending</td>
                             <td>2024-10-30</td>
-                        </tr><tr>
+                        </tr>
+                        <tr>
                             <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
                             <td>P2</td>
                             <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking through
@@ -104,7 +115,8 @@
                             <td>M034</td>
                             <td>Pending</td>
                             <td>2024-10-30</td>
-                        </tr><tr>
+                        </tr>
+                        <tr>
                             <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
                             <td>P2</td>
                             <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking through

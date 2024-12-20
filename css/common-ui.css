@@ -139,6 +139,10 @@ body:has(.menubutton > input:checked) #side-menu {
   width: 250px;
 }
 
+body:has(.menubutton > input:checked) .content {
+  width: 80vw;
+}
+
 @media screen and (max-width: 650px) {
   body:has(.menubutton > input:checked) #side-menu {
     width: 100%;

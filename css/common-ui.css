@@ -66,6 +66,8 @@ header h2 {
 #user-side-menu:checked + label:before {
   content: "X";
   cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 #user-side-menu,
@@ -82,15 +84,18 @@ header h2 {
 }
 
 /* Container */
+#outer-container{
+  overflow-y: auto;
+}
+
 #main-container {
   display: flex;
   flex: 1;
   margin-top: 50px; /* start after header */
-  overflow-y: auto;
-  overflow-x: auto;
 }
 
 .content {
+  overflow-x: auto;
   flex: 1;
 }
 
@@ -219,6 +224,7 @@ footer > * {
   padding: 20px;
   border-bottom: solid 1px #818181;
   margin: 0 20px;
+  padding-top: 2em;
 }
 
 .table-buttons button {

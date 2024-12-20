@@ -50,10 +50,12 @@ header h2 {
 
 #logo {
   height: 50px;
-}
-
-#user-side-menu {
-  display: none;
+  padding: 8px;
+  background-image: url(../assets/horizontal_logo_white.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  width: 100px;
 }
 
 #user-side-menu + label:before {
@@ -72,6 +74,11 @@ header h2 {
   border: none;
   cursor: pointer;
   padding: 10px;
+  display: flex;
+}
+
+#user-side-menu {
+  display: none;
 }
 
 /* Container */

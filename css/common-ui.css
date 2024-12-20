@@ -261,8 +261,9 @@ tr:hover {
     width: 100%;
     font-size: 0.7rem;
     border: none;
-    background-color: #fff;
+    background-color: #f9f9f9;
     margin: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
   .table-buttons button img {
     height: 15px;

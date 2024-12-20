@@ -85,6 +85,9 @@ header h2 {
 
 /* Container */
 #outer-container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   overflow-y: auto;
 }
 
@@ -97,6 +100,7 @@ header h2 {
 .content {
   overflow-x: auto;
   flex: 1;
+  height: 100%;
 }
 
 .main {

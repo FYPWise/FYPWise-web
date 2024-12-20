@@ -74,9 +74,14 @@ header h2 {
 }
 
 /* Container */
-.container {
+#main-container {
   display: flex;
-  width: 100%;
+  flex: 1;
+  margin-top: 50px; /* start after header */
+}
+
+.content {
+  flex: 1;
 }
 
 .main {
@@ -192,17 +197,6 @@ footer > * {
 }
 
 /* table styling */
-#main-container {
-  display: flex;
-  flex: 1;
-  margin-top: 50px; /* start after header */
-  overflow-x: auto;
-}
-
-.content {
-  flex: 1;
-}
-
 .table-header-container {
   color: #06509f;
   display: flex;

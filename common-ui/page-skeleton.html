@@ -26,20 +26,50 @@
                 <input type="text" id="search-bar" placeholder="Search">
             </div>
             <ul id="side-menu-shortcuts">
-                <li><a href="#">Shortcut 1</a></li>
-                <li><a href="#">Shortcut 2</a></li>
-                <li><a href="#">Shortcut 3</a></li>
+                <li class="side-menu-dropdown-list">
+                    <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
+                            class="expand-icon"></span></button>
+                    <ul class="inner-dropdown">
+                        <li class="inner-dropdown-list"><a class="menu-button" href="#lancau">Inner Shortcut</a></li>
+                    </ul>
+                </li>
+                <li class="side-menu-dropdown-list">
+                    <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
+                            class="expand-icon"></span></button>
+                </li>
+                <li class="side-menu-dropdown-list">
+                    <button class="menu-button"><span class="menu-label">Shortcut 1</span><span
+                            class="expand-icon"></span></button>
+                </li>
             </ul>
         </nav>
 
         <div class="content">
             <section class="main">
-                <h1>Welcome!</h1>
+                <h1 id="page-name">Page Skeleton</h1>
             </section>
         </div>
 
 
     </div>
+
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("menu-button");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.parentNode.classList.toggle("expanded");
+                var dropdownContent = this.parentNode.querySelector('ul.inner-dropdown');
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
 
     <footer>
         <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,

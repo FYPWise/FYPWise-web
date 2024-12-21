@@ -143,28 +143,27 @@
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
-        <script>
-            document.querySelectorAll('.response-buttons button').forEach(button => {
-                button.addEventListener('click', event => {
-                    // Determine which button was clicked
-                    const buttonType = event.target.className;
-
-                    // Define the message based on the button type
-                    let message = '';
-                    if (buttonType === 'accept') {
-                        message = 'You have accepted the meeting invitation.';
-                    } else if (buttonType === 'tentative') {
-                        message = 'You have marked the meeting as tentative.';
-                    } else if (buttonType === 'decline') {
-                        message = 'You have declined the meeting invitation.';
-                    }
-
-                    // Show the pop-up message
-                    alert(message);
-                });
-            });
-        </script>
     </div>
-</body>
+    <script>
+        document.querySelectorAll('.response-buttons button').forEach(button => {
+            button.addEventListener('click', event => {
+                // Determine which button was clicked
+                const buttonType = event.target.className;
 
+                // Define the message based on the button type
+                let message = '';
+                if (buttonType === 'accept') {
+                    message = 'You have accepted the meeting invitation.';
+                } else if (buttonType === 'tentative') {
+                    message = 'You have marked the meeting as tentative.';
+                } else if (buttonType === 'decline') {
+                    message = 'You have declined the meeting invitation.';
+                }
+
+                // Show the pop-up message
+                alert(message);
+            });
+        });
+    </script>
+</body>
 </html>

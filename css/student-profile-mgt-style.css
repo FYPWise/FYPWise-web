@@ -134,7 +134,7 @@ table input, table select {
     border-radius: 5px;
 }
 
-#edit-btn, #imageUploadButton {
+#edit-btn, #image-btn {
     display: flex;
     background-color: #06509f;
     color: white;
@@ -146,9 +146,15 @@ table input, table select {
     transition: background-color 0.3s ease;
 }
 
-#edit-btn:hover, #imageUploadButton:hover {
+#edit-btn:hover, #image-btn:hover {
     background-color: #053f80;
 }
+
+#footer{
+    width: 95.5%;
+    margin: 10px 0 0 32px;
+}
+
 @media (max-width: 768px) {
     .profile {
         flex-direction: column;

@@ -182,6 +182,7 @@ header h2 {
   align-content: center;
   width: 100%;
   padding: 20px;
+  cursor: pointer;
 }
 
 .menu-label {

@@ -7,6 +7,19 @@
         <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
         <link rel="stylesheet" href="../css/login-page-style.css">
     </head>
+    <script>
+        function response() {
+            var form = document.getElementById('testform');
+            var inputs = form.querySelectorAll('input');
+
+            var profileInfo = '';
+            inputs.forEach(input => {
+                profileInfo += `${input.name}: ${input.value}\n`;
+            });
+
+            alert(`Profile Information:\n${profileInfo}`);
+        }
+    </script>
     <body>
         <!-- Header Section -->
         <header>
@@ -19,7 +32,7 @@
         <h2>Login</h2>
 
         <!-- Login -->
-            <form method="POST" action="http://www.randyconnolly.com/tests/process.php" id="testform">
+            <form id="testform">
                 <div class="container">
                     <div class="email-input">
                         <label for="email">Student ID:</label>
@@ -27,9 +40,9 @@
                     </div>
                     <div class="password-input">
                         <label for="password">Password:</label>
-                        <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 to 12 characters" required/>
+                        <input id="password" name="password" type="password" required/>
                     </div>
-                    <div class="submit-btn"><button  type="submit" form="testform" value="LOGIN" class="submit">LOGIN</button></div>
+                    <div class="submit-btn"><button  type="submit" form="testform" value="LOGIN" class="submit" onclick="response()">LOGIN</button></div>
                 </div>
             </form>
         <div class="signup-caption"><p>Don't have an account? <a href="#">Sign Up</a></p></div>

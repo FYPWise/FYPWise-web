@@ -6,6 +6,19 @@
         <title>Registration</title>
         <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
         <link rel="stylesheet" href="../css/student-registration-page-style.css">
+        <script>
+            function response() {
+                var form = document.getElementById('testform');
+                var inputs = form.querySelectorAll('input, select');
+
+                var profileInfo = '';
+                inputs.forEach(input => {
+                  profileInfo += `${input.name}: ${input.value}\n`;
+                });
+            
+                alert(`Profile Information:\n${profileInfo}`);
+            }
+        </script>
     </head>
     <body>
         <!-- Header Section -->
@@ -17,15 +30,15 @@
         <h2><span id="text1">Create</span> New <span id="text2">Account</span></h2>
 
         <!-- Login -->
-            <form method="POST" action="http://www.randyconnolly.com/tests/process.php" id="testform">
+            <form id="testform">
                 <div class="container">
                     <div class="name-input">
                         <label for="name">Name:</label>
-                        <input id="name" name="name" type="text" required/>
+                        <input id="name" name="name" type="text" pattern="[A-Za-z\s]+" title="Please put your fullname according to your ID card" required/>
                     </div>
                     <div class="id-input">
                         <label for="id">Student ID:</label>
-                        <input id="id" name="id" type="text" pattern="[0-9]{10}" title="Please enter your Student ID."  required/>
+                        <input id="id" name="id" type="text" pattern="\d{10}" title="Please enter your Student ID."  required/>
                     </div>
                     <div class="email-input">
                         <label for="email">Student Email:</label>
@@ -39,24 +52,24 @@
                         <label for="study-year">Year of study</label>
                         <select name="study-year" id="study-year" required>
                             <option value="" disabled selected>Select</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="0">1</option>
+                            <option value="1">2</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
                         </select>
                     </div>
                     <div class="faculty">
                         <label for="faculty">Specialization :</label>
                         <select name="faculty" id="faculty" required>
                             <option value="" disabled selected>Select your Specialization<y/option>
-                            <option value="0">Cybersecurity</option>
-                            <option value="1">Data Science</option>
-                            <option value="2">Game Development</option>
-                            <option value="2">Software Engineering</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Game Development">Game Development</option>
+                            <option value="Software Engineering" selected>Software Engineering</option>
                         </select>
                     </div>
-                    <div class="submit-btn"><button  type="sign-up" form="testform" value="sign-up" class="submit">Sign Up</button></div>
+                    <div class="submit-btn"><button  type="button" form="testform" value="sign-up" class="submit" onclick="response()">Sign Up</button></div>
                 </div>
             </form>
         <div class="login-caption"><p>Already have an account? <a href="login-page.html">Login</a></p></div>

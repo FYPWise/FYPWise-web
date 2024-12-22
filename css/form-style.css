@@ -97,7 +97,13 @@
     flex-direction: column;
   }
 
-  .form-group label {
+  .form-group label,
+  .form-group input,
+  .form-group textarea {
     width: 100%;
+  }
+
+  form{
+    padding: 20px;
   }
 }

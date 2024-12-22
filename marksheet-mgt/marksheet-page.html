@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet</title>
+    <link rel="stylesheet" href="../css/nav-bar.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+    <link rel="stylesheet" href="../css/approve-project-plan-style.css">
+    <style>
+        .table-container {
+            background-color: #fff;
+            padding: 1.5em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 2em auto;
+            max-width: 900px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+
+        a {
+            color: #06509f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .side-menu {
+            background-color: #06509f;
+            padding: 1em;
+            height: 100%;
+            color: #fff;
+            position: fixed;
+            width: 200px;
+        }
+
+        .side-menu a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5em 0;
+        }
+
+        .side-menu a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <button id="user-side-menu" onclick="navigateTo('menu')">
+            <img src="../assets/user_side_menu.png" alt="Side Menu Icon" width="30">
+        </button>
+        <h2>Marksheet</h2>
+        <button id="home" onclick="navigateTo('home')">
+            <img src="../assets/home.png" alt="Home Icon" width="30">
+        </button>
+    </header>
+
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <a href="#">All Project Plans</a>
+        <a href="#">Project Management</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Marksheet</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project ID</th>
+                        <th>Marksheet ID</th>
+                        <th>Date</th>
+                        <th>Total Score</th>
+                        <th>Evaluator ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Fill all rows dynamically as required -->
+                    <tr>
+                        <td>PR1</td>
+                        <td><a href="marksheet-MK1.html">MK1</a></td>
+                        <td>10-12-2023</td>
+                        <td>75</td>
+                        <td>M123</td>
+                    </tr>
+                    <tr>
+                        <td>PR2</td>
+                        <td><a href="marksheet-MK2.html">MK2</a></td>
+                        <td>15-12-2023</td>
+                        <td>80</td>
+                        <td>M124</td>
+                    </tr>
+                    <tr>
+                        <td>PR3</td>
+                        <td><a href="marksheet-MK3.html">MK3</a></td>
+                        <td>20-12-2023</td>
+                        <td>85</td>
+                        <td>M125</td>
+                    </tr>
+                    <tr>
+                        <td>PR4</td>
+                        <td><a href="marksheet-MK4.html">MK4</a></td>
+                        <td>25-12-2023</td>
+                        <td>90</td>
+                        <td>M126</td>
+                    </tr>
+                    <tr>
+                        <td>PR5</td>
+                        <td><a href="marksheet-MK5.html">MK5</a></td>
+                        <td>30-12-2023</td>
+                        <td>95</td>
+                        <td>M127</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function navigateTo(destination) {
+            if (destination === 'menu') {
+                alert("Navigating to the side menu...");
+            } else if (destination === 'home') {
+                alert("Navigating to the home page...");
+            }
+        }
+    </script>
+</body>
+</html>

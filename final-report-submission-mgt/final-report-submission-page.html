@@ -1,184 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Final Report</title>
-    <link rel="stylesheet" href="../css/form-style.css" />
-    <link rel="stylesheet" href="../css/project-page.css" />
-    <link rel="stylesheet" href="../css/proposal-management-style.css" />
-    <style>
-      .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        background-color: #e9ecef;
-        padding: 2em;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/common-ui.css">
+</head>
 
-      .form-group {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5em;
-      }
+<body>
+    <div id="outer-container">
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton">
+                <input title="side-menu" type="checkbox" id="user-side-menu">
+                <label for="user-side-menu" class="fas"></label>
+            </div>
+            <div id="logo"></div>
+            <button id="home"><img src="../assets/home.png" alt="home icon"></button>
+        </header>
 
-      .form-group label {
-        margin-bottom: 0.5em;
-        font-weight: bold;
-        color: #06509f;
-      }
+        <!-- Main Content -->
+        <div id="main-container">
+            <!-- Side Menu -->
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 2</span></button>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 3</span></button>
+                    </li>
+                </ul>
+            </nav>
 
-      .form-group input,
-      .form-group textarea {
-        flex: 1;
-        padding: 0.75em;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 1em;
-      }
+            <div class="content">
+                <h2 class="form-title">Submit Final Report</h2>
+                <hr />
+                <form id="final-report-form" class="form-container" onsubmit="handleSubmit(event)">
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label for="full-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="full-name" name="full-name" required>
+                    </div>
 
-      .form-group input[type="file"] {
-        display: flex;
-        flex-direction: column; 
-        margin-bottom: 1.5em;
-      }
+                    <!-- Student ID -->
+                    <div class="form-group">
+                        <label for="student-id">Student ID <span class="required">*</span></label>
+                        <input type="text" id="student-id" name="student-id" required>
+                    </div>
 
-      .file-label {
-        padding: 1em 0.2em;
-        background-color: white;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-        text-align: center;
-        font-size: 0.9em;
-        justify-items: flex-start;
-      }
+                    <!-- Project ID -->
+                    <div class="form-group">
+                        <label for="project-id">Project ID <span class="required">*</span></label>
+                        <input type="text" id="project-id" name="project-id" required>
+                    </div>
 
-      .form-buttons {
-        display: flex;
-        gap: 1em;
-        justify-content: center;
-        margin-top: 1.5em;
-      }
+                    <!-- Submit Your Report -->
+                    <div class="form-group">
+                        <label for="report-file">Submit Your Report <span class="required">*</span></label>
+                        <input type="file" id="report-file" name="report-file" required>
+                    </div>
 
-      .btn {
-        border: none;
-        cursor: pointer;
-        padding: 0.75em 1.5em;
-        border-radius: 4px;
-        font-size: 1em;
-        color: #fff;
-      }
+                    <!-- Comments -->
+                    <div class="form-group">
+                        <label for="comments">Comments (if any)</label>
+                        <textarea id="comments" name="comments" rows="4"></textarea>
+                    </div>
 
-      .save-btn {
-        background-color: #4caf50;
-      }
-
-      .save-btn:hover {
-        opacity: 0.8;
-      }
-
-      .reset-btn {
-        background-color: #e74c3c;
-      }
-
-      .reset-btn:hover {
-        opacity: 0.8;
-      }
-
-      .required {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Header -->
-    <header>
-      <button id="user-side-menu" onclick="navigateTo('menu')">
-        <img
-          src="../assets/user_side_menu.png"
-          alt="Side Menu Icon"
-          width="30"
-        />
-      </button>
-      <h2>Submit Final Report</h2>
-      <button id="home" onclick="navigateTo('home')">
-        <img src="../assets/home.png" alt="Home Icon" width="30" />
-      </button>
-    </header>
-
-    <!-- Content -->
-    <div class="content">
-      <h2 class="form-title">Submit Final Report</h2>
-      <hr />
-      <form
-        id="final-report-form"
-        class="form-container"
-        onsubmit="handleSubmit(event)"
-      >
-        <!-- Full Name -->
-        <div class="form-group">
-          <label for="full-name"
-            >Full Name <span class="required">*</span></label
-          >
-          <input type="text" id="full-name" name="full-name" required />
+                    <!-- Form Buttons -->
+                    <div class="form-buttons">
+                        <button type="submit" class="btn save-btn" style="background-color: #007BFF;">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <!-- Student ID -->
-        <div class="form-group">
-          <label for="student-id"
-            >Student ID <span class="required">*</span></label
-          >
-          <input type="text" id="student-id" name="student-id" required />
-        </div>
-
-        <!-- Project ID -->
-        <div class="form-group">
-          <label for="project-id"
-            >Project ID <span class="required">*</span></label
-          >
-          <input type="text" id="project-id" name="project-id" required />
-        </div>
-
-        <!-- Submit Your Report -->
-        <div class="form-group">
-          <label for="report-file"
-            >Submit Your Report <span class="required">*</span></label
-          >
-          
-          
-          <input type="file" id="report-file" name="report-file" required />
-        </div>
-
-        <!-- Comments -->
-        <div class="form-group">
-          <label for="comments">Comments (if any)</label>
-          <textarea id="comments" name="comments" rows="4"></textarea>
-        </div>
-
-        <!-- Form Buttons -->
-        <div class="form-buttons">
-          <button type="submit" class="btn save-btn">Save</button>
-        </div>
-      </form>
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
     </div>
 
-    <!-- JavaScript -->
     <script>
-      function navigateTo(destination) {
-        if (destination === "menu") {
-          alert("Navigating to the side menu...");
-        } else if (destination === "home") {
-          alert("Navigating to the home page...");
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the form from refreshing the page
+            alert("Your final report has been submitted!");
         }
-      }
-
-      function handleSubmit(event) {
-        event.preventDefault(); // Prevent the form from refreshing the page
-        alert("Your final report has been submitted!");
-      }
     </script>
-  </body>
+</body>
+
 </html>

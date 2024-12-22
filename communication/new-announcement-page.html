@@ -54,20 +54,22 @@
                     <form class="form" id="proposalForm">
                         <!-- auto-generated Proposal ID -->
                         <div class="form-group ">
-                            <label for="announcements-title">Announcement Title*</label>
-                            <input type="text" id="announcements-title" name="proposal-title" required>
+                            <label for="announcement-title">Announcement Title*</label>
+                            <input type="text" id="announcement-title" name="announcement-title" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="proposal-date">Proposal Date*</label>
-                            <input type="date" id="proposal-date" name="proposal-date" required>
+                            <label for="announcement-date">Proposal Date*</label>
+                            <input type="date" id="announcement-date" name="announcement-date"
+                                onfocus="this.showPicker()" onchange="this.blur()" required>
                         </div>
-                    
+
                         <div class="form-group">
-                            <label for="proposal-description">Description*</label>
-                            <textarea id="proposal-description" name="proposal-description" rows="6" required></textarea>
+                            <label for="announcement-description">Description*</label>
+                            <textarea id="announcement-description" name="announcement-description" rows="6"
+                                required></textarea>
                         </div>
-                    
+
                         <!-- submit and reset buttons -->
                         <div class="form-buttons">
                             <button type="submit" class="btn submit-btn">Submit</button>

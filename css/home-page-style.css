@@ -165,6 +165,7 @@ header {
   width: 15em;
   height: 2.7em;
   transition: 0.3s;
+  flex-shrink: 1;
 }
 
 .btn:hover {
@@ -182,4 +183,27 @@ header {
   background-color: white;
   color: #06509f;
   border: 3px solid #06509f;
+}
+
+@media screen and (max-width: 500px) {
+  .login-caption {
+    height: 0;
+    width: 0;
+    display: none;
+  }
+
+  #login-btn {
+    position: relative;
+  }
+
+  .buttons {
+    display: grid;
+  }
+
+  .buttons::after {
+    content: "Already have an account?";
+    color: #333;
+    display: block;
+    text-align: center;
+  }
 }

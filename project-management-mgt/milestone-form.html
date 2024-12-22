@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone Form</title>
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/calendar-style.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+
+    <style>
+        
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .icon-button img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #06509f;
+            color: #fff;
+            padding: 10px 20px;
+        }
+        header h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+     <!-- Header -->
+     <header>
+        <!-- Side Menu Icon -->
+        <button class="icon-button" onclick="navigateTo('sideMenu')">
+            <img src="../assets/user_side_menu.png" alt="Side Menu Icon">
+        </button>
+        <h2>Project Timeline Planning</h2>
+        <!-- Home Icon -->
+        <button class="icon-button" onclick="navigateTo('home')">
+            <img src="../assets/home.png" alt="Home Icon">
+        </button>
+    </header>
+
+    <!-- Content -->
+    <div class="content">
+        <h2 class="form-title">Milestone Submission</h2>
+        <hr>
+        <form id="milestone-form" class="form">
+            <!-- Milestone ID -->
+            <div class="form-group">
+                <label for="milestone-id">Milestone ID</label>
+                <p id="milestone-id">M1</p>
+            </div>
+
+            <!-- Milestone Description -->
+            <div class="form-group">
+                <label for="milestone-description">Milestone Description</label>
+                <textarea id="milestone-description" name="description" placeholder="Enter milestone description..." required></textarea>
+            </div>
+
+            <!-- Start Date -->
+            <div class="form-group">
+                <label for="start-date">Start Date</label>
+                <input type="date" id="start-date" name="start-date" required>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-group">
+                <label for="end-date">End Date</label>
+                <input type="date" id="end-date" name="end-date" required>
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="form-buttons">
+                <button type="submit" class="btn submit-btn">Submit</button>
+                <button type="reset" class="btn reset-btn">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Navigation Functionality
+        function navigateTo(destination) {
+            if (destination === 'menu') {
+                alert("Navigating to the side menu...");
+            } else if (destination === 'home') {
+                alert("Navigating to the home page...");
+            }
+        }
+
+        // Form Submission Handler
+        document.getElementById('milestone-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent actual form submission
+            alert("Milestone form has been submitted!");
+        });
+    </script>
+</body>
+</html>

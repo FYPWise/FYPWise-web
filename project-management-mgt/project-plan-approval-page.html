@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Project Plan</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <link rel="stylesheet" href="../css/approve-project-plan.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <a href="project-menu.html" id="user-side-menu">
+            <img src="../assets/user_side_menu.png" alt="Menu" width="30" height="30">
+        </a>
+        <h2>Approve Project Plan</h2>
+        <a href="home.html" id="home">
+            <img src="../assets/filter.png" alt="Home" width="30" height="30">
+        </a>
+    </header>
+
+    <!-- Container Section -->
+    <div class="container">
+        <!-- Side Menu -->
+        <div class="side-menu">
+            <ul>
+                <li><a href="all-project-plans.html">All Project Plans</a></li>
+                <li><a href="project-management.html">Project Management</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timeline ID</th>
+                            <th>Advisee</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="timeline-details.html?id=T1">T1</a></td>
+                            <td>Luigi Mario</td>
+                            <td>
+                                <select class="status-dropdown" onchange="updateStatus(this)">
+                                    <option value="On-going" selected>On-going</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="timeline-details.html?id=T2">T2</a></td>
+                            <td>Gracie Abrams</td>
+                            <td>
+                                <select class="status-dropdown" onchange="updateStatus(this)">
+                                    <option value="On-going">On-going</option>
+                                    <option value="Approved" selected>Approved</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="timeline-details.html?id=T3">T3</a></td>
+                            <td>Lee Zii Jia</td>
+                            <td>
+                                <select class="status-dropdown" onchange="updateStatus(this)">
+                                    <option value="On-going">On-going</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Pending" selected>Pending</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Dropdown Behavior -->
+    <script>
+        function updateStatus(selectElement) {
+            const status = selectElement.value;
+
+            // Update dropdown background color dynamically
+            if (status === "On-going") {
+                selectElement.style.backgroundColor = "#7f8c8d";
+                selectElement.style.color = "#fff";
+            } else if (status === "Approved") {
+                selectElement.style.backgroundColor = "#4CAF50";
+                selectElement.style.color = "#fff";
+            } else if (status === "Pending") {
+                selectElement.style.backgroundColor = "#f39c12";
+                selectElement.style.color = "#fff";
+            }
+        }
+
+        // Initialize dropdown colors on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropdowns = document.querySelectorAll(".status-dropdown");
+            dropdowns.forEach((dropdown) => updateStatus(dropdown));
+        });
+    </script>
+</body>
+</html>

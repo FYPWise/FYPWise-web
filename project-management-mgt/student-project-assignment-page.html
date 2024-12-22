@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Advisee</title>
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <style>
+        /* Edit Button Styling */
+        .edit-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 0.5em;
+        }
+
+        .edit-btn img {
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+
+        .edit-btn img:hover {
+            opacity: 1;
+        }
+
+        /* Editable Fields */
+        .editable {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 0.5em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <a href="project-menu.html" id="user-side-menu">
+            <img src="../assets/user_side_menu.png" alt="Menu" width="30" height="30">
+        </a>
+        <h2>Assign Advisee</h2>
+        <a href="home.html" id="home">
+            <img src="../assets/filter.png" alt="Home" width="30" height="30">
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content">
+            <!-- Form Section -->
+            <div class="form assign-form">
+                <p><strong>PROPOSAL ID:</strong> P1</p>
+                <p><strong>PROJECT ID:</strong> P1</p>
+
+                <!-- Editable Proposal Title -->
+                <div class="form-group">
+                    <label><strong>Proposal Title:</strong></label>
+                    <span id="title-text">Sentiment Analysis Software for Businesses</span>
+                    <input type="text" id="title-input" class="editable hidden">
+                    <button class="edit-btn" onclick="toggleEdit('title')">
+                        <img src="../assets/edit.png" alt="Edit" width="20" height="20">
+                    </button>
+                </div>
+
+                <!-- Editable Description -->
+                <div class="form-group">
+                    <label><strong>Description:</strong></label>
+                    <div id="description-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis nisl diam inceptos elementum scelerisque eros.
+                        Nullam eu dolor adipiscing pellentesque pellentesque vitae diam dui.
+                    </div>
+                    <textarea id="description-input" class="editable hidden" rows="4"></textarea>
+                    <button class="edit-btn" onclick="toggleEdit('description')">
+                        <img src="../assets/edit.png" alt="Edit" width="20" height="20">
+                    </button>
+                </div>
+
+                <!-- Start and End Dates -->
+                <div class="form-group">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" value="2024-10-31">
+                </div>
+                <div class="form-group">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date" name="end-date" value="2025-05-31">
+                </div>
+
+                <!-- Category Radio Buttons -->
+                <div class="form-group category-group">
+                    <p><strong>Category:</strong></p>
+                    <label><input type="radio" name="category" value="research"> Research-based</label>
+                    <label><input type="radio" name="category" value="application"> Application-based</label>
+                    <label><input type="radio" name="category" value="both"> Research & Application-based</label>
+                </div>
+
+                <!-- Supervisor ID -->
+                <div class="form-group">
+                    <label for="supervisor">Supervisor ID:</label>
+                    <input type="text" id="supervisor" name="supervisor" placeholder="Enter Supervisor ID" readonly>
+                </div>
+
+                <!-- Student ID -->
+                <div class="form-group">
+                    <label for="student">Student ID:</label>
+                    <input type="text" id="student" name="student" placeholder="Enter Student ID">
+                </div>
+
+                <!-- Buttons -->
+                <div class="form-buttons">
+                    <button class="btn save-btn" onclick="submitForm()">Save</button>
+                    <button class="btn cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Edit and Save Functionality -->
+    <script>
+        // Function to toggle edit mode
+        function toggleEdit(section) {
+            const textElement = document.getElementById(`${section}-text`);
+            const inputElement = document.getElementById(`${section}-input`);
+
+            if (textElement.classList.contains('hidden')) {
+                // Save edited content
+                textElement.innerHTML = inputElement.value;
+                textElement.classList.remove('hidden');
+                inputElement.classList.add('hidden');
+            } else {
+                // Enable editing
+                inputElement.value = textElement.innerHTML;
+                textElement.classList.add('hidden');
+                inputElement.classList.remove('hidden');
+                inputElement.focus();
+            }
+        }
+
+        // Function to handle form submission
+        function submitForm() {
+            alert("Form is submitted!");
+        }
+    </script>
+</body>
+</html>

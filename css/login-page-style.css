@@ -13,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow-y: auto;
 }
 
 #about-us, #home {
@@ -79,16 +80,25 @@ form{
     font-size: 1.3em;  
 }
 
+/* Eye icon */
+#toggle-password {
+    cursor: pointer; 
+    width: 20px; height: 20px; 
+    position: absolute; 
+    right: 630px; 
+    top: 430px;
+}
+
 /* Submit */
 .submit-btn{
     text-align: center;
 }
 
-.email-input, .password-input{
+.id-input, .password-input{
     margin-bottom: 1em;
 }
 
-input[type=email], input[type=password]{
+input{
     padding-left: 10px;
     margin-top: 10px;
     width: 100%;

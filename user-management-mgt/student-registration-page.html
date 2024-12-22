@@ -48,6 +48,7 @@
                     <div class="password-input">
                         <label for="password">Password:</label>
                         <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}" required/>
+                        <img id="toggle-password" src="../assets/show.png" alt="Show/Hide Password" >
                         <span id="tooltip" class="tooltip">
                             <ul>
                                 <li id="number" class="invalid">Have one number</li>
@@ -107,6 +108,7 @@
             var submitButton = document.getElementById('submit');
             var tooltip = document.getElementById('tooltip');
             var error = document.getElementById('error');
+            var togglePassword = document.getElementById('toggle-password');
             var requirements = {
                 number: /(?=.*\d)/,
                 uppercase: /(?=.*[A-Z])/,
@@ -154,6 +156,15 @@
                     error.style.marginBottom = '1em';
                 }
             }
+            togglePassword.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    togglePassword.src = '../assets/hide.png';
+                } else {
+                    passwordInput.type = 'password';
+                    togglePassword.src = '../assets/show.png';
+                }
+            });
         </script>
     </body>
 </html>

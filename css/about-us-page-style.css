@@ -118,6 +118,7 @@ hr{
     line-height: 2;
     font-size: 0.8rem;
     transition: 0.3s;
+    word-break: break-all;
 }
 
 .member:hover .details {
@@ -191,7 +192,6 @@ hr{
         opacity: 0;
     }
 }
-
 
 
 

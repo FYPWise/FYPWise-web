@@ -26,7 +26,7 @@
         <!-- Header Section -->
         <header>
             <button id="home"><a href="home-page.html"><img src="../assets/home.png" alt="home icon" class="home-image"></a></button>
-            <button id="about-us"><a href="#"><img src="../assets/about us.png" alt="about us icon" class="aboutus-image"></a></button>
+            <button id="about-us"><a href="about-us-page.html"><img src="../assets/about us.png" alt="about us icon" class="aboutus-image"></a></button>
         </header>
 
         <!-- FYPwise Logo -->
@@ -34,20 +34,21 @@
         <h2>Login</h2>
 
         <!-- Login -->
-            <form id="testform">
+            <form id="testform" onsubmit="response()">
                 <div class="container">
-                    <div class="email-input">
-                        <label for="email">Student ID:</label>
-                        <input id="email" name="email" type="email" required/>
+                    <div class="id-input">
+                        <label for="id">Student ID:</label>
+                        <input id="text" name="id" type="text" required/>
                     </div>
                     <div class="password-input">
                         <label for="password">Password:</label>
                         <input id="password" name="password" type="password" required/>
+                        <img id="toggle-password" src="../assets/show.png" alt="Show/Hide Password" >
                     </div>
-                    <div class="submit-btn"><button  type="submit" form="testform" value="LOGIN" class="submit" onclick="response()">LOGIN</button></div>
+                    <div class="submit-btn"><button  type="submit" form="testform" value="LOGIN" class="submit" >LOGIN</button></div>
                 </div>
             </form>
-        <div class="signup-caption"><p>Don't have an account? <a href="#">Sign Up</a></p></div>
+        <div class="signup-caption"><p>Don't have an account? <a href="student-registration-page.html">Sign Up</a></p></div>
 
         <footer id="footer">
             <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
@@ -60,5 +61,18 @@
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
+        <script>
+            var togglePassword = document.getElementById('toggle-password');
+            var passwordInput = document.getElementById('password');
+            togglePassword.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    togglePassword.src = '../assets/hide.png';
+                } else {
+                    passwordInput.type = 'password';
+                    togglePassword.src = '../assets/show.png';
+                }
+            });
+        </script>
     </body>
 </html>

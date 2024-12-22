@@ -287,11 +287,10 @@
         </footer>
     </div>
    
+    <script src="../scripts/side-menu.js"></script>
 
     <!-- JavaScript -->
     <script>
-
-        src="../scripts/side-menu.js"
 
         function navigateTo(destination) {
             if (destination === 'menu') {
@@ -309,18 +308,6 @@
         function handleCancel() {
             alert("Form submission has been canceled.");
         }
-
-        // Dropdown toggle functionality
-        const dropdownButtons = document.querySelectorAll('.dropdown-button');
-
-        dropdownButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const dropdown = button.nextElementSibling;
-                if (dropdown) {
-                    dropdown.classList.toggle('show');
-                }
-            });
-        });
     </script>
 </body>
 </html>

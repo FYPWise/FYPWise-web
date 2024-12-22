@@ -52,6 +52,9 @@ body:has(.menubutton > input:checked) .main {
 body:has(.menubutton > input:not(:checked)) #page-side {
   animation: fade-in 1s forwards;
 }
+body:has(.menubutton > input:checked) #chat-container {
+  margin-left: 0;
+}
 
 #page-side {
   background-color: #f4f4f4;

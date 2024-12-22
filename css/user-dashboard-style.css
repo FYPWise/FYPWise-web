@@ -16,6 +16,11 @@ body {
     overflow: auto;
 }
 
+header a{
+    margin: 0;
+    padding: 0;
+}
+
 /* Sidebar */
 .sidebar {
     background-color: #06509f;

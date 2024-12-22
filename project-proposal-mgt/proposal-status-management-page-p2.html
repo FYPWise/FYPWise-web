@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../css/form-style.css">
     <link rel="stylesheet" href="../css/common-ui.css">
 </head>
+
 <body>
     <div id="outer-container">
         <!-- Header Section -->
@@ -16,7 +18,8 @@
             <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
                     for="user-side-menu" class="fas"></label></div>
             <div id="logo"></div>
-            <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png" alt="home icon"></a></button>
+            <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png"
+                        alt="home icon"></a></button>
         </header>
         <!-- Main Content -->
         <div class="container">
@@ -63,6 +66,7 @@
 
                             <li class="inner-dropdown-list"><a class="menu-button"
                                     href="../project-proposal-mgt/proposal-submission-page.html">New Proposal</a>
+
                             </li>
                         </ul>
                     </li>
@@ -113,16 +117,20 @@
 
                     <div class="form-group">
                         <label for="proposal-title">Proposal Title</label>
-                        <p id="proposal-title" name="proposal-title">Personalized Calorie Tracking through Deep Learning and Food Image Recognition</p>
+                        <p id="proposal-title" name="proposal-title">Personalized Calorie Tracking through Deep Learning
+                            and Food Image Recognition</p>
                     </div>
 
                     <div class="form-group">
                         <label for="description">Description</label>
                         <p id="description" name="description">
-                            As health consciousness has grown, accurate calorie tracking has become crucial for diet management and 
-                            promoting healthier eating practices. Current calorie tracking apps available often rely on manual input, 
-                            leading to inaccuracies and frustration for users. The integration of deep learning and food image recognition 
-                            can automate this process, enhancing accuracy and user experience. 
+                            As health consciousness has grown, accurate calorie tracking has become crucial for diet
+                            management and
+                            promoting healthier eating practices. Current calorie tracking apps available often rely on
+                            manual input,
+                            leading to inaccuracies and frustration for users. The integration of deep learning and food
+                            image recognition
+                            can automate this process, enhancing accuracy and user experience.
                         </p>
                     </div>
 
@@ -142,7 +150,8 @@
                             <input type="radio" id="research-based" name="category" value="research" disabled>
                             <label for="research-based">Research-based</label>
 
-                            <input type="radio" id="application-based" name="category" value="application" checked="false" disabled>
+                            <input type="radio" id="application-based" name="category" value="application"
+                                checked="false" disabled>
                             <label for="application-based">Application-based</label>
 
                             <input type="radio" id="both" name="category" value="research-application" disabled>
@@ -183,20 +192,22 @@
             </div>
         </div>
         <footer>
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
+                    Selangor,
                     Malaysia</a></h3>
             <div id="side">
                 <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
                 <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
                 <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
+                    Desk</a>
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
     </div>
 
     <script>
-        document.getElementById("proposalForm").addEventListener("submit", function(event) {
+        document.getElementById("proposalForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent form submission
 
             // Collect form data
@@ -218,4 +229,5 @@
     </script>
     <script src="../scripts/side-menu.js"></script>
 </body>
+
 </html>

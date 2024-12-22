@@ -75,7 +75,7 @@
 body {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -148,7 +148,7 @@ header h2 {
 #outer-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
 }
 
@@ -263,6 +263,10 @@ body:has(.menubutton > input:checked) .content {
 }
 
 @media screen and (max-width: 650px) {
+  #outer-container {
+    height: 100dvh;
+  }
+
   #main-container {
     display: block;
     flex: 1;
@@ -312,6 +316,11 @@ body:has(.menubutton > input:checked) .content {
 
   body:has(.menubutton > input:checked) .content {
     width: 100%;
+  }
+
+  body {
+    height: 100dvh;
+    overflow-y: auto;
   }
 }
 

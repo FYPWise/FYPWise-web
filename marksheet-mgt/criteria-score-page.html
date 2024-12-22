@@ -132,6 +132,25 @@
         .side-menu a:hover {
             text-decoration: underline;
         }
+
+        .inner-dropdown {
+        display: none;
+        padding-left: 20px;
+      }
+
+      .inner-dropdown.show {
+        display: block; 
+      }
+
+      .dropdown-button {
+        cursor: pointer;
+      }
+
+      ul {
+        list-style-type: none; 
+        margin: 0;
+        padding: 0; 
+      }
     </style>
 </head>
 <body>
@@ -153,96 +172,122 @@
                 <div class="search-container">
                     <input type="text" id="search-bar" placeholder="Search">
                 </div>
-                <ul id="side-menu-shortcuts">
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Shortcut 1</span>
-                            <span class="expand-icon"></span>
-                        </button>
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
-                        </ul>
-                    </li>
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button"><span class="menu-label">Shortcut 2</span></button>
-                    </li>
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button"><span class="menu-label">Shortcut 3</span></button>
-                    </li>
-                </ul>
+        
+                        <ul id="side-menu-shortcuts">
+                            <li class="side-menu-dropdown-list">
+                              <button class="menu-button dropdown-button">
+                                <span class="menu-label">Project Management </span>
+                                <span class="expand-icon"></span>
+                              </button>
+                              <ul class="inner-dropdown">
+                                <li class="inner-dropdown-list">
+                                  <a
+                                    class="menu-button"
+                                    href="../marksheet-mgt/marksheet-page.html"
+                                    >Marksheet Page</a>
+                                </li>
+                                <li class="inner-dropdown-list">
+                                    <a
+                                      class="menu-button"
+                                      href="../final-report-submission-mgt/final-report-submission-page.html"
+                                      >Final Submission Page</a
+                                    >
+                                  </li>
+                                
+                              </ul>
+                            </li>
+                            <li class="side-menu-dropdown-list">
+                              <button class="menu-button dropdown-button">
+                                <span class="menu-label">module 2 </span>
+                                <span class="expand-icon"></span>
+                              </button>
+                              <ul class="inner-dropdown">
+                                <li class="inner-dropdown-list">
+                                    <a
+                                      class="menu-button"
+                                      href="../marksheet-mgt/criteria-score-page.html"
+                                      >abcde</a
+                                    >
+                                  </li>
+                              </ul>
+                            </li>
+                          </ul>
             </nav>
 
-    <!-- Main Content -->
-    <div class="content" style="margin-left: 220px;">
-        <div class="form-container">
-            <!-- Header Information -->
-            <div class="header-info">
-                <p>Marksheet ID: <span style="color: #06509f;">MK001</span></p>
-                <p>Evaluator ID: M123</p>
+            <!-- Main Content -->
+            <div class="content" style="margin-left: 220px;">
+                <div class="form-container">
+                    <!-- Header Information -->
+                    <div class="header-info">
+                        <p>Marksheet ID: <span style="color: #06509f;">MK001</span></p>
+                        <p>Evaluator ID: M123</p>
+                    </div>
+
+                    <!-- Criteria Sections -->
+                    <form id="criteria-score-form" onsubmit="handleSubmit(event)">
+                        <div class="criteria-section">
+                            <h3>Project Management</h3>
+                            <div class="criteria-input">
+                                <input type="number" name="score1" placeholder="Enter Score" required>
+                                <textarea name="comment1" rows="3" placeholder="Add Comments (if any)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="criteria-section">
+                            <h3>Report</h3>
+                            <div class="criteria-input">
+                                <input type="number" name="score2" placeholder="Enter Score" required>
+                                <textarea name="comment2" rows="3" placeholder="Add Comments (if any)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="criteria-section">
+                            <h3>Poster Presentation</h3>
+                            <div class="criteria-input">
+                                <input type="number" name="score3" placeholder="Enter Score" required>
+                                <textarea name="comment3" rows="3" placeholder="Add Comments (if any)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="criteria-section">
+                            <h3>Oral Presentation</h3>
+                            <div class="criteria-input">
+                                <input type="number" name="score4" placeholder="Enter Score" required>
+                                <textarea name="comment4" rows="3" placeholder="Add Comments (if any)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="criteria-section">
+                            <h3>Research Paper / Commercialisation Proposal</h3>
+                            <div class="criteria-input">
+                                <input type="number" name="score5" placeholder="Enter Score" required>
+                                <textarea name="comment5" rows="3" placeholder="Add Comments (if any)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="criteria-section">
+                            <h3>Execution</h3>
+                            <div class="criteria-input">
+                                <input type="number" name="score6" placeholder="Enter Score" required>
+                                <textarea name="comment6" rows="3" placeholder="Add Comments (if any)"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submission Date -->
+                        <div class="form-group">
+                            <label for="submission-date">Submission Date</label>
+                            <input type="date" id="submission-date" name="submission-date" required>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-buttons">
+                            <button type="submit" class="btn submit">Submit</button>
+                            <button type="button" class="btn cancel" onclick="handleCancel()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
-
-            <!-- Criteria Sections -->
-            <form id="criteria-score-form" onsubmit="handleSubmit(event)">
-                <div class="criteria-section">
-                    <h3>Project Management</h3>
-                    <div class="criteria-input">
-                        <input type="number" name="score1" placeholder="Enter Score" required>
-                        <textarea name="comment1" rows="3" placeholder="Add Comments (if any)"></textarea>
-                    </div>
-                </div>
-
-                <div class="criteria-section">
-                    <h3>Report</h3>
-                    <div class="criteria-input">
-                        <input type="number" name="score2" placeholder="Enter Score" required>
-                        <textarea name="comment2" rows="3" placeholder="Add Comments (if any)"></textarea>
-                    </div>
-                </div>
-
-                <div class="criteria-section">
-                    <h3>Poster Presentation</h3>
-                    <div class="criteria-input">
-                        <input type="number" name="score3" placeholder="Enter Score" required>
-                        <textarea name="comment3" rows="3" placeholder="Add Comments (if any)"></textarea>
-                    </div>
-                </div>
-
-                <div class="criteria-section">
-                    <h3>Oral Presentation</h3>
-                    <div class="criteria-input">
-                        <input type="number" name="score4" placeholder="Enter Score" required>
-                        <textarea name="comment4" rows="3" placeholder="Add Comments (if any)"></textarea>
-                    </div>
-                </div>
-
-                <div class="criteria-section">
-                    <h3>Research Paper / Commercialisation Proposal</h3>
-                    <div class="criteria-input">
-                        <input type="number" name="score5" placeholder="Enter Score" required>
-                        <textarea name="comment5" rows="3" placeholder="Add Comments (if any)"></textarea>
-                    </div>
-                </div>
-
-                <div class="criteria-section">
-                    <h3>Execution</h3>
-                    <div class="criteria-input">
-                        <input type="number" name="score6" placeholder="Enter Score" required>
-                        <textarea name="comment6" rows="3" placeholder="Add Comments (if any)"></textarea>
-                    </div>
-                </div>
-
-                <!-- Submission Date -->
-                <div class="form-group">
-                    <label for="submission-date">Submission Date</label>
-                    <input type="date" id="submission-date" name="submission-date" required>
-                </div>
-
-                <!-- Buttons -->
-                <div class="form-buttons">
-                    <button type="submit" class="btn submit">Submit</button>
-                    <button type="button" class="btn cancel" onclick="handleCancel()">Cancel</button>
-                </div>
-            </form>
         </div>
         <footer>
             <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
@@ -255,7 +300,7 @@
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
     </div>
-
+   
 
     <!-- JavaScript -->
     <script>
@@ -275,6 +320,18 @@
         function handleCancel() {
             alert("Form submission has been canceled.");
         }
+
+        // Dropdown toggle functionality
+        const dropdownButtons = document.querySelectorAll('.dropdown-button');
+
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const dropdown = button.nextElementSibling;
+                if (dropdown) {
+                    dropdown.classList.toggle('show');
+                }
+            });
+        });
     </script>
 </body>
 </html>

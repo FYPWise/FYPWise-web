@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Timeline Planning</title>
+    <link rel="icon" type="image/png" href="../assets/main_logo.png" />
     <link rel="stylesheet" href="../css/form-style.css">
     <link rel="stylesheet" href="../css/project-page.css">
     <link rel="stylesheet" href="../css/project-timeline-planning.css">
@@ -74,7 +75,9 @@
             </div>
             <div id="logo"></div>
             <button id="home" onclick="navigateTo('home')">
-                <img src="../assets/home.png" alt="Home Icon">
+                <a href="../user-management-mgt/user-dashboard-page.html" id="home">
+                    <img src="../assets/home.png" alt="home icon" />
+                  </a>
             </button>
         </header>
 
@@ -97,24 +100,7 @@
                             <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/milestone-form.html">Milestone Form</a></li>
                         </ul>
                     </li>
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Shortcut 2</span>
-                            <span class="expand-icon"></span>
-                        </button>
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Shortcut 3</span>
-                            <span class="expand-icon"></span>
-                        </button>
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 3</a></li>
-                        </ul>
-                    </li>
+                  
                 </ul>
             </nav>
 
@@ -127,7 +113,7 @@
                     <div class="chart-box">
                         <div class="chart-title">Gantt Chart</div>
                         <div class="chart-content">
-                            <p>Your Gantt chart content will appear here.</p>
+                            <p>Click Edit to Access Your Gantt Chart</p>
                         </div>
                         <div class="button-group">
                             <button class="btn edit-btn" onclick="navigateToEdit('gantt')">Edit</button>
@@ -139,7 +125,7 @@
                     <div class="chart-box">
                         <div class="chart-title">Flow Chart</div>
                         <div class="chart-content">
-                            <p>Your Flow chart content will appear here.</p>
+                            <p>Click Edit to Access Your Flow Chart</p>
                         </div>
                         <div class="button-group">
                             <button class="btn edit-btn" onclick="navigateToEdit('flow')">Edit</button>
@@ -152,11 +138,11 @@
                 <div class="milestone-section">
                     <div class="milestone-title">Milestones</div>
                     <ul class="milestone-list">
-                        <li>Milestone 1</li>
-                        <li>Milestone 2</li>
-                        <li>Milestone 3</li>
+                        <li>Submit Project Proposal</li>
+                        <li>Complete System Development</li>
+                        <li>Prepare Final Presentation</li>
                     </ul>
-                    <a href="dummy-milestone.html" class="add-btn">Add Milestone</a>
+                    <a href="../project-management-mgt/milestone-form.html" class="add-btn">Add Milestone</a>
                 </div>
             </div>
         </div>
@@ -178,7 +164,7 @@
     <script>
 
         src="../scripts/side-menu.js"
-        
+
         // Redirect to specific sections
         function navigateToEdit(section) {
             if (section === 'gantt') {

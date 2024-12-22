@@ -173,6 +173,7 @@ header {
 }
 
 .registration {
+    color: white;
     background-color: #06509f;
 }
 
@@ -180,18 +181,5 @@ header {
     background-color: white;
     color: #06509f;
     border: 3px solid #06509f;
-}
-
-/* link */
-a {
-    text-decoration: none;
-}
-
-.registration a{
-    color:white;
-}
-
-.login a{
-    color:#06509f;
 }
 

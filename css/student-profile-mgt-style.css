@@ -42,7 +42,7 @@ body {
 }
 
 #logout-btn{
-    padding: 16em 1em 0 1em;
+    padding: 18em 1em 0 1em;
 }
 
 .sidebar a {
@@ -53,12 +53,12 @@ body {
 }
 
 .icons img, .logout img {
-    width: 1.5em;
+    width: 1.7em;
     transition: 0.2s ease;
 }
 
 .icons img:hover, .logout img:hover{
-    width: 1.7em;
+    width: 1.9em;
 }
 
 /* Main Content */
@@ -162,6 +162,17 @@ table input, table select {
     padding: 10px;
 }
 
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    border: 1px solid black;
+}
 
 @media (max-width: 768px) {
     #footer {
@@ -206,25 +217,5 @@ table input, table select {
     .edit-btn {
         width: 100%;
         padding: 10px;
-    }
-
-    @media (max-width: 480px) {
-
-        .sidebar {
-            width: 50px;
-        }
-
-        .main-container {
-            margin-left: 50px;
-        }
-
-        .profile-section {
-            padding: 15px;
-        }
-
-        .profile-image img {
-            width: 120px;
-            height: 120px;
-        }
     }
 }

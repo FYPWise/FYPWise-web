@@ -7,6 +7,19 @@
         <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
         <link rel="stylesheet" href="../css/student-registration-page-style.css">
         <link rel="stylesheet" href="../css/footer.css">
+        <script>
+            function response() {
+                var form = document.getElementById('testform');
+                var inputs = form.querySelectorAll('input, select');
+
+                var profileInfo = '';
+                inputs.forEach(input => {
+                  profileInfo += `${input.name}: ${input.value}\n`;
+                });
+            
+                alert(`Profile Information:\n${profileInfo}`);
+            }
+        </script>
     </head>
     <body>
         <!-- Header Section -->
@@ -18,7 +31,7 @@
         <h2><span id="text1">Create</span> New <span id="text2">Account</span></h2>
 
         <!-- Login -->
-        <form method="POST" action="http://www.randyconnolly.com/tests/process.php" id="testform">
+        <form id="testform">
             <div class="container">
                 <div class="name-input">
                     <label for="name">Name:</label>

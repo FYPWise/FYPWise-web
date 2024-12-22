@@ -204,7 +204,7 @@ header h2 {
 .menu-button {
   border-style: none;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   color: #333;
   background-color: transparent;
@@ -213,13 +213,14 @@ header h2 {
   align-items: center;
   align-content: center;
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   cursor: pointer;
 }
 
 .menu-label {
   width: 100%;
   display: flex;
+  text-align: left;
 }
 
 .expand-icon {
@@ -247,6 +248,11 @@ header h2 {
 .expanded > * :hover {
   background-color: #ccc;
   border: none;
+}
+
+.inner-dropdown-list .menu-button {
+  padding-top: 10px;
+  font-size: 0.7rem;
 }
 
 .inner-dropdown {

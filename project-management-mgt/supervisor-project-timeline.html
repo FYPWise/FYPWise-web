@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="../css/proposal-management-style.css">
     <link rel="stylesheet" href="../css/supervisor-timeline-style.css"> 
     <link rel="stylesheet" href="../css/common-ui.css">
-    <link rel="stylesheet" href="../css/nav-bar.css">
-    <link rel="stylesheet" href="../css/footer.css">
     <style>
         .chart-box {
             margin: 20px;
@@ -26,39 +24,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .inner-dropdown {
-            display: none;
-            padding-left: 20px;
-        }
-
-        .inner-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-button {
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 1em;
-            font-weight: bold;
-            text-align: left;
-            width: 100%;
-        }
-
-        .dropdown-button:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .expand-icon {
-            float: right;
         }
     </style>
 </head>
@@ -171,11 +136,10 @@
         FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
     </footer>
 
+    <script src="../scripts/side-menu.js"></script>
+
     <!-- JavaScript -->
     <script>
-
-        src="../scripts/side-menu.js"
-
         let currentMilestone = 1;
 
         // Approve Chart Notification
@@ -201,18 +165,6 @@
             const milestoneText = `M${currentMilestone}`;
             document.getElementById('milestone-link').textContent = milestoneText;
         }
-
-        // Dropdown toggle functionality
-        const dropdownButtons = document.querySelectorAll('.dropdown-button');
-
-        dropdownButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const dropdown = button.nextElementSibling;
-                if (dropdown && dropdown.classList.contains('inner-dropdown')) {
-                    dropdown.classList.toggle('show');
-                }
-            });
-        });
     </script>
 </body>
 </html>

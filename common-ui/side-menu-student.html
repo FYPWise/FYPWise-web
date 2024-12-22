@@ -4,12 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Management</title>
-    <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
+    <title>Example of Side Menu</title>
     <link rel="stylesheet" href="../css/common-ui.css">
-    <link rel="stylesheet" href="../css/proposal-management-style.css">
-    <link rel="stylesheet"
-        href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
 </head>
 
 <body>
@@ -19,13 +15,14 @@
             <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
                     for="user-side-menu" class="fas"></label></div>
             <div id="logo"></div>
-            <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png" alt="home icon"></a></button>
+            <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png"
+                        alt="home icon"></a></button>
         </header>
 
         <!-- Main Content -->
-
-        <!-- Side Menu -->
         <div id="main-container">
+
+            <!-- Side Menu -->
             <nav id="side-menu">
                 <div class="search-container">
                     <input type="text" id="search-bar" placeholder="Search">
@@ -93,59 +90,7 @@
                 </ul>
             </nav>
 
-            <div class="content">
-                <div class="header-container">
-                    <h2>Meetings</h2>
-    
-                    <div class="table-buttons">
-                        <button id="edit-btn"><a href='#'><img src="../assets/edit.png" alt="edit"></a></button>
-                        <button id="filter-btn"><a href='#'><img src="../assets/filter.png" alt="filter"></a></button>
-                    </div>
-                </div>
-                <hr />
-
-                <div class="proposals">
-                    <table id="proposal-table">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" id="select-all"></th>
-                                <th>Meeting ID</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Mode</th>
-                                <th>Status</th>
-                                <th>Participants</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Table with sample data -->
-                            <tr>
-                                <td><input type="checkbox" class="row-checkbox" value="M001"></td>
-                                <td>M1</td>
-                                <td><a href="meeting-acceptance-page.html">Meeting FYP 1</a></td>
-                                <td>
-                                    First FYP Meeting
-                                </td>
-                                <td>2024-10-30</td>
-                                <td>03:00 PM</td>
-                                <td>Online</td>
-                                <td>Accepted</td>
-                                <td>Nur Aisyah Nabila, Nur Farahiya Aida</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div id="output"></div>
-                
-            </div>
         </div>
-
-        <script src="../scripts/table_search.js"></script>
-        <script src="../scripts/checkbox.js"></script>
-        <script src="../scripts/side-menu.js"></script>
 
         <footer>
             <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
@@ -161,6 +106,9 @@
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
     </div>
+
+    <!-- JavaScript -->
+    <script src="../scripts/side-menu.js"></script>
 </body>
 
 </html>

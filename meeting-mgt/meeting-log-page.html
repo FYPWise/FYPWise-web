@@ -32,23 +32,64 @@
                     <input type="text" id="search-bar" placeholder="Search">
                 </div>
                 <ul id="side-menu-shortcuts">
+
+                    <!-- Dropdown List -->
                     <li class="side-menu-dropdown-list">
                         <button class="menu-button dropdown-button">
-                            <span class="menu-label">Shortcut 1</span>
+                            <span class="menu-label">User Management</span>
                             <span class="expand-icon"></span>
                         </button>
+
+                        <!-- Inner Dropdown List -->
                         <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button" href="#lancau">Inner Shortcut</a>
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../user-management-mgt/student-profile-mgt-page.html">Student Profile</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../user-management-mgt/user-dashboard-page.html">Student Dashboard</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../user-management-mgt/about-us-page.html">About Us</a>
                             </li>
                         </ul>
                     </li>
+
                     <li class="side-menu-dropdown-list">
-                        <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
-                                class="expand-icon"></span></button>
+                        <button onclick="location.href='../project-management-mgt/projectmanagement.html'"
+                            class="menu-button"><span class="menu-label">Project Management</span>
                     </li>
+
                     <li class="side-menu-dropdown-list">
-                        <button class="menu-button"><span class="menu-label">Shortcut 1</span><span
-                                class="expand-icon"></span></button>
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Meeting & Presentation</span>
+                            <span class="expand-icon"></span>
+                        </button>
+
+                        <!-- Inner Dropdown List -->
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../meeting-mgt/meeting-management-page.html">All Meetings</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../meeting-mgt/meeting-scheduler-page.html">New Meeting</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../meeting-mgt/meeting-log-page.html">New Meeting Log</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../meeting-mgt/presentation-management-page.html">Presentation</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="side-menu-dropdown-list">
+                        <button onclick="location.href='../communication/comm-page.html'" class="menu-button"><span
+                                class="menu-label">Communication</span>
                     </li>
                 </ul>
             </nav>

@@ -134,7 +134,7 @@ table input, table select {
     border-radius: 5px;
 }
 
-#edit-btn, #image-btn {
+#edit-btn, #imageUploadButton {
     display: flex;
     background-color: #06509f;
     color: white;
@@ -146,7 +146,7 @@ table input, table select {
     transition: background-color 0.3s ease;
 }
 
-#edit-btn:hover, #image-btn:hover {
+#edit-btn:hover, #imageUploadButton:hover {
     background-color: #053f80;
 }
 

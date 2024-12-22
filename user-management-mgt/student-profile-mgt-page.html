@@ -6,7 +6,6 @@
         <title>Profile Management</title>
         <link rel="stylesheet" href="../css/student-profile-mgt-style.css">
         <link rel="stylesheet" href="../css/footer.css">
-        <link rel="stylesheet" href="../css/nav-bar.css">
         <script src="../scripts/profile_form_response.js"></script>
     </head>
     <body>
@@ -31,7 +30,7 @@
             <div class="profile">
                 <div class="profile-image">
                     <img src="../assets/Imran.jpg" alt="Profile Image">
-                    <button type="button" id="image-btn" style="display:none;" onclick="uploadImage()">Upload Image</button>
+                    <button type="button" id="imageUploadButton" style="display:none;" onclick="uploadImage()">Upload Image</button>
                 </div>
                 <div class="details">
                     <form id="profileForm">
@@ -59,11 +58,11 @@
                                 <td><label for="year"><strong>Year of study:</strong></label></td>
                                 <td>
                                     <select id="year" name="year" disabled>
-                                        <option value="0">1</option>
-                                        <option value="1">2</option>
-                                        <option value="2" selected>3</option>
-                                        <option value="3">4</option>
-                                        <option value="4">5</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3" selected>3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
                                     </select>
                                 </td>
                             </tr>

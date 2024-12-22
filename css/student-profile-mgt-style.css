@@ -150,12 +150,36 @@ table input, table select {
     background-color: #053f80;
 }
 
-#footer{
-    width: 95.5%;
-    margin: 10px 0 0 32px;
+#footer {
+    width: 90%;
+    margin: 5px 0 0 125px;
+    padding: 10px;
+    text-align: center;
 }
 
+#footer h3, #footer #side {
+    margin: 0;
+    padding: 10px;
+}
+
+
 @media (max-width: 768px) {
+    #footer {
+        width: 35em;
+        margin: 250px 125px 0 125px;
+    }
+
+    #footer h3 {
+        font-size: 1.2em;
+    }
+
+    #footer #side {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+
     .profile {
         flex-direction: column;
         text-align: center;

@@ -69,3 +69,10 @@ tr:nth-child(even) {
 tr:hover {
     background-color: #ddd;
 }
+
+/* Center Content */
+.content {
+    margin: 0 auto;
+    padding: 1.5em;
+    max-width: 1200px;
+}

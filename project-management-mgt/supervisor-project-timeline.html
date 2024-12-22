@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor Project Timeline</title>
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+    <link rel="stylesheet" href="../css/project-timeline-planning.css">
+    <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <link rel="stylesheet" href="../css/supervisor-timeline-style.css"> 
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/nav-bar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <style>
+        .chart-box {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Outer Container -->
+    <div id="outer-container">
+
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton">
+                <input title="side-menu" type="checkbox" id="user-side-menu">
+                <label for="user-side-menu" class="fas"></label>
+            </div>
+            <div id="logo"></div>
+            <button id="home" onclick="navigateTo('home')">
+                <img src="../assets/home.png" alt="Home Icon">
+            </button>
+        </header>
+
+        <div id="main-container">
+
+            <!-- Side Menu -->
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 2</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 3</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        
+    
+
+        <!-- Main Section -->
+        <div class="main-content">
+            <div>
+                <h2>Project Planning Outline</h2>
+            </div>
+            <!-- Gantt Chart Section -->
+            <div class="chart-box">
+                <div class="chart-title">Gantt Chart</div>
+                <div class="chart-content">
+                    <a href="https://dummy-excel-link.com" target="_blank" class="chart-link">Open Gantt Chart</a>
+                </div>
+                <div class="button-group">
+                    <button class="btn" onclick="approveChart('Gantt Chart')">Approve</button>
+                    <button class="btn" onclick="toggleCommentBox('gantt-comment')">Comment</button>
+                </div>
+                <div id="gantt-comment" class="comment-box">
+                    <textarea placeholder="Add your comment here..."></textarea>
+                    <button class="btn save-btn" onclick="saveComment()">Save</button>
+                </div>
+            </div>
+
+            <!-- Flow Chart Section -->
+            <div class="chart-box">
+                <div class="chart-title">Flow Chart</div>
+                <div class="chart-content">
+                    <a href="https://dummy-diagram-link.com" target="_blank" class="chart-link">Open Flow Chart</a>
+                </div>
+                <div class="button-group">
+                    <button class="btn" onclick="approveChart('Flow Chart')">Approve</button>
+                    <button class="btn" onclick="toggleCommentBox('flow-comment')">Comment</button>
+                </div>
+                <div id="flow-comment" class="comment-box">
+                    <textarea placeholder="Add your comment here..."></textarea>
+                    <button class="btn save-btn" onclick="saveComment()">Save</button>
+                </div>
+            </div>
+
+            <!-- Milestone Section -->
+            <div class="chart-box">
+                <div class="chart-title">Milestone</div>
+                <div class="milestone-navigation">
+                    <button class="nav-arrow" onclick="navigateMilestone(-1)">&#8592;</button>
+                    <a href="#" id="milestone-link" class="milestone-link">M1</a>
+                    <button class="nav-arrow" onclick="navigateMilestone(1)">&#8594;</button>
+                </div>
+            </div>
+        </div> 
+        </div>
+    
+    </div>
+
+    <footer>
+        <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
+        <div id="side">
+            <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+            <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+            <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+            <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+        </div>
+        FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        let currentMilestone = 1;
+
+        // Approve Chart Notification
+        function approveChart(chartName) {
+            alert(chartName + " has been approved!");
+        }
+
+        // Toggle Comment Box Visibility
+        function toggleCommentBox(commentBoxId) {
+            const commentBox = document.getElementById(commentBoxId);
+            commentBox.style.display = commentBox.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Save Comment Notification
+        function saveComment() {
+            alert("You have commented on the project.");
+        }
+
+        // Milestone Navigation
+        function navigateMilestone(direction) {
+            currentMilestone += direction;
+            if (currentMilestone < 1) currentMilestone = 1; // Prevent going below M1
+            const milestoneText = `M${currentMilestone}`;
+            document.getElementById('milestone-link').textContent = milestoneText;
+        }
+
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone Submission</title>
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/calendar-style.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+    <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/nav-bar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <style>
+        .form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2.5em; 
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 1em; 
+            margin-right: 3em;
+            color: #06509f;
+        }
+
+        textarea, input[type="date"] {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 0.75em; 
+        }
+
+        textarea {
+            resize:both;
+        }
+
+        textarea[readonly], input[readonly] {
+            background-color: #f9f9f9;
+            border: none;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 1em;
+            justify-content: flex-end;
+            margin-top: 1.5em;
+        }
+
+        .form-buttons .btn {
+            padding: 0.75em 1.5em;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50;
+        }
+
+        .edit-btn:hover {
+            opacity: 0.8;
+        }
+
+        .save-btn {
+            background-color: #27ae60;
+        }
+
+        .save-btn:hover {
+            opacity: 0.8;
+        }
+
+        .reset-btn {
+            background-color: #e74c3c;
+        }
+
+        .reset-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+  <!-- Outer Container -->
+  <div id="outer-container">
+
+    <!-- Header Section -->
+    <header>
+        <div class="menubutton">
+            <input title="side-menu" type="checkbox" id="user-side-menu">
+            <label for="user-side-menu" class="fas"></label>
+        </div>
+        <div id="logo"></div>
+        <button id="home" onclick="navigateTo('home')">
+            <img src="../assets/home.png" alt="Home Icon">
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <div id="main-container">
+
+        <!-- Side Menu -->
+        <nav id="side-menu">
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search">
+            </div>
+            <ul id="side-menu-shortcuts">
+                <li class="side-menu-dropdown-list">
+                    <button class="menu-button dropdown-button">
+                        <span class="menu-label">Shortcut 1</span>
+                        <span class="expand-icon"></span>
+                    </button>
+                    <ul class="inner-dropdown">
+                        <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                    </ul>
+                </li>
+                <li class="side-menu-dropdown-list">
+                    <button class="menu-button dropdown-button">
+                        <span class="menu-label">Shortcut 2</span>
+                        <span class="expand-icon"></span>
+                    </button>
+                    <ul class="inner-dropdown">
+                        <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 2</a></li>
+                    </ul>
+                </li>
+                <li class="side-menu-dropdown-list">
+                    <button class="menu-button dropdown-button">
+                        <span class="menu-label">Shortcut 3</span>
+                        <span class="expand-icon"></span>
+                    </button>
+                    <ul class="inner-dropdown">
+                        <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    <!-- Content -->
+    <div class="content">
+        <h2 class="form-title">Milestone Submission</h2>
+        <hr>
+        <form id="milestone-form" class="form">
+            <!-- Milestone ID -->
+            <div class="form-group">
+                <label for="milestone-id">Milestone ID</label>
+                <p id="milestone-id">M1</p>
+            </div>
+
+            <!-- Milestone Description -->
+            <div class="form-group">
+                <label for="milestone-description">Milestone Description</label>
+                <textarea id="milestone-description" name="description" readonly>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultrices odio odio, at lacinia metus aliquet eget.
+                </textarea>
+            </div>
+
+            <!-- Start Date -->
+            <div class="form-group">
+                <label for="start-date">Start Date</label>
+                <input type="date" id="start-date" name="start-date" value="2025-01-10" readonly>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-group">
+                <label for="end-date">End Date</label>
+                <input type="date" id="end-date" name="end-date" value="2025-05-31" readonly>
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="form-buttons">
+                <button type="button" id="edit-btn" class="btn edit-btn" onclick="toggleEdit(true)">Edit</button>
+                <button type="button" id="save-btn" class="btn save-btn" style="display:none;" onclick="saveChanges()">Save</button>
+                <button type="reset" id="reset-btn" class="btn reset-btn" onclick="resetForm()">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
+    <div id="side">
+        <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+        <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+        <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+        <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+    </div>
+    FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+</footer>
+
+</div>
+
+    <!-- JavaScript -->
+    <script>
+        function navigateTo(destination) {
+            if (destination === 'menu') {
+                alert("Navigating to the side menu...");
+            } else if (destination === 'home') {
+                alert("Navigating to the home page...");
+            }
+        }
+
+        // Enable editing of form fields
+        function toggleEdit(isEditable) {
+            const description = document.getElementById('milestone-description');
+            const startDate = document.getElementById('start-date');
+            const endDate = document.getElementById('end-date');
+            const editButton = document.getElementById('edit-btn');
+            const saveButton = document.getElementById('save-btn');
+
+            description.readOnly = !isEditable;
+            startDate.readOnly = !isEditable;
+            endDate.readOnly = !isEditable;
+
+            if (isEditable) {
+                editButton.style.display = 'none';
+                saveButton.style.display = 'inline-block';
+            } else {
+                editButton.style.display = 'inline-block';
+                saveButton.style.display = 'none';
+            }
+        }
+
+        // Save changes and disable editing
+        function saveChanges() {
+            toggleEdit(false);
+            alert("Milestone form has been edited!");
+        }
+
+        // Reset form fields
+        function resetForm() {
+            document.getElementById('milestone-description').value = "";
+            document.getElementById('start-date').value = "";
+            document.getElementById('end-date').value = "";
+        }
+    </script>
+</body>
+</html>

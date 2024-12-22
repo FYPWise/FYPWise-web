@@ -31,33 +31,47 @@
         <h2><span id="text1">Create</span> New <span id="text2">Account</span></h2>
 
         <!-- Login -->
-            <form id="testform">
+            <form id="testform" onsubmit="response()">
                 <div class="container">
                     <div class="name-input">
                         <label for="name">Name:</label>
-                        <input id="name" name="name" type="text" pattern="[A-Za-z\s]+" title="Please put your fullname according to your ID card" required/>
+                        <input id="name" name="name" type="text" placeholder="Full name according to ID" pattern="[A-Za-z\s]+" title="Please put your fullname according to your ID card" required/>
                     </div>
                     <div class="id-input">
                         <label for="id">Student ID:</label>
-                        <input id="id" name="id" type="text" pattern="\d{10}" title="Please enter your Student ID."  required/>
+                        <input id="id" name="id" type="text" placeholder="1211030429" pattern="\d{10}" title="Please enter your Student ID."  required/>
                     </div>
                     <div class="email-input">
                         <label for="email">Student Email:</label>
-                        <input id="email" name="email" type="email" required/>
+                        <input id="email" name="email" placeholder="1211030429@student.mmu.edu.my" pattern="\d{10}@student\.mmu\.edu\.my" type="email" required/>
                     </div>
                     <div class="password-input">
                         <label for="password">Password:</label>
-                        <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 to 12 characters" required/>
+                        <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}" required/>
+                        <span id="tooltip" class="tooltip">
+                            <ul>
+                                <li id="number" class="invalid">Have one number</li>
+                                <li id="uppercase" class="invalid">Have one uppercase character</li>
+                                <li id="lowercase" class="invalid">Have one lowercase character</li>
+                                <li id="special" class="invalid">Have one special character (!@#$%^&*)</li>
+                                <li id="length" class="invalid">Have 8 to 16 characters</li>    
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="cpass-input">
+                        <label for="cpass">Confirm Password:</label>
+                        <input id="cpass" name="cpass" type="password" required/>
+                        <span id="error" class="error" hidden>Please ensure your password match.</span>
                     </div>
                     <div class="study-year">
                         <label for="study-year">Year of study</label>
                         <select name="study-year" id="study-year" required>
                             <option value="" disabled selected>Select</option>
-                            <option value="0">1</option>
-                            <option value="1">2</option>
-                            <option value="2">3</option>
-                            <option value="3">4</option>
-                            <option value="4">5</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
                     </div>
                     <div class="faculty">
@@ -67,15 +81,15 @@
                             <option value="Cybersecurity">Cybersecurity</option>
                             <option value="Data Science">Data Science</option>
                             <option value="Game Development">Game Development</option>
-                            <option value="Software Engineering" selected>Software Engineering</option>
+                            <option value="Software Engineering">Software Engineering</option>
                         </select>
                     </div>
-                    <div class="submit-btn"><button  type="button" form="testform" value="sign-up" class="submit" onclick="response()">Sign Up</button></div>
+                    <div class="submit-btn" disabled><button  id="submit" type="submit" form="testform" value="sign-up" class="submit" >Sign Up</button></div>
                 </div>
             </form>
         <div class="login-caption"><p>Already have an account? <a href="login-page.html">Login</a></p></div>
-        <!-- footer Section -->
-        <footer>
+        <!-- Footer -->
+        <footer id="footer">
             <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
                     Malaysia</a></h3>
             <div id="side">
@@ -86,5 +100,60 @@
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
+        <script>
+            // Password check
+            var passwordInput = document.getElementById('password');
+            var confirmPasswordInput = document.getElementById('cpass');
+            var submitButton = document.getElementById('submit');
+            var tooltip = document.getElementById('tooltip');
+            var error = document.getElementById('error');
+            var requirements = {
+                number: /(?=.*\d)/,
+                uppercase: /(?=.*[A-Z])/,
+                lowercase: /(?=.*[a-z])/,
+                special: /(?=.*[!@#$%^&*])/,
+                length: /.{8,16}/
+            };
+
+            passwordInput.addEventListener('focus', function() {
+                tooltip.style.opacity = '1';
+            });
+
+            passwordInput.addEventListener('blur', function() {
+                tooltip.style.opacity = '0';
+            });
+
+            passwordInput.addEventListener('input', function() {
+                var value = passwordInput.value;
+                for (var key in requirements) {
+                    var element = document.getElementById(key);
+                    if (requirements[key].test(value)) {
+                        element.classList.remove('invalid');
+                        element.classList.add('valid');
+                    } else {
+                        element.classList.remove('valid');
+                        element.classList.add('invalid');
+                    }
+                }
+            });
+
+            // Confirm Password
+            confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+
+            function checkPasswordMatch() {
+                if (passwordInput.value === confirmPasswordInput.value) {
+                    confirmPasswordInput.style.border = '3px solid green';
+                    confirmPasswordInput.style.marginBottom = '1em';
+                    submitButton.disabled = false;
+                    error.hidden = true;
+                } else {
+                    confirmPasswordInput.style.border = '3px solid red';
+                    confirmPasswordInput.style.marginBottom = '0';
+                    submitButton.disabled = true;
+                    error.hidden = false;
+                    error.style.marginBottom = '1em';
+                }
+            }
+        </script>
     </body>
 </html>

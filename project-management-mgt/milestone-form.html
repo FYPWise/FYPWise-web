@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milestone Form</title>
+    <link rel="icon" type="image/png" href="../assets/main_logo.png" />
     <link rel="stylesheet" href="../css/form-style.css">
     <link rel="stylesheet" href="../css/calendar-style.css">
     <link rel="stylesheet" href="../css/project-page.css">
@@ -63,7 +64,7 @@
         </div>
         <div id="logo"></div>
         <button id="home" onclick="navigateTo('home')">
-            <img src="../assets/home.png" alt="Home Icon">
+            <img src="../user-management-mgt/user-dashboard-page.html" alt="Home Icon">
         </button>
     </header>
 
@@ -91,24 +92,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="side-menu-dropdown-list">
-                    <button class="menu-button dropdown-button">
-                        <span class="menu-label">Shortcut 2</span>
-                        <span class="expand-icon"></span>
-                    </button>
-                    <ul class="inner-dropdown">
-                        <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 2</a></li>
-                    </ul>
-                </li>
-                <li class="side-menu-dropdown-list">
-                    <button class="menu-button dropdown-button">
-                        <span class="menu-label">Shortcut 3</span>
-                        <span class="expand-icon"></span>
-                    </button>
-                    <ul class="inner-dropdown">
-                        <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 3</a></li>
-                    </ul>
-                </li>
+                
             </ul>
         </nav>
 
@@ -164,7 +148,7 @@
     <script>
 
         src="../scripts/side-menu.js"
-        
+
         // Navigation Functionality
         function navigateTo(destination) {
             if (destination === 'menu') {

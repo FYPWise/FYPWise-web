@@ -36,6 +36,10 @@ body:has(.menubutton > input:checked) #side-menu {
   animation: fade-in 1s forwards;
 }
 
+body:has(.menubutton > input:checked) #side-menu {
+  animation: fade-in 1s forwards;
+}
+
 /* Chat Menu Side */
 body:has(.menubutton > input:checked) #page-side {
   width: 0;
@@ -150,6 +154,11 @@ body:has(.menubutton > input:not(:checked)) #page-side {
   padding-left: 20px;
   margin-left: 250px;
   padding-right: 20px;
+}
+
+body:has(.menubutton > input:checked) #chat-container {
+  margin-left: 20px;
+  animation: fade-in 1s forwards;
 }
 
 #chat-container ul {

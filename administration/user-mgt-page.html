@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
+    <link rel="stylesheet" href="../css/announcements-mgt-style.css">
+    <link rel="stylesheet" href="../css/user-mgt-style.css">
+    <link rel="stylesheet" href="../css/common-ui.css">
+</head>
+
+<body>
+    <div id="outer-container">
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
+                    for="user-side-menu" class="fas"></label></div>
+            <div id="logo"></div>
+            <button id="home"><img src="../assets/home.png" alt="home icon"></a></button>
+        </header>
+
+        <!-- Main Content -->
+        <div id="main-container">
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#lancau">Inner Shortcut</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
+                                class="expand-icon"></span></button>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 1</span><span
+                                class="expand-icon"></span></button>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Proposal Table Section -->
+            <div class="content">
+                <div class="table-header-container">
+                    <h2>User Management</h2>
+
+                    <div class="table-buttons">
+                        <button id="edit-btn"><img src="../assets/edit.png" alt="edit"></button>
+                        <button id="filter-btn"><img src="../assets/filter.png" alt="filter"></button>
+                        <button class="create-new-btn" type="button"
+                            onclick="location.href='new-announcement-page.html';"><img
+                                src="../assets/create-new-icon.png" alt="filter"></button>
+                    </div>
+                </div>
+
+
+                <div class="table-name">
+                    <table id="tablename-table">
+                        <thead>
+                            <th><input title="select all" type="checkbox" id="select-all"></th>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>
+                                </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td><input title="U1" type="checkbox" class="row-checkbox" value="U001"></td>
+                                <td><a href="#">121110332</a></td>
+                                <td>Muhammad Firzan Ruzain bin Firdus</td>
+                                <td>firzanruzain@gmail.com</td>
+                                <td>
+                                    <p class="role">Student</p>
+                                </td>
+                                <td><button class="more-btn" type="button">⋮</button></td>
+                            </tr>
+
+                            <tr>
+                                <td><input title="U2" type="checkbox" class="row-checkbox" value="U002"></td>
+                                <td><a href="#">121110332</a></td>
+                                <td>Aisyah Nabila The Legend</td>
+                                <td>aisyahggxo@gmai.com</td>
+                                <td>
+                                    <p class="role">Moderator</p>
+                                </td>
+                                <td><button class="more-btn" type="button">⋮</button></td>
+                            </tr>
+
+                            <tr>
+                                <td><input title="U3" type="checkbox" class="row-checkbox" value="U003"></td>
+                                <td><a href="#">SV001254</a></td>
+                                <td>Mohamed Imran Mamak bin 1st Gen</td>
+                                <td>imranmamak@gmail.com</td>
+                                <td>
+                                    <p class="role">Supervisor</p>
+                                </td>
+                                <td><button class="more-btn" type="button">⋮</button></td>
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+                </div>
+
+                <div id="output"></div>
+            </div>
+        </div>
+
+        <!-- footer Section -->
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
+                    Selangor,
+                    Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
+                    Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabel Imran Aida Firzan
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../scripts/table_search.js"></script>
+    <script src="../scripts/checkbox.js"></script>
+
+    <script>
+        document.querySelectorAll('.role').forEach(cell => {
+            const text = cell.textContent.trim(); // Get the text content of the cell
+            if (text === 'Student') {
+                cell.classList.add('student'); // Add 'published' class
+            } else if (text === 'Moderator') {
+                cell.classList.add('moderator'); // Add 'unpublished' class
+            } else if (text === 'Supervisor') {
+                cell.classList.add('supervisor'); // Add 'unpublished' class
+            }
+        });
+    </script>
+
+    <!-- Initialize search functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            initSearch("search-bar", "proposal-table");
+        });
+    </script>
+</body>
+
+</html>

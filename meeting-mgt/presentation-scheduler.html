@@ -30,23 +30,79 @@
                     <input type="text" id="search-bar" placeholder="Search">
                 </div>
                 <ul id="side-menu-shortcuts">
+
+                    <!-- Dropdown List -->
                     <li class="side-menu-dropdown-list">
                         <button class="menu-button dropdown-button">
-                            <span class="menu-label">Shortcut 1</span>
+                            <span class="menu-label">User Management</span>
                             <span class="expand-icon"></span>
                         </button>
+
+                        <!-- Inner Dropdown List -->
                         <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button" href="#lancau">Inner Shortcut</a>
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../user-management-mgt/user-dashboard-page.html">Admin Dashboard</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../user-management-mgt/about-us-page.html">About Us</a>
                             </li>
                         </ul>
                     </li>
+
                     <li class="side-menu-dropdown-list">
-                        <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
-                                class="expand-icon"></span></button>
+                        <button class="menu-button dropdown-button"><span class="menu-label">Project & Proposal</span>
+                            <span class="expand-icon"></span>
+                        </button>
+
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../project-proposal-mgt/proposal-management-page.html">All
+                                    Proposal</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../project-proposal-mgt/proposal-submission-page.html">New Proposal</a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="side-menu-dropdown-list">
-                        <button class="menu-button"><span class="menu-label">Shortcut 1</span><span
-                                class="expand-icon"></span></button>
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Meeting & Presentation</span>
+                            <span class="expand-icon"></span>
+                        </button>
+
+                        <!-- Inner Dropdown List -->
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../meeting-mgt/presentation-management-page.html">All Presentations</a>
+                            </li>
+
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                href="../meeting-mgt/presentation-scheduler.html">New Presentations</a>
+                        </li>
+                        </ul>
+                    </li>
+
+                    <li class="side-menu-dropdown-list">
+                        <button onclick="location.href='../communication/comm-page.html'" class="menu-button"><span
+                                class="menu-label">Communication</span>
+                    </li>
+
+                    <!-- Dropdown List -->
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Administration</span>
+                            <span class="expand-icon"></span>
+                        </button>
+
+                        <!-- Inner Dropdown List -->
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../administration/new-user-page.html">Add User</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -163,26 +219,7 @@
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
-
-        <script>
-            /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-            var dropdown = document.getElementsByClassName("dropdown-button");
-            var i;
-
-            for (i = 0; i < dropdown.length; i++) {
-                dropdown[i].addEventListener("click", function () {
-                    this.parentNode.classList.toggle("expanded");
-                    var dropdownContent = this.parentNode.querySelector('ul.inner-dropdown');
-                    dropdownContent.classList.toggle("slideDown");
-                    if (dropdownContent.style.display === "block") {
-                        dropdownContent.style.display = "none";
-                    } else {
-                        dropdownContent.style.display = "block";
-                    }
-                });
-            }
-        </script>
-
+        <script src="../scripts/side-menu.js"></script>
         <script src="../scripts/calendar.js"></script>
         <script>
             // function to auto-generate ID

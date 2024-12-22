@@ -84,11 +84,11 @@ form{
     text-align: center;
 }
 
-.email-input, .password-input{
+.id-input, .password-input{
     margin-bottom: 1em;
 }
 
-input[type=email], input[type=password]{
+input{
     padding-left: 10px;
     margin-top: 10px;
     width: 100%;

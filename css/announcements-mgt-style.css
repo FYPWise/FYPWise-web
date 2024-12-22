@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+  font-family: "ITC Avant Garde Gothic W02 Md", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Section */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #06509f;
+  color: #fff;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  padding: 1.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+header h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5em;
+}
+
+#user-side-menu,
+#home {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+#top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#top-bar > span {
+  padding: 5px;
+}
+
+.create-new-btn {
+  width: 20px;
+  height: 20px;
+}
+
+.create-new-btn img{
+  width: 20px;
+  height: 20px;
+}
+
+.more-btn,
+.search-btn {
+  border: none;
+  font-size: larger;
+  border-radius: 100%;
+}
+
+.more-btn:hover,
+.search-btn:hover {
+  transform: scale(1.5);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.create-new-btn:hover {
+  background-color: #ffffff;
+  color: #06509f;
+  cursor: pointer;
+}
+
+#container {
+  margin-top: 50px;
+}
+
+.center {
+  margin: auto;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding: 20px;
+  border: none;
+  background-color: #ececec;
+  width: 90%;
+  height: max-content;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table > * {
+  text-align: left;
+  font-size: 1rem;
+}
+
+tr {
+  border-bottom: 1px solid #ccc;
+}
+
+th,
+td {
+  padding: 20px;
+}
+
+.status:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(1.1);
+}
+
+.published {
+  color: #06509f;
+  background-color: #c9def5;
+  border-radius: 20px;
+  padding: 10px;
+  width: fit-content;
+}
+
+.unpublished {
+  color: #ec2227;
+  background-color: #fac8c9;
+  border-radius: 20px;
+  padding: 10px;
+  width: fit-content;
+}
+
+a {
+  color: #06509f;
+}
+
+@media screen and (max-width: 600px) {
+  #container {
+    margin-top: 50px;
+  }
+  .center {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  td,th{
+    padding: 10px 7px;
+    margin: 0;
+    font-size: 0.7rem;
+  }
+}
+
+/* Form styling */
+#proposalForm{
+  padding: 0;
+}

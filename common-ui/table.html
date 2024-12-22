@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Example</title>
+    <link rel="stylesheet" href="../css/common-ui.css">
+</head>
+
+<body>
+
+    <div id="outer-container">
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
+                    for="user-side-menu" class="fas"></label></div>
+            <div id="logo"></div>
+            <button id="home"><img src="../assets/home.png" alt="home icon"></a></button>
+        </header>
+
+        <!-- Main Content -->
+        <div id="main-container">
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul>
+                    <li><a href="#">Shortcut 1</a></li>
+                    <li><a href="#">Shortcut 2</a></li>
+                    <li><a href="#">Shortcut 3</a></li>
+                </ul>
+            </nav>
+            <!-- Proposal Table Section -->
+            <div class="content">
+                <div class="table-header-container">
+                    <h2>Proposals</h2>
+
+                    <div class="table-buttons">
+                        <button id="edit-btn"><img src="../assets/edit.png" alt="edit"></a></button>
+                        <button id="filter-btn"><img src="../assets/filter.png" alt="filter"></a></button>
+                    </div>
+                </div>
+
+                <div class="table-name">
+                    <table id="tablename-table">
+                        <thead>
+                            <tr>
+                                <th><input title="select all" type="checkbox" id="select-all"></th>
+                                <th>Proposal ID</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Submission Date</th>
+                                <th>Supervisor ID</th>
+                                <th>Status</th>
+                                <th>Updated At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table with sample data -->
+                            <tr>
+                                <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
+                                <td>P2</td>
+                                <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking
+                                        through
+                                        Deep Learning and Food Image Recognition</a></td>
+                                <td>
+                                    As health consciousness has grown, accurate calorie tracking has become crucial for
+                                    diet
+                                    management and
+                                    promoting healthier eating practices.
+                                </td>
+                                <td>2024-10-30</td>
+                                <td>M034</td>
+                                <td>Pending</td>
+                                <td>2024-10-30</td>
+                            </tr>
+                            <tr>
+                                <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
+                                <td>P2</td>
+                                <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking
+                                        through
+                                        Deep Learning and Food Image Recognition</a></td>
+                                <td>
+                                    As health consciousness has grown, accurate calorie tracking has become crucial for
+                                    diet
+                                    management and
+                                    promoting healthier eating practices.
+                                </td>
+                                <td>2024-10-30</td>
+                                <td>M034</td>
+                                <td>Pending</td>
+                                <td>2024-10-30</td>
+                            </tr>
+                            <tr>
+                                <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
+                                <td>P2</td>
+                                <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking
+                                        through
+                                        Deep Learning and Food Image Recognition</a></td>
+                                <td>
+                                    As health consciousness has grown, accurate calorie tracking has become crucial for
+                                    diet
+                                    management and
+                                    promoting healthier eating practices.
+                                </td>
+                                <td>2024-10-30</td>
+                                <td>M034</td>
+                                <td>Pending</td>
+                                <td>2024-10-30</td>
+                            </tr>
+                            <tr>
+                                <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
+                                <td>P2</td>
+                                <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking
+                                        through
+                                        Deep Learning and Food Image Recognition</a></td>
+                                <td>
+                                    As health consciousness has grown, accurate calorie tracking has become crucial for
+                                    diet
+                                    management and
+                                    promoting healthier eating practices.
+                                </td>
+                                <td>2024-10-30</td>
+                                <td>M034</td>
+                                <td>Pending</td>
+                                <td>2024-10-30</td>
+                            </tr>
+                            <tr>
+                                <td><input title="p2" type="checkbox" class="row-checkbox" value="P002"></td>
+                                <td>P2</td>
+                                <td><a href="proposal-status-management-page-p2.html">Personalized Calorie Tracking
+                                        through
+                                        Deep Learning and Food Image Recognition</a></td>
+                                <td>
+                                    As health consciousness has grown, accurate calorie tracking has become crucial for
+                                    diet
+                                    management and
+                                    promoting healthier eating practices.
+                                </td>
+                                <td>2024-10-30</td>
+                                <td>M034</td>
+                                <td>Pending</td>
+                                <td>2024-10-30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="output"></div>
+            </div>
+        </div>
+
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
+                    Selangor,
+                    Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
+                    Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../scripts/table_search.js"></script>
+    <script src="../scripts/checkbox.js"></script>
+
+    <!-- Initialize search functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            initSearch("search-bar", "proposal-table");
+        });
+    </script>
+</body>
+
+</html>

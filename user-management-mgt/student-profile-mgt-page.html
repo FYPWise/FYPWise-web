@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile Management</title>
+        <link rel="stylesheet" href="../css/student-profile-mgt-style.css">
+        <link rel="stylesheet" href="../css/footer.css">
+        <script src="../scripts/profile_form_response.js"></script>
+    </head>
+    <body>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <img src="../assets/main_logo_white.png" alt="Logo" class="logo">
+            <div class="icons">
+                <button id="sidebar-btn"><a href="home-page.html"><img src="../assets/home.png" alt="home"></a></button>
+                <button id="sidebar-btn"><a href="#"><img src="../assets/messages.png" alt="messages"></a></button>
+                <button id="sidebar-btn"><a href="#"><img src="../assets/notification.png" alt="notification"></a></button>
+                <button id="logout-btn"><a href="login-page.html"><img src="../assets/logout.png" alt="logout"></a></button>
+            </div>
+        </div>
+
+        <!-- Main Container -->
+        <div class="container">
+
+            <h1>User Profile</h1>
+            <hr>
+
+            <!-- Profile -->
+            <div class="profile">
+                <div class="profile-image">
+                    <img src="../assets/Imran.jpg" alt="Profile Image">
+                    <button type="button" id="imageUploadButton" style="display:none;" onclick="uploadImage()">Upload Image</button>
+                </div>
+                <div class="details">
+                    <form id="profileForm">
+                        <table>
+                            <tr>
+                                <td><label for="name"><strong>Name:</strong></label></td>
+                                <td><input type="text" id="name" name="name" value="Mohamed Imran Bin Mohamed Yunus" pattern="[A-Za-z\s]+" readonly></td>
+                            </tr>
+                            <tr>
+                                <td><label for="student-id"><strong>Student ID:</strong></label></td>
+                                <td><input type="text" id="student-id" name="student_id" value="1211101935" pattern="\d{10}" readonly></td>
+                                <td><label for="email"><strong>Email:</strong></label></td>
+                                <td><input type="email" id="email" name="email" value="121111935@student.mmu.edu.my" pattern="\d{10}@student\.mmu\.edu\.my" readonly></td>
+                            </tr>
+                            <tr>
+                                <td><label for="faculty"><strong>Specialization:</strong></label></td>
+                                <td>
+                                    <select id="faculty" name="Specialization" disabled>
+                                        <option value="Cybersecurity">Cybersecurity</option>
+                                        <option value="Data Science">Data Science</option>
+                                        <option value="Game Development">Game Development</option>
+                                        <option value="Software Engineering" selected>Software Engineering</option>
+                                    </select>
+                                </td>
+                                <td><label for="year"><strong>Year of study:</strong></label></td>
+                                <td>
+                                    <select id="year" name="year" disabled>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3" selected>3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="button" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
+                    Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+    </body>
+</html>

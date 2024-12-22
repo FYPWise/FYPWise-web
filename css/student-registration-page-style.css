@@ -1,0 +1,192 @@
+@import url(https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md);
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'ITC Avant Garde Gothic W02 Md', Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #06509f;
+    color: #fff;
+    padding: 10px 20px;
+    position: relative;
+    padding: 1.5em;
+}
+
+#about-us, #home {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+}
+
+#about-us {
+    right: 20px;
+}
+
+#home {
+    right: 60px;
+}
+
+.aboutus-image, .home-image {
+    width: 1.5em;
+    transition: 0.2s ease;
+}
+
+.aboutus-image:hover, .home-image:hover {
+    width: 1.7em;
+}
+
+/* Title */
+
+h2 {
+    text-align: center;
+    margin: 1em 0;
+    font-size: 2em;
+}
+
+#text1{
+    color:#06509f;
+}
+
+#text2{
+    color:red;
+}
+
+/* Login box */
+form{
+    width: 500px;
+    height: 800px;
+    margin: 1em auto;
+    border: none ;
+    border-radius: 50px;
+    box-shadow: 0 0 30px rgb(170, 167, 167); 
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    width: 90%;
+    max-height: 700px;
+    height: 90%;
+    padding: 5%;
+    font-size: 1.3em;  
+}
+
+input, select{
+    padding-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 1em;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+}
+
+#cpass:focus{
+    outline: none;
+}
+
+.error {
+    text-align: center;
+    font-size: x-small;
+    font-weight: bold;
+}
+
+/* Submit */
+.submit-btn{
+    text-align: center;
+}
+
+.submit {
+    border: none;
+    font-size: 1.2em;
+    width: 45%;
+    height: 45px;
+    background-color: #06509f;
+    color: white;
+    border-radius: 3px;
+    transition: 0.3s ease;
+}
+
+.submit:hover{
+   width: 50%;
+   height: 50px;
+}
+
+/* Login caption */
+.login-caption {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+.login-caption a{
+    color: red;
+}
+
+/* Tooltip for password */
+.password-input {
+    position: relative;
+}
+
+.tooltip {
+    font-size: x-small;
+    position: absolute;
+    background-color: #ebe6e6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 10px;
+    z-index: 1;
+    width: 200px;
+    left: 102%;
+    top: 0%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.tooltip.visible {
+    opacity: 1;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -7px;
+    margin-left: -5px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: transparent #ebe6e6 transparent transparent;
+  }
+
+.tooltip ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tooltip ul li {
+    margin: 5px 0;
+}
+
+.tooltip ul li.invalid {
+    color: red;
+}
+
+.tooltip ul li.valid {
+    color: green;
+}

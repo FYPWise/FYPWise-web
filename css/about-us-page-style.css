@@ -1,0 +1,197 @@
+@import url(https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md);
+
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'ITC Avant Garde Gothic W02 Md', Arial, sans-serif;
+}
+
+/* Body */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #06509f;
+    color: #fff;
+    padding: 10px 20px;
+    position: relative;
+    padding: 1.5em;
+}
+
+header h2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5em;
+}
+
+#home {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    right: 20px;
+}
+
+.home-image {
+    width: 1.5em;
+    transition: 0.2s ease;
+}
+
+.home-image:hover {
+    width: 1.7em;
+}
+
+/* Title */
+
+h1 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    font-weight: bolder;
+    color: #06509f;
+}
+
+h3 {
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+    text-align: center;
+}
+
+hr{
+    margin: 0 70px;
+}
+
+
+/* Member Details */
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 2%;
+}
+
+/* Member card*/
+.member {
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: none;
+    border-radius: 10px;
+    width: 300px;
+    height: 390px;
+    overflow: hidden;
+    box-shadow: 0 0 10px 5px rgb(205, 205, 205);
+    transition: 0.3s ease;
+}
+
+.member:hover {
+    width: 310px;
+    height: 400px;
+}
+
+.member img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Details */
+.details {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    opacity: 0;
+    color: black;
+    padding: 10px;
+    line-height: 2;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    word-break: break-all;
+}
+
+.member:hover .details {
+    opacity: 0.8;
+}
+
+.member a{
+    text-decoration: none;
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    width: 100%;
+    color: grey;
+    text-align: center;
+    padding: 1em 0;
+    font-size: 1em;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+}
+
+.quote-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 1.5em;
+    position: relative;
+}
+
+.quote {
+    position: absolute;
+    opacity: 0;
+    animation: quoteAnimation 25s infinite;
+}
+
+.quote:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.quote:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.quote:nth-child(3) {
+    animation-delay: 10s;
+}
+
+.quote:nth-child(4) {
+    animation-delay: 15s;
+}
+
+.quote:nth-child(5) {
+    animation-delay: 20s;
+}
+
+/* Keyframes for the quote fade-in and fade-out */
+@keyframes quoteAnimation {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+

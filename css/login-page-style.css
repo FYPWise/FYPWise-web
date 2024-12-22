@@ -15,18 +15,6 @@ body {
     height: 100vh;
 }
 
-/* Header Section */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #06509f;
-    color: #fff;
-    padding: 10px 20px;
-    position: relative;
-    padding: 1.5em;
-}
-
 #about-us, #home {
     background: transparent;
     border: none;
@@ -57,14 +45,14 @@ header {
 #FYPWise-logo {
     width: 100%;
     max-width: 200px;
-    margin: 2em auto 0 auto;
+    margin: 70px auto 30px auto;
 }
 
 /* Title */
 
 h2 {
     text-align: center;
-    margin: 1em 0;
+    margin-bottom: 1em;
     font-size: 2em;
 }
 
@@ -125,7 +113,7 @@ input[type=email], input[type=password]{
 }
 
 .signup-caption {
-    margin-top: 1.5em;
+    margin: 1.2em 0;
     text-align: center;
 }
 

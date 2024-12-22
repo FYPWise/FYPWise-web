@@ -1,0 +1,64 @@
+/* General Table Styling */
+.project-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5em;
+    background-color: #fff;
+}
+
+.project-table th, .project-table td {
+    padding: 1em;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.project-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Links in Table */
+.project-table a {
+    color: #06509f;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.project-table a:hover {
+    text-decoration: underline;
+}
+
+/* Assign Advisee Button */
+.assign-btn {
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.assign-btn:hover {
+    opacity: 0.8;
+}
+
+/* Content Styling */
+.content h2 {
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+hr {
+    border: 1px solid #ddd;
+    margin-bottom: 1.5em;
+}
+
+/* Table Row Hover */
+.project-table tr:hover {
+    background-color: #f9f9f9;
+}

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criteria Score</title>
+    <link rel="stylesheet" href="../css/nav-bar.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 2em auto;
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .header-info {
+            margin-bottom: 2em;
+            text-align: center;
+        }
+
+        .header-info p {
+            margin: 0.5em 0;
+            font-weight: bold;
+            color: #06509f;
+        }
+
+        .criteria-section {
+            margin-bottom: 1.5em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5em;
+            background-color: #f9f9f9;
+        }
+
+        .criteria-section h3 {
+            margin: 0;
+            color: #06509f;
+            margin-bottom: 1em;
+        }
+
+        .criteria-input {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+        .criteria-input input,
+        .criteria-input textarea {
+            width: 100%;
+            padding: 0.75em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .form-group {
+            text-align: center;
+            margin: 2em 0;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #06509f;
+            margin-right: 1em;
+        }
+
+        .form-group input {
+            padding: 0.75em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            margin-top: 1.5em;
+        }
+
+        .btn {
+            padding: 0.75em 1.5em;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .btn.submit {
+            background-color: #4CAF50;
+        }
+
+        .btn.cancel {
+            background-color: #e74c3c;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .side-menu {
+            background-color: #06509f;
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            color: white;
+            padding: 1em;
+        }
+
+        .side-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 1em;
+            font-weight: bold;
+        }
+
+        .side-menu a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer-container">
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton">
+                <input title="side-menu" type="checkbox" id="user-side-menu">
+                <label for="user-side-menu" class="fas"></label>
+            </div>
+            <div id="logo"></div>
+            <button id="home"><img src="../assets/home.png" alt="home icon"></button>
+        </header>
+
+        <!-- Main Content -->
+        <div id="main-container">
+            <!-- Side Menu -->
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 2</span></button>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 3</span></button>
+                    </li>
+                </ul>
+            </nav>
+
+    <!-- Main Content -->
+    <div class="content" style="margin-left: 220px;">
+        <div class="form-container">
+            <!-- Header Information -->
+            <div class="header-info">
+                <p>Marksheet ID: <span style="color: #06509f;">MK001</span></p>
+                <p>Evaluator ID: M123</p>
+            </div>
+
+            <!-- Criteria Sections -->
+            <form id="criteria-score-form" onsubmit="handleSubmit(event)">
+                <div class="criteria-section">
+                    <h3>Project Management</h3>
+                    <div class="criteria-input">
+                        <input type="number" name="score1" placeholder="Enter Score" required>
+                        <textarea name="comment1" rows="3" placeholder="Add Comments (if any)"></textarea>
+                    </div>
+                </div>
+
+                <div class="criteria-section">
+                    <h3>Report</h3>
+                    <div class="criteria-input">
+                        <input type="number" name="score2" placeholder="Enter Score" required>
+                        <textarea name="comment2" rows="3" placeholder="Add Comments (if any)"></textarea>
+                    </div>
+                </div>
+
+                <div class="criteria-section">
+                    <h3>Poster Presentation</h3>
+                    <div class="criteria-input">
+                        <input type="number" name="score3" placeholder="Enter Score" required>
+                        <textarea name="comment3" rows="3" placeholder="Add Comments (if any)"></textarea>
+                    </div>
+                </div>
+
+                <div class="criteria-section">
+                    <h3>Oral Presentation</h3>
+                    <div class="criteria-input">
+                        <input type="number" name="score4" placeholder="Enter Score" required>
+                        <textarea name="comment4" rows="3" placeholder="Add Comments (if any)"></textarea>
+                    </div>
+                </div>
+
+                <div class="criteria-section">
+                    <h3>Research Paper / Commercialisation Proposal</h3>
+                    <div class="criteria-input">
+                        <input type="number" name="score5" placeholder="Enter Score" required>
+                        <textarea name="comment5" rows="3" placeholder="Add Comments (if any)"></textarea>
+                    </div>
+                </div>
+
+                <div class="criteria-section">
+                    <h3>Execution</h3>
+                    <div class="criteria-input">
+                        <input type="number" name="score6" placeholder="Enter Score" required>
+                        <textarea name="comment6" rows="3" placeholder="Add Comments (if any)"></textarea>
+                    </div>
+                </div>
+
+                <!-- Submission Date -->
+                <div class="form-group">
+                    <label for="submission-date">Submission Date</label>
+                    <input type="date" id="submission-date" name="submission-date" required>
+                </div>
+
+                <!-- Buttons -->
+                <div class="form-buttons">
+                    <button type="submit" class="btn submit">Submit</button>
+                    <button type="button" class="btn cancel" onclick="handleCancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+        function navigateTo(destination) {
+            if (destination === 'menu') {
+                alert("Navigating to the side menu...");
+            } else if (destination === 'home') {
+                alert("Navigating to the home page...");
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent page refresh
+            alert("The scores have been submitted successfully!");
+        }
+
+        function handleCancel() {
+            alert("Form submission has been canceled.");
+        }
+    </script>
+</body>
+</html>

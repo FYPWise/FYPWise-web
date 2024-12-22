@@ -26,6 +26,39 @@
             justify-content: center;
             align-items: center;
         }
+
+        .inner-dropdown {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .inner-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-button {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: left;
+            width: 100%;
+        }
+
+        .dropdown-button:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .expand-icon {
+            float: right;
+        }
     </style>
 </head>
 <body>
@@ -54,11 +87,16 @@
                 <ul id="side-menu-shortcuts">
                     <li class="side-menu-dropdown-list">
                         <button class="menu-button dropdown-button">
-                            <span class="menu-label">Shortcut 1</span>
+                            <span class="menu-label">Project Management</span>
                             <span class="expand-icon"></span>
                         </button>
                         <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                            <li class="inner-dropdown-list"><a class="menu-button" href="../marksheet-mgt/marksheet-page.html" >Marksheet Page</a></li>
+                            <li class="inner-dropdown-list"><a class="menu-button" href="../marksheet-mgt/criteria-score-page.html">Criteria Score Page</a></li>
+                            <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/project-plan-approval-page.html">Approve Project Plan</a></li>
+                            <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/projectmanagement.html">Project Management</a></li>
+                            <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/student-project-assignment-page.html">Assign Advisee</a></li>
+                            <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/milestone-submission.html">Milestone Submission</a></li>
                         </ul>
                     </li>
                     <li class="side-menu-dropdown-list">
@@ -81,58 +119,55 @@
                     </li>
                 </ul>
             </nav>
-        
-    
 
-        <!-- Main Section -->
-        <div class="main-content">
-            <div>
-                <h2>Project Planning Outline</h2>
-            </div>
-            <!-- Gantt Chart Section -->
-            <div class="chart-box">
-                <div class="chart-title">Gantt Chart</div>
-                <div class="chart-content">
-                    <a href="https://dummy-excel-link.com" target="_blank" class="chart-link">Open Gantt Chart</a>
+            <!-- Main Section -->
+            <div class="main-content">
+                <div>
+                    <h2>Project Planning Outline</h2>
                 </div>
-                <div class="button-group">
-                    <button class="btn" onclick="approveChart('Gantt Chart')">Approve</button>
-                    <button class="btn" onclick="toggleCommentBox('gantt-comment')">Comment</button>
+                <!-- Gantt Chart Section -->
+                <div class="chart-box">
+                    <div class="chart-title">Gantt Chart</div>
+                    <div class="chart-content">
+                        <a href="https://dummy-excel-link.com" target="_blank" class="chart-link">Open Gantt Chart</a>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn" onclick="approveChart('Gantt Chart')">Approve</button>
+                        <button class="btn" onclick="toggleCommentBox('gantt-comment')">Comment</button>
+                    </div>
+                    <div id="gantt-comment" class="comment-box">
+                        <textarea placeholder="Add your comment here..."></textarea>
+                        <button class="btn save-btn" onclick="saveComment()">Save</button>
+                    </div>
                 </div>
-                <div id="gantt-comment" class="comment-box">
-                    <textarea placeholder="Add your comment here..."></textarea>
-                    <button class="btn save-btn" onclick="saveComment()">Save</button>
-                </div>
-            </div>
 
-            <!-- Flow Chart Section -->
-            <div class="chart-box">
-                <div class="chart-title">Flow Chart</div>
-                <div class="chart-content">
-                    <a href="https://dummy-diagram-link.com" target="_blank" class="chart-link">Open Flow Chart</a>
+                <!-- Flow Chart Section -->
+                <div class="chart-box">
+                    <div class="chart-title">Flow Chart</div>
+                    <div class="chart-content">
+                        <a href="https://dummy-diagram-link.com" target="_blank" class="chart-link">Open Flow Chart</a>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn" onclick="approveChart('Flow Chart')">Approve</button>
+                        <button class="btn" onclick="toggleCommentBox('flow-comment')">Comment</button>
+                    </div>
+                    <div id="flow-comment" class="comment-box">
+                        <textarea placeholder="Add your comment here..."></textarea>
+                        <button class="btn save-btn" onclick="saveComment()">Save</button>
+                    </div>
                 </div>
-                <div class="button-group">
-                    <button class="btn" onclick="approveChart('Flow Chart')">Approve</button>
-                    <button class="btn" onclick="toggleCommentBox('flow-comment')">Comment</button>
-                </div>
-                <div id="flow-comment" class="comment-box">
-                    <textarea placeholder="Add your comment here..."></textarea>
-                    <button class="btn save-btn" onclick="saveComment()">Save</button>
-                </div>
-            </div>
 
-            <!-- Milestone Section -->
-            <div class="chart-box">
-                <div class="chart-title">Milestone</div>
-                <div class="milestone-navigation">
-                    <button class="nav-arrow" onclick="navigateMilestone(-1)">&#8592;</button>
-                    <a href="#" id="milestone-link" class="milestone-link">M1</a>
-                    <button class="nav-arrow" onclick="navigateMilestone(1)">&#8594;</button>
+                <!-- Milestone Section -->
+                <div class="chart-box">
+                    <div class="chart-title">Milestone</div>
+                    <div class="milestone-navigation">
+                        <button class="nav-arrow" onclick="navigateMilestone(-1)">&#8592;</button>
+                        <a href="#" id="milestone-link" class="milestone-link">M1</a>
+                        <button class="nav-arrow" onclick="navigateMilestone(1)">&#8594;</button>
+                    </div>
                 </div>
-            </div>
-        </div> 
+            </div> 
         </div>
-    
     </div>
 
     <footer>
@@ -174,7 +209,17 @@
             document.getElementById('milestone-link').textContent = milestoneText;
         }
 
-      
+        // Dropdown toggle functionality
+        const dropdownButtons = document.querySelectorAll('.dropdown-button');
+
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const dropdown = button.nextElementSibling;
+                if (dropdown && dropdown.classList.contains('inner-dropdown')) {
+                    dropdown.classList.toggle('show');
+                }
+            });
+        });
     </script>
 </body>
 </html>

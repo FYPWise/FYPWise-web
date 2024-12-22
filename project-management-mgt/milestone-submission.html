@@ -87,6 +87,25 @@
         .reset-btn:hover {
             opacity: 0.8;
         }
+
+        .inner-dropdown {
+        display: none;
+        padding-left: 20px;
+      }
+
+      .inner-dropdown.show {
+        display: block; 
+      }
+
+      .dropdown-button {
+        cursor: pointer;
+      }
+
+      ul {
+        list-style-type: none; 
+        margin: 0;
+        padding: 0; 
+      }
     </style>
 </head>
 <body>
@@ -116,11 +135,17 @@
             <ul id="side-menu-shortcuts">
                 <li class="side-menu-dropdown-list">
                     <button class="menu-button dropdown-button">
-                        <span class="menu-label">Shortcut 1</span>
+                        <span class="menu-label">Project Management</span>
                         <span class="expand-icon"></span>
                     </button>
                     <ul class="inner-dropdown">
-                        <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                        <li class="inner-dropdown-list"><a class="menu-button" href="../marksheet-mgt/marksheet-page.html" >Marksheet Page</a></li>
+                          <li class="inner-dropdown-list"><a class="menu-button" href="../marksheet-mgt/criteria-score-page.html">Criteria Score Page</a></li>
+                          <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/project-plan-approval-page.html">Approve Project Plan</a></li>
+                          <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/projectmanagement.html">Project Management</a></li>
+                          <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/student-project-assignment-page.html">Assign Advisee</a></li>
+                          <li class="inner-dropdown-list"><a class="menu-button" href="../project-management-mgt/supervisor-project-timeline.html">Project Timeline</a></li>
+                        
                     </ul>
                 </li>
                 <li class="side-menu-dropdown-list">
@@ -241,6 +266,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultrices odio odio, 
             document.getElementById('start-date').value = "";
             document.getElementById('end-date').value = "";
         }
+
+        const dropdownButtons = document.querySelectorAll('.dropdown-button');
+
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const dropdown = button.nextElementSibling; // Select the dropdown menu
+            if (dropdown && dropdown.classList.contains('inner-dropdown')) {
+                dropdown.classList.toggle('show'); // Toggle the 'show' class
+            }
+        });
+    });
     </script>
 </body>
 </html>

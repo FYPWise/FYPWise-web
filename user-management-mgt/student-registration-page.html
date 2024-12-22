@@ -35,7 +35,7 @@
                 <div class="password-input">
                     <label for="password">Password:</label>
                     <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}" required/>
-                    <span class="tooltip">
+                    <span id="tooltip" class="tooltip">
                         <ul>
                             <li id="number" class="invalid">Have one number</li>
                             <li id="uppercase" class="invalid">Have one uppercase character</li>
@@ -48,7 +48,7 @@
                 <div class="cpass-input">
                     <label for="cpass">Confirm Password:</label>
                     <input id="cpass" name="cpass" type="password" required/>
-                    <span class="error" hidden>Please ensure your password match.</span>
+                    <span id="error" class="error" hidden>Please ensure your password match.</span>
                 </div>
                 <div class="study-year">
                     <label for="study-year">Year of study</label>
@@ -92,8 +92,8 @@
             var passwordInput = document.getElementById('password');
             var confirmPasswordInput = document.getElementById('cpass');
             var submitButton = document.getElementById('submit');
-            var tooltip = document.querySelector('.tooltip');
-            var error = document.querySelector('.error');
+            var tooltip = document.getElementById('tooltip');
+            var error = document.getElementById('error');
             var requirements = {
                 number: /(?=.*\d)/,
                 uppercase: /(?=.*[A-Z])/,

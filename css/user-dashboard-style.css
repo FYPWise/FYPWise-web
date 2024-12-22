@@ -44,7 +44,7 @@ body {
 }
 
 #logout-btn{
-    padding: 16em 1em 0 1em;
+    padding: 18em 1em 0 1em;
 }
 
 .sidebar a {
@@ -55,12 +55,12 @@ body {
 }
 
 .icons img, .logout img {
-    width: 1.5em;
+    width: 1.7em;
     transition: 0.2s ease;
 }
 
 .icons img:hover, .logout img:hover{
-    width: 1.7em;
+    width: 1.9em;
 }
 
 /* Main Content */

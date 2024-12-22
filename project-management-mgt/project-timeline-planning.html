@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Timeline Planning</title>
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+    <link rel="stylesheet" href="../css/project-timeline-planning.css">
+    <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/nav-bar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <style>
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .icon-button img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #06509f;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        #outer-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #main-container {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        footer {
+            width: 100%;
+            background-color: #06509f;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            position: relative;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Outer Container -->
+    <div id="outer-container">
+
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton">
+                <input title="side-menu" type="checkbox" id="user-side-menu">
+                <label for="user-side-menu" class="fas"></label>
+            </div>
+            <div id="logo"></div>
+            <button id="home" onclick="navigateTo('home')">
+                <img src="../assets/home.png" alt="Home Icon">
+            </button>
+        </header>
+
+        <!-- Main Container -->
+        <div id="main-container">
+
+            <!-- Side Menu -->
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 2</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 3</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container">
+                <!-- Main Content -->
+                <div class="main-content">
+                    <!-- Gantt Chart -->
+                    <div class="chart-box">
+                        <div class="chart-title">Gantt Chart</div>
+                        <div class="chart-content">
+                            <p>Your Gantt chart content will appear here.</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn edit-btn" onclick="navigateToEdit('gantt')">Edit</button>
+                            <button class="btn submit-btn" onclick="submitChart('Gantt Chart')">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Flow Chart -->
+                    <div class="chart-box">
+                        <div class="chart-title">Flow Chart</div>
+                        <div class="chart-content">
+                            <p>Your Flow chart content will appear here.</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn edit-btn" onclick="navigateToEdit('flow')">Edit</button>
+                            <button class="btn submit-btn" onclick="submitChart('Flow Chart')">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone Section -->
+                <div class="milestone-section">
+                    <div class="milestone-title">Milestones</div>
+                    <ul class="milestone-list">
+                        <li>Milestone 1</li>
+                        <li>Milestone 2</li>
+                        <li>Milestone 3</li>
+                    </ul>
+                    <a href="dummy-milestone.html" class="add-btn">Add Milestone</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Redirect to specific sections
+        function navigateToEdit(section) {
+            if (section === 'gantt') {
+                window.location.href = "https://dummy-excel-link.com";
+            } else if (section === 'flow') {
+                window.location.href = "https://dummy-diagram-link.com";
+            }
+        }
+
+        // Display a success alert
+        function submitChart(chartName) {
+            alert(chartName + " submitted successfully!");
+        }
+
+        // Redirect to side menu or home
+        function navigateTo(destination) {
+            if (destination === 'sideMenu') {
+                alert("Navigating to the Side Menu...");
+                
+                window.location.href = "#";
+            } else if (destination === 'home') {
+                alert("Navigating to the Home Page...");
+                
+                window.location.href = "#";
+            }
+        }
+
+        // Dropdown Toggle
+        const dropdownButtons = document.querySelectorAll(".dropdown-button");
+        dropdownButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const dropdown = button.nextElementSibling;
+                dropdown.classList.toggle("slideDown");
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
+</body>
+
+</html>

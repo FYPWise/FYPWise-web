@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet</title>
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/nav-bar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+</head>
+
+<body>
+    <!-- Outer Container -->
+    <div id="outer-container">
+
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton">
+                <input title="side-menu" type="checkbox" id="user-side-menu">
+                <label for="user-side-menu" class="fas"></label>
+            </div>
+            <div id="logo"></div>
+            <button id="home" onclick="navigateTo('home')">
+                <img src="../assets/home.png" alt="Home Icon">
+            </button>
+        </header>
+
+        <!-- Main Container -->
+        <div id="main-container">
+
+            <!-- Side Menu -->
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 2</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 3</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#">Inner Shortcut 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="content">
+                <h2>Marksheet</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Project ID</th>
+                                <th>Marksheet ID</th>
+                                <th>Date</th>
+                                <th>Total Score</th>
+                                <th>Evaluator ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PR1</td>
+                                <td><a href="marksheet-MK1.html">MK1</a></td>
+                                <td>10-12-2023</td>
+                                <td>75</td>
+                                <td>M123</td>
+                            </tr>
+                            <tr>
+                                <td>PR2</td>
+                                <td><a href="marksheet-MK2.html">MK2</a></td>
+                                <td>15-12-2023</td>
+                                <td>80</td>
+                                <td>M124</td>
+                            </tr>
+                            <tr>
+                                <td>PR3</td>
+                                <td><a href="marksheet-MK3.html">MK3</a></td>
+                                <td>20-12-2023</td>
+                                <td>85</td>
+                                <td>M125</td>
+                            </tr>
+                            <tr>
+                                <td>PR4</td>
+                                <td><a href="marksheet-MK4.html">MK4</a></td>
+                                <td>25-12-2023</td>
+                                <td>90</td>
+                                <td>M126</td>
+                            </tr>
+                            <tr>
+                                <td>PR5</td>
+                                <td><a href="marksheet-MK5.html">MK5</a></td>
+                                <td>30-12-2023</td>
+                                <td>95</td>
+                                <td>M127</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+
+    </div>
+
+    <!-- JavaScript for dropdown -->
+    <script>
+        const dropdownButtons = document.querySelectorAll(".dropdown-button");
+
+        dropdownButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const dropdown = button.nextElementSibling;
+                dropdown.classList.toggle("slideDown");
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
+</body>
+
+</html>

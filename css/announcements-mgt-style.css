@@ -61,6 +61,7 @@ header h2 {
   border: none;
   font-size: larger;
   border-radius: 100%;
+  background: transparent;
 }
 
 .more-btn:hover,

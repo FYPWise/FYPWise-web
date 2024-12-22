@@ -252,7 +252,7 @@ body:has(.menubutton > input:checked) .content {
     overflow-x: auto;
     flex: 1;
     height: max-content;
-    padding: 12px;
+    padding: 0px;
   }
 
   .main {

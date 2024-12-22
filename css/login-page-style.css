@@ -79,6 +79,15 @@ form{
     font-size: 1.3em;  
 }
 
+/* Eye icon */
+#toggle-password {
+    cursor: pointer; 
+    width: 20px; height: 20px; 
+    position: absolute; 
+    right: 630px; 
+    top: 430px;
+}
+
 /* Submit */
 .submit-btn{
     text-align: center;

@@ -43,6 +43,7 @@
                     <div class="password-input">
                         <label for="password">Password:</label>
                         <input id="password" name="password" type="password" required/>
+                        <img id="toggle-password" src="../assets/show.png" alt="Show/Hide Password" >
                     </div>
                     <div class="submit-btn"><button  type="submit" form="testform" value="LOGIN" class="submit" >LOGIN</button></div>
                 </div>
@@ -60,5 +61,18 @@
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
+        <script>
+            var togglePassword = document.getElementById('toggle-password');
+            var passwordInput = document.getElementById('password');
+            togglePassword.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    togglePassword.src = '../assets/hide.png';
+                } else {
+                    passwordInput.type = 'password';
+                    togglePassword.src = '../assets/show.png';
+                }
+            });
+        </script>
     </body>
 </html>

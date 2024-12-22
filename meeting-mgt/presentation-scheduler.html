@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation Scheduler</title>
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/calendar-style.css">
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
+</head>
+
+<body>
+    <div id="outer-container">
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
+                    for="user-side-menu" class="fas"></label></div>
+            <div id="logo"></div>
+            <button id="home"><img src="../assets/home.png" alt="home icon"></a></button>
+        </header>
+
+        <!-- Main Content -->
+        <!-- Side Menu -->
+        <div id="main-container">
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#lancau">Inner Shortcut</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
+                                class="expand-icon"></span></button>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 1</span><span
+                                class="expand-icon"></span></button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <h2 class="form-title">Presentation Scheduler</h2>
+                <hr />
+                <form class="form" id="presentationForm">
+                    <!-- auto-generated ID -->
+                    <div class="form-group">
+                        <label for="presentation-id">Presentation ID</label>
+                        <p id="presentation-id" class="presentation-id"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Presentation Title</label>
+                        <input type="text" id="title" name="title" placeholder="Enter presentation title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-id">Project ID</label>
+                        <p id="project-id" class="project-id">PR67</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Presentation Date</label>
+                        <div class="calendar-section">
+                            <!-- Calendar Header -->
+                            <div class="calendar-header">
+                                <button id="prev-month" class="nav-btn">&lt;</button>
+                                <span id="month-display" class="month-display"></span>
+                                <button id="next-month" class="nav-btn">&gt;</button>
+                            </div>
+                    
+                            <!-- Calendar Table -->
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S</th>
+                                        <th>M</th>
+                                        <th>T</th>
+                                        <th>W</th>
+                                        <th>T</th>
+                                        <th>F</th>
+                                        <th>S</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calendar"></tbody>
+                            </table>
+                        </div>
+                        <!-- Hidden input to store selected date -->
+                        <input type="hidden" id="date" name="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Presentation Time</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mode">Mode of Presentation</label>
+                        <select id="mode" name="mode" required>
+                            <option value="" disabled selected>Select Mode</option>
+                            <option value="Online">Online</option>
+                            <option value="Offline">Offline</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Enter location">
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="url">Online Presentation URL</label>
+                        <input type="url" id="url" placeholder="Enter presentation URL">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="moderator-id">Moderator ID</label>
+                        <input type="text" id="moderator" placeholder="Enter moderator ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="supervisor-id">Supervisor ID</label>
+                        <p id="supervisor-id" class="supervisor-id">M43</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-id">Student ID</label>
+                        <p id="student-id" class="student-id">1211104230</p>
+                    </div>
+                    
+                    <!-- submit and reset buttons -->
+                    <div class="form-buttons">
+                        <button type="submit" class="btn submit-btn">Submit</button>
+                        <button type="reset" class="btn reset-btn">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
+                    Selangor,
+                    Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
+                    Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+
+        <script>
+            /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+            var dropdown = document.getElementsByClassName("dropdown-button");
+            var i;
+
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.parentNode.classList.toggle("expanded");
+                    var dropdownContent = this.parentNode.querySelector('ul.inner-dropdown');
+                    dropdownContent.classList.toggle("slideDown");
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+        </script>
+
+        <script src="../scripts/calendar.js"></script>
+        <script>
+            // function to auto-generate ID
+            function generatePresentationID() {
+                const prefix = "PRE";
+                const maxID = 9999; // limit to P9999
+
+                // retrieve the last ID from localStorage
+                let lastID = localStorage.getItem("lastPresentationID");
+
+                // if no lastID is found, start with "1"
+                if (!lastID) {
+                    lastID = "1"; // Starting point if no ID exists yet
+                    localStorage.setItem("lastPresentationID", lastID);
+                }
+
+                // Increment the ID (parse with radix 10)
+                let nextID = parseInt(lastID, 10) + 1;
+
+                // Check if parsing was successful
+                if (isNaN(nextID)) {
+                    console.error("Error: Unable to parse lastID into a number!");
+                    return `${prefix}1`; // Return a default value if error occurs
+                }
+
+                // Ensure the ID doesn't exceed the maxID
+                if (nextID > maxID) {
+                    alert("Maximum Presentation ID reached!");
+                    return `${prefix}${maxID}`;
+                }
+
+                // Save the new ID back to localStorage
+                localStorage.setItem("lastPresentationID", nextID.toString());
+
+                // Return the full Proposal ID with the prefix
+                return `${prefix}${nextID}`;
+            }
+
+            // assign auto-generated meeting ID every page load to simulate auto-generation
+            window.onload = function () {
+                const meetingIDField = document.getElementById("presentation-id");
+                if (meetingIDField) {
+                    meetingIDField.textContent = generatePresentationID();
+                }
+            };
+            
+            // form submission demo
+            document.getElementById("presentationForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // prevent actual form submission, only for display
+                
+                // retrieve form data
+                const formData = {
+                    presentationID: document.getElementById("presentation-id").textContent,
+                    title: document.getElementById("title").value,
+                    projectID: document.getElementById("project-id").textContent,
+                    date: document.getElementById("date").value,
+                    time: document.getElementById("time").value,
+                    mode: document.getElementById("mode").value,
+                    location: document.getElementById("location").value,
+                    moderatorID: document.getElementById("moderator").value,
+                };
+
+                // display submitted meeting data in an alert
+                let displayMessage = `
+                    Presentation ID: ${formData.presentationID}
+                    Presentation Title: ${formData.title}
+                    Project ID: ${formData.projectID}
+                    Presentation Date: ${formData.date}
+                    Presentation Time: ${formData.time}
+                    Mode: ${formData.mode}
+                    Location: ${formData.location}
+                    Moderator ID: ${formData.moderatorID}
+
+                `;
+
+                // show the form data in a pop-up message
+                alert(`Meeting scheduled successfully!\n\n${displayMessage}`);
+
+                // reload page after successful submission
+                location.reload();
+            });
+        </script>
+    </div>
+</body>
+
+</html>

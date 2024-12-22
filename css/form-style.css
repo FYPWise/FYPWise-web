@@ -21,6 +21,7 @@
 .form-group {
     display: flex;
     flex-direction: row;
+    padding: 0.5em;
 }
 
 .form-group label {
@@ -38,6 +39,8 @@
     border-radius: 4px;
     font-size: 1em;
     width: 80%;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
 }
 
 .radio-group {
@@ -58,7 +61,8 @@
 .form-buttons {
     display: flex;
     gap: 1em;
-    justify-content: flex-start;
+    justify-content: center;
+    margin-top: 2em;
 }
 
 .btn {
@@ -135,4 +139,37 @@
 
 .meeting-form .form-buttons .btn:hover {
     opacity: 0.8;
+}
+
+.file-input-container {
+    position: relative;
+    width: 80%;
+}
+.file-input-container input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.file-input-container .fake-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+.file-input-container .fake-input span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.file-input-container .fake-input .upload-icon {
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
 }

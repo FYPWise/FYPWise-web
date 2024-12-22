@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Management</title>
+    <link rel="stylesheet" href="../css/meeting-acceptance-style.css">
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet"
+        href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
+</head>
+
+<body>
+    <div id="outer-container">
+        <!-- Header Section -->
+        <header>
+            <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
+                    for="user-side-menu" class="fas"></label></div>
+            <div id="logo"></div>
+            <button id="home"><img src="../assets/home.png" alt="home icon"></a></button>
+        </header>
+
+        <!-- Main Content -->
+        <div id="main-container">
+            <nav id="side-menu">
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search">
+                </div>
+                <ul id="side-menu-shortcuts">
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button dropdown-button">
+                            <span class="menu-label">Shortcut 1</span>
+                            <span class="expand-icon"></span>
+                        </button>
+                        <ul class="inner-dropdown">
+                            <li class="inner-dropdown-list"><a class="menu-button" href="#lancau">Inner Shortcut</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 1</span> <span
+                                class="expand-icon"></span></button>
+                    </li>
+                    <li class="side-menu-dropdown-list">
+                        <button class="menu-button"><span class="menu-label">Shortcut 1</span><span
+                                class="expand-icon"></span></button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="content">
+                <div class="header-container">
+                    <h2>Pending Acceptance</h2></br>
+                </div>
+                <hr />
+
+                <div class="side">
+                    <form class="meeting-acceptance-form" id="meetingAcceptanceForm">
+                        <!-- auto-generated ID -->
+                        <div class="form-group ">
+                            <label for="meeting-id">Meeting ID</label>
+                            <p id="meeting-id" class="meeting-id">ME1</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Meeting Description</label>
+                            <p id="description" name="description">
+                                Meeting #3 for Zakat Finder 
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="meeting-date">Meeting Date</label>
+                            <p id="meeting-date" name="meeting-date">27 December 2024</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Start Time</label>
+                            <p id="start-time" name="start-time">03:00 PM</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment">End Time</label>
+                            <p id="start-time" name="start-time">05:00 PM</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="participants">Participants</label>
+                            <p id="participants" name="participants">Nur Aisyah Nabila, Zarina Che Embi</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mode">Mode of Meeting</label>
+                            <p id="mode" name="mode">Online</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <p id="location" name="location">MS Teams</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url">Meeting URL</label>
+                            <p id="url" name="url"><a href="#">MS Teams URL</a></p>
+                        </div>
+                    </form>
+
+                    <!-- Right Section -->
+                    <div class="calendar">
+                        <h3>Today | 14 December 2024</h3>
+                        <div class="event">
+                            <p><strong>9:00 AM</strong> FYP Introduction</p>
+                            <p>Participants: Nur Aisyah, Nur Farahiya, Zarina Che</p>
+                        </div>
+                        <h3>Tomorrow | 15 December 2024</h3>
+                        <div class="event">
+                            <p><strong>10:00 AM</strong> FYP Meeting 1 (Individual)</p>
+                            <p>Participants: Nur Aisyah, Zarina Che</p>
+                        </div>
+                        <h3>20 December 2024</h3>
+                        <div class="event">
+                            <p><strong>10:00 AM</strong> FYP Meeting 2 (Individual)</p>
+                            <p>Participants: Nur Aisyah, Zarina Che</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="response-buttons">
+                    <button class="accept">Accept</button>
+                    <button class="tentative">Tentative</button>
+                    <button class="decline">Decline</button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor, Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+    </div>
+    <script>
+        document.querySelectorAll('.response-buttons button').forEach(button => {
+            button.addEventListener('click', event => {
+                // Determine which button was clicked
+                const buttonType = event.target.className;
+
+                // Define the message based on the button type
+                let message = '';
+                if (buttonType === 'accept') {
+                    message = 'You have accepted the meeting invitation.';
+                } else if (buttonType === 'tentative') {
+                    message = 'You have marked the meeting as tentative.';
+                } else if (buttonType === 'decline') {
+                    message = 'You have declined the meeting invitation.';
+                }
+
+                // Show the pop-up message
+                alert(message);
+            });
+        });
+    </script>
+</body>
+</html>

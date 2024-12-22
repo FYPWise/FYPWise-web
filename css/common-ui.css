@@ -18,7 +18,6 @@
     font-weight:normal;
     font-style:normal;
     font-display:swap;
-}
 
 @keyframes slideDown {
   0% {
@@ -194,6 +193,7 @@ header h2 {
   align-content: center;
   width: 100%;
   padding: 20px;
+  cursor: pointer;
 }
 
 .menu-label {
@@ -345,6 +345,10 @@ footer > * {
 .link:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   color: var(--secondary-color);
+}
+
+.header-container{
+  color: #06509f;
 }
 
 /* table styling */

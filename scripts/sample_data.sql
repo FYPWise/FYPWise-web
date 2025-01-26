@@ -107,16 +107,9 @@ VALUES
 
 -- --------------------------------------------------------
 
-INSERT INTO timeline_file (timeline_fileID, filename, file_type, file_size, file_category, file_path, uploaded_at, edited_at, timeline_ID)
-VALUES 
-(1, 'gantt_chart.png', 'image', 2048, 'gantt_chart', '/files/gantt_chart.png', '2025-01-05 10:00:00', NULL, NULL),
-(2, 'flow_chart.pdf', 'pdf', 1024, 'flow_chart', '/files/flow_chart.pdf', '2025-01-15 14:30:00', '2025-01-20 09:00:00', NULL),
-(3, 'design_doc.docx', 'docx', 3072, 'others', '/files/design_doc.docx', '2025-01-25 16:00:00', NULL, NULL),
-(4, 'test_plan.pdf', 'pdf', 512, 'others', '/files/test_plan.pdf', '2025-02-05 11:15:00', NULL, NULL),
-(5, 'deployment_notes.txt', 'txt', 256, 'others', '/files/deployment_notes.txt', '2025-02-15 13:00:00', NULL, NULL),
-(6, 'doc_manual.pdf', 'pdf', 1024, 'others', '/files/doc_manual.pdf', '2025-03-05 09:45:00', NULL, NULL),
-(7, 'final_review_notes.docx', 'docx', 2048, 'others', '/files/final_review_notes.docx', '2025-03-25 14:30:00', NULL, NULL),
-(8, 'initial_review.png', 'image', 1024, 'others', '/files/initial_review.png', '2025-03-15 10:00:00', NULL, NULL);
+--
+-- Insert sample data  for table `timeline_file`
+--
 
 -- --------------------------------------------------------
 
@@ -143,7 +136,7 @@ INSERT INTO criteria_score (scoreID, score, criteria, comment, marksheetID, eval
 VALUES 
 (1, 25, 'project_mgt', 'Well-organized project management', NULL, NULL),
 (2, 30, 'execution', 'Excellent execution of tasks', NULL, NULL),
-(3, 20, 'report', 'Good but needs improvement', NULL, NULL),
+(3, 20, 'report', 'Good but needs improvement', NULL, NULL),/
 (4, 15, 'oral_presentation', 'Clear presentation', NULL, NULL),
 (5, 10, 'research_paper', 'Requires further detail', NULL, NULL),
 (6, 25, 'project_mgt', 'Satisfactory management', NULL, NULL),

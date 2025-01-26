@@ -58,27 +58,57 @@ USE fypwise;
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `project`
---
+CREATE TABLE project (
+    projectID INT NOT NULL PRIMARY KEY,
+    project_title VARCHAR(100) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE,
+    project_description TEXT NOT NULL,
+    project_status ENUM('ongoing', 'submitted', 'approved') NOT NULL,
+    studentID VARCHAR(5) NOT NULL,
+    proposalID VARCHAR(5) NOT NULL,
+    supervisorID VARCHAR(4) NOT NULL,
+    FOREIGN KEY (studentID) REFERENCES student(studentID),
+    FOREIGN KEY (proposalID) REFERENCES proposal(proposalID),
+    FOREIGN KEY (supervisorID) REFERENCES user(userID)
+);
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `project_timeline`
---
+CREATE TABLE project_timeline (
+    timelineID INT NOT NULL PRIMARY KEY,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    status ENUM('pending', 'in-progress', 'completed') NOT NULL,
+    projectID VARCHAR(6) NOT NULL,
+    FOREIGN KEY (projectID) REFERENCES project(projectID)
+);
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `milestone`
---
+CREATE TABLE milestone (
+    milestoneID INT NOT NULL PRIMARY KEY,
+    milestone_name VARCHAR(100) NOT NULL,
+    milestone_start_date DATE NOT NULL,
+    milestone_end_date DATE NOT NULL,
+    timelineID VARCHAR(5) NOT NULL,
+    FOREIGN KEY (timelineID) REFERENCES project_timeline(timelineID)
+);
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `timeline_file`
---
+CREATE TABLE timeline_file (
+    timeline_fileID INT NOT NULL PRIMARY KEY,
+    filename VARCHAR(50) NOT NULL,
+    file_type VARCHAR(10) NOT NULL,
+    file_size BIGINT NOT NULL,
+    file_category ENUM('gantt_chart', 'flow_chart', 'others') NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    uploaded_at DATETIME NOT NULL,
+    edited_at DATETIME,
+    timeline_ID VARCHAR(5) NOT NULL,
+    FOREIGN KEY (timeline_ID) REFERENCES project_timeline(timelineID)
+);
 
 -- --------------------------------------------------------
 
@@ -88,15 +118,28 @@ USE fypwise;
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `marksheet`
---
+CREATE TABLE marksheet (
+    marksheetID INT NOT NULL PRIMARY KEY,
+    total_score BIGINT NOT NULL,
+    date DATETIME NOT NULL,
+    projectID VARCHAR(6) NOT NULL,
+    FOREIGN KEY (projectID) REFERENCES project(projectID)
+);
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `criteria_score`
---
+CREATE TABLE criteria_score (
+    scoreID INT NOT NULL PRIMARY KEY,
+    score BIGINT NOT NULL,
+    criteria ENUM('project_mgt', 'execution', 'report', 'oral_presentation', 
+                  'research_paper', 'commercialization_prpsl', 
+                  'poster_presentation') NOT NULL,
+    comment TEXT NOT NULL,
+    marksheetID VARCHAR(6) NOT NULL,
+    evaluatorID VARCHAR(4) NOT NULL,
+    FOREIGN KEY (marksheetID) REFERENCES marksheet(marksheetID),
+    FOREIGN KEY (evaluatorID) REFERENCES user(userID)
+);
 
 -- --------------------------------------------------------
 

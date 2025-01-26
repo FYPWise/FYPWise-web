@@ -67,7 +67,7 @@ CREATE TABLE proposal (
 --
 CREATE TABLE proposal (
     proposal_statusID INT NOT NULL AUTO_INCREMENT,
-    status ENUM('application-based', 'research-based', 'application-research-based') NOT NULL,
+    status ENUM('accepted', 'rejected', 'pending') NOT NULL,
     comment TEXT,
     updated_at DATETIME NOT NULL,
     PRIMARY KEY (proposal_statusID),

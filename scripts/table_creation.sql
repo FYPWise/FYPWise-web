@@ -49,13 +49,30 @@ USE fypwise;
 --
 -- Table structure for table `proposal`
 --
-
+CREATE TABLE proposal (
+    proposalID INT NOT NULL AUTO_INCREMENT,
+    proposal_title VARCHAR(100) NOT NULL,
+    proposal_description TEXT,
+    submission_date DATETIME NOT NULL,
+    specialisation VARCHAR(30),
+    category ENUM('application-based', 'research-based', 'application-research-based') NOT NULL,
+    supervisorID VARCHAR(4) NOT NULL,
+    PRIMARY KEY (proposalID),
+    FOREIGN KEY (supervisorID) REFERENCES lecturer(lecturerID)
+)
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `proposal_status`
 --
-
+CREATE TABLE proposal (
+    proposal_statusID INT NOT NULL AUTO_INCREMENT,
+    status ENUM('accepted', 'rejected', 'pending') NOT NULL,
+    comment TEXT,
+    updated_at DATETIME NOT NULL,
+    PRIMARY KEY (proposal_statusID),
+    FOREIGN KEY (proposalID) REFERENCES proposal(proposalID)
+)
 -- --------------------------------------------------------
 
 --

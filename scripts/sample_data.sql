@@ -68,6 +68,7 @@ VALUES
 
 -- --------------------------------------------------------
 
+
 INSERT INTO project_timeline (timelineID, start_date, end_date, status, projectID)
 VALUES 
 (1, '2025-01-01', '2025-01-31', 'completed', NULL),
@@ -78,6 +79,17 @@ VALUES
 (6, '2025-06-01', '2025-06-30', 'in-progress', NULL),
 (7, '2025-07-01', '2025-07-31', 'pending', NULL),
 (8, '2025-08-01', '2025-08-31', 'completed', NULL);
+
+--
+-- Table structure for table `lecturer_project`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Insert sample data  for table `project_timeline`
+--
+
 
 -- --------------------------------------------------------
 

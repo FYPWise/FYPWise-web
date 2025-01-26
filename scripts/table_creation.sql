@@ -65,6 +65,12 @@ USE fypwise;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lecturer_project`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `project_timeline`
 --
 

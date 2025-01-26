@@ -62,6 +62,12 @@ USE fypwise;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lecturer_project`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Insert sample data  for table `project_timeline`
 --
 

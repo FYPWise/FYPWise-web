@@ -126,25 +126,72 @@ CREATE TABLE proposal (
 --
 -- Table structure for table `meeting`
 --
-
+CREATE TABLE meeting (
+    meetingID INT NOT NULL AUTO_INCREMENT,
+    date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    mode ENUM('online', 'physical') NOT NULL,
+    location VARCHAR(50),
+    meeting_title VARCHAR(100) NOT NULL,
+    meeting_description TEXT NOT NULL,
+    meeting_URL TEXT,
+    supervisorID INT NOT NULL,
+    student_meetingID INT NOT NULL,
+    PRIMARY KEY (meetingID),
+    FOREIGN KEY (supervisorID) REFERENCES lecturer(lecturerID),
+);
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `student_meeting`
 --
-
+CREATE TABLE student_meeting (
+    meetingID INT NOT NULL,
+    studentID INT NOT NULL,
+    PRIMARY KEY (meetingID, studentID),
+    FOREIGN KEY (meetingID) REFERENCES meeting(meetingID),
+    FOREIGN KEY (studentID) REFERENCES student(studentID)
+);
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `meeting_log`
 --
-
+CREATE TABLE meeting_log (
+    meeting_logID INT NOT NULL AUTO_INCREMENT,
+    submission_date DATETIME NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    status ENUM('submitted', 'pending', 'rejected', 'approved') NOT NULL,
+    comment TEXT NOT NULL,
+    updated_at DATETIME NOT NULL,
+    meetingID INT NOT NULL,
+    studentID INT NOT NULL,
+    projectID INT NOT NULL,
+    PRIMARY KEY (meeting_logID),
+    FOREIGN KEY (meetingID) REFERENCES meeting(meetingID),
+    FOREIGN KEY (studentID) REFERENCES student(studentID),
+    FOREIGN KEY (projectID) REFERENCES project(projectID)
+);
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `presentation`
 --
-
+CREATE TABLE presentation (
+    presentationID INT AUTO_INCREMENT PRIMARY KEY,
+    presentation_title VARCHAR(50) NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    date DATE NOT NULL,
+    mode ENUM('online', 'physical') NOT NULL,
+    location VARCHAR(50) NOT NULL,
+    presentation_URL TEXT,
+    status ENUM('scheduled', 'postponed', 'presented') NOT NULL,
+    updated_at DATETIME NOT NULL,
+    projectID INT NOT NULL,
+    FOREIGN KEY (projectID) REFERENCES project(projectID)
+);
 -- --------------------------------------------------------
 
 --

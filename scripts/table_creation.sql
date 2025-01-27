@@ -19,19 +19,38 @@ USE fypwise;
 --
 -- Table structure for table `user`
 --
+CREATE table user(
+    userID VARCHAR(5) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL, COMMENT 'hashed password', -- Hashed password
+    email VARCHAR(100) NOT NULL,
+    role ENUM('student', 'lecturer', 'admin') NOT NULL,
+    filename VARCHAR(50) DEFAULT 'Default_pfp.jpg',
+    PRIMARY KEY (userID)
+);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `lecturer`
 --
-
+CREATE table lecturer(
+    lecturerID VARCHAR(4) NOT NULL,
+    position VARCHAR(50) NOT NULL,
+    PRIMARY KEY (lecturerID)
+);
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `student`
 --
-
+CREATE table student(
+    studentID VARCHAR(10) NOT NULL,
+    year INT NOT NULL,
+    specialization VARCHAR(50) NOT NULL,
+    PRIMARY KEY (studentID),
+    FOREIGN KEY (studentID) REFERENCES user(userID)
+);
 -- --------------------------------------------------------
 
 --
@@ -43,7 +62,14 @@ USE fypwise;
 --
 -- Table structure for table `task`
 --
-
+CREATE TABLE task (
+    taskID INT NOT NULL AUTO_INCREMENT,
+    taskName VARCHAR(100) NOT NULL,
+    taskDate DATE NOT NULL,
+    userID VARCHAR(5) NOT NULL,
+    PRIMARY KEY (taskID),
+    FOREIGN KEY (userID) REFERENCES user(userID)
+);
 -- --------------------------------------------------------
 
 --
@@ -59,7 +85,7 @@ CREATE TABLE proposal (
     supervisorID VARCHAR(4) NOT NULL,
     PRIMARY KEY (proposalID),
     FOREIGN KEY (supervisorID) REFERENCES lecturer(lecturerID)
-)
+);
 -- --------------------------------------------------------
 
 --
@@ -72,7 +98,7 @@ CREATE TABLE proposal (
     updated_at DATETIME NOT NULL,
     PRIMARY KEY (proposal_statusID),
     FOREIGN KEY (proposalID) REFERENCES proposal(proposalID)
-)
+);
 -- --------------------------------------------------------
 
 CREATE TABLE project (

@@ -16,7 +16,23 @@ USE fypwise;
 --
 -- Insert sample data  for table `user`
 --
-
+INSERT INTO users (userID, name, password, email, role) VALUES
+('1211101935', 'Mohamed Imran Bin Mohamed Yunus', '123', '1211101935@student.mmu.edu.my', 'student'),
+('1211103220', 'Mohamed Firzan RUzain Bin Firdus', '123', '1211103220@student.mmu.edu.my', 'student'),
+('1211103194', 'Nur Farahiya Aida Binti Abd Razak', '123', '1211103194@student.mmu.edu.my', 'student'),
+('1211104230', 'Nur Aisyah Nabila Binti Nahar', '123', '1211104230@student.mmu.edu.my', 'student'),
+('1211017635', 'Ahmad Abu', '123', '1211017635@student.mmu.edu.my', 'student'),
+('1209115403', 'Ali Naki', '123', '1209115403@student.mmu.edu.my', 'student'),
+('1212003221', 'Sarah Humaira', '123', '1212003221@student.mmu.edu.my', 'student'),
+('1213567211', 'Nurul Aliya', '123', '1213567211@student.mmu.edu.my', 'student'),
+('L001', 'Lecturer One', '123', 'lecturer1@mmu.edu.my', 'lecturer'),
+('L002', 'Lecturer Two', '123', 'lecturer2@mmu.edu.my', 'lecturer'),
+('L003', 'Lecturer Three', '123', 'lecturer3@mmu.edu.my', 'lecturer'),
+('L004', 'Lecturer Four', '123', 'lecturer4@mmu.edu.my', 'lecturer'),
+('L005', 'Lecturer Five', '123', 'lecturer5@mmu.edu.my', 'lecturer'),
+('L006', 'Lecturer Six', '123', 'lecturer6@mmu.edu.my', 'lecturer'),
+('L007', 'Lecturer Seven', '123', 'lecturer7@mmu.edu.my', 'lecturer'),
+('L008', 'Lecturer Eight', '123', 'lecturer8@mmu.edu.my', 'lecturer');
 -- --------------------------------------------------------
 
 --
@@ -49,12 +65,6 @@ INSERT INTO student (studentID, year, specialization) VALUES
 -- --------------------------------------------------------
 
 --
--- Insert sample data  for table `announcement`
---
-
--- --------------------------------------------------------
-
---
 -- Insert sample data  for table `task`
 --
 INSERT INTO task (taskName, taskDate, userID) VALUES
@@ -74,7 +84,13 @@ INSERT INTO task (taskName, taskDate, userID) VALUES
 ('Create Prototype', '2025-03-15', '1209115403'),
 ('Test Prototype', '2025-03-20', '1212003221'),
 ('Finalize Project', '2025-03-25', '1213567211');
+-- --------------------------------------------------------
 
+--
+-- Insert sample data  for table `announcement`
+--
+
+-- --------------------------------------------------------
 --
 -- Insert sample data  for table `proposal`
 --

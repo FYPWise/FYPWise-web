@@ -27,7 +27,7 @@ CREATE table user(
     role ENUM('student', 'lecturer', 'admin') NOT NULL,
     filename VARCHAR(50) DEFAULT 'Default_pfp.jpg',
     PRIMARY KEY (userID)
-)
+);
 
 -- --------------------------------------------------------
 
@@ -38,19 +38,19 @@ CREATE table lecturer(
     lecturerID VARCHAR(4) NOT NULL,
     position VARCHAR(50) NOT NULL,
     PRIMARY KEY (lecturerID)
-)
+);
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `student`
 --
 CREATE table student(
-    studentID VARCHAR(5) NOT NULL,
-    id INT NOT NULL,
+    studentID VARCHAR(10) NOT NULL,
     year INT NOT NULL,
     specialization VARCHAR(50) NOT NULL,
-    PRIMARY KEY (studentID)
-)
+    PRIMARY KEY (studentID),
+    FOREIGN KEY (studentID) REFERENCES user(userID)
+);
 -- --------------------------------------------------------
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE task (
     userID VARCHAR(5) NOT NULL,
     PRIMARY KEY (taskID),
     FOREIGN KEY (userID) REFERENCES user(userID)
-)
+);
 -- --------------------------------------------------------
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE proposal (
     supervisorID VARCHAR(4) NOT NULL,
     PRIMARY KEY (proposalID),
     FOREIGN KEY (supervisorID) REFERENCES lecturer(lecturerID)
-)
+);
 -- --------------------------------------------------------
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE proposal (
     updated_at DATETIME NOT NULL,
     PRIMARY KEY (proposal_statusID),
     FOREIGN KEY (proposalID) REFERENCES proposal(proposalID)
-)
+);
 -- --------------------------------------------------------
 
 CREATE TABLE project (

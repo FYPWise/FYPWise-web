@@ -37,15 +37,15 @@ INSERT INTO lecturer (lecturerID, position) VALUES
 --
 -- Insert sample data  for table `student`
 --
-INSERT INTO student (studentID, id, year, specialization) VALUES
-('S001', 1211101935, 3, 'Software Engineering'),
-('S002', 1211103220, 3, 'Software Engineering'),
-('S003', 1211103194, 3, 'Software Engineering'),
-('S004', 1211104230, 3, 'Software Engineering'),
-('S005', 1211017635, 4, 'Data Science'),
-('S006', 1209115403, 5, 'Cybersecurity'),
-('S007', 1212003221, 2, 'Game Development'),
-('S008', 1213567211, 3, 'Data Science');
+INSERT INTO student (studentID, year, specialization) VALUES
+('1211101935', 3, 'Software Engineering'),
+('1211103220', 3, 'Software Engineering'),
+('1211103194', 3, 'Software Engineering'),
+('1211104230', 3, 'Software Engineering'),
+('1211017635', 4, 'Data Science'),
+('1209115403', 5, 'Cybersecurity'),
+('1212003221', 2, 'Game Development'),
+('1213567211', 3, 'Data Science');
 -- --------------------------------------------------------
 
 --

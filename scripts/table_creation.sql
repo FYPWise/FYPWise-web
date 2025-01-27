@@ -19,10 +19,10 @@ USE fypwise;
 --
 -- Table structure for table `user`
 --
-CREATE table user(
-    userID VARCHAR(5) NOT NULL,
+CREATE table users(
+    userID VARCHAR(10) NOT NULL,
     name VARCHAR(100) NOT NULL,
-    password VARCHAR(255) NOT NULL, COMMENT 'hashed password', -- Hashed password
+    password VARCHAR(255) NOT NULL, -- Hashed password
     email VARCHAR(100) NOT NULL,
     role ENUM('student', 'lecturer', 'admin') NOT NULL,
     filename VARCHAR(50) DEFAULT 'Default_pfp.jpg',
@@ -49,14 +49,8 @@ CREATE table student(
     year INT NOT NULL,
     specialization VARCHAR(50) NOT NULL,
     PRIMARY KEY (studentID),
-    FOREIGN KEY (studentID) REFERENCES user(userID)
+    FOREIGN KEY (studentID) REFERENCES users(userID)
 );
--- --------------------------------------------------------
-
---
--- Table structure for table `announcement`
---
-
 -- --------------------------------------------------------
 
 --
@@ -66,10 +60,16 @@ CREATE TABLE task (
     taskID INT NOT NULL AUTO_INCREMENT,
     taskName VARCHAR(100) NOT NULL,
     taskDate DATE NOT NULL,
-    userID VARCHAR(5) NOT NULL,
+    userID VARCHAR(10) NOT NULL,
     PRIMARY KEY (taskID),
-    FOREIGN KEY (userID) REFERENCES user(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID)
 );
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcement`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE proposal (
 --
 -- Table structure for table `proposal_status`
 --
-CREATE TABLE proposal (
+CREATE TABLE proposal_status (
     proposal_statusID INT NOT NULL AUTO_INCREMENT,
     status ENUM('accepted', 'rejected', 'pending') NOT NULL,
     comment TEXT,

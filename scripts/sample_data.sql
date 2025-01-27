@@ -66,14 +66,14 @@ INSERT INTO task (taskName, taskDate, userID) VALUES
 ('Deploy to Server', '2025-02-05', 'L006'),
 ('Conduct User Training', '2025-02-10', 'L007'),
 ('Gather Feedback', '2025-02-15', 'L008'),
-('Research on AI', '2025-02-20', 'S001'),
-('Develop Machine Learning Model', '2025-02-25', 'S001'),
-('Analyze Data', '2025-03-01', 'S003'),
-('Prepare Presentation', '2025-03-05', 'S004'),
-('Write Research Paper', '2025-03-10', 'S001'),
-('Create Prototype', '2025-03-15', 'S006'),
-('Test Prototype', '2025-03-20', 'S007'),
-('Finalize Project', '2025-03-25', 'S008');
+('Research on AI', '2025-02-20', '1211101935'),
+('Develop Machine Learning Model', '2025-02-25', '1211101935'),
+('Analyze Data', '2025-03-01', '1211103194'),
+('Prepare Presentation', '2025-03-05', '1211104230'),
+('Write Research Paper', '2025-03-10', '1211101935'),
+('Create Prototype', '2025-03-15', '1209115403'),
+('Test Prototype', '2025-03-20', '1212003221'),
+('Finalize Project', '2025-03-25', '1213567211');
 
 --
 -- Insert sample data  for table `proposal`

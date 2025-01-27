@@ -22,13 +22,30 @@ USE fypwise;
 --
 -- Insert sample data  for table `lecturer`
 --
+INSERT INTO lecturer (lecturerID, position) VALUES
+('L001', 'Senior Lecturer'),
+('L002', 'Associate Professor'),
+('L003', 'Professor'),
+('L004', 'Lecturer'),
+('L005', 'Senior Lecturer'),
+('L006', 'Associate Professor'),
+('L007', 'Professor'),
+('L008', 'Lecturer');
 
 -- --------------------------------------------------------
 
 --
 -- Insert sample data  for table `student`
 --
-
+INSERT INTO student (studentID, id, year, specialization) VALUES
+('S001', 1211101935, 3, 'Software Engineering'),
+('S002', 1211103220, 3, 'Software Engineering'),
+('S003', 1211103194, 3, 'Software Engineering'),
+('S004', 1211104230, 3, 'Software Engineering'),
+('S005', 1211017635, 4, 'Data Science'),
+('S006', 1209115403, 5, 'Cybersecurity'),
+('S007', 1212003221, 2, 'Game Development'),
+('S008', 1213567211, 3, 'Data Science');
 -- --------------------------------------------------------
 
 --
@@ -40,8 +57,23 @@ USE fypwise;
 --
 -- Insert sample data  for table `task`
 --
-
--- --------------------------------------------------------
+INSERT INTO task (taskName, taskDate, userID) VALUES
+('Design Database', '2025-01-10', 'L001'),
+('Develop API', '2025-01-15', 'L002'),
+('Create Frontend', '2025-01-20', 'L003'),
+('Write Documentation', '2025-01-25', 'L001'),
+('Test Application', '2025-01-30', 'L005'),
+('Deploy to Server', '2025-02-05', 'L006'),
+('Conduct User Training', '2025-02-10', 'L007'),
+('Gather Feedback', '2025-02-15', 'L008'),
+('Research on AI', '2025-02-20', 'S001'),
+('Develop Machine Learning Model', '2025-02-25', 'S001'),
+('Analyze Data', '2025-03-01', 'S003'),
+('Prepare Presentation', '2025-03-05', 'S004'),
+('Write Research Paper', '2025-03-10', 'S001'),
+('Create Prototype', '2025-03-15', 'S006'),
+('Test Prototype', '2025-03-20', 'S007'),
+('Finalize Project', '2025-03-25', 'S008');
 
 --
 -- Insert sample data  for table `proposal`

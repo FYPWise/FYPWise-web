@@ -297,7 +297,7 @@ CREATE TABLE presentation (
     end_time TIME NOT NULL,
     date DATE NOT NULL,
     mode ENUM('online', 'physical') NOT NULL,
-    location VARCHAR(50) NOT NULL,
+    location VARCHAR(50),
     presentation_URL TEXT,
     status ENUM('scheduled', 'postponed', 'presented') NOT NULL,
     updated_at DATETIME NOT NULL,

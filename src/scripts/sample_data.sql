@@ -248,11 +248,11 @@ VALUES
 --
 -- Insert sample data  for table `meeting`
 --
-INSERT INTO meeting (date, start_time, end_time, mode, location, meeting_title, meeting_description, meeting_URL, supervisorID) VALUES
-('2025-01-10', '10:00:00', '11:00:00', 'online', NULL, 'Initial Project Discussion', 'Discuss project requirements and initial plans', 'https://example.com/meeting1', 9),
-('2025-02-15', '14:00:00', '15:00:00', 'physical', 'Room 101', 'Mid-Project Review', 'Review project progress and address any issues', NULL, 10),
-('2025-03-20', '09:00:00', '10:00:00', 'online', NULL, 'Final Review Preparation', 'Prepare for the final project review', 'https://example.com/meeting3', 11),
-('2025-04-25', '13:00:00', '14:00:00', 'physical', 'Room 202', 'Project Wrap-Up', 'Discuss project completion and final deliverables', NULL, 12);
+INSERT INTO meeting (date, start_time, end_time, mode, location, meeting_title, meeting_description, meeting_URL) VALUES
+('2025-01-10', '10:00:00', '11:00:00', 'online', NULL, 'Initial Project Discussion', 'Discuss project requirements and initial plans', 'https://example.com/meeting1'),
+('2025-02-15', '14:00:00', '15:00:00', 'physical', 'Room 101', 'Mid-Project Review', 'Review project progress and address any issues', NULL),
+('2025-03-20', '09:00:00', '10:00:00', 'online', NULL, 'Final Review Preparation', 'Prepare for the final project review', 'https://example.com/meeting3'),
+('2025-04-25', '13:00:00', '14:00:00', 'physical', 'Room 202', 'Project Wrap-Up', 'Discuss project completion and final deliverables', NULL);
 -- --------------------------------------------------------
 
 --

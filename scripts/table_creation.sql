@@ -72,7 +72,15 @@ CREATE TABLE task (
 --
 -- Table structure for table `announcement`
 --
-
+CREATE TABLE announcement (
+    announcementID INT AUTO_INCREMENT PRIMARY KEY,
+    datetime DATETIME NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    status VARCHAR(50),
+    userID INT NOT NULL,
+    FOREIGN KEY (userID) REFERENCES `users`(userID)
+);
 -- --------------------------------------------------------
 
 --
@@ -185,7 +193,18 @@ CREATE TABLE timeline_file (
 --
 -- Table structure for table `project_submission`
 --
-
+CREATE TABLE project_submission (
+    project_submissionID INT AUTO_INCREMENT PRIMARY KEY,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    project_description TEXT NOT NULL,
+    project_status VARCHAR(50) NOT NULL,
+    project_category VARCHAR(50) NOT NULL,
+    studentID INT NOT NULL,
+    projectID INT NOT NULL,
+    FOREIGN KEY (studentID) REFERENCES student(userID),
+    FOREIGN KEY (projectID) REFERENCES project(projectID)
+);
 -- --------------------------------------------------------
 
 --
@@ -292,17 +311,39 @@ CREATE TABLE presentation (
 --
 -- Table structure for table `message`
 --
-
+CREATE TABLE message (
+    messageID INT AUTO_INCREMENT PRIMARY KEY,
+    senderID INT NOT NULL,
+    receiverID INT NOT NULL,
+    groupID INT,
+    messageContent TEXT NOT NULL,
+    timeStamp DATETIME NOT NULL,
+    FOREIGN KEY (senderID) REFERENCES `users`(userID),
+    FOREIGN KEY (receiverID) REFERENCES `users`(userID),
+    FOREIGN KEY (groupID) REFERENCES `group`(groupID)
+);
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `group`
 --
-
+CREATE TABLE `group` (
+    groupID INT AUTO_INCREMENT PRIMARY KEY,
+    groupName VARCHAR(255) NOT NULL,
+    createdAt DATETIME NOT NULL,
+    createdBy INT NOT NULL,
+    FOREIGN KEY (createdBy) REFERENCES user_group(userID)
+);
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `user_group`
 --
-
+CREATE TABLE user_group (
+    userID INT NOT NULL,
+    groupID INT NOT NULL,
+    PRIMARY KEY (userID, groupID),
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (groupID) REFERENCES `group`(groupID)
+);
 -- --------------------------------------------------------

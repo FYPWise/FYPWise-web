@@ -20,7 +20,8 @@ USE fypwise;
 -- Table structure for table `user`
 --
 CREATE table users(
-    userID INT NOT NULL,
+    userID INT NOT NULL AUTO_INCREMENT,
+    id VARCHAR(10) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL, -- Hashed password
     email VARCHAR(100) NOT NULL,
@@ -36,7 +37,7 @@ CREATE table users(
 --
 CREATE table lecturer(
     userID INT NOT NULL,
-    lecturerID VARCHAR(4) NOT NULL,
+    lecturerID VARCHAR(4) NOT NULL UNIQUE,
     position VARCHAR(50) NOT NULL,
     PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES users(userID)
@@ -48,9 +49,9 @@ CREATE table lecturer(
 --
 CREATE table student(
     userID INT NOT NULL,
-    studentID VARCHAR(10) NOT NULL,
+    studentID VARCHAR(10) NOT NULL UNIQUE,
     year INT NOT NULL,
-    specialization VARCHAR(50) NOT NULL,
+    specialization ENUM('Software Engineering', 'Data Science', 'Cybersecurity', 'Game Development') NOT NULL,
     PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES users(userID)
 );

@@ -16,8 +16,13 @@ function toggleEditMode() {
         }
         input.style.border = '1px solid black';
         });
-        profileImage.style.width = '300px';
-        profileImage.style.height = '300px';
+        if (window.matchMedia("(max-width: 768px)").matches) {
+            profileImage.style.width = '160px';
+            profileImage.style.height = '160px';
+        } else {
+            profileImage.style.width = '300px';
+            profileImage.style.height = '300px';
+        }
         imageUploadButton.style.display = 'block';
 
         editButton.innerText = 'Save Profile';
@@ -31,8 +36,13 @@ function toggleEditMode() {
         }
         input.style.border = 'none';
         });
-        profileImage.style.width = '350px';
-        profileImage.style.height = '350px';
+        if (window.matchMedia("(max-width: 768px)").matches) {
+            profileImage.style.width = '160px';
+            profileImage.style.height = '160px';
+        } else {
+            profileImage.style.width = '350px';
+            profileImage.style.height = '350px';
+        }
         imageUploadButton.style.display = 'none';
 
         editButton.innerText = 'Edit Profile';

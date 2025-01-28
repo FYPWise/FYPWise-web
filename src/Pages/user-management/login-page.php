@@ -36,9 +36,9 @@ echo"test";
 <body>
     <!-- Header Section -->
     <header>
-        <button id="home"><a href="/testb"><img src="./src/assets/home.png" alt="home icon"
+        <button id="home"><a href="/FYPWise-web/"><img src="./src/assets/home3.png" alt="home icon"
                     class="home-image"></a></button>
-        <button id="about-us"><a href="/testb/about-us"><img src="./src/assets/about us.png" alt="about us icon"
+        <button id="about-us"><a href="about-us"><img src="./src/assets/about us.png" alt="about us icon"
                     class="aboutus-image"></a></button>
     </header>
 
@@ -58,7 +58,6 @@ echo"test";
                 <input id="password" name="password" type="password" required />
                 <img id="toggle-password" src="./src/assets/show.png" alt="Show/Hide Password">
             </div>
-            <?php if(isset($_SESSION["Invalid"])){ ?> Incorrect username or password! <?php } ?>
             <div class="submit-btn"><button type="submit" form="testform" value="LOGIN" class="submit">LOGIN</button>
             </div>
         </div>

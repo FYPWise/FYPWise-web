@@ -34,24 +34,31 @@ header a{
 }
 
 .sidebar img.logo {
-    width: 40px;
-    margin-bottom: 12em;
+  width: 40px;
 }
 
-#sidebar-btn, #logout-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
+#sidebar-btn,
+#logout-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin: 7px 0;
 }
 
 #sidebar-btn {
-    padding: 0 1.2em;
+  top: 120%;
+  transform: translateY(-50%);
+  padding: 0 1.2em;
+  right: 6px;
 }
 
-#logout-btn{
-    padding: 18em 1em 0 1em;
+#logout-btn {
+  position: absolute;
+  bottom: 2px;
+  right: 6px;
+  padding: 1em;
 }
-
 .sidebar a {
     display: block;
     color: white;

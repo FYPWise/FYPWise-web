@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Management</title>
-    <link rel="stylesheet" href="../css/student-profile-mgt-style.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <script src="../scripts/profile_form_response.js"></script>
+    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.2">
+    <link rel="stylesheet" href="./src/css/footer.css?v=0.1">
+    <script src="./src/scripts/profile_form_response.js?v=0.3"></script>
 </head>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img src="../assets/main_logo_white.png" alt="Logo" class="logo">
+        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
         <div class="icons">
-            <button id="sidebar-btn"><a href="user-dashboard-page.html"><img src="../assets/home.png" alt="home"></a></button>
-            <button id="sidebar-btn"><a href="../communication/comm-page.html"><img src="../assets/messages.png"
+            <button id="sidebar-btn"><a href="/FYPWise-web/"><img src="./src/assets/home3.png" alt="home"></a></button>
+            <button id="sidebar-btn"><a href="../communication/comm-page.html"><img src="./src/assets/messages1.png"
                         alt="messages"></a></button>
-            <button id="logout-btn"><a href="login-page.html"><img src="../assets/logout.png" alt="logout"></a></button>
+            <button id="sidebar-btn"><a href="dashboard"><img src="./src/assets/dashboard1.png" alt="dashboard"></a></button>
+            <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
         </div>
     </div>
 
@@ -31,7 +32,7 @@
         <!-- Profile -->
         <div class="profile">
             <div class="profile-image">
-                <img src="../assets/Imran.jpg" alt="Profile Image">
+                <img src="./src/assets/Imran.jpg" alt="Profile Image">
                 <button type="button" id="imageUploadButton" style="display:none;" onclick="uploadImage()">Upload
                     Image</button>
             </div>
@@ -77,18 +78,19 @@
                 </form>
             </div>
         </div>
+        
+        <footer id="footer">
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
+                    Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
     </div>
-    <footer id="footer">
-        <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
-                Malaysia</a></h3>
-        <div id="side">
-            <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-            <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-            <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-            <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
-        </div>
-        FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
-    </footer>
 </body>
 
 </html>

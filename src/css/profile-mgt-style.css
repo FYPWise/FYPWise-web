@@ -48,7 +48,6 @@ body {
 
 .sidebar img.logo {
   width: 40px;
-  margin-bottom: 12em;
 }
 
 #sidebar-btn,
@@ -56,14 +55,22 @@ body {
   background: transparent;
   border: none;
   cursor: pointer;
+  position: relative;
+  margin: 7px 0;
 }
 
 #sidebar-btn {
+  top: 120%;
+  transform: translateY(-50%);
   padding: 0 1.2em;
+  right: 6px;
 }
 
 #logout-btn {
-  padding: 18em 1em 0 1em;
+  position: absolute;
+  bottom: 2px;
+  right: 6px;
+  padding: 1em;
 }
 
 .sidebar a {
@@ -113,7 +120,7 @@ hr {
   border-radius: 10px;
   width: 95%;
   max-width: 1500px;
-  height: 60vh;
+  height: 65vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -130,9 +137,7 @@ hr {
 .details {
   padding: 10px;
   width: 100%;
-  max-width: 700px;
   height: 100%;
-  max-width: 900px;
 }
 
 .details table {
@@ -175,10 +180,8 @@ table select {
 }
 
 #footer {
-  width: 90%;
-  margin: 5px 0 0 125px;
-  padding: 10px;
-  text-align: center;
+  width: 100%;
+  margin-top: 30px;
 }
 
 #footer h3,
@@ -203,8 +206,8 @@ select:focus {
 
 @media (max-width: 768px) {
   #footer {
-    width: 35em;
-    margin: 250px 125px 0 125px;
+    width: 100%;
+    margin-top: 100%;
   }
 
   #footer h3 {
@@ -227,8 +230,8 @@ select:focus {
 
   .profile-image img {
     margin: 0 0 20px 0;
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
   }
 
   table td {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="./src/css/user-dashboard-style.css">
+    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.1">
     <link rel="stylesheet" href="./src/css/calendar-style.css">
     <link rel="stylesheet" href="./src/css/footer.css">
     <script src="./src/scripts/calendar.js"></script>
@@ -16,10 +16,11 @@
     <div class="sidebar">
         <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
         <div class="icons">
-            <button id="sidebar-btn"><a href="home-page.html"><img src="./src/assets/home.png" alt="home"></a></button>
-            <button id="sidebar-btn"><a href="./src/communication/comm-page.html"><img src="./src/assets/messages.png"
+            <button id="sidebar-btn"><a href="home-page.html"><img src="./src/assets/home3.png" alt="home"></a></button>
+            <button id="sidebar-btn"><a href="./src/communication/comm-page.html"><img src="./src/assets/messages1.png"
                         alt="messages"></a></button>
-            <button id="logout-btn"><a href="login-page.html"><img src="./src/assets/logout.png" alt="logout"></a></button>
+            <button id="sidebar-btn"><a href="profilemanagement"><img src="./src/assets/profile.png" alt="logout"></a></button>
+            <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
         </div>
     </div>
 

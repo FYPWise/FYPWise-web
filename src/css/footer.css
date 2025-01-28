@@ -1,16 +1,25 @@
+/* variables */
+:root {
+  --primary-color: #06509f;
+  --secondary-color: #ec2227;
+  --white: #fff;
+}
+
 footer {
   width: 100%;
-  background-color: #06509f;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--white);
   padding: 20px;
   height: max-content;
   align-content: center;
   text-align: center;
+  font-size: small;
   margin-top: auto
+  
 }
 
 footer a {
-  color: #fff;
+  color: var(--white);
 }
 
 footer > * {
@@ -19,8 +28,8 @@ footer > * {
 
 .link {
   text-decoration: none;
-  background-color: #fff;
-  color: #06509f;
+  background-color: var(--white);
+  color: var(--primary-color);
   border-radius: 2px;
   margin: 2px;
   padding: 5px;
@@ -28,4 +37,5 @@ footer > * {
 
 .link:hover{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: var(--secondary-color);
 }

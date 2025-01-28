@@ -16,7 +16,7 @@ USE fypwise;
 --
 -- Insert sample data  for table `user`
 --
-INSERT INTO users (userID, name, password, email, role) VALUES
+INSERT INTO users (id, name, password, email, role) VALUES
 ('1211101935', 'Mohamed Imran Bin Mohamed Yunus', '123', '1211101935@student.mmu.edu.my', 'student'),
 ('1211103220', 'Mohamed Firzan RUzain Bin Firdus', '123', '1211103220@student.mmu.edu.my', 'student'),
 ('1211103194', 'Nur Farahiya Aida Binti Abd Razak', '123', '1211103194@student.mmu.edu.my', 'student'),
@@ -25,65 +25,66 @@ INSERT INTO users (userID, name, password, email, role) VALUES
 ('1209115403', 'Ali Naki', '123', '1209115403@student.mmu.edu.my', 'student'),
 ('1212003221', 'Sarah Humaira', '123', '1212003221@student.mmu.edu.my', 'student'),
 ('1213567211', 'Nurul Aliya', '123', '1213567211@student.mmu.edu.my', 'student'),
-('L001', 'Lecturer One', '123', 'lecturer1@mmu.edu.my', 'lecturer'),
-('L002', 'Lecturer Two', '123', 'lecturer2@mmu.edu.my', 'lecturer'),
-('L003', 'Lecturer Three', '123', 'lecturer3@mmu.edu.my', 'lecturer'),
-('L004', 'Lecturer Four', '123', 'lecturer4@mmu.edu.my', 'lecturer'),
-('L005', 'Lecturer Five', '123', 'lecturer5@mmu.edu.my', 'lecturer'),
-('L006', 'Lecturer Six', '123', 'lecturer6@mmu.edu.my', 'lecturer'),
-('L007', 'Lecturer Seven', '123', 'lecturer7@mmu.edu.my', 'lecturer'),
-('L008', 'Lecturer Eight', '123', 'lecturer8@mmu.edu.my', 'lecturer');
+('L001', 'Chan Wai Ti', '123', 'L001@mmu.edu.my', 'lecturer'),
+('L002', 'Alif Zulfakar Bin Pokaad', '123', 'L002@mmu.edu.my', 'lecturer'),
+('L003', 'Ervina Efzan Binti Mhd Noor', '123', 'L003@mmu.edu.my', 'lecturer'),
+('L004', 'Em Poh Ping', '123', 'L004@mmu.edu.my', 'lecturer'),
+('L005', 'Ganesh Kumar A/L Krishnan', '123', 'L005@mmu.edu.my', 'lecturer'),
+('L006', 'Jee Kian Siong', '123', 'L006@mmu.edu.my', 'lecturer'),
+('L007', 'Logah A/L Perumal', '123', 'L007@mmu.edu.my', 'lecturer'),
+('L008', 'Muharniza Azinita Binti Musa', '123', 'L008@mmu.edu.my', 'lecturer'),
+('A001', 'Ng Hu', '123', 'A001@mmu.edu.my', 'admin'),;
 -- --------------------------------------------------------
 
 --
 -- Insert sample data  for table `lecturer`
 --
-INSERT INTO lecturer (lecturerID, position) VALUES
-('L001', 'Senior Lecturer'),
-('L002', 'Associate Professor'),
-('L003', 'Professor'),
-('L004', 'Lecturer'),
-('L005', 'Senior Lecturer'),
-('L006', 'Associate Professor'),
-('L007', 'Professor'),
-('L008', 'Lecturer');
+INSERT INTO lecturer (userID, lecturerID, position) VALUES
+(9, 'L001', 'Senior Lecturer'),
+(10, 'L002', 'Associate Professor'),
+(11, 'L003', 'Professor'),
+(12, 'L004', 'Lecturer'),
+(13, 'L005', 'Senior Lecturer'),
+(14, 'L006', 'Associate Professor'),
+(15, 'L007', 'Professor'),
+(16, 'L008', 'Lecturer');
 
 -- --------------------------------------------------------
 
 --
 -- Insert sample data  for table `student`
 --
-INSERT INTO student (studentID, year, specialization) VALUES
-('1211101935', 3, 'Software Engineering'),
-('1211103220', 3, 'Software Engineering'),
-('1211103194', 3, 'Software Engineering'),
-('1211104230', 3, 'Software Engineering'),
-('1211017635', 4, 'Data Science'),
-('1209115403', 5, 'Cybersecurity'),
-('1212003221', 2, 'Game Development'),
-('1213567211', 3, 'Data Science');
+INSERT INTO student (userID, studentID, year, specialization) VALUES
+(1, '1211101935', 3, 'Software Engineering'),
+(2, '1211103220', 3, 'Software Engineering'),
+(3, '1211103194', 3, 'Software Engineering'),
+(4, '1211104230', 3, 'Software Engineering'),
+(5, '1211017635', 4, 'Data Science'),
+(6, '1209115403', 5, 'Cybersecurity'),
+(7, '1212003221', 2, 'Game Development'),
+(8, '1213567211', 3, 'Data Science');
 -- --------------------------------------------------------
 
 --
 -- Insert sample data  for table `task`
 --
 INSERT INTO task (taskName, taskDate, userID) VALUES
-('Design Database', '2025-01-10', 'L001'),
-('Develop API', '2025-01-15', 'L002'),
-('Create Frontend', '2025-01-20', 'L003'),
-('Write Documentation', '2025-01-25', 'L001'),
-('Test Application', '2025-01-30', 'L005'),
-('Deploy to Server', '2025-02-05', 'L006'),
-('Conduct User Training', '2025-02-10', 'L007'),
-('Gather Feedback', '2025-02-15', 'L008'),
-('Research on AI', '2025-02-20', '1211101935'),
-('Develop Machine Learning Model', '2025-02-25', '1211101935'),
-('Analyze Data', '2025-03-01', '1211103194'),
-('Prepare Presentation', '2025-03-05', '1211104230'),
-('Write Research Paper', '2025-03-10', '1211101935'),
-('Create Prototype', '2025-03-15', '1209115403'),
-('Test Prototype', '2025-03-20', '1212003221'),
-('Finalize Project', '2025-03-25', '1213567211');
+('Design Database', '2025-01-10', '9'),
+('Develop API', '2025-01-15', '10'),
+('Create Frontend', '2025-01-20', '11'),
+('Write Documentation', '2025-01-25', '9'),
+('Test Application', '2025-01-30', '13'),
+('Deploy to Server', '2025-02-05', '14'),
+('Conduct User Training', '2025-02-10', '15'),
+('Gather Feedback', '2025-02-15', '16'),
+('Research on AI', '2025-02-20', '1'),
+('Develop Machine Learning Model', '2025-02-25', '1'),
+('Analyze Data', '2025-03-01', '3'),
+('Prepare Presentation', '2025-03-05', '4'),
+('Write Research Paper', '2025-03-10', '1'),
+('Create Prototype', '2025-03-15', '6'),
+('Test Prototype', '2025-03-20', '7'),
+('Finalize Project', '2025-03-25', '8');
 -- --------------------------------------------------------
 
 --

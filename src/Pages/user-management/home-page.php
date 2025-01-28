@@ -45,7 +45,7 @@
     <div class="container">
         <p class="login-caption">Already have an account?</p>
         <div class="buttons">
-            <button id="reg-btn" onclick="window.location.href = 'student-registration-page.html';"
+            <button id="reg-btn" onclick="window.location.href = 'register';"
                 class="btn registration">Student
                 Registration</button>
             <button id="login-btn" onclick="window.location.href = 'login';" class="btn login">Log In</button>

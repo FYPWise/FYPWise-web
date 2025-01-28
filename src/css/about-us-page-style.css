@@ -16,6 +16,27 @@ body {
   overflow-y: auto;
 }
 
+#home {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+}
+
+#home {
+  right: 20px;
+}
+
+.home-image {
+  width: 1.5em;
+  transition: 0.2s ease;
+}
+
+.home-image:hover {
+  width: 1.7em;
+}
+
 /* Header */
 header {
   display: flex;

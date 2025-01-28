@@ -22,8 +22,8 @@ class Base{
             <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
                     for="user-side-menu" class="fas"></label></div>
             <div id="logo"></div>
-            <button id="home"><a href="/testb"><img src="./src/assets/home.png"
-                        alt="home icon"></a></button>
+            <button id="home"><a href="/testb"><img src="./src/assets/home3.png"
+                        alt="home icon" style="width:25px;"></a></button>
         </header>';
     }
 

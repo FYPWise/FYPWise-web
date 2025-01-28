@@ -252,22 +252,19 @@ CREATE TABLE meeting (
     meeting_title VARCHAR(100) NOT NULL,
     meeting_description TEXT,
     meeting_URL TEXT,
-    supervisorID INT NOT NULL,
-    student_meetingID INT NOT NULL,
-    PRIMARY KEY (meetingID),
-    FOREIGN KEY (supervisorID) REFERENCES lecturer(userID)
+    PRIMARY KEY (meetingID)
 );
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_meeting`
+-- Table structure for table `users_meeting`
 --
-CREATE TABLE student_meeting (
+CREATE TABLE users_meeting (
+    userID INT NOT NULL,
     meetingID INT NOT NULL,
-    studentID INT NOT NULL,
-    PRIMARY KEY (meetingID, studentID),
+    PRIMARY KEY (meetingID, userID),
     FOREIGN KEY (meetingID) REFERENCES meeting(meetingID),
-    FOREIGN KEY (studentID) REFERENCES student(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID)
 );
 -- --------------------------------------------------------
 

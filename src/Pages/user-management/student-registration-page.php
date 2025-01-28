@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registration</title>
-        <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
-        <link rel="stylesheet" href="../css/student-registration-page-style.css">
-        <link rel="stylesheet" href="../css/footer.css">
+        <link rel="icon" type="image/x-icon" href="./src/assets/main_logo.png">
+        <link rel="stylesheet" href="./src/css/student-registration-page-style.css">
+        <link rel="stylesheet" href="./src/css/footer.css">
         <script>
             function response() {
                 var form = document.getElementById('testform');
@@ -24,8 +24,8 @@
     <body>
         <!-- Header Section -->
         <header>
-            <button id="home"><a href="home-page.html"><img src="../assets/home.png" alt="home icon" class="home-image"></a></button>
-            <button id="about-us"><a href="about-us-page.html"><img src="../assets/about us.png" alt="about us icon" class="aboutus-image"></a></button>
+            <button id="home"><a href="/FYPWise-web/"><img src="./src/assets/home.png" alt="home icon" class="home-image"></a></button>
+            <button id="about-us"><a href="about-us-page.html"><img src="./src/assets/about us.png" alt="about us icon" class="aboutus-image"></a></button>
         </header>
 
         <h2><span id="text1">Create</span> New <span id="text2">Account</span></h2>
@@ -48,7 +48,7 @@
                     <div class="password-input">
                         <label for="password">Password:</label>
                         <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}" required/>
-                        <img id="toggle-password" src="../assets/show.png" alt="Show/Hide Password" >
+                        <img id="toggle-password" src="./src/assets/show.png" alt="Show/Hide Password" >
                         <span id="tooltip" class="tooltip">
                             <ul>
                                 <li id="number" class="invalid">Have one number</li>
@@ -159,10 +159,10 @@
             togglePassword.addEventListener('click', function() {
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    togglePassword.src = '../assets/hide.png';
+                    togglePassword.src = './src/assets/hide.png';
                 } else {
                     passwordInput.type = 'password';
-                    togglePassword.src = '../assets/show.png';
+                    togglePassword.src = './src/assets/show.png';
                 }
             });
         </script>

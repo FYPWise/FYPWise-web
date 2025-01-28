@@ -310,6 +310,18 @@ CREATE TABLE presentation (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `group`
+--
+CREATE TABLE group_chat (
+    groupID INT AUTO_INCREMENT PRIMARY KEY,
+    groupName VARCHAR(255) NOT NULL,
+    createdAt DATETIME NOT NULL,
+    createdBy INT NOT NULL,
+    FOREIGN KEY (createdBy) REFERENCES users(userID)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `message`
 --
 CREATE TABLE message (
@@ -319,24 +331,12 @@ CREATE TABLE message (
     groupID INT,
     messageContent TEXT NOT NULL,
     timeStamp DATETIME NOT NULL,
-    FOREIGN KEY (senderID) REFERENCES `users`(userID),
-    FOREIGN KEY (receiverID) REFERENCES `users`(userID),
-    FOREIGN KEY (groupID) REFERENCES `group`(groupID)
+    FOREIGN KEY (senderID) REFERENCES users(userID),
+    FOREIGN KEY (receiverID) REFERENCES users(userID),
+    FOREIGN KEY (groupID) REFERENCES group_chat(groupID)
 );
--- --------------------------------------------------------
 
---
--- Table structure for table `group`
---
-CREATE TABLE `group` (
-    groupID INT AUTO_INCREMENT PRIMARY KEY,
-    groupName VARCHAR(255) NOT NULL,
-    createdAt DATETIME NOT NULL,
-    createdBy INT NOT NULL,
-    FOREIGN KEY (createdBy) REFERENCES user_group(userID)
-);
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `user_group`
 --
@@ -345,6 +345,6 @@ CREATE TABLE user_group (
     groupID INT NOT NULL,
     PRIMARY KEY (userID, groupID),
     FOREIGN KEY (userID) REFERENCES users(userID),
-    FOREIGN KEY (groupID) REFERENCES `group`(groupID)
+    FOREIGN KEY (groupID) REFERENCES group_chat(groupID)
 );
 -- --------------------------------------------------------

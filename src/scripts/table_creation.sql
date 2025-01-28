@@ -124,7 +124,7 @@ CREATE TABLE project (
     end_date DATE,
     project_description TEXT NOT NULL,
     project_status ENUM('ongoing', 'submitted', 'approved') NOT NULL,
-    studentID INT NOT NULL,
+    studentID INT,
     proposalID INT NOT NULL,
     FOREIGN KEY (studentID) REFERENCES student(userID),
     FOREIGN KEY (proposalID) REFERENCES proposal(proposalID)
@@ -252,22 +252,19 @@ CREATE TABLE meeting (
     meeting_title VARCHAR(100) NOT NULL,
     meeting_description TEXT,
     meeting_URL TEXT,
-    supervisorID INT NOT NULL,
-    student_meetingID INT NOT NULL,
-    PRIMARY KEY (meetingID),
-    FOREIGN KEY (supervisorID) REFERENCES lecturer(userID)
+    PRIMARY KEY (meetingID)
 );
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_meeting`
+-- Table structure for table `users_meeting`
 --
-CREATE TABLE student_meeting (
+CREATE TABLE users_meeting (
+    userID INT NOT NULL,
     meetingID INT NOT NULL,
-    studentID INT NOT NULL,
-    PRIMARY KEY (meetingID, studentID),
+    PRIMARY KEY (meetingID, userID),
     FOREIGN KEY (meetingID) REFERENCES meeting(meetingID),
-    FOREIGN KEY (studentID) REFERENCES student(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID)
 );
 -- --------------------------------------------------------
 
@@ -300,7 +297,7 @@ CREATE TABLE presentation (
     end_time TIME NOT NULL,
     date DATE NOT NULL,
     mode ENUM('online', 'physical') NOT NULL,
-    location VARCHAR(50) NOT NULL,
+    location VARCHAR(50),
     presentation_URL TEXT,
     status ENUM('scheduled', 'postponed', 'presented') NOT NULL,
     updated_at DATETIME NOT NULL,

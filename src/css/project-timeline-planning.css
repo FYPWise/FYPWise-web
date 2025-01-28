@@ -1,0 +1,155 @@
+/* General Styling for Container */
+.container {
+    display: flex;
+    flex-direction: row; /* Horizontal alignment */
+    gap: 1.5em;
+    padding: 2em;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Main Content (Gantt Chart & Flow Chart) */
+.main-content {
+    flex: 3; /* Takes majority of the space */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.chart-box {
+    background-color: #004c99;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-height: 180px; /* Consistent box height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.chart-title {
+    background-color: #e74c3c;
+    padding: 0.5em 1em;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    color: #fff;
+}
+
+.chart-content p {
+    margin: 0;
+    text-align: center;
+    font-size: 1em;
+}
+
+.chart-content a {
+    color: #f1c40f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.chart-content a:hover {
+    text-decoration: underline;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.btn {
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.submit-btn {
+    background-color: #2980b9;
+}
+
+.edit-btn {
+    background-color: #27ae60;
+}
+
+/* Milestones Section */
+.milestone-section {
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1em;
+    flex: 1; /* Takes smaller portion */
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.milestone-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.milestone-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.milestone-list li {
+    background-color: #c0392b;
+    border-radius: 5px;
+    margin: 0.5em 0;
+    padding: 0.5em;
+    color: #fff;
+}
+
+.add-btn {
+    display: inline-block;
+    background-color: #27ae60;
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1em;
+}
+
+.add-btn:hover {
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .main-content, .milestone-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .milestone-section {
+        margin-top: 1.5em;
+    }
+}

@@ -1,0 +1,78 @@
+/* CSS stylesheet for proposal management page*/
+
+/* Container */
+.container {
+    display: flex;
+    flex: 1;
+    margin-top: 50px; /* start after header */
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.content h2 {
+    color: #06509f;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-buttons button {
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+}
+
+.table-buttons button a {
+    display: inline-block;
+}
+
+hr {
+    color: #d5d8dc;
+}
+
+.proposals {
+    padding-top: 2em;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Center Content */
+.content {
+    margin: 0 auto;
+    padding: 1.5em;
+    max-width: 1200px;
+}

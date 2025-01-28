@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Route all other requests
+RewriteCond %{REQUEST_URI} !^/src/css/
+RewriteCond %{REQUEST_URI} !^/src/assets/
+RewriteCond %{REQUEST_URI} !^/src/Pages/common-ui/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (.*) index.php?route=$1 [L,QSA]
+</IfModule>

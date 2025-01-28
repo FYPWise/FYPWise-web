@@ -1,0 +1,109 @@
+/* Styling for Forms */
+.content .form-title {
+  color: #06509f;
+  margin-bottom: 0.5em;
+}
+
+.content hr {
+  margin-bottom: 1em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  background-color: #f9f9f9;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5em;
+}
+
+.form-group label {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  color: #06509f;
+  width: 20%;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.15em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 80%;
+  margin-bottom: 0.5em;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+}
+
+.radio-group input {
+  margin-right: 0.2em;
+}
+
+.radio-group label {
+  width: 15em;
+  white-space: nowrap;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-size: 1em;
+  color: #fff;
+}
+
+.submit-btn {
+  background-color: #4caf50;
+}
+
+.reset-btn {
+  background-color: #e74c3c;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.form-group p {
+  padding: 0.15em;
+  font-size: 1em;
+  width: 80%;
+  margin: 0;
+}
+
+@media screen and (max-width: 650px) {
+  .form-group {
+    flex-direction: column;
+  }
+
+  .form-group label,
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+  }
+
+  form{
+    padding: 20px;
+  }
+}

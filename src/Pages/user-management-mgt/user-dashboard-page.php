@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./src/css/user-dashboard-style.css">
+    <link rel="stylesheet" href="./src/css/calendar-style.css">
+    <link rel="stylesheet" href="./src/css/footer.css">
+    <script src="./src/scripts/calendar.js"></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
+        <div class="icons">
+            <button id="sidebar-btn"><a href="home-page.html"><img src="./src/assets/home.png" alt="home"></a></button>
+            <button id="sidebar-btn"><a href="./src/communication/comm-page.html"><img src="./src/assets/messages.png"
+                        alt="messages"></a></button>
+            <button id="logout-btn"><a href="login-page.html"><img src="./src/assets/logout.png" alt="logout"></a></button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="header">
+            <h1>User Profile</h1>
+            <div class="right-header">
+                <input type="text" placeholder="Search.." />
+                <a href="student-profile-mgt-page.html"><img src="./src/assets/madam mohana.png" alt="User"
+                        class="user-image"></a>
+            </div>
+        </div>
+        <hr>
+        <!-- Container for Calendar and Task -->
+        <div class="mini-container1">
+            <!-- Calendar -->
+            <div class="calendar-section">
+                <!-- Calendar Header -->
+                <div class="calendar-header">
+                    <button id="prev-month" class="nav-btn">&lt;</button>
+                    <span id="month-display" class="month-display"></span>
+                    <button id="next-month" class="nav-btn">&gt;</button>
+                </div>
+                <!-- Calendar Table -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>T</th>
+                            <th>F</th>
+                            <th>S</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar"></tbody>
+                </table>
+            </div>
+            <!-- Task -->
+            <div class="task-section">
+                <h2>Task</h2>
+                <div class="task-container">
+                    <div class="task">
+                        <input type="checkbox" id="task1" name="task1" value="task1">
+                        <label for="task1">Task 1</label>
+                        <p>2 December</p>
+                    </div>
+                    <div class="task">
+                        <input type="checkbox" id="task2" name="task2" value="task2">
+                        <label for="task2">Task 2</label>
+                        <p>11 December</p>
+                    </div>
+                    <div class="task">
+                        <input type="checkbox" id="task3" name="task3" value="task3">
+                        <label for="task3">Task 3</label>
+                        <p>27 December</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Announcement Section -->
+        <div class="announcement-section">
+            <h2>Announcements</h2>
+            <div class="announcement-box">
+                <div class="announcement-header">
+                    <img src="./src/assets/madam mohana.png" alt="User" class="user-image">
+                    <div class="user-details">
+                        <p class="user-name">Madam Mohana</p>
+                        <p class="announcement-time">11:36 AM &nbsp; | &nbsp; 16/10</p>
+                    </div>
+                </div>
+                <div class="announcement-content">
+                    <h4 class="announcement-title">Meeting Log Submission</h4>
+                    <p class="announcement-text">
+                        Make sure to submit your meeting logs by 20 December 2024. Your Submission should consist
+                        meeting log 1 - 3 with the supervisor signature.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Container for Project progress, submission updates and quick shortcuts -->
+        <div class="mini-container2">
+            <!-- Project Progress Section -->
+            <div class="project-progress-section task-section">
+                <h2>Project Progress</h2>
+                <div class="task-container">
+                </div>
+            </div>
+            <!-- Submission Updates Section -->
+            <div class="submission-updates-section task-section">
+                <h2>Submission Updates</h2>
+                <div class="task-container">
+                </div>
+            </div>
+            <!-- Quick Shortcuts Section -->
+            <div class="quick-shortcuts-section task-section">
+                <h2>Quick Shortcuts</h2>
+                <div class="task-container">
+                    <div class="task">
+                        <a href="./src/project-management-mgt/project-timeline-planning.html">Project Timeline Planning</a>
+                    </div>
+                    <div class="task">
+                        <a href="./src/meeting-mgt/meeting-scheduler-page.html">Schedule a Meeting</a>
+                    </div>
+                    <div class="task">
+                        <a href="./src/meeting-mgt/meeting-log-page.html">Submit Meeting Log</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer Section -->
+        <footer>
+            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
+                    Selangor,
+                    Malaysia</a></h3>
+            <div id="side">
+                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
+                    Desk</a>
+            </div>
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+        </footer>
+    </div>
+</body>
+
+</html>

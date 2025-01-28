@@ -1,0 +1,34 @@
+.role {
+  border-radius: 20px;
+  padding: 10px;
+  width: fit-content;
+}
+
+.role:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(1.1);
+}
+
+.student {
+  color: #e28c08;
+  background-color: #ffefd7;
+}
+
+.moderator {
+  color: #535353;
+  background-color: #cecece;
+}
+
+.supervisor {
+  color: #1e6332;
+  background-color: #e5ffea;
+}
+
+#user-id {
+  pointer-events: none;
+  background-color: #cecece;
+}
+
+#userForm {
+  padding: 0;
+}

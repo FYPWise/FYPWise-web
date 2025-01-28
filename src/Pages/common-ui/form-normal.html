@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <link rel="stylesheet" href="../css/proposal-management-style.css">
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/form-style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <button id="user-side-menu"><a href="#"><img src="../assets/user_side_menu.png" alt="user side menu"></a></button>
+        <h2>Example of Form</h2>
+        <button id="home"><a href="#"><img src="../assets/home.png" alt="home icon"></a></button>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Side Menu -->
+        <nav class="side-menu">
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search">
+            </div>
+            <ul>
+                <li><a href="#">Shortcut 1</a></li>
+                <li><a href="#">Shortcut 2</a></li>
+                <li><a href="#">Shortcut 3</a></li>
+            </ul>
+        </nav>
+
+        <!-- Proposal Submission Form -->
+        <div class="content">
+            <h2 class="form-title">Proposals Submission</h2>
+            <hr />
+            <form class="form" id="proposalForm">
+                <!-- auto-generated Proposal ID -->
+                <div class="form-group">
+                    <label for="proposal-id">Proposal ID</label>
+                    <input type="text" id="proposal-id" name="proposal-id" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="proposal-title">Proposal Title</label>
+                    <input type="text" id="proposal-title" name="proposal-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="6" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="submission-date">Submission Date</label>
+                    <input type="date" id="submission-date" name="submission-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialisation">Specialisation</label>
+                    <select id="specialisation" name="specialisation" required>
+                        <option value="" disabled selected>Select Specialisation</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Game Development">Game Development</option>
+                        <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <div class="radio-group">
+                        <input type="radio" id="research-based" name="category" value="research" required>
+                        <label for="research-based">Research-based</label>
+
+                        <input type="radio" id="application-based" name="category" value="application" required>
+                        <label for="application-based">Application-based</label>
+
+                        <input type="radio" id="both" name="category" value="research-application" required>
+                        <label for="both">Research & Application-based</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="supervisor-id">Supervisor ID</label>
+                    <input type="text" id="supervisor-id" name="supervisor-id" required>
+                </div>
+
+                <!-- submit and reset buttons -->
+                <div class="form-buttons">
+                    <button type="submit" class="btn submit-btn">Submit</button>
+                    <button type="reset" class="btn reset-btn">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
+                Malaysia</a></h3>
+        <div id="side">
+            <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
+            <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
+            <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
+            <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+        </div>
+        FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
+    </footer>
+
+    <!-- JavaScript to simulate submission -->
+    <script>
+        // form submission demo
+        document.getElementById("proposalForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // prevent actual form submission, only for display
+            
+            // retrieve form data
+            const formData = {
+                proposalID: document.getElementById("proposal-id").value,
+                title: document.getElementById("proposal-title").value,
+                description: document.getElementById("description").value,
+                submissionDate: document.getElementById("submission-date").value,
+                specialisation: document.getElementById("specialisation").value,
+                category: document.querySelector('input[name="category"]:checked').value,
+                supervisorID: document.getElementById("supervisor-id").value
+            };
+
+            // display submitted proposal data in an alert
+            let displayMessage = `
+                Proposal ID: ${formData.proposalID}
+                Proposal Title: ${formData.title}
+                Description: ${formData.description}
+                Submission Date: ${formData.submissionDate}
+                Specialisation: ${formData.specialisation}
+                Category: ${formData.category}
+                Supervisor ID: ${formData.supervisorID}
+            `;
+
+            // show the form data in a pop-up message
+            alert(`Proposal submitted successfully!\n\n${displayMessage}`);
+
+            // reload page after successful submission
+            location.reload();
+        });
+    </script>
+</body>
+</html>

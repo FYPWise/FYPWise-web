@@ -1,0 +1,136 @@
+@import url(https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md);
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'ITC Avant Garde Gothic W02 Md', Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#about-us, #home {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+}
+
+#about-us {
+    right: 20px;
+}
+
+#home {
+    right: 60px;
+}
+
+.aboutus-image, .home-image {
+    width: 1.5em;
+    transition: 0.2s ease;
+}
+
+.aboutus-image:hover, .home-image:hover {
+    width: 1.7em;
+}
+
+/* Logo */
+
+#FYPWise-logo {
+    width: 100%;
+    max-width: 200px;
+    margin: 70px auto 30px auto;
+}
+
+/* Title */
+
+h2 {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 2em;
+}
+
+/* Login box */
+form{
+    max-width: 550px;
+    width: 100%;
+    max-height: 300px;
+    height: 100%;
+    margin: 1em auto;
+    border: none ;
+    border-radius: 50px;
+    box-shadow: 0 0 30px rgb(170, 167, 167); 
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 350px;
+    width: 90%;
+    max-height: 300px;
+    height: 90%;
+    padding: 5%;
+    font-size: 1.3em;  
+}
+
+/* Eye icon */
+#toggle-password {
+    cursor: pointer; 
+    width: 20px; height: 20px; 
+    position: absolute; 
+    top: 50px;
+    right: 10px;
+}
+
+/* Submit */
+.submit-btn{
+    text-align: center;
+}
+
+.id-input, .password-input{
+    margin-bottom: 1em;
+}
+
+.password-input{
+    position: relative;
+}
+
+input{
+    padding-left: 10px;
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.submit {
+    border: none;
+    font-size: 1.2em;
+    width: 45%;
+    height: 45px;
+    background-color: #06509f;
+    color: white;
+    border-radius: 3px;
+    transition: 0.3s ease;
+}
+
+.submit:hover{
+   width: 50%;
+   height: 50px;
+}
+
+.signup-caption {
+    margin: 1.2em 0;
+    text-align: center;
+}
+
+.signup-caption a{
+    color: red;
+}

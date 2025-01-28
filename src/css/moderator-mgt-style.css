@@ -1,0 +1,28 @@
+.assign-status:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(1.1);
+}
+
+.assign-status {
+  width: fit-content;
+  background-color: #c9def5;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: default;
+}
+
+.assigned {
+  color: #06509f;
+}
+
+.unassigned {
+  color: #ec2227;
+  background-color: #fac8c9;
+  cursor: pointer;
+}
+
+#project-id{
+    pointer-events:none;
+    background: transparent;
+    border: none;
+}

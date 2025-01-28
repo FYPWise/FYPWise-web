@@ -167,7 +167,14 @@ INSERT INTO lecturer_project (projectID, lecturerID, lecturer_role) VALUES
 (5, 13, 'supervisor'),
 (6, 14, 'supervisor'),
 (7, 15, 'supervisor'),
-(8, 16, 'supervisor');
+(8, 16, 'supervisor'),
+(2, 11, 'moderator'),
+(3, 12, 'moderator'),
+(4, 13, 'moderator'),
+(5, 14, 'moderator'),
+(6, 15, 'moderator'),
+(7, 16, 'moderator'),
+(8, 9, 'moderator');
 -- --------------------------------------------------------
 
 --

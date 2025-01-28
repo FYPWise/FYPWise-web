@@ -128,7 +128,7 @@ INSERT INTO proposal_status (status, comment, updated_at, proposalID) VALUES
 
 -- --------------------------------------------------------
 
-INSERT INTO project (project_title, start_date, end_date, project_description, project_status, studentID, proposalID, supervisorID)
+INSERT INTO project (project_title, start_date, end_date, project_description, project_status, studentID, proposalID)
 VALUES 
 ('AI Chatbot', '2025-01-01', '2025-06-30', 'Developing an AI chatbot for customer service', 'ongoing', NULL, 1),
 ('E-Commerce Platform', '2025-02-01', '2025-07-31', 'Building an e-commerce platform for small businesses', 'submitted', NULL, 2),

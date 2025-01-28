@@ -124,7 +124,7 @@ CREATE TABLE project (
     end_date DATE,
     project_description TEXT NOT NULL,
     project_status ENUM('ongoing', 'submitted', 'approved') NOT NULL,
-    studentID INT NOT NULL,
+    studentID INT,
     proposalID INT NOT NULL,
     FOREIGN KEY (studentID) REFERENCES student(userID),
     FOREIGN KEY (proposalID) REFERENCES proposal(proposalID)

@@ -16,6 +16,9 @@ $router->get("/FYPWise-web/profilemanagement","Pages/user-management/profile-mgt
 // Admin
 $router->get("/FYPWise-web/administration", "Pages/administration/user-mgt-page.html");
 
+// Proposal Management
 $router->get("/FYPWise-web/test","Pages/project-proposal-mgt/new-proposals-management-page.php");
+$router->get("/FYPWise-web/proposal","Pages/project-proposal-mgt/proposal-management-page.php");
+$router->get("/FYPWise-web/pagesekelton","Pages/common-ui/page-skeleton.php");
 
 $router->dispatch();

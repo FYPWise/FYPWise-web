@@ -17,7 +17,7 @@ class Authentication{
         $password = $this->db->escapeString($_POST['password']);
 
         // Retrieve user data from 'users' table
-        $usersSql = "SELECT * from users where userID='$id' and password='$password'";
+        $usersSql = "SELECT * from users where id='$id' and password='$password'";
         $users = $this->db->query($usersSql);
         $usersRowcount = mysqli_num_rows($users);
 

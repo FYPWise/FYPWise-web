@@ -22,7 +22,6 @@
 
     <!-- Announcement -->
     <div class="announcement">
-        <p> <?php echo ($_SESSION['logged-in']) ?> </p>
         <p class="announcement-caption">Announcements</p>
         <div class="announcement-box">
             <div class="announcement-header">

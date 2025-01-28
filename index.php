@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['logged-in'] = "true";
 
 require './vendor/autoload.php';
 

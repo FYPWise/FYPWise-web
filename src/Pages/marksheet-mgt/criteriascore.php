@@ -7,11 +7,8 @@ use App\Models\Db;
 
 $base = new Base("Criteria Score Page");
 $sideMenu = new SideMenu();
-$criteriaModel = new CriteriaModel();
 $db = new Db();
-
-
-
+$criteriaModel = new CriteriaModel($db);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $marksheetID = $_POST['marksheetID'];

@@ -7,9 +7,8 @@ use App\Models\Db;
 class CriteriaModel {
     private $db;
 
-    public function __construct() {
-        require_once 'DB.php';
-        $this->db = new Db();
+    public function __construct(Db $db) {
+        $this->db = $db;
     }
 
     public function getAllCriteriaScores() {

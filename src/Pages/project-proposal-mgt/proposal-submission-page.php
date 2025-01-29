@@ -1,3 +1,7 @@
+<!-- TBD : Add the following features -->
+<!-- 1. User Session -->
+<!-- 2. supervisor ID fecth from DB instead of input -->
+
 <?php
 use App\Models\Base;
 use App\Models\SideMenu;
@@ -24,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     ) {
         $errorMessage = "Please fill out all required fields.";
     } else {
-        // Process the form data (insert into the database)
+        // Process the form data (insert into DB)
         try {
             $proposalId = $proposal->createProposal(
                 $_POST['proposal-title'],
@@ -72,9 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             <textarea id="description" name="description" rows="6" required></textarea>
                         </div>
 
+                        <!-- Submission Date is set to the current date by default -->
                         <div class="form-group">
                             <label for="submission-date">Submission Date</label>
-                            <input type="date" id="submission-date" name="submission-date" required>
+                            <input type="date" id="submission-date" name="submission-date" value="<?php echo date('Y-m-d'); ?>" readonly required>
                         </div>
 
                         <div class="form-group">
@@ -93,12 +98,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             <label for="category">Category</label>
                             <select id="category" name="category" required>
                                 <option value="" disabled selected>Select Category</option>
-                                <option value="research">Research-based</option>
-                                <option value="application">Application-based</option>
-                                <option value="research-application">Research & Application-based</option>
+                                <option value="research-based">Research-based</option>
+                                <option value="application-based">Application-based</option>
+                                <option value="application-research-based">Research & Application-based</option>
                             </select>
                         </div>
 
+                        <!-- TBD : Supervisor ID should be fetched from the database -->
                         <div class="form-group">
                             <label for="supervisor-id">Supervisor ID</label>
                             <input type="text" id="supervisor-id" name="supervisor-id" required>
@@ -112,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </form>
 
                     <script>
+                        // Client-side form validation
                         function validateForm() {
                             var title = document.getElementById('proposal-title').value;
                             var description = document.getElementById('description').value;
@@ -130,6 +137,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </section>
             </div>
         </div>
+        <script>
+            // Client-side form validation display, show red box if invalid/empty
+            document.addEventListener("DOMContentLoaded", function () {
+                let inputs = document.querySelectorAll(".form-group input, .form-group textarea, .form-group select");
+
+                inputs.forEach(input => {
+                    input.addEventListener("blur", function () {
+                        if (!this.checkValidity()) {
+                            this.classList.add("invalid");
+                        } else {
+                            this.classList.remove("invalid");
+                        }
+                    });
+                });
+            });
+            // Display success/error messages
+            <?php if (!empty($successMessage)): ?>
+                alert("<?php echo $successMessage; ?>");
+            <?php endif; ?>
+
+            <?php if (!empty($errorMessage)): ?>
+                alert("<?php echo $errorMessage; ?>");
+            <?php endif; ?>
+        </script>
         <?php $base->renderFooter() ?>
     </div>
 </body>

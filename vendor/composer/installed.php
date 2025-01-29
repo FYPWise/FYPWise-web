@@ -3,7 +3,7 @@
         'name' => 'acer/test',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f1f1788d9c0635acd680bcc3f2942f9b5fd60577',
+        'reference' => '527ab3697682ee8e2b0a9a9e5d6e5b7368a2487e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'acer/test' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f1f1788d9c0635acd680bcc3f2942f9b5fd60577',
+            'reference' => '527ab3697682ee8e2b0a9a9e5d6e5b7368a2487e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -10,12 +10,12 @@ $db = new Db();
 $proposal = new Proposal($db);
 
 
-echo "Proposal ID: " . $proposalID;
+// echo "Proposal ID: {$proposalID}";
 $proposalDetails = null;
 
 if ($proposalID) {
     try {
-        $proposalDetails = $proposal->getProposalByID($proposalID);
+        $proposalDetails = $proposal->getProposalByID($proposalID) ?? null;
     } catch (Exception $e) {
         echo "<p>Error: " . $e->getMessage() . "</p>";
     }
@@ -23,8 +23,8 @@ if ($proposalID) {
 
 ?>
 <head>
-    <link rel="stylesheet" href="./src/css/proposal-management-style.css">
-    <link rel="stylesheet" href="./src/css/form-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
 </head>
 <body>
     <div id="outer-container">

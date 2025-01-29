@@ -17,6 +17,7 @@ $router->get("/FYPWise-web/profilemanagement","Pages/user-management/profile-mgt
 $router->get("/FYPWise-web/new-user", "Pages/administration/new-user-page.php");
 $router->get("/FYPWise-web/manage-user", "Pages/administration/user-mgt-page.php");
 $router->get("/FYPWise-web/userlist", "Pages/administration/userlist.php");
+$router->get("/FYPWise-web/viewUser", "Pages/administration/viewUser.php");
 
 // Testing
 $router->get("/FYPWise-web/test","Pages/common-ui/page-skeleton.php");

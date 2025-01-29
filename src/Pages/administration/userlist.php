@@ -22,7 +22,7 @@ if (count($users) > 0) {
 ?>
     <table id="tablename-table">
         <thead>
-            <th><input title="select all" type="checkbox" id="select-all"></th>
+            <th>No.</th>
             <th>User ID</th>
             <th>Name</th>
             <th>Email</th>
@@ -33,10 +33,11 @@ if (count($users) > 0) {
 
         <tbody>
             <?php
-                foreach ($users as $user) { ?>
+            $no = 0;
+                foreach ($users as $user) { $no++;?>
                     <tr>
-                        <td><input title="<?php echo $user->getId(); ?>" type="checkbox" class="row-checkbox" value="<?php echo $user->getId(); ?>"></td>
-                        <td><a href=<?php echo "?userid=".$user->getId(); ?> ><?php echo $user->getId(); ?></a></td>
+                        <td><?php echo $no; ?></td>
+                        <td><a href=<?php echo "viewUser?userid=".$user->getId(); ?> ><?php echo $user->getId(); ?></a></td>
                         <td><?php echo $user->getName(); ?></td>
                         <td><?php echo $user->getEmail(); ?></td>
                         <td>

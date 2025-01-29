@@ -112,6 +112,7 @@ header h2 {
   background-size: contain;
   background-position: center center;
   width: 100px;
+  cursor: pointer;
 }
 
 #user-side-menu + label:before {

@@ -1,9 +1,16 @@
 <?php
+
+use App\Models\User;
 use App\Models\Base;
 use App\Models\SideMenu;
 
-$base = new Base("Page Skeleton", "admin");
-$SideMenu = new SideMenu();
+$base = new Base("Page Skeleton");
+$SideMenu = new SideMenu("admin");
+
+$userID = $_GET['userid'];
+
+$user = new User($userID);
+
 ?>
 
 <head>
@@ -36,7 +43,7 @@ $SideMenu = new SideMenu();
 
 
                 <div id="table-name">
-                        <h1 id="textHint" onclick="focusOnSearchBar()">Search Account by User ID</h1>
+                        <h1> <?php echo $user->getUserID(); echo $user->getName(); ?></h1>
                 </div>
 
                 <div id="output"></div>

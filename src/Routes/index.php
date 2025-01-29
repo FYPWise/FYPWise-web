@@ -19,6 +19,9 @@ $router->get("/FYPWise-web/administration", "Pages/administration/user-mgt-page.
 // Proposal Management
 $router->get("/FYPWise-web/test","Pages/project-proposal-mgt/new-proposals-management-page.php");
 $router->get("/FYPWise-web/proposal","Pages/project-proposal-mgt/proposal-management-page.php");
-$router->get("/FYPWise-web/pagesekelton","Pages/common-ui/page-skeleton.php");
+$router->get("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
+    echo "Proposal ID received: $proposalID";  // Debugging: To check if proposalID is captured correctly
+    include "src/Pages/project-proposal-mgt/proposal-status-management-page.php";  // Correct page
+});
 
 $router->dispatch();

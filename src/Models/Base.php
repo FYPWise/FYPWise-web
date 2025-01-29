@@ -10,11 +10,10 @@ class Base{
     private $auth;
     private $role;
 
-    public function __construct($pageTitle, $role = null) {
+    public function __construct($pageTitle) {
         $this->pageTitle = $pageTitle;
         $this->head = new Head($pageTitle);
         $this->auth = new Authentication();
-        $this->role = $role;
     }
 
     public function getTitle(){

@@ -30,4 +30,9 @@ $router->get("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
     include "src/Pages/project-proposal-mgt/proposal-details.php";
 });
 
+
+//marksheet management
+$router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
+
+
 $router->dispatch();

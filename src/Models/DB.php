@@ -21,6 +21,10 @@ class Db
         return $this->conn->query($sql);
     }
 
+    public function prepare($sql) {
+        return $this->conn->prepare($sql);
+    }
+
     public function escapeString($sql) {
         return $this->conn->real_escape_string($sql);
     }

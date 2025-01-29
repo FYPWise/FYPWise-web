@@ -5,7 +5,7 @@ use App\Models\Proposal;
 use App\Models\Db;
 
 $base = new Base("Proposals");
-$sideMenu = new SideMenu("student");
+$sideMenu = new SideMenu();
 $db = new Db();
 $proposal = new Proposal($db);
 
@@ -52,7 +52,7 @@ $proposal = new Proposal($db);
                                         echo "<tr>";
                                         echo "<td><input type='checkbox' class='row-checkbox' value='{$row['proposalID']}'></td>";
                                         echo "<td>{$row['proposalID']}</td>";
-                                        echo "<td><a href='proposal-status-management-page-{$row['proposalID']}.html'>{$row['proposal_title']}</a></td>";
+                                        echo "<td><a href='/FYPWise-web/proposal/{$row['proposalID']}'>{$row['proposal_title']}</a></td>";
                                         echo "<td>".htmlentities($row['proposal_description'])."</td>"; //htmlentities = for special characters
                                         echo "<td>{$row['submission_date']}</td>";
                                         echo "<td>{$row['supervisor_name']}</td>";

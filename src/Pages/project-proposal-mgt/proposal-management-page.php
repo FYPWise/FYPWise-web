@@ -5,7 +5,7 @@ use App\Models\Proposal;
 use App\Models\Db;
 
 $base = new Base("Proposals");
-$sideMenu = new SideMenu("student");
+$sideMenu = new SideMenu();
 $db = new Db();
 $proposal = new Proposal($db);
 

@@ -8,6 +8,8 @@ $SideMenu = new SideMenu("student")
 <head>
     <link rel="stylesheet" href="./src/css/proposal-management-style.css">
 </head>
+
+
 <body>
     <div id="outer-container">
         <!-- Header Section -->

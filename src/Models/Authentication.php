@@ -48,4 +48,12 @@ class Authentication{
         unset( $_SESSION["role"] );
         header('location:/FYPWise-Web');
     }
+
+    public function authenticate(){
+        if(isset($_SESSION['mySession'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

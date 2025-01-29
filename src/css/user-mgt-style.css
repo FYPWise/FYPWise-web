@@ -32,3 +32,8 @@
 #userForm {
   padding: 0;
 }
+
+#textHint {
+  text-decoration: underline;
+  cursor: pointer;
+}

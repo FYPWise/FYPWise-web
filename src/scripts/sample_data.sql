@@ -207,9 +207,16 @@ VALUES
 (8, 'initial_review.png', 'image', 1024, 'others', '/files/initial_review.png', '2025-03-15 10:00:00', NULL, NULL);
 -- --------------------------------------------------------
 
---
--- Insert sample data  for table `project_submission`
---
+INSERT INTO project_submission (start_date, end_date, project_description, project_status, project_category, studentID, projectID)
+VALUES
+('2025-01-01', '2025-06-30', 'Developing an AI chatbot for customer service', 'submitted', 'Software Engineering', NULL, NULL),
+('2025-02-01', '2025-07-31', 'Building an e-commerce platform for small businesses', 'approved', 'E-commerce', NULL, NULL),
+('2025-03-01', '2025-09-30', 'Creating an IoT-based smart home system', 'pending', 'Internet of Things', NULL, NULL),
+('2025-04-01', '2025-10-31', 'Developing a secure blockchain wallet', 'submitted', 'Blockchain', NULL, NULL),
+('2025-05-01', '2025-11-30', 'Designing a data analysis tool for researchers', 'rejected', 'Data Science', NULL, NULL),
+('2025-06-01', '2025-12-31', 'Creating a VR game for education', 'approved', 'Game Development', NULL, NULL),
+('2025-07-01', '2026-01-31', 'Developing a fitness tracker mobile app', 'pending', 'Health & Fitness', NULL, NULL),
+('2025-08-01', '2026-02-28', 'Building an online learning portal for schools', 'submitted', 'Education', NULL, NULL);
 
 -- --------------------------------------------------------
 

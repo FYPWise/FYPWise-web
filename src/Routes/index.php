@@ -29,6 +29,17 @@ $router->get("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
     // echo "Proposal ID received: $proposalID";  // Debugging: To check if proposalID is captured correctly
     include "src/Pages/project-proposal-mgt/proposal-details.php";
 });
+$router->post("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
+    include "src/Pages/project-proposal-mgt/proposal-details.php";
+});
+$router->get("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/proposal-submission-page.php");
+$router->post("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/proposal-submission-page.php");
+
+
+//marksheet management
+$router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
+
+
 
 
 //marksheet management

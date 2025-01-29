@@ -51,6 +51,17 @@ $marksheets = $marksheet->getAllMarksheet();
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Insert Form -->
+                        <form action="marksheet-insert.php" method="POST">
+                            <label for="total_score">Total Score:</label>
+                            <input type="number" name="total_score" required>
+                            <label for="date">Date:</label>
+                            <input type="datetime-local" name="date" required>
+                            <label for="projectID">Project ID:</label>
+                            <input type="number" name="projectID" required>
+                            <button type="submit">Insert Marksheet</button>
+                        </form>
                     </div>
                 </section>
             </div>

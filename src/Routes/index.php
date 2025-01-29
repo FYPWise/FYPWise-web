@@ -33,6 +33,6 @@ $router->get("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
 
 //marksheet management
 $router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
-
+$router->get("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php");
 
 $router->dispatch();

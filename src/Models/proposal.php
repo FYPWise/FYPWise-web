@@ -81,5 +81,28 @@ class Proposal {
             throw new \Exception("Database query failed: " . $stmt->error);
         }
     }
+
+    public function createProposal($title, $description, $submissionDate, $specialisation, $category, $supervisorId) {
+        
+        $sql = "INSERT INTO proposal (proposal_title, proposal_description, submission_date, specialisation, category, supervisorID) 
+                VALUES (?, ?, ?, ?, ?, ?)";
+    
+        // Prepare the statement
+        if ($stmt = $this->db->prepare($sql)) {
+            // Bind parameters to the prepared statement
+            $stmt->bind_param("sssssi", $title, $description, $submissionDate, $specialisation, $category, $supervisorId);
+    
+            // Execute the statement
+            if ($stmt->execute()) {
+                // Return the ID of the newly inserted proposal
+                return $stmt->insert_id;
+            } else {
+                throw new \Exception("Failed to insert proposal: " . $stmt->error);
+            }
+        } else {
+            throw new \Exception("Failed to prepare statement: " . $stmt->error);
+        }
+    }
+    
 }
 ?>

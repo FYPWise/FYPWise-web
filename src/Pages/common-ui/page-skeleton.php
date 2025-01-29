@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\SideMenu;
 
 $base = new Base("Page Skeleton");
-$SideMenu = new SideMenu("student")
+$SideMenu = new SideMenu();
 ?>
 
 <body>

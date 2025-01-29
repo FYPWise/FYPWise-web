@@ -124,7 +124,7 @@ CREATE TABLE project (
     end_date DATE,
     project_description TEXT NOT NULL,
     project_status ENUM('ongoing', 'submitted', 'approved') NOT NULL,
-    studentID INT NOT NULL,
+    studentID INT,
     proposalID INT NOT NULL,
     FOREIGN KEY (studentID) REFERENCES student(userID),
     FOREIGN KEY (proposalID) REFERENCES proposal(proposalID)
@@ -252,22 +252,19 @@ CREATE TABLE meeting (
     meeting_title VARCHAR(100) NOT NULL,
     meeting_description TEXT,
     meeting_URL TEXT,
-    supervisorID INT NOT NULL,
-    student_meetingID INT NOT NULL,
-    PRIMARY KEY (meetingID),
-    FOREIGN KEY (supervisorID) REFERENCES lecturer(userID)
+    PRIMARY KEY (meetingID)
 );
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_meeting`
+-- Table structure for table `users_meeting`
 --
-CREATE TABLE student_meeting (
+CREATE TABLE users_meeting (
+    userID INT NOT NULL,
     meetingID INT NOT NULL,
-    studentID INT NOT NULL,
-    PRIMARY KEY (meetingID, studentID),
+    PRIMARY KEY (meetingID, userID),
     FOREIGN KEY (meetingID) REFERENCES meeting(meetingID),
-    FOREIGN KEY (studentID) REFERENCES student(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID)
 );
 -- --------------------------------------------------------
 
@@ -300,12 +297,24 @@ CREATE TABLE presentation (
     end_time TIME NOT NULL,
     date DATE NOT NULL,
     mode ENUM('online', 'physical') NOT NULL,
-    location VARCHAR(50) NOT NULL,
+    location VARCHAR(50),
     presentation_URL TEXT,
     status ENUM('scheduled', 'postponed', 'presented') NOT NULL,
     updated_at DATETIME NOT NULL,
     projectID INT NOT NULL,
     FOREIGN KEY (projectID) REFERENCES project(projectID)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group`
+--
+CREATE TABLE group_chat (
+    groupID INT AUTO_INCREMENT PRIMARY KEY,
+    groupName VARCHAR(255) NOT NULL,
+    createdAt DATETIME NOT NULL,
+    createdBy INT NOT NULL,
+    FOREIGN KEY (createdBy) REFERENCES users(userID)
 );
 -- --------------------------------------------------------
 
@@ -319,24 +328,12 @@ CREATE TABLE message (
     groupID INT,
     messageContent TEXT NOT NULL,
     timeStamp DATETIME NOT NULL,
-    FOREIGN KEY (senderID) REFERENCES `users`(userID),
-    FOREIGN KEY (receiverID) REFERENCES `users`(userID),
-    FOREIGN KEY (groupID) REFERENCES `group`(groupID)
+    FOREIGN KEY (senderID) REFERENCES users(userID),
+    FOREIGN KEY (receiverID) REFERENCES users(userID),
+    FOREIGN KEY (groupID) REFERENCES group_chat(groupID)
 );
--- --------------------------------------------------------
 
---
--- Table structure for table `group`
---
-CREATE TABLE `group` (
-    groupID INT AUTO_INCREMENT PRIMARY KEY,
-    groupName VARCHAR(255) NOT NULL,
-    createdAt DATETIME NOT NULL,
-    createdBy INT NOT NULL,
-    FOREIGN KEY (createdBy) REFERENCES user_group(userID)
-);
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `user_group`
 --
@@ -345,6 +342,6 @@ CREATE TABLE user_group (
     groupID INT NOT NULL,
     PRIMARY KEY (userID, groupID),
     FOREIGN KEY (userID) REFERENCES users(userID),
-    FOREIGN KEY (groupID) REFERENCES `group`(groupID)
+    FOREIGN KEY (groupID) REFERENCES group_chat(groupID)
 );
 -- --------------------------------------------------------

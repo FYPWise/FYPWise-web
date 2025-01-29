@@ -6,7 +6,8 @@ class SideMenu{
 
     private $sideMenu;
 
-    public function __construct($role) {
+    public function __construct() {
+        $role = $_SESSION["role"];
         if ($role == "student"){
             $this->sideMenu = "/../Pages/common-ui/side-menu-student.html";
         }else if ($role == "admin"){

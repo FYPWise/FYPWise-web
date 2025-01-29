@@ -2,14 +2,18 @@
 
 namespace App\Models;
 use App\Models\Head;
+use App\Models\Authentication;
 
 class Base{
     private $pageTitle;
     private $head;
+    private $auth;
+    private $role;
 
     public function __construct($pageTitle) {
         $this->pageTitle = $pageTitle;
         $this->head = new Head($pageTitle);
+        $this->auth = new Authentication();
     }
 
     public function getTitle(){
@@ -21,9 +25,9 @@ class Base{
         <header>
             <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
                     for="user-side-menu" class="fas"></label></div>
-            <div id="logo"></div>
-            <button id="home"><a href="/testb"><img src="./src/assets/home.png"
-                        alt="home icon"></a></button>
+            <div id="logo" onClick="location.href=\'/FYPWise-web\'" ></div>
+            <button id="home"><a href="/FYPWise-web/dashboard"><img src="./src/assets/home3.png"
+                        alt="home icon" style="width:25px;"></a></button>
         </header>';
     }
 
@@ -41,5 +45,9 @@ class Base{
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>';
+    }
+
+    public function authenticateUser(){
+        
     }
 }

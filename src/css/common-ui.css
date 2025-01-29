@@ -112,6 +112,7 @@ header h2 {
   background-size: contain;
   background-position: center center;
   width: 100px;
+  cursor: pointer;
 }
 
 #user-side-menu + label:before {
@@ -406,7 +407,7 @@ footer > * {
   background: transparent;
 }
 
-.table-name {
+#table-name {
   padding-top: 2em;
   padding-bottom: 2em;
   margin: 0 20px;
@@ -455,7 +456,7 @@ tr:hover {
   .table-buttons button img {
     height: 15px;
   }
-  .table-name {
+  #table-name {
     margin: 30px 0;
     margin-bottom: 0;
     padding-bottom: 0;

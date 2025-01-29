@@ -6,7 +6,9 @@ $auth = new Authentication();
 
 $auth->login();
 
-echo"test";
+if (isset($_SESSION["Invalid"])){
+    echo"invalid";
+}
 ?>
 
 <!DOCTYPE html>

@@ -37,8 +37,23 @@ class Authentication{
             }
         } else {
             $_SESSION["Invalid"] = true;
-            header("login");
         }
     }
-}
+    }
+
+    public function logout(){
+        unset( $_SESSION["mySession"] );
+        unset( $_SESSION["name"] );
+        unset( $_SESSION["email"] );
+        unset( $_SESSION["role"] );
+        header('location:/FYPWise-Web');
+    }
+
+    public function authenticate(){
+        if(isset($_SESSION['mySession'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

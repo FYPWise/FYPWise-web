@@ -117,6 +117,25 @@ class Proposal {
             throw $e;
         }
     }
+
+    public function updateProposalStatus($proposalID, $status, $comment) {
+        try {
+            $sql = "UPDATE proposal_status 
+                    SET status = ?, comment = ?, updated_at = NOW() 
+                    WHERE proposalID = ?";
+    
+            if ($stmt = $this->db->prepare($sql)) {
+                $stmt->bind_param("ssi", $status, $comment, $proposalID);
+                if (!$stmt->execute()) {
+                    throw new \Exception("Failed to update proposal status: " . $stmt->error);
+                }
+            } else {
+                throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
     
 }
 ?>

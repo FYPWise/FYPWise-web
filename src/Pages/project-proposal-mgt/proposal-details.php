@@ -4,11 +4,14 @@ use App\Models\SideMenu;
 use App\Models\Proposal;
 use App\Models\Db;
 
-$base = new Base("Proposals");
+$base = new Base("Proposal Details");
 $sideMenu = new SideMenu();
 $db = new Db();
 $proposal = new Proposal($db);
 
+// Simulating user roles for testing
+$isAdmin = true;
+// $isAdmin = false;
 
 // echo "Proposal ID: {$proposalID}";
 $proposalDetails = null;
@@ -21,7 +24,20 @@ if ($proposalID) {
     }
 }
 
+// Handle form submission (only if admin)
+if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
+    $newStatus = $_POST['status'];
+    $newComment = $_POST['comment'];
+
+    try {
+        $proposal->updateProposalStatus($proposalID, $newStatus, $newComment);
+        echo "<script>alert('Proposal status updated successfully!'); window.location.reload();</script>";
+    } catch (Exception $e) {
+        echo "<script>alert('Error updating proposal: " . $e->getMessage() . "');</script>";
+    }
+}
 ?>
+
 <head>
     <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css">
     <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
@@ -37,63 +53,73 @@ if ($proposalID) {
             <?php $sideMenu->render(); ?>
 
             <div class="content">
-                <h2 class="form-title">Proposal Submission</h2>
+                <h2 class="form-title">Proposal Details</h2>
                 <hr />
+                
                 <?php if ($proposalDetails): ?>
-                    <form class="proposal-form" id="proposalForm">
-                        <!-- Proposal ID -->
+                    <form method="POST" action="/FYPWise-web/proposal/<?php echo $proposalDetails['proposalID']; ?>">
+                        <!-- Hidden input for proposalID -->
+                        <input type="hidden" name="proposalID" value="<?php echo htmlspecialchars($proposalDetails['proposalID']); ?>">
                         <div class="form-group">
                             <label for="proposal-id">Proposal ID</label>
-                            <p id="proposal-id" class="proposal-id"><?php echo htmlspecialchars($proposalDetails['proposalID']); ?></p>
+                            <p><?php echo htmlspecialchars($proposalDetails['proposalID']); ?></p>
                         </div>
 
-                        <!-- Proposal Title -->
                         <div class="form-group">
                             <label for="proposal-title">Proposal Title</label>
-                            <p id="proposal-title" name="proposal-title"><?php echo htmlspecialchars($proposalDetails['proposal_title']); ?></p>
+                            <p><?php echo htmlspecialchars($proposalDetails['proposal_title']); ?></p>
                         </div>
 
-                        <!-- Description -->
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <p id="description" name="description"><?php echo nl2br(htmlspecialchars($proposalDetails['proposal_description'])); ?></p>
+                            <p><?php echo nl2br(htmlspecialchars($proposalDetails['proposal_description'])); ?></p>
                         </div>
 
-                        <!-- Submission Date -->
                         <div class="form-group">
                             <label for="submission-date">Submission Date</label>
-                            <p id="submission-date" name="submission-date"><?php echo htmlspecialchars($proposalDetails['submission_date']); ?></p>
+                            <p><?php echo htmlspecialchars($proposalDetails['submission_date']); ?></p>
                         </div>
 
-                        <!-- Specialisation -->
                         <div class="form-group">
                             <label for="specialisation">Specialisation</label>
-                            <p id="specialisation" name="specialisation"><?php echo htmlspecialchars($proposalDetails['specialisation']); ?></p>
+                            <p><?php echo htmlspecialchars($proposalDetails['specialisation']); ?></p>
                         </div>
 
-                        <!-- Category -->
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <p id="category" name="category"><?php echo htmlspecialchars($proposalDetails['category']); ?></p>
+                            <p><?php echo htmlspecialchars($proposalDetails['category']); ?></p>
                         </div>
 
-                        <!-- Supervisor Name -->
                         <div class="form-group">
                             <label for="supervisor-name">Supervisor Name</label>
-                            <p id="supervisor-name" name="supervisor-name"><?php echo htmlspecialchars($proposalDetails['supervisor_name']); ?></p>
+                            <p><?php echo htmlspecialchars($proposalDetails['supervisor_name']); ?></p>
                         </div>
 
-                        <!-- Status -->
                         <div class="form-group">
                             <label for="status">Status</label>
-                            <p id="status" name="status"><?php echo htmlspecialchars($proposalDetails['status']); ?></p>
+                            <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                                <select name="status" required>
+                                    <option value="pending" <?php echo ($proposalDetails['status'] === 'pending') ? 'selected' : ''; ?>>Pending</option>
+                                    <option value="accepted" <?php echo ($proposalDetails['status'] === 'accepted') ? 'selected' : ''; ?>>Accepted</option>
+                                    <option value="rejected" <?php echo ($proposalDetails['status'] === 'rejected') ? 'selected' : ''; ?>>Rejected</option>
+                                </select>
+                            <?php else: ?>
+                                <p><?php echo htmlspecialchars($proposalDetails['status']); ?></p>
+                            <?php endif; ?>
                         </div>
 
-                        <!-- Comment -->
                         <div class="form-group">
                             <label for="comment">Comment</label>
-                            <textarea id="comment" name="comment" rows="6" disabled><?php echo htmlspecialchars($proposalDetails['comment']); ?></textarea>
+                            <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                                <textarea name="comment" rows="4"><?php echo htmlspecialchars($proposalDetails['comment']); ?></textarea>
+                            <?php else: ?>
+                                <p><?php echo nl2br(htmlspecialchars($proposalDetails['comment'])); ?></p>
+                            <?php endif; ?>
                         </div>
+
+                        <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                            <button type="submit" name="update" class="btn submit-btn">Save Changes</button>
+                        <?php endif; ?>
                     </form>
                 <?php else: ?>
                     <p>No proposal found with the provided ID.</p>
@@ -101,8 +127,7 @@ if ($proposalID) {
             </div>
         </div>
 
-        <?php $base->renderFooter() ?>
+        <?php $base->renderFooter(); ?>
     </div>
 </body>
-
 </html>

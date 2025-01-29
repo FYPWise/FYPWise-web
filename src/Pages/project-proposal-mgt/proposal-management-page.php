@@ -12,6 +12,26 @@ $proposal = new Proposal($db);
 ?>
 <head>
     <link rel="stylesheet" href="./src/css/proposal-management-style.css">
+    <style>
+        .status-accepted {
+            color: white;
+            background-color: green;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .status-pending {
+            color: black;
+            background-color: burlywood;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .status-rejected {
+            color: white;
+            background-color: red;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <div id="outer-container">
@@ -56,7 +76,16 @@ $proposal = new Proposal($db);
                                         echo "<td>".htmlentities($row['proposal_description'])."</td>"; //htmlentities = for special characters
                                         echo "<td>{$row['submission_date']}</td>";
                                         echo "<td>{$row['supervisor_name']}</td>";
-                                        echo "<td>{$row['status']}</td>";
+                                        $status = $row['status'];
+                                        if ($status === 'accepted') {
+                                            echo "<td><span class='status-accepted'>{$status}</span></td>";
+                                        } elseif ($status === 'pending') {
+                                            echo "<td><span class='status-pending'>{$status}</span></td>";
+                                        } elseif ($status === 'rejected') {
+                                            echo "<td><span class='status-rejected'>{$status}</span></td>";
+                                        } else {
+                                            echo "<td>{$status}</td>";
+                                        }
                                         echo "<td>{$row['updated_at']}</td>";
                                         echo "</tr>";
                                     }

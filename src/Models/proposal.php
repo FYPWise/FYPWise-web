@@ -32,7 +32,7 @@ class Proposal {
         $result = $this->db->query($sql);
     
         if (!$result) {
-            throw new \Exception("Database query failed: " . $this->db->error);
+            throw new \Exception("Database query failed for query: $sql. Error: " . $this->db->getError());
         }
     
         $proposals = [];
@@ -45,29 +45,27 @@ class Proposal {
     
     public function getProposalByID($proposalID) {
         $sql = "SELECT 
-                    p.proposalID,
-                    p.proposal_title,
-                    p.proposal_description,
-                    p.submission_date,
-                    p.supervisorID,
-                    u.name AS supervisor_name,
-                    ps.status,
-                    ps.updated_at,
-                    p.specialisation,
-                    p.category,
-                    p.comment,
-                    p.adminID
-                FROM 
-                    proposal p
-                JOIN 
-                    lecturer l ON p.supervisorID = l.userID
-                JOIN 
-                    users u ON l.userID = u.userID
-                LEFT JOIN 
-                    proposal_status ps ON p.proposalID = ps.proposalID
-                WHERE 
-                    p.proposalID = ?";
-    
+                p.proposalID,
+                p.proposal_title,
+                p.proposal_description,
+                p.submission_date,
+                p.supervisorID,
+                u.name AS supervisor_name,
+                ps.status,
+                ps.updated_at,
+                p.specialisation,
+                p.category,
+                ps.comment
+            FROM 
+                proposal p
+            JOIN 
+                lecturer l ON p.supervisorID = l.userID
+            JOIN 
+                users u ON l.userID = u.userID
+            LEFT JOIN 
+                proposal_status ps ON p.proposalID = ps.proposalID
+            WHERE 
+                p.proposalID = ?";
 
         if ($stmt = $this->db->prepare($sql)) {
             $stmt->bind_param("i", $proposalID);
@@ -80,7 +78,7 @@ class Proposal {
                 throw new \Exception("Proposal not found.");
             }
         } else {
-            throw new \Exception("Database query failed: " . $this->db->error);
+            throw new \Exception("Database query failed: " . $stmt->error);
         }
     }
 }

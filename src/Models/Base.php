@@ -17,8 +17,9 @@ class Base{
 
         if ($roles) {
             is_array($roles) ? $this->roles = $roles : $this->roles = [$roles];
-            $this->authenticateUser();
         }
+
+        $this->authenticateUser();
     }
 
     public function getTitle(){
@@ -58,10 +59,11 @@ class Base{
             exit();
         }
 
-        if(!in_array($_SESSION['role'], $this->roles)){
-            include(ROOT_DIR . "/src/Pages/common-ui/404.php");
-            exit();
+        if ($this->roles){
+            if(!in_array($_SESSION['role'], $this->roles)){
+                include(ROOT_DIR . "/src/Pages/common-ui/404.php");
+                exit();
+            }
         }
-        
     }
 }

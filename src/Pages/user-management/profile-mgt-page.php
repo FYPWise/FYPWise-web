@@ -28,16 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
-        <div class="icons">
-            <button id="sidebar-btn"><a href="/FYPWise-web/"><img src="./src/assets/home3.png" alt="home"></a></button>
-            <button id="sidebar-btn"><a href="../communication/comm-page.html"><img src="./src/assets/messages1.png"
-                        alt="messages"></a></button>
-            <button id="sidebar-btn"><a href="dashboard"><img src="./src/assets/dashboard1.png" alt="dashboard"></a></button>
-        </div>
-        <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
-    </div>
+    <?php include "user-dashboard-sidebar.php"; ?>
 
     <!-- Main Container -->
     <div class="container">

@@ -42,6 +42,21 @@
   margin-bottom: 0.5em;
 }
 
+/* Styling for invalid inputs */
+.form-group input.invalid,
+.form-group textarea.invalid,
+.form-group select.invalid {
+  border-color: #e74c3c;
+  background-color: #fce4e4;
+}
+
+.form-group input:invalid,
+.form-group textarea:invalid,
+.form-group select:invalid {
+  border-color: #e74c3c;
+  background-color: #fce4e4;
+}
+
 .radio-group {
   display: flex;
   gap: 1.5em;

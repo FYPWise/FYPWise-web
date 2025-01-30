@@ -19,6 +19,7 @@ class Head{
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet"
             href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
+            <link rel="stylesheet" href="/FYPWise-web/src/css/common-ui.css"">
         </head>
         ');
     }

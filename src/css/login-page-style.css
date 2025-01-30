@@ -32,12 +32,21 @@ body {
     right: 60px;
 }
 
-.aboutus-image, .home-image {
+.aboutus-image {
+    width: 1.7em;
+    transition: 0.2s ease-in-out;
+}
+
+.aboutus-image:hover {
+    width: 1.9em;
+}
+
+.home-image {
     width: 1.5em;
     transition: 0.2s ease;
 }
 
-.aboutus-image:hover, .home-image:hover {
+.home-image:hover {
     width: 1.7em;
 }
 
@@ -61,7 +70,7 @@ h2 {
 form{
     max-width: 550px;
     width: 100%;
-    max-height: 300px;
+    max-height: 320px;
     height: 100%;
     margin: 1em auto;
     border: none ;
@@ -72,9 +81,9 @@ form{
 .container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 350px;
+    max-width: 370px;
     width: 90%;
-    max-height: 300px;
+    max-height: 350px;
     height: 90%;
     padding: 5%;
     font-size: 1.3em;  
@@ -108,6 +117,17 @@ input{
     width: 100%;
     height: 50px;
     border-radius: 5px;
+}
+
+#error-msg.hide {
+    display: none;
+}
+
+#error-msg.show{
+    display: block;
+    font-size: smaller;
+    color: red;
+    text-align: center;
 }
 
 .submit {

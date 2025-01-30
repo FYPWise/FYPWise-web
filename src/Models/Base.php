@@ -8,12 +8,17 @@ class Base{
     private $pageTitle;
     private $head;
     private $auth;
-    private $role;
+    private $roles = [];
 
-    public function __construct($pageTitle) {
+    public function __construct($pageTitle, $roles = null) {
         $this->pageTitle = $pageTitle;
         $this->head = new Head($pageTitle);
         $this->auth = new Authentication();
+
+        if ($roles) {
+            is_array($roles) ? $this->roles = $roles : $this->roles = [$roles];
+            $this->authenticateUser();
+        }
     }
 
     public function getTitle(){
@@ -48,6 +53,15 @@ class Base{
     }
 
     public function authenticateUser(){
+        if (!isset($_SESSION['mySession'])) { // if not logged in
+            header('Location: login');
+            exit();
+        }
+
+        if(!in_array($_SESSION['role'], $this->roles)){
+            include(ROOT_DIR . "/src/Pages/common-ui/404.php");
+            exit();
+        }
         
     }
 }

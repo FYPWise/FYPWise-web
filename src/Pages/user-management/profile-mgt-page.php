@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Db;
 use App\Models\UpdateProfile;
 
-$base = new Base("Profile Management", "student");
+$base = new Base("Profile Management", ["student", "admin", "lecturer"]);
 $db = new Db();
 $form = new UpdateProfile();
 

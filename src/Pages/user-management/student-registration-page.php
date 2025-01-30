@@ -2,7 +2,7 @@
 use App\Models\Base;
 use App\Models\Register;
 
-$base = new Base("Registration", "student");
+$base = new Base("Registration");
 $register = new Register();
 
 if (isset($_POST['submit'])){

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$base = new Base("Dashboard");
+$base = new Base("Dashboard", ["student", "lecturer", "admin"]);
 $db = new Db();
 echo $_SESSION["role"];
 

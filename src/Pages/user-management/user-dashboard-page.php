@@ -14,8 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$base = new Base("Dashboard", "student");
+$base = new Base("Dashboard",["lecturer", "student"]);
 $db = new Db();
+echo $_SESSION["role"];
 
 
 function task($db) {
@@ -74,7 +75,7 @@ $taskDates = getTaskDates($db);
             <button id="sidebar-btn"><a href="profilemanagement"><img src="./src/assets/profile.png" alt="logout"></a></button>
         </div>
         
-        <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
+        <button id="logout-btn"><a href="login?q=logout"><img src="./src/assets/logout2.png" alt="logout"></a></button>
     </div>
 
     <!-- Main Container -->

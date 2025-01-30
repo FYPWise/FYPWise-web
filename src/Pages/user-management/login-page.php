@@ -7,6 +7,10 @@ $auth = new Authentication();
 $auth->login();
 
 $showError = isset($_SESSION["Invalid"]);
+
+if (isset($_GET["q"]) && $_GET["q"] == "logout") {
+    $auth->logout();
+}
 ?>
 
 <!DOCTYPE html>

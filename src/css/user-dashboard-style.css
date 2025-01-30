@@ -89,7 +89,6 @@ hr {
     align-items: center;
     margin-top: auto;
     margin-bottom: auto;
-    gap: 20px;
 }
 
 #sidebar-btn, #logout-btn {
@@ -98,17 +97,25 @@ hr {
     color: white;
     margin: 10px 0;
     cursor: pointer;
+    padding: 25px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 #sidebar-btn img, #logout-btn img {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
+}
+
+#sidebar-btn:hover, #logout-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 #logout-btn {
     margin-top: auto; 
     margin-bottom: 20px; 
 }
+
 
 /* Calendar and Task Section */
 .mini-container1 {
@@ -374,6 +381,7 @@ hr {
     .sidebar .logo {
         width: 50px;
         margin-right: 10px;
+        margin-bottom: 0;
     }
 
     .icons {
@@ -382,7 +390,6 @@ hr {
         align-items: center;
         flex-grow: 1; 
         justify-content: center;
-        gap: 20px
     }
     
     #sidebar-btn, #logout-btn {
@@ -390,7 +397,7 @@ hr {
         border: none;
         color: white;
         cursor: pointer;
-        padding: 5px;
+        padding: 25px;
     }
     
     #sidebar-btn img, #logout-btn img {
@@ -400,6 +407,7 @@ hr {
     
     #logout-btn {
         margin-left: auto; 
+        margin-bottom: 10px;
     }
 
     .mini-container1, .mini-container2 {

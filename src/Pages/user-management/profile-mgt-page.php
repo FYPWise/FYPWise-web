@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.6">
+    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.7">
     <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
     <script src="./src/scripts/profile_form_response.js?v=0.7"></script>
 </head>
@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button id="sidebar-btn"><a href="../communication/comm-page.html"><img src="./src/assets/messages1.png"
                         alt="messages"></a></button>
             <button id="sidebar-btn"><a href="dashboard"><img src="./src/assets/dashboard1.png" alt="dashboard"></a></button>
-            <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
         </div>
+        <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
     </div>
 
     <!-- Main Container -->

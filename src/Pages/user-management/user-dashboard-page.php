@@ -60,7 +60,6 @@ $taskDates = getTaskDates($db);
 <head>
     <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.3">
     <link rel="stylesheet" href="./src/css/calendar-style.css?v=0.1">
-    <link rel="stylesheet" href="./src/css/footer.css">
     <script src="./src/scripts/calendar.js?v=0.1"></script>
 </head>
 

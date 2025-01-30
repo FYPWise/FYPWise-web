@@ -13,8 +13,12 @@ if (isset($_POST['submit'])){
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="./src/css/student-registration-page-style.css?v=0.1">
-        <link rel="stylesheet" href="./src/css/footer.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration</title>
+        <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
+        <link rel="stylesheet" href="./src/css/student-registration-page-style.css?v=0.3">
+        <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
     </head>
     <body>
         <!-- Header Section -->

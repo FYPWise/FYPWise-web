@@ -6,7 +6,7 @@ $router = new NewRouter();
 
 // User
 $router->get("/FYPWise-web/", "Pages/user-management/home-page.php");
-$router->get("/FYPWise-web/about-us", "Pages/user-management/about-us-page.html");
+$router->get("/FYPWise-web/about-us", "Pages/user-management/about-us-page.php");
 $router->get("/FYPWise-web/login", "Pages/user-management/login-page.php");
 $router->post("/FYPWise-web/login","Pages/user-management/login-page.php");
 $router->get("/FYPWise-web/register","Pages/user-management/student-registration-page.php");

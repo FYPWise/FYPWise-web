@@ -56,7 +56,7 @@ if (isset($_GET["q"]) && $_GET["q"] == "logout") {
         </div>
     </form>
     <div class="signup-caption">
-        <p>Don't have an account? <a href="student-registration-page.html">Sign Up</a></p>
+        <p>Don't have an account? <a href="register">Sign Up</a></p>
     </div>
 
     <footer id="footer">

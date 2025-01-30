@@ -66,17 +66,7 @@ $taskDates = getTaskDates($db);
 
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
-        <div class="icons">
-            <button id="sidebar-btn"><a href="home-page.html"><img src="./src/assets/home3.png" alt="home"></a></button>
-            <button id="sidebar-btn"><a href="./src/communication/comm-page.html"><img src="./src/assets/messages1.png"
-                        alt="messages"></a></button>
-            <button id="sidebar-btn"><a href="profilemanagement"><img src="./src/assets/profile.png" alt="logout"></a></button>
-        </div>
-        
-        <button id="logout-btn"><a href="login?q=logout"><img src="./src/assets/logout2.png" alt="logout"></a></button>
-    </div>
+    <?php include "user-dashboard-sidebar.php"; ?>
 
     <!-- Main Container -->
     <div class="container">

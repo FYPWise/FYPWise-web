@@ -17,9 +17,8 @@ class Base{
 
         if ($roles) {
             is_array($roles) ? $this->roles = $roles : $this->roles = [$roles];
+            $this->authenticateUser();
         }
-
-        $this->authenticateUser();
     }
 
     public function getTitle(){

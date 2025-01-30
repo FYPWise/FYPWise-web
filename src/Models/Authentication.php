@@ -56,11 +56,8 @@ class Authentication{
     }
 
     public function logout(){
-        unset( $_SESSION["mySession"] );
-        unset( $_SESSION["name"] );
-        unset( $_SESSION["email"] );
-        unset( $_SESSION["role"] );
-        header('location:/FYPWise-Web');
+        session_destroy();
+        header('location:login');
     }
 
     public function authenticate(){

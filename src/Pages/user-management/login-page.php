@@ -7,6 +7,14 @@ $auth = new Authentication();
 $auth->login();
 
 $showError = isset($_SESSION["Invalid"]);
+
+if (isset($_GET["q"]) && $_GET["q"] == "logout") {
+    $auth->logout();
+}
+
+if (isset($_SESSION["mySession"])){
+    header("location:dashboard");
+}
 ?>
 
 <!DOCTYPE html>

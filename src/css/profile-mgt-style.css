@@ -61,7 +61,7 @@ body {
 
 #logout-btn {
   margin-top: auto; 
-  margin-bottom: 20px; 
+  margin-bottom: 0; 
 }
 
 /* Main Content */
@@ -201,14 +201,15 @@ select:focus {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 0;
   }
 
   .sidebar .logo {
-      width: 50px;
-      margin-right: 10px;
-      margin-bottom: 0px;
-  }
+    width: 50px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
 
   .icons {
       display: flex;
@@ -224,6 +225,7 @@ select:focus {
       color: white;
       cursor: pointer;
       padding: 25px;
+      margin: 0px;
   }
 
   #sidebar-btn img, #logout-btn img {
@@ -231,9 +233,12 @@ select:focus {
       height: 24px;
   }
 
+  #sidebar-btn:hover, #logout-btn:hover {
+      transform: scale(1);
+  }
+
   #logout-btn {
       margin-left: auto;
-      margin-bottom: 10px; 
   }
 
   .form-group {

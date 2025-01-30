@@ -21,22 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.7">
+    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.8">
     <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
     <script src="./src/scripts/profile_form_response.js?v=0.7"></script>
 </head>
 
 <body>
-    <!-- Sidebar -->
     <div class="sidebar">
         <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
         <div class="icons">
-            <button id="sidebar-btn"><a href="/FYPWise-web/"><img src="./src/assets/home3.png" alt="home"></a></button>
-            <button id="sidebar-btn"><a href="../communication/comm-page.html"><img src="./src/assets/messages1.png"
-                        alt="messages"></a></button>
-            <button id="sidebar-btn"><a href="dashboard"><img src="./src/assets/dashboard1.png" alt="dashboard"></a></button>
+            <a href="/FYPWise-web"><button id="sidebar-btn"><img src="./src/assets/home3.png" alt="home"></button></a>
+            <a href="Communication"><button id="sidebar-btn"><img src="./src/assets/messages1.png"
+                        alt="messages"></button></a>
+            <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
         </div>
-        <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
+        <a href="login?q=logout"><button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button></a>
     </div>
 
     <!-- Main Container -->
@@ -88,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <option value="5" <?php if ($_SESSION['year'] == '5') echo 'selected'; ?>>5</option>
                         </select>
                     </div>
-                    <?php } else { ?>
+                    <?php } elseif($_SESSION['role'] == 'lecturer') { ?>
                     <div class="form-group">
                         <label for="position"><strong>Position:</strong></label>
                         <input type="text" id="position" name="position" value="<?php echo $_SESSION['position']; ?>" pattern="[A-Za-z\s]+" readonly>

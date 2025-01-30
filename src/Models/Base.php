@@ -48,6 +48,15 @@ class Base{
     }
 
     public function authenticateUser(){
+        if (!isset($_SESSION['mySession'])) { // if not logged in
+            header('Location: login.php');
+            exit();
+        }
+
+        if ($_SESSION['role'] !== $this->role) { // if no access
+            header('Location: ./src/Pages/common-ui/404.php');
+            exit();
+        }
         
     }
 }

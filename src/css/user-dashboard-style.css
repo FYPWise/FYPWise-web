@@ -34,7 +34,7 @@ header a{
 }
 
 .sidebar img.logo {
-  width: 40px;
+    width: 40px;
 }
 
 #sidebar-btn,
@@ -59,6 +59,7 @@ header a{
   right: 6px;
   padding: 1em;
 }
+
 .sidebar a {
     display: block;
     color: white;
@@ -92,7 +93,7 @@ header a{
 }
 
 h1 {
-    width: 30%;
+    width: 70%;
     margin: 0;
     padding: 1em 1em;
     color: #06509f;
@@ -130,6 +131,7 @@ hr{
     display: flex;
 }
 
+/* Calendar */
 .calendar-section {
     flex: 1.5;
     flex-direction: column;
@@ -146,6 +148,7 @@ hr{
     text-align: center;
 }
 
+/* Task */
 .task-section {
     background-color: #f4f4f4;
     border-radius: 5px;
@@ -208,6 +211,91 @@ hr{
     font-size: 0.9em;
 }
 
+.task-btn {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.task-btn button {
+    background-color: #06509f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.task-btn button:hover {
+    background-color: #003366;
+}
+
+/* Add Task pop-up */
+.addTaskPopUp {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.addTaskPopUp-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 30%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.addTaskPopUp-content h2 {
+    margin-bottom: 10px;
+}
+
+.addTaskPopUp-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.addTaskPopUp-content .form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.addTaskPopUp-content .form-row label,
+.addTaskPopUp-content .form-row input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.addTaskPopUp-content #addTask-btn2 {
+    background-color: #06509f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    align-items: center;
+}
+
+/* Announcement */
 .announcement-section {
     width: 97.5%;
     background-color: #f4f4f4;

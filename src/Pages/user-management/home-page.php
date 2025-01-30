@@ -7,13 +7,13 @@
     <title>FYPWise</title>
     <link rel="icon" type="image/x-icon" href="./src/assets/main_logo.png">
     <link rel="stylesheet" href="./src/css/common-ui.css">
-    <link rel="stylesheet" href="./src/css/home-page-style.css">
+    <link rel="stylesheet" href="./src/css/home-page-style.css?v=0.1">
 </head>
 
 <body>
     <!-- Header Section -->
     <header>
-        <button id="about-us"><a href="about-us"><img src="./src/assets/about us.png" alt="about us icon"
+        <button id="about-us"><a href="about-us"><img src="./src/assets/about us2.png" alt="about us icon"
                     class="aboutus-image"></a></button>
     </header>
 

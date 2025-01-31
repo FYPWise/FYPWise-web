@@ -2,7 +2,7 @@
 
 namespace App;
 
-class NewRouter {
+class Router {
    protected $routes = [];
 
    private function addRoute($route, $page, $method) {
@@ -15,6 +15,24 @@ class NewRouter {
 
    public function post($route, $page) {
       $this->addRoute($route, $page, "POST");
+   }
+
+   public function getGet(){
+      return $this->routes["GET"];
+   }
+
+   public function getPost(){
+      if (isset($this->routes["POST"])) return $this->routes["POST"];
+   }
+
+   public function include($router){
+      if ($router->getGet()) {foreach ($router->getGet() as $get) {
+         $this->get($get['route'], $get['page']);
+      }}
+
+      if ($router->getPost()) {foreach ($router->getPost() as $post) {
+         $this->post($post['route'], $post['page']);
+      }}
    }
 
    public function dispatch() {

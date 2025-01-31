@@ -1,10 +1,8 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
 use App\Models\User;
 
 $base = new Base("Create User", "admin");
-$SideMenu = new SideMenu();
 
 function getNewLecturerID() {
     $user = new User();
@@ -35,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $SideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
 
             <div class="content">
                 <section class="main">

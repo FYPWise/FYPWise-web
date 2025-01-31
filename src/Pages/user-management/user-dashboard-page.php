@@ -75,6 +75,9 @@ $taskDates = getTaskDates($db);
         <a href="login?q=logout"><button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button></a>
     </div>
 
+    <!-- Side Menu -->
+            <?php $base->renderMenu() ?>
+
     <!-- Main Container -->
     <div class="container">
         <div class="non-footercontainer">

@@ -1,10 +1,8 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
 use App\Models\User;
 
 $base = new Base("Manage User", "admin");
-$SideMenu = new SideMenu();
 
 if(isset($_GET['view'])){
     $userID = $_GET['view'];
@@ -25,7 +23,7 @@ if(isset($_GET['view'])){
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $SideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
 
             <div class="content">
                 <div class="table-header-container">

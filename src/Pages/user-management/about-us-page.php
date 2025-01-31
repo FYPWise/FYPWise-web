@@ -14,8 +14,8 @@ $base = new Base('About us');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     <link rel="icon" type="image/x-icon" href="./src/assets/main_logo.png">
-    <link rel="stylesheet" href="./src/css/common-ui.css">
-    <link rel="stylesheet" href="./src/css/about-us-page-style.css?v=0.1">
+    <link rel="stylesheet" href="./src/css/common-ui.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./src/css/about-us-page-style.css?v=<?php echo time(); ?>">
 </head>
 
 <body>

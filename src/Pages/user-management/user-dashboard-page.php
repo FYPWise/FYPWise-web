@@ -58,9 +58,9 @@ $taskDates = getTaskDates($db);
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.8">
-    <link rel="stylesheet" href="./src/css/calendar-style.css?v=0.1">
-    <script src="./src/scripts/calendar.js?v=0.1"></script>
+    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./src/css/calendar-style.css?v=<?php echo time(); ?>">
+    <script src="./src/scripts/calendar.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body>

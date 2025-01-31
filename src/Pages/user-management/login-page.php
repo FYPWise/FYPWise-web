@@ -25,8 +25,8 @@ if (isset($_SESSION["mySession"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="icon" type="image/x-icon" href="./src/assets/main_logo.png">
-    <link rel="stylesheet" href="./src/css/common-ui.css">
-    <link rel="stylesheet" href="./src/css/login-page-style.css?v=0.2">
+    <link rel="stylesheet" href="./src/css/common-ui.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./src/css/login-page-style.css?v=<?php echo time(); ?>">
 </head>
 
 <body>

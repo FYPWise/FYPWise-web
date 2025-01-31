@@ -38,7 +38,7 @@ CREATE table users(
 CREATE table lecturer(
     userID INT NOT NULL,
     lecturerID VARCHAR(4) NOT NULL UNIQUE,
-    position VARCHAR(50) NOT NULL,
+    position ENUM('Senior Lecturer', 'Associate Professor', 'Professor', 'Lecturer', 'Principal Lecturer') NOT NULL,
     PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );

@@ -1,7 +1,9 @@
 <div class="sidebar">
-        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
+        <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
+                    for="user-side-menu" class="fas"></label></div>
         <div class="icons">
             <button id="sidebar-btn"><a href="/FYPWise-web"><img src="./src/assets/home3.png" alt="home"></a></button>
+            
             <button id="sidebar-btn"><a href="Communication"><img src="./src/assets/messages1.png"
                         alt="messages"></a></button>
             <button id="sidebar-btn"><a href="profilemanagement"><img src="./src/assets/profile.png" alt="logout"></a></button>

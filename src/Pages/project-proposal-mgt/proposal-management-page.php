@@ -1,11 +1,9 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
 use App\Models\Proposal;
 use App\Models\Db;
 
 $base = new Base("Proposals");
-$sideMenu = new SideMenu();
 $db = new Db();
 $proposal = new Proposal($db);
 
@@ -41,7 +39,7 @@ $proposal = new Proposal($db);
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $sideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
 
             <div class="content">
                 <section class="main">

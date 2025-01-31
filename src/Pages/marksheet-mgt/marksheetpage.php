@@ -1,11 +1,9 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
 use App\Models\Marksheet;
 use App\Models\Db;
 
 $base = new Base("Page Skeleton");
-$sideMenu = new SideMenu();
 $marksheet = new Marksheet();
 $db = new Db();
 
@@ -21,7 +19,7 @@ $marksheets = $marksheet->getAllMarksheet();
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $sideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
 
             <div class="content">
                 <section class="main">

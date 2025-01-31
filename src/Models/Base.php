@@ -3,17 +3,20 @@
 namespace App\Models;
 use App\Models\Head;
 use App\Models\Authentication;
+use App\Models\SideMenu;
 
 class Base{
     private $pageTitle;
     private $head;
     private $auth;
+    private $sideMenu;
     private $roles = [];
 
     public function __construct($pageTitle, $roles = null) {
         $this->pageTitle = $pageTitle;
         $this->head = new Head($pageTitle);
         $this->auth = new Authentication();
+        $this->sideMenu = new SideMenu();
 
         if ($roles) {
             is_array($roles) ? $this->roles = $roles : $this->roles = [$roles];
@@ -50,6 +53,10 @@ class Base{
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>';
+    }
+
+    public function renderMenu(){
+        $this->sideMenu->render();
     }
 
     public function authenticateUser(){

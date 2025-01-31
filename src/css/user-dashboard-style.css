@@ -359,6 +359,21 @@ hr {
     text-decoration: underline;
 }
 
+body:has(.menubutton > input:checked) #side-menu {
+  width: 250px;
+}
+
+
+#side-menu {
+    background-color: #f4f4f4;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: width 300ms;
+    overflow-x: hidden;
+    margin-left: 80px;
+    position: fixed;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .container {
@@ -417,4 +432,45 @@ hr {
     .calendar-section, .task-section, .project-progress-section, .submission-updates-section, .quick-shortcuts-section {
         width: 100%;
     }
+
+    body:has(.menubutton > input:checked) #side-menu {
+        max-height: 100%;
+        width: 100%;
+        height: max-content;
+        overflow-y: visible;
+    }
+
+    #side-menu {
+        background-color: #f4f4f4;
+        box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+        height: 0px;
+        width: 100%;
+        transition: max-height 300ms;
+        margin-left: 0px;
+        position: relative;
+        overflow-x:visible;
+        overflow-y: hidden;
+    }
 }
+
+@media screen and (max-width: 650px) {
+    #side-menu {
+        background-color: #f4f4f4;
+        box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+        height: 0px;
+        width: 100%;
+        transition: max-height 300ms;
+        margin-left: 0px;
+        position: relative;
+        overflow-x:visible;
+        overflow-y: hidden;
+    }
+
+    body:has(.menubutton > input:checked) #side-menu {
+        max-height: 100%;
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+    }
+}
+

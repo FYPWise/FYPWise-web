@@ -1,12 +1,15 @@
 <?php
 use App\Models\Base;
 use App\Models\Register;
+use App\Models\User;
 
 $base = new Base("Registration");
 $register = new Register();
 
 if (isset($_POST['submit'])){
-    $register->register();
+    $user = new User();
+    $user->create("student");
+    header('location:login');
 }
 ?>
 

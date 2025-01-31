@@ -68,6 +68,9 @@ $taskDates = getTaskDates($db);
     <!-- Sidebar -->
     <?php include "user-dashboard-sidebar.php"; ?>
 
+    <!-- Side Menu -->
+            <?php $base->renderMenu() ?>
+
     <!-- Main Container -->
     <div class="container">
         <div class="non-footercontainer">

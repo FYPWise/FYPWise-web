@@ -87,4 +87,60 @@ class User{
         }
     }
 
+    public function getNewLecturerID(){
+        $sql = "SELECT lecturerID FROM `lecturer` ORDER BY `lecturer`.`lecturerID` DESC";
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0 ){
+            $row = $result->fetch_row();
+            $id = explode("L", $row[0]);
+            $id = intval( $id[1] );
+
+            if ($id < 10){
+                $head = "L00";
+            }elseif ($id <100){
+                $head = "L0";
+            }else{
+                $head = "L";
+            }
+
+            $newID = $head . strval($id+1);
+            
+            
+            return $newID;
+        }
+    }
+
+    public function create($role){
+        $name = $this->db->escapeString($_POST['name']);
+        $email = $this->db->escapeString($_POST['email']);
+        $id = $this->db->escapeString($_POST['id']);
+        $password = $this->db->escapeString($_POST['password']);
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        switch ($role) {
+            case 'student':
+                $specialization = $this->db->escapeString($_POST['specialization']);
+                $year = $this->db->escapeString($_POST['year']);
+                break;
+            case 'lecturer':
+                $position = $this->db->escapeString($_POST['position']);
+                break;
+        }
+        $sql = "INSERT INTO users (id, name, password, email, role) VALUES ('$id', '$name', '$hash', '$email', '$role')";
+
+        if ($this->db->query($sql)) {
+            $userId = $this->db->conn->insert_id;
+
+            $tableSql = match ($role) {
+                'student' => "INSERT INTO student (userID, studentID, year, specialization) VALUES ('$userId', '$id', '$year', '$specialization')",
+                'lecturer' => "INSERT INTO lecturer (userID, lecturerID, position) VALUES ('$userId', '$id', '$position')"
+            };
+            
+            $this->db->query($tableSql);
+        } else {
+            echo "Error: " . $sql . "<br>" . $this->db->conn->error;
+        }
+    }
+
 }

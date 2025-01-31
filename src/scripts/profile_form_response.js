@@ -1,9 +1,11 @@
 function toggleEditMode() {
-    const editButton = document.getElementById('edit-btn');
-    const inputs = document.querySelectorAll('#profileForm input, #profileForm select');
-    const profileImage = document.querySelector('.profile-image img');
-    const fileImage = document.getElementById('imageUpload');
-    const imageUploadButton = document.getElementById('imageUploadButton');
+    var editButton = document.getElementById('edit-btn');
+    var inputs = document.querySelectorAll('#profileForm input, #profileForm select');
+    var passwordInputs = document.querySelectorAll('.password-input');
+    var profileImage = document.querySelector('.profile-image img');
+    var fileImage = document.getElementById('imageUpload');
+    var imageUploadButton = document.getElementById('imageUploadButton');
+    var tooltip = document.getElementById('tooltip');
 
     if (editButton.innerText === 'Edit Profile') {
         // Enable form fields
@@ -22,13 +24,25 @@ function toggleEditMode() {
             profileImage.style.width = '300px';
             profileImage.style.height = '300px';
         }
+
+        passwordInputs.forEach(input => {
+            input.style.display = 'block';
+        });
+        passwordInput.addEventListener('focus', function() {
+            tooltip.style.display = 'block';
+
+        });
+        
+        passwordInput.addEventListener('blur', function() {
+            tooltip.style.display = 'none';
+        });
         fileImage.style.display = 'block';
         imageUploadButton.style.display = 'block';
 
         editButton.innerText = 'Save Profile';
+        editButton.type = 'button';
     } else {
-        document.getElementById('profileForm').submit();
-
+        
         // Disable form fields
         inputs.forEach(input => {
             if (input.tagName === 'INPUT') {
@@ -40,11 +54,15 @@ function toggleEditMode() {
         });
         profileImage.style.width = '350px';
         profileImage.style.height = '350px';
+        passwordInputs.forEach(input => {
+            input.style.display = 'none';
+        });
+        tooltip.style.display = 'none';
         fileImage.style.display = 'none';
         imageUploadButton.style.display = 'none';
 
 
         editButton.innerText = 'Edit Profile';
-        
+        editButton.type = 'submit';
     }
 }

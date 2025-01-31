@@ -8,6 +8,7 @@ $db = new Db();
 $form = new UpdateProfile();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
     if (isset($_POST['profile'])) {
         $form->profile();
 
@@ -21,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.8">
+    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.1">
     <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
-    <script src="./src/scripts/profile_form_response.js?v=0.7"></script>
+    <script src="./src/scripts/profile_form_response.js?v=0.10"></script>
 </head>
 
 <body>
@@ -49,12 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="profile-image">
                 <form id="imageUploadForm" method="post" enctype="multipart/form-data">
                     <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
-                    <input type="file" id="imageUpload" name="image" accept="image/*" style="display:none;">
+                    <input type="file" id="imageUpload" name="image" accept="image/*" style="display:none;" required>
                     <button type="submit" name="image" id="imageUploadButton" style="display:none;">Upload Image</button>
                 </form>
             </div>
             <div class="details">
-                <form id="profileForm" method="post">
+                <form id="profileForm" method="post" onsubmit="enableDisabledFields()">
                     <div class="form-group">
                         <label for="name"><strong>Name:</strong></label>
                         <input type="text" id="name" name="name" value="<?php echo $_SESSION['name']; ?>" pattern="[A-Za-z\s]+" readonly>
@@ -93,11 +94,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="text" id="position" name="position" value="<?php echo $_SESSION['position']; ?>" pattern="[A-Za-z\s]+" readonly>
                     </div>
                     <?php } ?>
-                    <button type="button" name="profile" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
+                    <div class="form-group password-input" style="display:none;">
+                        <label for="password">New Password:</label>
+                        <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}" required/>
+                        <img id="toggle-password" src="./src/assets/show.png" alt="Show/Hide Password" >
+                        <span id="tooltip" class="tooltip" style="display:none;">
+                            <ul>
+                                <li id="number" class="invalid">Have one number</li>
+                                <li id="uppercase" class="invalid">Have one uppercase character</li>
+                                <li id="lowercase" class="invalid">Have one lowercase character</li>
+                                <li id="special" class="invalid">Have one special character (!@#$%^&*)</li>
+                                <li id="length" class="invalid">Have 8 to 16 characters</li>    
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="form-group password-input cpass" style="display:none;">
+                        <label for="cpass">Confirm Password:</label>
+                        <input id="cpass" name="cpass" type="password" required/>
+                        <span id="error" class="error" hidden>Please ensure your password match.</span>
+                    </div>
+                    <button type="submit" name="profile" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
                 </form>
+                <script>
+                    document.getElementById('profileForm').onsubmit = function() {
+                        var inputs = document.querySelectorAll('#profileForm input, #profileForm select');
+                        inputs.forEach(input => {
+                            if (input.disabled) {
+                                input.disabled = false;
+                            }
+                        });
+                        return true;
+                    };
+                </script>
+                <script src="./src/scripts/passwordCheck.js"></script>
             </div>
         </div>
-        
         <?php $base->renderFooter() ?>
     </div>
 </body>

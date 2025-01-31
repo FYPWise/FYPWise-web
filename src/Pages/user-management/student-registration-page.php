@@ -1,7 +1,8 @@
 <?php
-
+use App\Models\Base;
 use App\Models\Register;
 
+$base = new Base("Registration");
 $register = new Register();
 
 if (isset($_POST['submit'])){
@@ -83,22 +84,12 @@ if (isset($_POST['submit'])){
                             <option value="Software Engineering">Software Engineering</option>
                         </select>
                     </div>
-                    <div class="submit-btn" disabled><button  id="submit" name="submit" type="submit" form="testform" value="sign-up" class="submit" >Sign Up</button></div>
+                    <div class="submit-btn"><button  id="submit" name="submit" type="submit" form="testform" value="sign-up" class="submit" >Sign Up</button></div>
                 </div>
             </form>
         <div class="login-caption"><p>Already have an account? <a href="login-page.html">Login</a></p></div>
         <!-- Footer -->
-        <footer id="footer">
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
-            </div>
-            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
-        </footer>
+        <?php $base->renderFooter() ?>
         <script>
             // Password check
             var passwordInput = document.getElementById('password');

@@ -10,5 +10,7 @@ $userRoutes->get("/FYPWise-web/about-us", "Pages/user-management/about-us-page.p
 $userRoutes->get("/FYPWise-web/login", "Pages/user-management/login-page.php");
 $userRoutes->post("/FYPWise-web/login","Pages/user-management/login-page.php");
 $userRoutes->get("/FYPWise-web/register","Pages/user-management/student-registration-page.php");
+$userRoutes->post("/FYPWise-web/register","Pages/user-management/student-registration-page.php");
 $userRoutes->get("/FYPWise-web/dashboard","Pages/user-management/user-dashboard-page.php");
 $userRoutes->get("/FYPWise-web/profilemanagement","Pages/user-management/profile-mgt-page.php");
+$userRoutes->post("/FYPWise-web/profilemanagement","Pages/user-management/profile-mgt-page.php");

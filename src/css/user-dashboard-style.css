@@ -397,6 +397,7 @@ body:has(.menubutton > input:checked) #side-menu {
     }
 
     .icons {
+        padding-top: 0px;
         padding-left: 40px;
         display: flex;
         flex-direction: row;

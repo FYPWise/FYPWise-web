@@ -58,7 +58,7 @@ $taskDates = getTaskDates($db);
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.7">
+    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.8">
     <link rel="stylesheet" href="./src/css/calendar-style.css?v=0.1">
     <script src="./src/scripts/calendar.js?v=0.1"></script>
 </head>
@@ -84,7 +84,6 @@ $taskDates = getTaskDates($db);
             <div class="header">
                 <h1><?php echo $_SESSION["name"]; ?></h1>
                 <div class="right-header">
-                    <input type="text" placeholder="Search.." />
                     <a href="profilemanagement"><img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="User"
                             class="user-image"></a>
                 </div>

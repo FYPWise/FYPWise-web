@@ -1,130 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+use App\Models\Base;
+use App\Models\SideMenu;
+use App\Models\User;
+
+$base = new Base("Create User", "admin");
+$SideMenu = new SideMenu();
+
+function getNewLecturerID() {
+    $user = new User();
+    return $user->getNewLecturerID();
+}
+
+$newLecturerID = getNewLecturerID();
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user = new User();
+    $user->create($_POST['role']);
+    echo"created";
+}
+?>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New User</title>
-    <link rel="stylesheet" href="../css/common-ui.css">
-    <link rel="stylesheet" href="../css/form-style.css">
-    <link rel="stylesheet" href="../css/announcements-mgt-style.css">
-    <link rel="stylesheet" href="../css/user-mgt-style.css">
+    <link rel="stylesheet" href="./src/css/form-style.css">
+    <link rel="stylesheet" href="./src/css/announcements-mgt-style.css">
+    <link rel="stylesheet" href="./src/css/user-mgt-style.css">
 </head>
 
 <body>
     <div id="outer-container">
-        <!-- Header Section -->
-        <header>
-            <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
-                    for="user-side-menu" class="fas"></label></div>
-            <div id="logo"></div>
-            <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png" alt="home icon"></a></button>
-        </header>
+        <?php $base->renderHeader() ?>
 
+        <!-- Main Content -->
         <div id="main-container">
-            <nav id="side-menu">
-                <div class="search-container">
-                    <input type="text" id="search-bar" placeholder="Search">
-                </div>
-                <ul id="side-menu-shortcuts">
 
-                    <!-- Dropdown List -->
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">User Management</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/user-dashboard-page.html">Admin Dashboard</a>
-                            </li>
-
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/about-us-page.html">About Us</a>
-                            </li>
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/about-us-page.html">About Us</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button"><span class="menu-label">Project & Proposal</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../project-proposal-mgt/proposal-management-page.html">All
-                                    Proposal</a>
-                            </li>
-
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../project-proposal-mgt/proposal-submission-page.html">New Proposal</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Meeting & Presentation</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../meeting-mgt/presentation-management-page.html">All Presentations</a>
-                            </li>
-
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                href="../meeting-mgt/presentation-scheduler.html">New Presentations</a>
-                        </li>
-                        </ul>
-                    </li>
-
-                    <li class="side-menu-dropdown-list">
-                        <button onclick="location.href='../communication/comm-page.html'" class="menu-button"><span
-                                class="menu-label">Communication</span>
-                    </li>
-
-                    <!-- Dropdown List -->
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Administration</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../administration/new-user-page.html">Add User</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+            <!-- Side Menu -->
+            <?php $SideMenu->render(); ?>
 
             <div class="content">
                 <section class="main">
                     <h1 id="page-name">Create New User</h1>
 
-                    <form class="form" id="userForm">
-                        <!-- auto-generated Proposal ID -->
+                    <form class="form" id="userForm" method="POST">
+                        <div class="form-group">
+                            <label for="user-role">Role</label>
+                            <select id="user-role" name="role" required>
+                                <option value="" disabled selected>Select User Role</option>
+                                <option value="student">Student</option>
+                                <option value="lecturer">Lecturer</option>
+                            </select>
+                        </div>
+
                         <div class="form-group ">
                             <label for="user-id">User ID</label>
-                            <input type="text" id="user-id" name="user-id" required>
+                            <input class="disabled" type="text" id="user-id" name="id" required disabled>
                         </div>
 
                         <div class="form-group">
-                            <label for="user-role">Role</label>
-                            <select id="user-role" name="user-role" required>
-                                <option value="" disabled selected>Select User Role</option>
-                                <option value="student">Student</option>
-                                <option value="moderator">Moderator</option>
-                                <option value="supervisor">Supervisor</option>
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group" id="position-field" style="display:none">
+                            <label for="position">Position</label>
+                            <select id="position" name="position" required>
+                                <option value="" disabled selected>Select Lecturer's Position</option>
+                                <option value="student">Professor</option>
+                                <option value="student">Associate Professor</option>
+                                <option value="student">Senior Lecturer</option>
+                                <option value="lecturer">Lecturer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group student-field" id="year-field" style="display:none">
+                            <label for="year">Year</label>
+                            <select class="student-field" id="year" name="year" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group student-field" style="display:none">
+                            <label for="specialization">Specialization :</label>
+                            <select class="student-field" name="specialization" id="faculty" required>
+                                <option value="" disabled selected>Select student's Specialization<y/option>
+                                <option value="Cybersecurity">Cybersecurity</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Game Development">Game Development</option>
+                                <option value="Software Engineering">Software Engineering</option>
                             </select>
                         </div>
 
@@ -153,64 +119,60 @@
 
         </div>
 
-        <footer>
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
-                    Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
-                    Desk</a>
-            </div>
-            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
-        </footer>
+                <?php $base->renderFooter() ?>
 
         <!-- JavaScript -->
-        <script src="../scripts/side-menu.js"></script>
 
         <script>
-            // simulate auto generate ID
+
+            var studentFields = document.getElementsByClassName("student-field");
+
+            function hideStudentField(hide){
+                if (hide == true){
+                    for (var i = 0; i < studentFields.length; i++){
+                        studentFields[i].style.display = 'none';
+                        studentFields[i].removeAttribute("required");
+                    }
+                }else{
+                    for (var i = 0; i < studentFields.length; i++){
+                        studentFields[i].style.display = 'inherit';
+                        studentFields[i].setAttribute("required", true);
+                    }
+                }
+                
+            }
+
             var userIDInput = document.getElementById("user-id");
 
             document.getElementById("user-role").addEventListener("change", function () {
                 var role = event.target.value;
 
                 if (role === "student") {
-                    userIDInput.value = "121110321";
-                } else if (role === "supervisor") {
-                    userIDInput.value = "SV012546";
-                } else if (role === "moderator") {
-                    userIDInput.value = "M001245";
-                }
+                    userIDInput.value = "";
+                    userIDInput.removeAttribute("disabled");
+                    userIDInput.classList.remove("disabled");
+                    document.getElementById("position-field").style.display = "none";
+                    document.getElementById("position").removeAttribute("required");
+                    hideStudentField(false);
+                } else if (role === "lecturer") {
+                    userIDInput.value = "<?php echo $newLecturerID; ?>";
+                    userIDInput.classList.add("disabled");
+                    document.getElementById("position-field").style.display = "inherit";
+                    document.getElementById("position").setAttribute("required", true);
+                    hideStudentField(true);
+                } 
             });
 
-            document.getElementById("userForm").addEventListener("submit", function (event) {
-                event.preventDefault(); // prevent actual form submission, only for display
-
-                // retrieve form data
-                const formData = {
-                    userID: document.getElementById("user-id").value,
-                    userRole: document.getElementById("user-role").value,
-                    email: document.getElementById("email").value,
-                    password: document.getElementById("password").value,
+            function getLecturerID(){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        document.getElementById("table-name").innerHTML = this.responseText;
+                    }
                 };
-
-                // display submitted proposal data in an alert
-                let displayMessage = `
-                User ID: ${formData.userID}
-                Role: ${formData.userRole}
-                Email: ${formData.email}
-                Password: ${formData.password}
-            `;
-
-                // show the form data in a pop-up message
-                alert(`Proposal submitted successfully!\n\n${displayMessage}`);
-
-                // reload page after successful submission
-                location.reload();
-            });
+                xmlhttp.open("GET", "userlist?userid="+userID, true);
+                xmlhttp.send();
+            }
         </script>
     </div>
 </body>

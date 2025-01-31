@@ -233,7 +233,7 @@ $taskDates = getTaskDates($db);
                                 <a href="./src/meeting-mgt/meeting-scheduler-page.html">Make Announcement</a>
                             </div>
                             <div class="task">
-                                <a href="./src/meeting-mgt/meeting-log-page.html">Create Profile</a>
+                                <a href="new-user">Create Profile</a>
                             </div>
                         <?php } ?>
                     </div>

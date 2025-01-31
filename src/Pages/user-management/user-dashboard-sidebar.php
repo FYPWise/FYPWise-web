@@ -1,6 +1,6 @@
 <div class="sidebar">
-        <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
-                    for="user-side-menu" class="fas"></label></div>
+        <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu">
+            <label for="user-side-menu" class="fas sidebar-btn"></label></div>
         <div class="icons">
             <a href="/FYPWise-web"><button id="sidebar-btn"><img src="./src/assets/home3.png" alt="home"></button></a>
             

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$base = new Base("Dashboard", ['lecturer', 'student', 'admin']);
+$base = new Base("Dashboard", ["student", "lecturer", "admin"]);
 $db = new Db();
 
 

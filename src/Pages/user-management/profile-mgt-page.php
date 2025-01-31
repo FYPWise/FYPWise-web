@@ -2,17 +2,18 @@
 use App\Models\Base;
 use App\Models\Db;
 use App\Models\UpdateProfile;
+use App\Models\User;
 
 $base = new Base("Profile Management", ["student", "admin", "lecturer"]);
 $db = new Db();
-$form = new UpdateProfile();
+$user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['profile'])) {
-        $form->profile();
+        $user->update("profile");
 
     } elseif (isset($_POST['image'])) {
-        $form->image();
+        $user->update("image");
     }
 }
 ?>

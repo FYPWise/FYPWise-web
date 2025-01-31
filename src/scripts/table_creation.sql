@@ -40,7 +40,7 @@ CREATE table lecturer(
     lecturerID VARCHAR(4) NOT NULL UNIQUE,
     position VARCHAR(50) NOT NULL,
     PRIMARY KEY (userID),
-    FOREIGN KEY (userID) REFERENCES users(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE table student(
     year INT NOT NULL,
     specialization ENUM('Software Engineering', 'Data Science', 'Cybersecurity', 'Game Development') NOT NULL,
     PRIMARY KEY (userID),
-    FOREIGN KEY (userID) REFERENCES users(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE task (
     taskDate DATE NOT NULL,
     userID INT NOT NULL,
     PRIMARY KEY (taskID),
-    FOREIGN KEY (userID) REFERENCES users(userID)
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
 -- --------------------------------------------------------
 

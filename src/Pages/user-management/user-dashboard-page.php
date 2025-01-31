@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $base = new Base("Dashboard", ["student", "lecturer", "admin"]);
 $db = new Db();
-echo $_SESSION["role"];
 
 
 function task($db) {
@@ -59,14 +58,22 @@ $taskDates = getTaskDates($db);
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.6">
+    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.7">
     <link rel="stylesheet" href="./src/css/calendar-style.css?v=0.1">
     <script src="./src/scripts/calendar.js?v=0.1"></script>
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <?php include "user-dashboard-sidebar.php"; ?>
+    <div class="sidebar">
+        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
+        <div class="icons">
+            <a href="/FYPWise-web"><button id="sidebar-btn"><img src="./src/assets/home3.png" alt="home"></button></a>
+            <a href="Communication"><button id="sidebar-btn"><img src="./src/assets/messages1.png"
+                        alt="messages"></button></a>
+            <a href="profilemanagement"><button id="sidebar-btn"><img src="./src/assets/profile.png" alt="profile"></button></a>
+        </div>
+        <a href="login?q=logout"><button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button></a>
+    </div>
 
     <!-- Side Menu -->
             <?php $base->renderMenu() ?>
@@ -143,8 +150,8 @@ $taskDates = getTaskDates($db);
                     </div>
                 </div>
                 <script>
-                    var addTaskPopUp = document.getElementsByClassName('addTaskPopUp')[0];
-                    var close = document.getElementsByClassName('close')[0];
+                    var addTaskPopUp = document.querySelector('.addTaskPopUp');
+                    var close = document.querySelector('.close');
 
                     function openUpWindow() {
                         addTaskPopUp.style.display = 'flex';

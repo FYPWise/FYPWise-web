@@ -16,7 +16,7 @@ class Base{
         $this->pageTitle = $pageTitle;
         $this->head = new Head($pageTitle);
         $this->auth = new Authentication();
-        $this->sideMenu = new SideMenu();
+        if (isset($_SESSION["role"])) $this->sideMenu = new SideMenu($_SESSION["role"]);
 
         if ($roles) {
             is_array($roles) ? $this->roles = $roles : $this->roles = [$roles];

@@ -1,7 +1,6 @@
 <?php
 use App\Models\Base;
 use App\Models\Db;
-use App\Models\UpdateProfile;
 use App\Models\User;
 
 $base = new Base("Profile Management", ["student", "admin", "lecturer"]);
@@ -10,10 +9,14 @@ $user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['profile'])) {
-        $user->update("profile");
-
+        $existingUser = $user->find($_POST['student-id']);
+        if ($existingUser && $_POST['student-id'] != $_SESSION['id']) {
+            $error = "ID already in use.";
+        } else {
+            $user->update("profile", $_SESSION['role']);
+        }
     } elseif (isset($_POST['image'])) {
-        $user->update("image");
+        $user->update("image", $_SESSION['role']);
     }
 }
 ?>
@@ -22,14 +25,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.7">
+    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.1">
     <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
-    <script src="./src/scripts/profile_form_response.js?v=0.7"></script>
+    <script src="./src/scripts/profile_form_response.js?v=0.11"></script>
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <?php include "user-dashboard-sidebar.php"; ?>
+    <div class="sidebar">
+        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
+        <div class="icons">
+            <a href="/FYPWise-web"><button id="sidebar-btn"><img src="./src/assets/home3.png" alt="home"></button></a>
+            <a href="Communication"><button id="sidebar-btn"><img src="./src/assets/messages1.png"
+                        alt="messages"></button></a>
+            <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
+        </div>
+        <a href="login?q=logout"><button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button></a>
+    </div>
 
     <!-- Main Container -->
     <div class="container">
@@ -42,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="profile-image">
                 <form id="imageUploadForm" method="post" enctype="multipart/form-data">
                     <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
-                    <input type="file" id="imageUpload" name="image" accept="image/*" style="display:none;">
+                    <input type="file" id="imageUpload" name="image" accept="image/*" style="display:none;" required>
                     <button type="submit" name="image" id="imageUploadButton" style="display:none;">Upload Image</button>
                 </form>
             </div>
@@ -50,15 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form id="profileForm" method="post">
                     <div class="form-group">
                         <label for="name"><strong>Name:</strong></label>
-                        <input type="text" id="name" name="name" value="<?php echo $_SESSION['name']; ?>" pattern="[A-Za-z\s]+" readonly>
+                        <input type="text" id="name" name="name" value="<?php echo $_SESSION['name']; ?>" pattern="[A-Za-z]+" readonly>
                     </div>
                     <div class="form-group">
                         <label for="student-id"><strong>ID:</strong></label>
-                        <input type="text" id="student-id" name="student-id" value="<?php echo $_SESSION['id']; ?>" pattern="\d{10}" readonly>
+                        <input type="text" id="student-id" name="student-id" value="<?php echo $_SESSION['id']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\d{10}' : ($_SESSION['role'] == 'lecturer' ? 'L\d{3}' : 'A\d{3}'); ?>" readonly required>
                     </div>
                     <div class="form-group">
                         <label for="email"><strong>Email:</strong></label>
-                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="\d{10}@student\.mmu\.edu\.my" readonly>
+                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\d{10}@admin\.mmu\.edu\.my' : ($_SESSION['role'] == 'lecturer' ? 'L\d{3}@lecturer\.mmu\.edu\.my' : 'A\d{3}@admin\.mmu\.edu\.my'); ?>" readonly>
                     </div>
                     <?php if ($_SESSION['role'] == 'student') { ?>
                     <div class="form-group">
@@ -80,19 +91,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <option value="5" <?php if ($_SESSION['year'] == '5') echo 'selected'; ?>>5</option>
                         </select>
                     </div>
-                    <?php } else { ?>
+                    <?php } elseif($_SESSION['role'] == 'lecturer') { ?>
                     <div class="form-group">
                         <label for="position"><strong>Position:</strong></label>
                         <input type="text" id="position" name="position" value="<?php echo $_SESSION['position']; ?>" pattern="[A-Za-z\s]+" readonly>
                     </div>
                     <?php } ?>
-                    <button type="button" name="profile" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
+                    <div class="form-group password-input" style="display:none;">
+                        <label for="password">New Password:</label>
+                        <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}" required/>
+                        <img id="toggle-password" src="./src/assets/show.png" alt="Show/Hide Password" >
+                        <span id="tooltip" class="tooltip" style="display:none;">
+                            <ul>
+                                <li id="number" class="invalid">Have one number</li>
+                                <li id="uppercase" class="invalid">Have one uppercase character</li>
+                                <li id="lowercase" class="invalid">Have one lowercase character</li>
+                                <li id="special" class="invalid">Have one special character (!@#$%^&*)</li>
+                                <li id="length" class="invalid">Have 8 to 16 characters</li>    
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="form-group password-input cpass" style="display:none;">
+                        <label for="cpass">Confirm Password:</label>
+                        <input id="cpass" name="cpass" type="password" required/>
+                        <span id="error" class="error" hidden>Please ensure your password match.</span>
+                    </div>
+                    <button type="submit" form="profileForm" name="profile" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
                 </form>
+                <script src="./src/scripts/passwordCheck.js"></script>
             </div>
         </div>
-        
-        <?php $base->renderFooter() ?>
+        <?php $base->renderFooter(); ?>
     </div>
+    <?php include 'idinusepopup.php'; ?>
 </body>
 
 </html>

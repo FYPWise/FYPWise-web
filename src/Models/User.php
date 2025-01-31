@@ -143,26 +143,43 @@ class User{
         }
     }
 
-    public function update($updates){
+    public function update($updates, $role){
         switch ($updates) {
             case "profile":
-                echo "Profile";
                 $name = $this->db->escapeString($_POST['name']);
                 $email = $this->db->escapeString($_POST['email']);
                 $id = $this->db->escapeString($_POST['student-id']);
                 $userId = $_SESSION['mySession'];
 
-                // Student
-                $specialization = $this->db->escapeString($_POST['specialization']);
-                $year = $this->db->escapeString($_POST['year']);
+                // Password
+                $password = $this->db->escapeString($_POST['password']);
+                $hash = password_hash($password, PASSWORD_DEFAULT);
 
-                $sql = "UPDATE users SET id='{$id}', name='{$name}', email='{$email}' WHERE userID='{$userId}'";
+                switch ($role) {
+                    case 'student':
+                        $specialization = $this->db->escapeString($_POST['specialization']);
+                        $year = $this->db->escapeString($_POST['year']);
+                        break;
+                    case 'lecturer':
+                        $position = $this->db->escapeString($_POST['position']);
+                        break;
+                }
+
+                if($password == "") {
+                    $sql = "UPDATE users SET id='{$id}', name='{$name}', email='{$email}' WHERE userID='{$userId}'";
+                } else {
+                    $sql = "UPDATE users SET id='{$id}', name='{$name}', email='{$email}', password='{$hash}' WHERE userID='{$userId}'";
+                }
                 if ($this->db->query($sql)) {
                     if ($_SESSION['role'] == 'student') {
-                        $sql = "UPDATE student SET specialization='$specialization', year='$year', id='$id' WHERE userID='$userId'";
+                        $sql = "UPDATE student SET specialization='$specialization', year='$year', studentID='$id' WHERE userID='$userId'";
                         $this->db->query($sql);
                         $_SESSION['specialization'] = $specialization;
                         $_SESSION['year'] = $year;
+                    } elseif ($_SESSION['role'] == 'lecturer') {
+                        $sql = "UPDATE lecturer SET lecturerID='$id', position='$position' WHERE userID='$userId'";
+                        $_SESSION['position'] = $position;
+                        $this->db->query($sql);
                     }
                     $_SESSION['name'] = $name;
                     $_SESSION['email'] = $email;

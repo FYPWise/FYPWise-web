@@ -2,11 +2,11 @@
 
 use App\Models\Base;
 use App\Models\CriteriaModel;
-use App\Models\SideMenu;
+//use App\Models\SideMenu;
 use App\Models\Db;
 
 $base = new Base("Criteria Score Page");
-$sideMenu = new SideMenu();
+//$sideMenu = new SideMenu();
 $db = new Db();
 $criteriaModel = new CriteriaModel($db);
 
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- Main Content -->
         <div id="main-container">
             <!-- Side Menu -->
-            <?php $sideMenu->render(); ?>
+            
 
             <div class="content">
                 <section class="main">

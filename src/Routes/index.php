@@ -38,12 +38,22 @@ $router->post("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/propos
 
 //marksheet management
 $router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
-
-
-
-
-//marksheet management
-$router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
 $router->get("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php");
+
+
+//final submission management
+$router->get("/FYPWise-web/finalsubmission","Pages/final-report-submission-mgt/final-report-submission.php");
+$router->get("/FYPWise-web/finalsubmission/([0-9]+)", function($projectID) {
+    include "src/Pages/final-report-submission-mgt/final-report-submission.php";
+});
+
+//project management
+$router->get("/FYPWise-web/milestoneform","Pages/project-management-mgt/milestone-form.php");
+$router->get("/FYPWise-web/milestonesubmission","Pages/project-management-mgt/milestone-submission.php");
+$router->get("/FYPWise-web/projectplanapproval","Pages/project-management-mgt/project-plan-approval.php");
+$router->get("/FYPWise-web/projecttimelineplanning","Pages/project-management-mgt/project-timeline-planning.php");
+$router->get("/FYPWise-web/projectmanagement","Pages/project-management-mgt/projectmanagement.php");
+$router->get("/FYPWise-web/studentprojectassignment","Pages/project-management-mgt/student-project-assignment.php");
+$router->get("/FYPWise-web/supervisorprojecttimeline","Pages/project-management-mgt/supervisor-project-timeline.php");
 
 $router->dispatch();

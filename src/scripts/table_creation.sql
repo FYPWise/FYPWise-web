@@ -201,6 +201,7 @@ CREATE TABLE project_submission (
     project_description TEXT NOT NULL,
     project_status VARCHAR(50) NOT NULL,
     project_category VARCHAR(50) NOT NULL,
+    project_file VARCHAR(255) NOT NULL,
     studentID INT NOT NULL,
     projectID INT NOT NULL,
     FOREIGN KEY (studentID) REFERENCES student(userID),

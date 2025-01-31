@@ -11,8 +11,8 @@ class SideMenu{
             $this->sideMenu = "/../Pages/common-ui/side-menu-student.html";
         }else if ($role == "admin"){
             $this->sideMenu = "/../Pages/common-ui/side-menu-admin.html";
-        }else if ($role == "supervisor"){
-            $this->sideMenu = "/../Pages/common-ui/side-menu-supervisor.html";
+        }else if ($role == "lecturer"){
+            $this->sideMenu = "/../Pages/common-ui/side-menu-lecturer.html";
         }
 
     }

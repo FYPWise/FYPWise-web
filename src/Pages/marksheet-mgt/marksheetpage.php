@@ -32,7 +32,7 @@ $marksheet = new Marksheet($db);
                                 <thead>
                                     <tr>
                                         <th>Project ID</th>
-                                        <th>Marksheet ID</th>
+                                        <th>Marksheet ID</th> 
                                         <th>Date</th>
                                         <th>Total Score</th>
                                     </tr>
@@ -46,7 +46,10 @@ $marksheet = new Marksheet($db);
                                         foreach ($marksheets as $row) { ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($row['projectID']); ?></td>
-                                                <td><a href="../marksheet-mgt/criteria-score-page.php?marksheetID=<?php echo $row['marksheetID']; ?>"> <?php echo htmlspecialchars($row['marksheetID']); ?></a></td>
+                                                <td><a href="criteriascore.php?marksheetID=<?php echo $row['marksheetID']; ?>"><?php echo htmlspecialchars($row['marksheetID']); ?></a></td>
+
+                                    
+
                                                 <td><?php echo htmlspecialchars($row['date']); ?></td>
                                                 <td><?php echo htmlspecialchars($row['total_score']); ?></td>
                                             </tr>

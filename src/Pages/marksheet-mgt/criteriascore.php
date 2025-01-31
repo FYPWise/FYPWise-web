@@ -10,6 +10,9 @@ $base = new Base("Criteria Score Page");
 $db = new Db();
 $criteriaModel = new CriteriaModel($db);
 
+$marksheetID = isset($_GET['marksheetID']) ? htmlspecialchars($_GET['marksheetID']) : 'Unknown';
+echo "<h2>Criteria Score for Marksheet ID: $marksheetID</h2>";
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $marksheetID = $_POST['marksheetID'];
     $evaluatorID = $_POST['evaluatorID'];

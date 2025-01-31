@@ -39,6 +39,9 @@ $router->post("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/propos
 //marksheet management
 $router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
 $router->get("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php");
+$router->get("FYPWise-web/criteriapage/([0-9]+)", function($marksheetID) {
+    include "src/Pages/marksheet-mgt/criteriascore.php";
+});
 
 
 //final submission management

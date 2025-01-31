@@ -15,10 +15,12 @@ var requirements = {
 
 passwordInput.addEventListener('focus', function() {
     tooltip.style.opacity = '1';
+    tooltip.style.display = 'block';
 });
 
 passwordInput.addEventListener('blur', function() {
     tooltip.style.opacity = '0';
+    tooltip.style.display = 'none';
 });
 
 passwordInput.addEventListener('input', function() {

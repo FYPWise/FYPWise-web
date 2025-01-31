@@ -24,8 +24,8 @@ if (isset($_POST['submit'])){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registration</title>
         <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
-        <link rel="stylesheet" href="./src/css/student-registration-page-style.css?v=0.3">
-        <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
+        <link rel="stylesheet" href="./src/css/student-registration-page-style.css?v=<?php echo time(); ?>">
+        <link rel="stylesheet" href="./src/css/footer.css?v=<?php echo time(); ?>">
     </head>
     <body>
         <!-- Header Section -->

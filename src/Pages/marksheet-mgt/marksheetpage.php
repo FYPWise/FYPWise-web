@@ -43,19 +43,16 @@ $marksheet = new Marksheet($db);
                                     if (empty($marksheets)) {
                                         echo "<tr><td colspan='4'>No marksheets found.</td></tr>";
                                     } else {
-                                        foreach ($marksheets as $row) { ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($row['projectID']); ?></td>
-                                                <td><a href="criteriascore.php?marksheetID=<?php echo $row['marksheetID']; ?>"><?php echo htmlspecialchars($row['marksheetID']); ?></a></td>
-
-                                    
-
-                                                <td><?php echo htmlspecialchars($row['date']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['total_score']); ?></td>
-                                            </tr>
-                                        <?php }
+                                        foreach ($marksheets as $row) {
+                                            echo "<tr>";
+                                            echo "<td>".htmlspecialchars($row['projectID'])."</td>";
+                                            echo "<td><a href='/FYPWise-web/criteriapage/".htmlspecialchars($row['marksheetID'])."'>".htmlspecialchars($row['marksheetID'])."</a></td>";
+                                            echo "<td>".htmlspecialchars($row['date'])."</td>";
+                                            echo "<td>".htmlspecialchars($row['total_score'])."</td>";
+                                            echo "</tr>";
+                                        }
                                     }
-                                    ?>
+                                ?>
                                 </tbody>
                             </table>
                         </div>

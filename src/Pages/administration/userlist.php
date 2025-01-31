@@ -37,7 +37,7 @@ if (count($users) > 0) {
                 foreach ($users as $user) { $no++;?>
                     <tr>
                         <td><?php echo $no; ?></td>
-                        <td><a href=<?php echo "viewUser?userid=".$user->getId(); ?> ><?php echo $user->getId(); ?></a></td>
+                        <td><a href=<?php echo "?view=".$user->getId(); ?> ><?php echo $user->getId(); ?></a></td>
                         <td><?php echo $user->getName(); ?></td>
                         <td><?php echo $user->getEmail(); ?></td>
                         <td>

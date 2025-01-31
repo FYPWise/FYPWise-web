@@ -1,20 +1,18 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
 
 $base = new Base("Page Skeleton");
-$SideMenu = new SideMenu();
 ?>
 
 <body>
     <div id="outer-container">
-        <?php $base->renderHeader() ?>
+        <?php $base->renderHeader(); ?>
 
         <!-- Main Content -->
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $SideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
 
             <div class="content">
                 <section class="main">

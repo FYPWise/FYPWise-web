@@ -59,6 +59,12 @@
     background-color: #e8f4ff;
 }
 
+/* Task Date */
+.calendar-section .task-date {
+    background-color: #ec2227;
+    color: white;
+}
+
 /* Highlight Today */
 .calendar-section .today {
     background-color: #06509f;

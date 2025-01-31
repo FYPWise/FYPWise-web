@@ -6,8 +6,14 @@ $auth = new Authentication();
 
 $auth->login();
 
-if (isset($_SESSION["Invalid"])){
-    echo"invalid";
+$showError = isset($_SESSION["Invalid"]);
+
+if (isset($_GET["q"]) && $_GET["q"] == "logout") {
+    $auth->logout();
+}
+
+if (isset($_SESSION["mySession"])){
+    header("location:dashboard");
 }
 ?>
 
@@ -20,27 +26,15 @@ if (isset($_SESSION["Invalid"])){
     <title>Login</title>
     <link rel="icon" type="image/x-icon" href="./src/assets/main_logo.png">
     <link rel="stylesheet" href="./src/css/common-ui.css">
-    <link rel="stylesheet" href="./src/css/login-page-style.css">
+    <link rel="stylesheet" href="./src/css/login-page-style.css?v=0.2">
 </head>
-<script>
-    function response() {
-        var form = document.getElementById('testform');
-        var inputs = form.querySelectorAll('input');
-
-        var profileInfo = '';
-        inputs.forEach(input => {
-            profileInfo += `${input.name}: ${input.value}\n`;
-        });
-        alert(`Profile Information:\n${profileInfo}`);
-    }
-</script>
 
 <body>
     <!-- Header Section -->
     <header>
         <button id="home"><a href="/FYPWise-web/"><img src="./src/assets/home3.png" alt="home icon"
                     class="home-image"></a></button>
-        <button id="about-us"><a href="about-us"><img src="./src/assets/about us.png" alt="about us icon"
+        <button id="about-us"><a href="about-us"><img src="./src/assets/about us2.png" alt="about us icon"
                     class="aboutus-image"></a></button>
     </header>
 
@@ -52,7 +46,7 @@ if (isset($_SESSION["Invalid"])){
     <form action="" id="testform" method="post">
         <div class="container">
             <div class="id-input">
-                <label for="id">Student ID:</label>
+                <label for="id">ID:</label>
                 <input id="text" name="id" type="text" required />
             </div>
             <div class="password-input">
@@ -60,12 +54,13 @@ if (isset($_SESSION["Invalid"])){
                 <input id="password" name="password" type="password" required />
                 <img id="toggle-password" src="./src/assets/show.png" alt="Show/Hide Password">
             </div>
-            <div class="submit-btn"><button type="submit" form="testform" value="LOGIN" class="submit">LOGIN</button>
+            <p id="error-msg" class="<?php echo $showError ? 'show' : 'hide'; ?>">Invalid ID or password</p>
+            <div class="submit-btn"><button type="submit" form="testform" name="login" value="login" class="submit">LOGIN</button>
             </div>
         </div>
     </form>
     <div class="signup-caption">
-        <p>Don't have an account? <a href="student-registration-page.html">Sign Up</a></p>
+        <p>Don't have an account? <a href="register">Sign Up</a></p>
     </div>
 
     <footer id="footer">

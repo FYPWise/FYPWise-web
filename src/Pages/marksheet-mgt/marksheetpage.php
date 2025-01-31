@@ -1,11 +1,11 @@
 <?php
 use App\Models\Base;
-//use App\Models\SideMenu;
+use App\Models\SideMenu;
 use App\Models\Marksheet;
 use App\Models\Db;
 
-$base = new Base("Marksheet");
-//$sideMenu = new SideMenu();
+$base = new Base("Marksheet", "lecturer");
+$sideMenu = new SideMenu();
 $db = new Db();
 $marksheet = new Marksheet($db);
 
@@ -18,8 +18,8 @@ $marksheet = new Marksheet($db);
         <!-- Main Content -->
         <div id="main-container">
 
-            <!-- Side Menu -->
-            
+        <?php $base->renderMenu() ?>
+
 
             <div class="content">
                 <section class="main">

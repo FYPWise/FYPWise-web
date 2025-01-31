@@ -12,6 +12,8 @@
 body {
     display: flex;
     flex-direction: column;
+    height: auto;
+    overflow: auto;
 }
 
 /* Header Section */
@@ -42,15 +44,23 @@ header {
     right: 60px;
 }
 
-.aboutus-image, .home-image {
+.aboutus-image {
+    width: 1.7em;
+    transition: 0.2s ease-in-out;
+}
+
+.aboutus-image:hover {
+    width: 1.9em;
+}
+
+.home-image {
     width: 1.5em;
     transition: 0.2s ease;
 }
 
-.aboutus-image:hover, .home-image:hover {
+.home-image:hover {
     width: 1.7em;
 }
-
 /* Title */
 
 h2 {

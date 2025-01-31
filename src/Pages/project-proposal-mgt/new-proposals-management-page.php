@@ -1,9 +1,7 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
 
 $base = new Base("Page Skeleton");
-$SideMenu = new SideMenu("student")
 ?>
 <head>
     <link rel="stylesheet" href="./src/css/proposal-management-style.css">
@@ -23,7 +21,8 @@ $SideMenu = new SideMenu("student")
         <div class="container">
 
             <!-- Side Menu -->
-            <?php $SideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
+
             <!-- Proposal Table Section -->
             <div class="content">
                 <div class="header-container">

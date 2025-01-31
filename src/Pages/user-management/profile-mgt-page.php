@@ -1,7 +1,6 @@
 <?php
 use App\Models\Base;
 use App\Models\Db;
-use App\Models\UpdateProfile;
 use App\Models\User;
 
 $base = new Base("Profile Management", ["student", "admin", "lecturer"]);
@@ -9,12 +8,15 @@ $db = new Db();
 $user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
     if (isset($_POST['profile'])) {
-        $user->update("profile");
-
+        $existingUser = $user->find($_POST['student-id']);
+        if ($existingUser && $_POST['student-id'] != $_SESSION['id']) {
+            $error = "ID already in use.";
+        } else {
+            $user->update("profile", $_SESSION['role']);
+        }
     } elseif (isset($_POST['image'])) {
-        $user->update("image");
+        $user->update("image", $_SESSION['role']);
     }
 }
 ?>
@@ -25,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.1">
     <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
-    <script src="./src/scripts/profile_form_response.js?v=0.10"></script>
+    <script src="./src/scripts/profile_form_response.js?v=0.11"></script>
 </head>
 
 <body>
@@ -56,18 +58,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
             </div>
             <div class="details">
-                <form id="profileForm" method="post" onsubmit="enableDisabledFields()">
+                <form id="profileForm" method="post">
                     <div class="form-group">
                         <label for="name"><strong>Name:</strong></label>
-                        <input type="text" id="name" name="name" value="<?php echo $_SESSION['name']; ?>" pattern="[A-Za-z\s]+" readonly>
+                        <input type="text" id="name" name="name" value="<?php echo $_SESSION['name']; ?>" pattern="[A-Za-z]+" readonly>
                     </div>
                     <div class="form-group">
                         <label for="student-id"><strong>ID:</strong></label>
-                        <input type="text" id="student-id" name="student-id" value="<?php echo $_SESSION['id']; ?>" pattern="\d{10}" readonly>
+                        <input type="text" id="student-id" name="student-id" value="<?php echo $_SESSION['id']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\d{10}' : ($_SESSION['role'] == 'lecturer' ? 'L\d{3}' : 'A\d{3}'); ?>" readonly required>
                     </div>
                     <div class="form-group">
                         <label for="email"><strong>Email:</strong></label>
-                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="\d{10}@student\.mmu\.edu\.my" readonly>
+                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\d{10}@admin\.mmu\.edu\.my' : ($_SESSION['role'] == 'lecturer' ? 'L\d{3}@lecturer\.mmu\.edu\.my' : 'A\d{3}@admin\.mmu\.edu\.my'); ?>" readonly>
                     </div>
                     <?php if ($_SESSION['role'] == 'student') { ?>
                     <div class="form-group">
@@ -114,24 +116,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input id="cpass" name="cpass" type="password" required/>
                         <span id="error" class="error" hidden>Please ensure your password match.</span>
                     </div>
-                    <button type="submit" name="profile" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
+                    <button type="submit" form="profileForm" name="profile" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
                 </form>
-                <script>
-                    document.getElementById('profileForm').onsubmit = function() {
-                        var inputs = document.querySelectorAll('#profileForm input, #profileForm select');
-                        inputs.forEach(input => {
-                            if (input.disabled) {
-                                input.disabled = false;
-                            }
-                        });
-                        return true;
-                    };
-                </script>
                 <script src="./src/scripts/passwordCheck.js"></script>
             </div>
         </div>
-        <?php $base->renderFooter() ?>
+        <?php $base->renderFooter(); ?>
     </div>
+    <?php include 'idinusepopup.php'; ?>
 </body>
 
 </html>

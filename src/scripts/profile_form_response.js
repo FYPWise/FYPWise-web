@@ -61,7 +61,6 @@ function toggleEditMode() {
         fileImage.style.display = 'none';
         imageUploadButton.style.display = 'none';
 
-
         editButton.innerText = 'Edit Profile';
         editButton.type = 'submit';
     }

@@ -56,40 +56,41 @@ $meetings = $meeting->getMeetingsByUserID($userID);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (count($meetings) > 0): ?>
-                                    <?php foreach ($meetings as $meeting): ?>
-                                        <tr>
-                                            <td><input type="checkbox" class="row-checkbox" value="<?= $meeting['meetingID']; ?>"></td>
-                                            <td><?= $meeting['meetingID']; ?></td>
-                                            <td><a href="meeting-acceptance-page.php?meetingID=<?= $meeting['meetingID']; ?>"><?= $meeting['meeting_title']; ?></a></td>
-                                            <td><?= $meeting['meeting_description']; ?></td>
-                                            <td><?= $meeting['date']; ?></td>
-                                            <td>
-                                                <?= date('H:i', strtotime($meeting['start_time'])); ?> - 
-                                                <?= date('H:i', strtotime($meeting['end_time'])); ?>
-                                            </td>
-                                            <td><?= ucfirst($meeting['mode']); ?></td>
-                                            <td>
-                                                <?php
-                                                $meetingInstance = new Meeting($db);
-                                                
-                                                // Get participants for this meeting
-                                                $participants = $meetingInstance->getUsersForMeeting($meeting['meetingID']);
-
-                                                if (count($participants) > 0) {
-                                                    foreach ($participants as $participant) {
-                                                        echo $participant['name'] . "<br>";
-                                                    }
-                                                } else {
-                                                    echo "No participants";
+                                <?php
+                                try {
+                                    if (!empty($meetings)) {
+                                        foreach ($meetings as $meeting) {
+                                            echo "<tr>";
+                                            echo "<td><input type='checkbox' class='row-checkbox' value='{$meeting['meetingID']}'></td>";
+                                            echo "<td>{$meeting['meetingID']}</td>";
+                                            echo "<td><a href='/FYPWise-web/view-meeting-details/{$meeting['meetingID']}'>{$meeting['meeting_title']}</a></td>";
+                                            echo "<td>".htmlentities($meeting['meeting_description'])."</td>";
+                                            echo "<td>{$meeting['date']}</td>";
+                                            echo "<td>".date('H:i', strtotime($meeting['start_time']))." - ".date('H:i', strtotime($meeting['end_time']))."</td>";
+                                            echo "<td>".ucfirst($meeting['mode'])."</td>";
+                                            echo "<td>";
+                                            
+                                            $meetingInstance = new Meeting($db);
+                                            $participants = $meetingInstance->getUsersForMeeting($meeting['meetingID']);
+                                            
+                                            if (!empty($participants)) {
+                                                foreach ($participants as $participant) {
+                                                    echo htmlentities($participant['name']) . "<br>";
                                                 }
-                                                ?>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr><td colspan="9">No meetings found.</td></tr>
-                                <?php endif; ?>
+                                            } else {
+                                                echo "No participants";
+                                            }
+                                            
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='8'>No meetings found.</td></tr>";
+                                    }
+                                } catch (Exception $e) {
+                                    echo "<tr><td colspan='8'>Error: " . $e->getMessage() . "</td></tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>

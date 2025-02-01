@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Db;
 use App\Models\MeetingLog;
 
-// debugging and error logging
+// Debugging and error logging
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -18,29 +18,22 @@ if (!isset($_SESSION['mySession'])) {
     exit();
 }
 
+// Database connection
 $db = new Db();
 $base = new Base("View Meetings", ["lecturer", "student"]);
 $meetingLog = new MeetingLog($db);
 
 $userID = $_SESSION['mySession']; 
 $isLecturer = isset($_SESSION['role']) && $_SESSION['role'] === 'lecturer';
+// $isLecturer = true; // Debugging: Set as lecturer for testing
 
 $meetingLogDetails = null;
 
-if (isset($_GET['meeting_logID'])) {
-    $meetingLogID = intval($_GET['meeting_logID']);
+if ($meeting_logID) {
     try {
-        $meetingLogDetails = $meetingLog->getMeetingLogDetails($meetingLogID);
+        $meetingLogDetails = $meetingLog->getMeetingLogDetails($meeting_logID);
     } catch (Exception $e) {
-        echo "<p>Error: " . $e->getMessage() . "</p>";
-    }
-}
-
-if ($proposalID) {
-    try {
-        $proposalDetails = $proposal->getProposalByID($proposalID) ?? null;
-    } catch (Exception $e) {
-        echo "<p>Error: " . $e->getMessage() . "</p>";
+        echo "<p>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
     }
 }
 
@@ -50,15 +43,20 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
     $newComment = $_POST['comment'];
 
     try {
-        $meetingLog->updateMeetingLogStatus($meetingLogID, $newStatus, $newComment);
-        echo "<script>alert('Meeting Log updated successfully!'); window.location.reload();</script>";
+        $meetingLog->updateMeetingLogStatus($meeting_logID, $newStatus, $newComment);
+        echo "<script>alert('Meeting Log updated successfully!'); window.location.href='meeting-log-details.php?meeting_logID=$meeting_logID';</script>";
     } catch (Exception $e) {
-        echo "<script>alert('Error updating meeting log: " . $e->getMessage() . "');</script>";
+        echo "<script>alert('Error updating meeting log: " . htmlspecialchars($e->getMessage()) . "');</script>";
     }
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Log Details</title>
     <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
 </head>
 <body>
@@ -66,72 +64,74 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
         <?php $base->renderHeader(); ?>
 
         <div id="main-container">
-            <?php $base->renderMenu() ?>
+            <?php $base->renderMenu(); ?>
 
             <div class="content">
                 <section class="main">
-                    <h1 id="page-name"><?php echo $base->getTitle() ?></h1>
+                    <h1 id="page-name"><?= $base->getTitle(); ?></h1>
 
                     <?php if ($meetingLogDetails): ?>
                         <form class="meeting-update-form" id="meetingUpdateForm" method="POST">
-                            <input type="hidden" name="meeting_logID" value="<?= htmlspecialchars($meetingLogDetails->meetinglogID) ?>">
+                            <input type="hidden" name="meeting_logID" value="<?= htmlspecialchars($meetingLogDetails['meeting_logID'] ?? '') ?>">
 
                             <div class="form-group">
                                 <label for="student-id">Student ID</label>
-                                <p id="student-id"><?= htmlspecialchars($meetingLogDetails->studentID) ?></p>
+                                <p id="student-id"><?= htmlspecialchars($meetingLogDetails['studentID'] ?? 'N/A') ?></p>
                             </div>
 
                             <div class="form-group">
                                 <label for="supervisor-id">Supervisor ID</label>
-                                <p id="supervisor-id"><?= htmlspecialchars($meetingLogDetails->supervisorID) ?></p>
+                                <p id="supervisor-id"><?= htmlspecialchars($meetingLogDetails['supervisorID'] ?? 'N/A') ?></p>
                             </div>
 
                             <div class="form-group">
                                 <label for="meeting-id">Meeting ID</label>
-                                <p id="meeting-id"><?= htmlspecialchars($meetingLogDetails->meetingID) ?></p>
+                                <p id="meeting-id"><?= htmlspecialchars($meetingLogDetails['meetingID'] ?? 'N/A') ?></p>
                             </div>
 
                             <div class="form-group">
                                 <label for="file">Meeting Log File</label>
                                 <p id="file">
-                                    <a href="../uploads/<?= htmlspecialchars($meetingLogDetails->file_path) ?>" target="_blank">
-                                        <?= htmlspecialchars($meetingLogDetails->file_path) ?>
+                                    <a href="../uploads/<?= htmlspecialchars($meetingLogDetails['file_path'] ?? '') ?>" target="_blank">
+                                        <?= htmlspecialchars($meetingLogDetails['file_path'] ?? 'No file uploaded') ?>
                                     </a>
                                 </p>
                             </div>
 
                             <div class="form-group">
                                 <label for="date">Submission Date</label>
-                                <p id="date"><?= htmlspecialchars($meetingLogDetails->submission_date) ?></p>
+                                <p id="date"><?= htmlspecialchars($meetingLogDetails['submission_date'] ?? 'N/A') ?></p>
                             </div>
 
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <?php if ($isLecturer): ?>
                                     <select id="status" name="status" required>
-                                        <option value="Pending" <?= ($meetingLogDetails->status == 'Pending') ? 'selected' : '' ?>>Pending Supervisor Approval</option>
-                                        <option value="Submitted" <?= ($meetingLogDetails->status == 'Submitted') ? 'selected' : '' ?>>Submitted</option>
-                                        <option value="Rejected" <?= ($meetingLogDetails->status == 'Rejected') ? 'selected' : '' ?>>Rejected</option>
-                                        <option value="Approved" <?= ($meetingLogDetails->status == 'Approved') ? 'selected' : '' ?>>Approved By Supervisor</option>
+                                        <option value="submitted" <?= ($meetingLogDetails['status'] == 'submitted') ? 'selected' : '' ?>>Submitted</option>
+                                        <option value="pending" <?= ($meetingLogDetails['status'] == 'pending') ? 'selected' : '' ?>>Pending</option>
+                                        <option value="rejected" <?= ($meetingLogDetails['status'] == 'rejected') ? 'selected' : '' ?>>Rejected</option>
+                                        <option value="approved" <?= ($meetingLogDetails['status'] == 'approved') ? 'selected' : '' ?>>Approved</option>
                                     </select>
                                 <?php else: ?>
-                                    <p id="status"><?= htmlspecialchars($meetingLogDetails->status) ?></p>
+                                    <p id="status"><?= htmlspecialchars($meetingLogDetails['status'] ?? 'N/A') ?></p>
                                 <?php endif; ?>
                             </div>
 
                             <div class="form-group">
                                 <label for="comment">Comment</label>
                                 <?php if ($isLecturer): ?>
-                                    <textarea id="comment" name="comment" rows="6"><?= htmlspecialchars($meetingLogDetails->comment) ?></textarea>
+                                    <textarea id="comment" name="comment" rows="6"><?= htmlspecialchars($meetingLogDetails['comment'] ?? '') ?></textarea>
                                 <?php else: ?>
-                                    <p id="comment"><?= nl2br(htmlspecialchars($meetingLogDetails->comment)) ?></p>
+                                    <p id="comment"><?= nl2br(htmlspecialchars($meetingLogDetails['comment'] ?? 'No comments')) ?></p>
                                 <?php endif; ?>
                             </div>
 
-                            <div class="form-buttons">
-                                <button type="submit" class="btn submit-btn" name="update">Update</button>
-                                <button type="reset" class="btn reset-btn">Reset</button>
-                            </div>
+                            <?php if ($isLecturer): ?>
+                                <div class="form-buttons">
+                                    <button type="submit" class="btn submit-btn" name="update">Update</button>
+                                    <button type="reset" class="btn reset-btn">Reset</button>
+                                </div>
+                            <?php endif; ?>
                         </form>
                     <?php else: ?>
                         <p>No meeting log found.</p>
@@ -140,8 +140,7 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
             </div>
         </div>
 
-        <?php $base->renderFooter() ?>
+        <?php $base->renderFooter(); ?>
     </div>
 </body>
-
 </html>

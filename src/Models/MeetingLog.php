@@ -84,10 +84,10 @@ class MeetingLog {
         return false; // No file uploaded
     }
 
-    // Retrieve meeting log details by meetingLogID
-    public function getMeetingLogDetails($meetingLogID) {
-        $meetingLogID = $this->db->escapeString($meetingLogID);
-        $sql = "SELECT * FROM meeting_log WHERE meeting_logID = '$meetingLogID'";
+    // Retrieve meeting log details by meeting_logID
+    public function getMeetingLogDetails($meeting_logID) {
+        $meeting_logID = $this->db->escapeString($meeting_logID);
+        $sql = "SELECT * FROM meeting_log WHERE meeting_logID = '$meeting_logID'";
         $result = $this->db->query($sql);
     
         if (!$result) {
@@ -96,7 +96,7 @@ class MeetingLog {
     
         $data = $result->fetch_assoc();
         if (!$data) {
-            die("No meeting log found for ID: " . htmlspecialchars($meetingLogID));
+            die("No meeting log found for ID: " . htmlspecialchars($meeting_logID));
         }
         
         return $data;
@@ -104,11 +104,11 @@ class MeetingLog {
     
 
     // Update meeting log status & comment
-    public function updateMeetingLogStatus($meetingLogID, $status, $comment) {
-        $meetingLogID = $this->db->escapeString($meetingLogID);
+    public function updateMeetingLogStatus($meeting_logID, $status, $comment) {
+        $meeting_logID = $this->db->escapeString($meeting_logID);
         $status = $this->db->escapeString($status);
         $comment = $this->db->escapeString($comment);
-        $sql = "UPDATE meeting_log SET status = '$status', comment = '$comment' WHERE meeting_LogID = '$meetingLogID'";
+        $sql = "UPDATE meeting_log SET status = '$status', comment = '$comment' WHERE meeting_LogID = '$meeting_logID'";
         return $this->db->query($sql);
     }
 }

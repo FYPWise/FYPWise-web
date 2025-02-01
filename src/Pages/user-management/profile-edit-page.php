@@ -38,8 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         alt="messages"></button></a>
             <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
         </div>
-        <a href="login?q=logout"><button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button></a>
+        <button id="logout-btn" onclick="showLogoutPopup()"><img src="./src/assets/logout2.png" alt="logout"></button>
     </div>
+    <!-- Logout Confirmation Popup -->
+    <?php include './src/Pages/common-ui/logoutConfirm.html'; ?>
 
     <!-- Main Container -->
     <div class="container">
@@ -52,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="profile-image">
                 <form id="imageUploadForm" method="post" enctype="multipart/form-data">
                     <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
-                    <input type="file" id="imageUpload" name="image" accept="image/*" style="display:none;" required>
-                    <button type="submit" name="image" id="imageUploadButton" style="display:none;">Upload Image</button>
+                    <input type="file" id="imageUpload" name="image" accept="image/*"  required>
+                    <button type="submit" name="image" id="imageUploadButton">Upload Image</button>
                 </form>
             </div>
             <div class="details">

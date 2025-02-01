@@ -83,5 +83,33 @@ class MeetingLog {
         }
         return false; // No file uploaded
     }
+
+    // Retrieve meeting log details by meeting_logID
+    public function getMeetingLogDetails($meeting_logID) {
+        $meeting_logID = $this->db->escapeString($meeting_logID);
+        $sql = "SELECT * FROM meeting_log WHERE meeting_logID = '$meeting_logID'";
+        $result = $this->db->query($sql);
+    
+        if (!$result) {
+            die("Database error: " . $this->db->conn->error);
+        }
+    
+        $data = $result->fetch_assoc();
+        if (!$data) {
+            die("No meeting log found for ID: " . htmlspecialchars($meeting_logID));
+        }
+        
+        return $data;
+    }
+    
+
+    // Update meeting log status & comment
+    public function updateMeetingLogStatus($meeting_logID, $status, $comment) {
+        $meeting_logID = $this->db->escapeString($meeting_logID);
+        $status = $this->db->escapeString($status);
+        $comment = $this->db->escapeString($comment);
+        $sql = "UPDATE meeting_log SET status = '$status', comment = '$comment' WHERE meeting_LogID = '$meeting_logID'";
+        return $this->db->query($sql);
+    }
 }
 ?>

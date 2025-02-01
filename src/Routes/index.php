@@ -20,6 +20,7 @@ $router->include($proposalRoutes);
 include "marksheet.php";
 $router->include($marksheetRoutes);
 
-
+include "meeting.php";
+$router->include($meetingRoutes);
 
 $router->dispatch();

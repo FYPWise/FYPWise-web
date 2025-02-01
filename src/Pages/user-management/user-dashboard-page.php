@@ -87,10 +87,11 @@ $taskDates = getTaskDates($db);
                 <script>
                     var taskDates = <?php echo json_encode($taskDates); ?>;
                     document.addEventListener('DOMContentLoaded', function() {
-                        // Add event listener for double-click on calendar dates
+                        // Double click for add task
                         document.querySelectorAll('td.day').forEach(function(dateElement) {
                             dateElement.addEventListener('dblclick', function() {
-                                openUpWindow();
+                                var clickedDate = this.getAttribute('data-date');
+                                openUpWindow(clickedDate);
                             });
                         });
                     });
@@ -129,8 +130,9 @@ $taskDates = getTaskDates($db);
                     var addTaskPopUp = document.querySelector('.addTaskPopUp');
                     var close = document.querySelector('.close');
 
-                    function openUpWindow() {
+                    function openUpWindow(selectedDate) {
                         addTaskPopUp.style.display = 'flex';
+                        document.getElementById('taskDate').value = selectedDate;
                     }
                     function closeUpWindow() {
                         addTaskPopUp.style.display = 'none';

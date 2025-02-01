@@ -110,7 +110,8 @@ hr {
 
 .profile-image {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-image img {

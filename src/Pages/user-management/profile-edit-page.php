@@ -2,10 +2,12 @@
 use App\Models\Base;
 use App\Models\Db;
 use App\Models\User;
+use App\Models\File;
 
 $base = new Base("Profile Management", ["student", "admin", "lecturer"]);
 $db = new Db();
 $user = new User();
+$file = new File();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['profile'])) {
@@ -13,10 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($existingUser && $_POST['student-id'] != $_SESSION['id']) {
             $error = "ID already in use.";
         } else {
-            $user->update("profile", $_SESSION['role']);
+            $user->update();
         }
     } elseif (isset($_POST['image'])) {
-        $user->update("image", $_SESSION['role']);
+        $file->uploadFile('image', './src/assets/pfp/', 'users', 'filename');
     }
 }
 ?>
@@ -52,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Profile -->
         <div class="profile">
             <div class="profile-image">
+                <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
                 <form id="imageUploadForm" method="post" enctype="multipart/form-data">
-                    <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
                     <input type="file" id="imageUpload" name="image" accept="image/*"  required>
                     <button type="submit" name="image" id="imageUploadButton">Upload Image</button>
                 </form>

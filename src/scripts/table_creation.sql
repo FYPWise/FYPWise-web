@@ -324,7 +324,7 @@ CREATE TABLE group_chat (
 CREATE TABLE message (
     messageID INT AUTO_INCREMENT PRIMARY KEY,
     senderID INT NOT NULL,
-    receiverID INT NOT NULL,
+    receiverID INT,
     groupID INT,
     messageContent TEXT NOT NULL,
     timeStamp DATETIME NOT NULL,

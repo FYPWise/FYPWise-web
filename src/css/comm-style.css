@@ -32,20 +32,20 @@ header {
   margin-left: 250px;
 }
 
-body:has(.menubutton > input:checked) #side-menu {
+/* body:has(.menubutton > input:checked) #side-menu {
   animation: fade-in 1s forwards;
-}
+} */
 
-/* Chat Menu Side */
+/* Chat Menu Side
 body:has(.menubutton > input:checked) #page-side {
   width: 0;
 }
 
 body:has(.menubutton > input:checked) #page-side > * {
   display: none;
-}
+} */
 
-body:has(.menubutton > input:checked) .main {
+/* body:has(.menubutton > input:checked) .main {
   margin-left: 0;
 }
 
@@ -54,6 +54,10 @@ body:has(.menubutton > input:not(:checked)) #page-side {
 }
 body:has(.menubutton > input:checked) #chat-container {
   margin-left: 0;
+} */
+
+#side-menu{
+  z-index: 2;
 }
 
 #page-side {
@@ -66,6 +70,8 @@ body:has(.menubutton > input:checked) #chat-container {
   display: flex;
   float: left;
   margin-right: 20px;
+  position: fixed;
+  z-index: 1;
 }
 
 #chat-menu {
@@ -110,6 +116,7 @@ body:has(.menubutton > input:checked) #chat-container {
 .chat-label {
   width: 100%;
   display: flex;
+  text-align: left;
 }
 
 .chat-icon::before {
@@ -132,6 +139,10 @@ body:has(.menubutton > input:checked) #chat-container {
 
 .sv-chat-icon::before {
   content: "sv";
+}
+
+.stud-chat-icon::before {
+  content: "ST";
 }
 
 .admin-chat-icon::before {
@@ -161,12 +172,13 @@ body:has(.menubutton > input:checked) #chat-container {
 
 .chat-entry-list {
   margin-bottom: 15px;
+  width: fit-content;
+  min-width: 15%;
+  max-width: 80%;
 }
 
 .chat-bubble {
   margin-bottom: 10px;
-  width: fit-content;
-  position: relative;
   border-radius: 5px;
 }
 
@@ -207,6 +219,10 @@ body:has(.menubutton > input:checked) #chat-container {
   text-align: right;
 }
 
+.chat-date {
+  text-align: left;
+}
+
 .chat-time,
 .chat-date {
   padding: 5px;
@@ -214,13 +230,9 @@ body:has(.menubutton > input:checked) #chat-container {
   font-style: italic;
 }
 
-.chat-received {
-  margin-right: 35%;
-}
-
 .chat-sended {
-  float: right;
-  margin-left: 35%;
+  text-align: right;
+  margin-left: auto;
 }
 
 @media screen and (max-width: 650px) {

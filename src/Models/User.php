@@ -12,9 +12,9 @@ class User{
     protected $email;
     protected $role;
 
-    public function __construct($userID = null) {
+    public function __construct($id = null) {
         $this->db = new Db();
-        $this->readId($userID);
+        $this->readId($id);
     }
 
     public function getUserID(){
@@ -140,6 +140,57 @@ class User{
             $this->db->query($tableSql);
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->conn->error;
+        }
+    }
+
+    public function getSupervisorID(){
+        $userId = $this->userID;
+
+        $sql = "SELECT l.lecturerID FROM lecturer_project lp JOIN lecturer l ON lp.lecturerID = l.userID JOIN users u ON l.userID = u.userID JOIN project p ON lp.projectID = p.projectID
+        WHERE p.studentID = '$userId' AND lp.lecturer_role = 'supervisor';";
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows == 1) {
+             $row = $result->fetch_row();
+             return $row[0];
+        }else{
+            return false;
+        }
+    }
+
+    public function getAdminID(){
+        $sql = "SELECT id FROM `users` WHERE role = 'admin'";
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows == 1) {
+             $row = $result->fetch_row();
+             return $row[0];
+        }else{
+            return false;
+        }
+
+    }
+
+    public function getSuperviseeIDs(){
+        $id = $this->id;
+        $superviseeIDs = [];
+
+        $sql = "SELECT DISTINCT s.studentID
+        FROM student s
+        JOIN project p ON s.userID = p.studentID
+        JOIN lecturer_project lp ON p.projectID = lp.projectID
+        JOIN lecturer l ON lp.lecturerID = l.userID
+        WHERE lp.lecturer_role = 'supervisor' 
+        AND l.lecturerID = '$id';";
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0 ) {
+             while ($row = $result->fetch_assoc()) {
+                $superviseeIDs[] = $row['studentID'];
+             }
+             return $superviseeIDs;
+        }else{
+            return false;
         }
     }
 

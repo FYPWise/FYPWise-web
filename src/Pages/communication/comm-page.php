@@ -1,133 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+use App\Models\Base;
+use App\Models\User;
+use App\Models\Chat;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
-    <title>Communication Page</title>
-    <link rel="stylesheet"
-        href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
-    <link rel="stylesheet" href="../css/common-ui.css">
-    <link rel="stylesheet" href="../css/comm-style.css">
-</head>
+$base = new Base("Communication");
+
+$user = new User($_SESSION['id']);
+$chat = new Chat();
+
+$chats = $chat->getChat($user);
+
+foreach ($chats as $chat) {
+    echo $chat['type']. "".$chat['id'];
+    echo "-----";
+}
+?>
+
+<link rel="stylesheet" href="./src/css/comm-style.css">
 
 <body>
     <div id="outer-container">
-        <!-- Header Section -->
-        <header>
-            <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
-                    for="user-side-menu" class="fas"></label></div>
-            <div id="logo"></div>
-            <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png"
-                        alt="home icon"></a></button>
-        </header>
+        <?php $base->renderHeader(); ?>
 
-        <!-- Main Container -->
+        <!-- Main Content -->
         <div id="main-container">
 
             <!-- Side Menu -->
-            <nav id="side-menu">
-                <div class="search-container">
-                    <input type="text" id="search-bar" placeholder="Search">
-                </div>
-                <ul id="side-menu-shortcuts">
-            
-                    <!-- Dropdown List -->
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">User Management</span>
-                            <span class="expand-icon"></span>
-                        </button>
-            
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/user-dashboard-page.html">Supervisor Dashboard</a>
-                            </li>
-            
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/about-us-page.html">About Us</a>
-                            </li>
-                        </ul>
-                    </li>
-            
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button"><span class="menu-label">Project & Proposal</span>
-                            <span class="expand-icon"></span>
-                        </button>
-            
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../project-management-mgt/projectmanagement.html">Projects</a>
-                            </li>
-            
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../project-proposal-mgt/proposal-management-page.html">All
-                                    Proposal</a>
-                            </li>
-            
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../project-proposal-mgt/proposal-submission-page.html">New Proposal</a>
-                            </li>
-                        </ul>
-                    </li>
-            
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Meeting & Presentation</span>
-                            <span class="expand-icon"></span>
-                        </button>
-            
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../meeting-mgt/meeting-management-page.html">All Meetings</a>
-                            </li>
-            
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../meeting-mgt/meeting-scheduler-page.html">New Meeting</a>
-                            </li>
-            
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../meeting-mgt/meeting-log-update-page.html">Meeting Logs</a>
-                            </li>
-            
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../meeting-mgt/presentation-management-page.html">All Presentations</a>
-                            </li>
-                        </ul>
-                    </li>
-            
-                    <li class="side-menu-dropdown-list">
-                        <button onclick="location.href='../communication/comm-page.html'" class="menu-button"><span
-                                class="menu-label">Communication</span>
-                    </li>
-                </ul>
-            </nav>
+            <?php $base->renderMenu() ?>
 
             <!-- Main Container -->
             <div class="content">
                 <div id="page-side">
                     <ul id="chat-menu">
-                        <li class="chat-menu-list">
-                            <button type="button" class="chat-button chat-button-active">
-                                <span class="chat-label">Deepak Kumar</span>
-                                <span class="chat-icon sv-chat-icon"></span>
-                            </button>
-                        </li>
-                        <li class="chat-menu-list">
-                            <button type="button" class="chat-button">
-                                <span class="chat-label">Mohana</span>
-                                <span class="chat-icon admin-chat-icon"></span>
-                            </button>
-                        </li>
-                        <li class="chat-menu-list">
-                            <button type="button" class="chat-button">
-                                <span class="chat-label">Miauu Miauu</span>
-                                <span class="chat-icon group-chat-icon"></span>
-                            </button>
-                        </li>
+                        <?php foreach ($chats as $chat){ ?>
+                            <li class="chat-menu-list">
+                                <button type="button" class="chat-button">
+                                    <span class="chat-label"><?php echo $chat['name'] ?></span>
+                                    <span class="chat-icon <?php echo $chat['type'] ?>-chat-icon"></span>
+                                </button>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
 
@@ -163,8 +75,7 @@
                                 <h4 class="chat-sender-name">You</h1>
                                     <div class="chat-bubble">
                                         <p class="chat-date">21/12/2024</p>
-                                        <p class="chat-text">Mollis fermentum sociosqu suscipit bibendum imperdiet
-                                            risus.</p>
+                                        <p class="chat-text">Hello Bos</p>
                                         <p class="chat-time">11:40 AM</p>
                                     </div>
                             </section>
@@ -203,16 +114,16 @@
                                     <div class="chat-bubble">
                                         <p class="chat-date">21/12/2024</p>
                                         <p class="chat-text">Lorem ipsum odor amet, consectetuer adipiscing elit.
-                                        Ultricies senectus curabitur litora cras, id curabitur. Mauris
-                                        augue at diam gravida nisi. Montes placerat tempor dis pulvinar rhoncus
-                                        sodales imperdiet est. Curae elit ornare
-                                        facilisis sem ex. Mollis fermentum sociosqu suscipit bibendum imperdiet
-                                        risus.Lorem ipsum odor amet, consectetuer adipiscing elit.
-                                        Ultricies senectus curabitur litora cras, id curabitur. Mauris
-                                        augue at diam gravida nisi. Montes placerat tempor dis pulvinar rhoncus
-                                        sodales imperdiet est. Curae elit ornare
-                                        facilisis sem ex. Mollis fermentum sociosqu suscipit bibendum imperdiet
-                                        risus.</p>
+                                            Ultricies senectus curabitur litora cras, id curabitur. Mauris
+                                            augue at diam gravida nisi. Montes placerat tempor dis pulvinar rhoncus
+                                            sodales imperdiet est. Curae elit ornare
+                                            facilisis sem ex. Mollis fermentum sociosqu suscipit bibendum imperdiet
+                                            risus.Lorem ipsum odor amet, consectetuer adipiscing elit.
+                                            Ultricies senectus curabitur litora cras, id curabitur. Mauris
+                                            augue at diam gravida nisi. Montes placerat tempor dis pulvinar rhoncus
+                                            sodales imperdiet est. Curae elit ornare
+                                            facilisis sem ex. Mollis fermentum sociosqu suscipit bibendum imperdiet
+                                            risus.</p>
                                         <p class="chat-time">11:37 AM</p>
                                     </div>
                             </section>
@@ -267,10 +178,7 @@
 
         </div>
 
-        <script src="../scripts/side-menu.js"></script>
-
         <script>
-            /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
             var chatButton = document.getElementsByClassName("chat-button");
 
             for (i = 0; i < chatButton.length; i++) {
@@ -285,19 +193,7 @@
             }
         </script>
 
-        <footer>
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
-                    Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
-                    Desk</a>
-            </div>
-            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
-        </footer>
+        <?php $base->renderFooter() ?>
     </div>
 </body>
 

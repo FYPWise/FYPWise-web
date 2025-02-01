@@ -1,11 +1,11 @@
 <?php
 use App\Models\Base;
-//use App\Models\SideMenu;
+use App\Models\SideMenu;
 use App\Models\Proposal;
 use App\Models\Db;
 
 $base = new Base("Proposal Details");
-//$sideMenu = new SideMenu();
+$sideMenu = new SideMenu();
 $db = new Db();
 $proposal = new Proposal($db);
 
@@ -50,7 +50,7 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
         <div id="main-container">
 
             <!-- Side Menu -->
-            
+            <?php $sideMenu->render(); ?>
 
             <div class="content">
                 <h2 class="form-title">Proposal Details</h2>

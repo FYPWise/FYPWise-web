@@ -19,7 +19,7 @@ $marksheet = new Marksheet($db);
         <div id="main-container">
 
             <!-- Side Menu -->
-            
+            <?php $sideMenu->render(); ?>
 
             <div class="content">
                 <section class="main">

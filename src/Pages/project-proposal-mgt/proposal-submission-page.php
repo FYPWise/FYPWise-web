@@ -4,12 +4,10 @@
 
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
 use App\Models\Proposal;
 use App\Models\Db;
 
 $base = new Base("Proposal Submission");
-$sideMenu = new SideMenu();
 $db = new Db();
 $proposal = new Proposal($db);
 
@@ -59,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $sideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
 
             <!-- Proposal Submission Form -->
             <div class="content">

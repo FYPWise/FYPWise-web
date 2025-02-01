@@ -269,6 +269,12 @@ body:has(.menubutton > input:checked) .content {
   width: 80vw;
 }
 
+#fileUploadButton {
+  background-color: #06509f;
+  color: white;
+  border: none;
+}
+
 @media screen and (max-width: 650px) {
   #outer-container {
     height: 100dvh;

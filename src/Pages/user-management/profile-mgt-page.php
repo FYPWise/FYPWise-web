@@ -1,96 +1,89 @@
+<?php
+use App\Models\Base;
+use App\Models\Db;
+use App\Models\User;
+
+$base = new Base("Profile Management", ["student", "admin", "lecturer"]);
+$db = new Db();
+$user = new User();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['profile'])) {
+        $existingUser = $user->find($_POST['student-id']);
+        if ($existingUser && $_POST['student-id'] != $_SESSION['id']) {
+            $error = "ID already in use.";
+        } else {
+            $user->update("profile", $_SESSION['role']);
+        }
+    } elseif (isset($_POST['image'])) {
+        $user->update("image", $_SESSION['role']);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Management</title>
-    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.2">
-    <link rel="stylesheet" href="./src/css/footer.css?v=0.1">
-    <script src="./src/scripts/profile_form_response.js?v=0.3"></script>
+    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
-    <!-- Sidebar -->
     <div class="sidebar">
         <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
         <div class="icons">
-            <button id="sidebar-btn"><a href="/FYPWise-web/"><img src="./src/assets/home3.png" alt="home"></a></button>
-            <button id="sidebar-btn"><a href="../communication/comm-page.html"><img src="./src/assets/messages1.png"
-                        alt="messages"></a></button>
-            <button id="sidebar-btn"><a href="dashboard"><img src="./src/assets/dashboard1.png" alt="dashboard"></a></button>
-            <button id="logout-btn"><a href="login"><img src="./src/assets/logout2.png" alt="logout"></a></button>
+            <a href="/FYPWise-web"><button id="sidebar-btn"><img src="./src/assets/home3.png" alt="home"></button></a>
+            <a href="Communication"><button id="sidebar-btn"><img src="./src/assets/messages1.png"
+                        alt="messages"></button></a>
+            <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
         </div>
+        <button id="logout-btn" onclick="showLogoutPopup()"><img src="./src/assets/logout2.png" alt="logout"></button>
     </div>
+    <!-- Logout Confirmation Popup -->
+    <?php include './src/Pages/common-ui/logoutConfirm.html'; ?>
 
     <!-- Main Container -->
     <div class="container">
 
-        <h1>User Profile</h1>
+        <h1>Your Profile</h1>
         <hr>
 
         <!-- Profile -->
         <div class="profile">
             <div class="profile-image">
-                <img src="./src/assets/Imran.jpg" alt="Profile Image">
-                <button type="button" id="imageUploadButton" style="display:none;" onclick="uploadImage()">Upload
-                    Image</button>
-            </div>
-            <div class="details">
-                <form id="profileForm">
-                    <table>
-                        <tr>
-                            <td><label for="name"><strong>Name:</strong></label></td>
-                            <td><input type="text" id="name" name="name" value="Mohamed Imran Bin Mohamed Yunus"
-                                    pattern="[A-Za-z\s]+" readonly></td>
-                        </tr>
-                        <tr>
-                            <td><label for="student-id"><strong>Student ID:</strong></label></td>
-                            <td><input type="text" id="student-id" name="student_id" value="1211101935" pattern="\d{10}"
-                                    readonly></td>
-                            <td><label for="email"><strong>Email:</strong></label></td>
-                            <td><input type="email" id="email" name="email" value="121111935@student.mmu.edu.my"
-                                    pattern="\d{10}@student\.mmu\.edu\.my" readonly></td>
-                        </tr>
-                        <tr>
-                            <td><label for="faculty"><strong>Specialization:</strong></label></td>
-                            <td>
-                                <select id="faculty" name="Specialization" disabled>
-                                    <option value="Cybersecurity">Cybersecurity</option>
-                                    <option value="Data Science">Data Science</option>
-                                    <option value="Game Development">Game Development</option>
-                                    <option value="Software Engineering" selected>Software Engineering</option>
-                                </select>
-                            </td>
-                            <td><label for="year"><strong>Year of study:</strong></label></td>
-                            <td>
-                                <select id="year" name="year" disabled>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3" selected>3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                    <button type="button" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
+                <form id="imageUploadForm" method="post" enctype="multipart/form-data">
+                    <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
                 </form>
             </div>
-        </div>
-        
-        <footer id="footer">
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya, Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service Desk</a>
+            <div class="details">
+                <form id="profileForm" method="post">
+                    <?php
+                        function renderInput($label, $value) {
+                            echo '<div class="form-group">';
+                            echo '<label for="name"><strong>' . $label . ':</strong></label>';
+                            echo '<input type="text" id="name" name="name" value="' . $value . '" readonly>';
+                            echo '</div>';
+                        }
+
+                        renderInput('Name', $_SESSION['name']);
+                        renderInput('ID', $_SESSION['id']);
+                        renderInput('Email', $_SESSION['email']);
+
+                        if ($_SESSION['role'] == 'student') {
+                            renderInput('Specialization', $_SESSION['specialization']);
+                            renderInput('Year of study', $_SESSION['year']);
+                        } elseif ($_SESSION['role'] == 'lecturer') {
+                            renderInput('Position', $_SESSION['position']);
+                        }
+                    ?>
+                    <button type="button" form="profileForm" name="profile" id="submit" onclick="window.location.href = 'profileedit';">Edit Profile</button>
+                </form>
+                <script src="./src/scripts/passwordCheck.js"></script>
             </div>
-            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
-        </footer>
+        </div>
+        <?php $base->renderFooter(); ?>
     </div>
+    <?php include 'idinusepopup.php'; ?>
 </body>
 
 </html>

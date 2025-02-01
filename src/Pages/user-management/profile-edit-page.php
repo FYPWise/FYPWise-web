@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="form-group">
                         <label for="email"><strong>Email:</strong></label>
-                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\\d{10}@student\\.mmu\\.edu\\.my' : ($_SESSION['role'] == 'lecturer' ? 'L\\d{3}@lecturer\\.mmu\\.edu\\.my' : 'A\\d{3}@admin\\.mmu\\.edu\\.my'); ?>" title="Please enter your Student Email.">
+                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\\d{10}@student.' : ($_SESSION['role'] == 'lecturer' ? 'L\\d{3}@' : 'A\\d{3}@'); ?>mmu\.edu\.my" title="Please enter your Email.">
                     </div>
                     <?php if ($_SESSION['role'] == 'student') { ?>
                     <div class="form-group">

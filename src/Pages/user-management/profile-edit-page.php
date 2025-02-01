@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./src/css/footer.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -55,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="profile">
             <div class="profile-image">
                 <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
-                <form id="imageUploadForm" method="post" enctype="multipart/form-data">
-                    <input type="file" id="imageUpload" name="image" accept="image/*"  required>
-                    <button type="submit" name="image" id="imageUploadButton">Upload Image</button>
+                <form id="UploadForm" method="post" enctype="multipart/form-data">
+                    <input type="file" id="fileUpload" name="image" accept="image/*"  required>
+                    <button type="submit" name="file" id="fileUploadButton">Upload Image</button>
                 </form>
             </div>
             <div class="details">
@@ -131,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <script src="./src/scripts/passwordCheck.js?v=<?php echo time(); ?>"></script>
                 <script>
                     passwordInput.addEventListener('focus', function() {
-                        
+                        tooltip.style.display = 'block';
 
                     });
                     

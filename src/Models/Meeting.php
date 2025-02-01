@@ -16,7 +16,7 @@ class Meeting {
         $result = $this->db->query($sql);
         
         if (!$result) {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
         
         $meetings = [];
@@ -42,7 +42,7 @@ class Meeting {
                 throw new \Exception("Meeting not found.");
             }
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
     // Retrieve meetings by user ID
@@ -64,7 +64,7 @@ class Meeting {
             }
             return $meetings;
         } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+            throw new \Exception("Failed to prepare statement: " . $this->db->conn->error);
         }
     }
 
@@ -86,7 +86,7 @@ class Meeting {
             // Get the ID of the newly inserted meeting
             $meetingID = $stmt->insert_id;
         } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+            throw new \Exception("Failed to prepare statement: " . $this->db->conn->error);
         }
 
         // Add participants to the users_meeting table
@@ -102,12 +102,13 @@ class Meeting {
                         throw new \Exception("Failed to add participant to meeting: " . $stmt->error);
                     }
                 } else {
-                    throw new \Exception("Failed to prepare statement for adding participant: " . $this->db->getError());
+                    throw new \Exception("Failed to prepare statement for adding participant: " . $this->db->conn->error);
                 }
             }
         }
         return $meetingID;
     }
+
 
     // Get users attending a specific meeting
     public function getUsersForMeeting($meetingID) {
@@ -133,7 +134,7 @@ class Meeting {
                 return [];  // Empty array if no users
             }
         } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+            throw new \Exception("Failed to prepare statement: " . $this->db->conn->error);
         }
     }
     

@@ -13,6 +13,8 @@ $criteriaModel = new CriteriaModel($db);
 $marksheetID = isset($_GET['marksheetID']) ? htmlspecialchars($_GET['marksheetID']) : 'Unknown';
 echo "<h2>Criteria Score for Marksheet ID: $marksheetID</h2>";
 
+$criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $marksheetID = $_POST['marksheetID'];
     $evaluatorID = $_POST['evaluatorID'];
@@ -147,8 +149,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     <div class="form-container">
                         <div class="header-info">
-                            Marksheet ID: <span>MK001</span><br>
-                            Evaluator ID: <span>M123</span>
+                            Marksheet ID: <span></span><br>
+                            Evaluator ID: <span></span>
                         </div>
 
                         <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">

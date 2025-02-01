@@ -1,23 +1,39 @@
 <?php
 use App\Models\Base;
-//use App\Models\SideMenu;
+use App\Models\Project;
+use App\Models\Db;
 
-$base = new Base("Page Skeleton");
-//$SideMenu = new SideMenu();
+$base = new Base("Project Management");
+$db = new Db();
+$project = new Project($db);
+
 ?>
+<head>
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <style>
+        .assign-btn {
+            background-color: green;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
 
+        .assign-btn:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
 <body>
     <div id="outer-container">
         <?php $base->renderHeader() ?>
 
-        <!-- Main Content -->
         <div id="main-container">
-
-           
-
             <div class="content">
                 <section class="main">
-                    <h1 id="page-name">Project Management</h1>
+                    <h1 id="page-name"><?php echo $base->getTitle(); ?></h1>
                 </section>
 
                 <table class="project-table">
@@ -29,118 +45,31 @@ $base = new Base("Page Skeleton");
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><a href="#">PocketFlow: Track Your Expenses with Fortune Cookie</a></td>
-                            <td>Aisyah Nabila</td>
-                            <td>Submitted</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Smart Food: AI-Powered Personalized Meal Recommendations</a></td>
-                            <td>Imran Yunus</td>
-                            <td>Approved</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Web-Based Catalog Application with Real-Time Chatbot Assistance</a></td>
-                            <td>Firzan Zurain</td>
-                            <td>Approved</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">IoT-Based Smart Home Security System</a></td>
-                            <td>Saleha</td>
-                            <td>Submitted</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Blockchain for Secure Voting Systems</a></td>
-                            <td>Embun</td>
-                            <td>Approved</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">AI-Driven Health Monitoring Wearable</a></td>
-                            <td> Bulan</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">E-Learning Platform with Gamification</a></td>
-                            <td>Thomas Shelby</td>
-                            <td>Submitted</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Machine Learning-Based Fraud Detection</a></td>
-                            <td>Hehu</td>
-                            <td>Approved</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Real-Time Language Translator App</a></td>
-                            <td>Aminah</td>
-                            <td>Approved</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Personalized Workout Planner</a></td>
-                            <td>Roabeah</td>
-                            <td>Submitted</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">AR-Powered Navigation for Tourists</a></td>
-                            <td>Shahirah</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Interactive Children's Storybook App</a></td>
-                            <td>Emma Watson</td>
-                            <td>Submitted</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">AI-Powered Virtual Assistant for Offices</a></td>
-                            <td>Adam</td>
-                            <td>Approved</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Voice-Activated Smart Mirror</a></td>
-                            <td>Ali</td>
-                            <td>Pending</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Automated Stock Market Analysis Tool</a></td>
-                            <td><a href="../project-management-mgt/student-project-assignment-page.html"
-                                    class="assign-btn">Assign Advisee</a></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Virtual Reality Training for Engineers</a></td>
-                            <td><a href="../project-management-mgt/student-project-assignment-page.html"
-                                    class="assign-btn">Assign Advisee</a></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Eco-Friendly Renewable Energy Dashboard</a></td>
-                            <td><a href="../project-management-mgt/student-project-assignment-page.html"
-                                    class="assign-btn">Assign Advisee</a></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Intelligent AI-Driven Pronunciation Corrector</a></td>
-                            <td><a href="../project-management-mgt/student-project-assignment-page.html"
-                                    class="assign-btn">Assign Advisee</a></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Development of a Real-Time Surf Wave Measurement Application for Surf
-                                    Forecasting for Surfers</a></td>
-                            <td><a href="../project-management-mgt/student-project-assignment-page.html"
-                                    class="assign-btn">Assign Advisee</a></td>
-                            <td></td>
-                        </tr>
+                        <?php
+                        try {
+                            $projects = $project->getAllProjects();
 
+                            if (!empty($projects)) {
+                                foreach ($projects as $row) {
+                                    echo "<tr>";
+                                    echo "<td><a href='/project/{$row['projectID']}'>" . htmlspecialchars($row['project_title']) . "</a></td>";
+                                    echo "<td>" . ($row['student_name'] !== 'Unassigned' ? htmlspecialchars($row['student_name']) : "<a href='/assign-student' class='assign-btn'>Assign Advisee</a>") . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['project_status']) . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>No projects found</td></tr>";
+                            }
+                        } catch (Exception $e) {
+                            echo "<tr><td colspan='3'>Error: " . $e->getMessage() . "</td></tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
 
-
-        </div>
-
         <?php $base->renderFooter() ?>
     </div>
 </body>
-
 </html>

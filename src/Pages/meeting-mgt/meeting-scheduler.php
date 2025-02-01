@@ -5,12 +5,12 @@ use App\Models\Db;
 
 $db = new Db();
 $base = new Base("Schedule a Meeting", ["lecturer", "student"]);
-// $base = new Base("Schedule a Meeting");
 $meeting = new Meeting($db);
 
 $successMessage = "";
 $errorMessage = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    // Validate required fields
     if (
         empty($_POST['date']) ||
         empty($_POST['start-time']) ||
@@ -21,17 +21,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $errorMessage = "Please fill out all required fields.";
     } else {
         try {
-            $meetingId = $meeting->createMeeting(
-                $_POST['date'],
-                $_POST['start-time'],
-                $_POST['end-time'],
-                $_POST['mode'],
-                $_POST['location'] ?? null,
-                $_POST['meeting-title'],
-                $_POST['meeting-description'] ?? null,
-                $_POST['meeting-url'] ?? null
-            );
-            $successMessage = "Meeting scheduled successfully!";
+            // Retrieve the participants from the form
+            $participants = isset($_POST['participants']) ? explode(",", $_POST['participants']) : [];
+
+            // Validate if participants are provided
+            if (empty($participants)) {
+                $errorMessage = "Please select at least one participant.";
+            } else {
+                // Create the meeting and add participants
+                error_log(print_r($participants, true)); // debugging to check if participants are populated correctly
+                $meetingId = $meeting->createMeeting(
+                    $_POST['date'],
+                    $_POST['start-time'],
+                    $_POST['end-time'],
+                    $_POST['mode'],
+                    $_POST['location'] ?? null,
+                    $_POST['meeting-title'],
+                    $_POST['meeting-description'] ?? null,
+                    $_POST['meeting-url'] ?? null,
+                    $participants
+                );
+                $successMessage = "Meeting scheduled successfully!";
+            }
         } catch (\Exception $e) {
             $errorMessage = "Error scheduling the meeting: " . $e->getMessage();
         }
@@ -45,9 +56,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <link rel="stylesheet" href="/FYPWise-web/src/css/calendar-style.css?v=<?php echo time(); ?>">
     <script src="/FYPWise-web/src/scripts/calendar.js?v=<?php echo time(); ?>"></script>
     <style>
+        #search-participants {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
         .scrollable-list {
-            max-height: 200px; /* Set a fixed height for scrolling */
-            overflow-y: auto; /* Enable vertical scrolling */
+            max-height: 200px;
+            overflow-y: auto;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
@@ -140,22 +160,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             </div>
                             
                             <div class="form-group">
-                                <label>Select Participants</label>
-                                <div id="participants-container">
-                                    <div class="scrollable-list">
-                                        <?php
-                                        $users = $db->query("SELECT id, name, role FROM users WHERE role IN ('lecturer', 'student')");
-                                        foreach ($users as $user) {
-                                            echo "<div class='participant' data-id='{$user['id']}'>";
-                                            echo "{$user['name']} ({$user['role']})";
-                                            echo "</div>";
-                                        }
-                                        ?>
-                                    </div>
+                                <label for="search-participants">Search Participants</label>
+                                <input type="text" id="search-participants" placeholder="Search by name or ID...">
+                            </div>
+
+                            <div id="participants-container">
+                                <div class="scrollable-list" id="participants-list">
+                                    <?php
+                                    $users = $db->query("SELECT userID, id, name, role FROM users WHERE role IN ('lecturer', 'student')");
+                                    foreach ($users as $user) {
+                                        echo "<div class='participant' data-id='{$user['userID']}'>";
+                                        echo "{$user['name']} ({$user['role']}) - ID: {$user['id']}";
+                                        echo "</div>";
+                                    }
+                                    ?>
                                 </div>
                             </div>
 
-                            <!-- Hidden input field to store selected participants -->
+                            <!-- Hidden input to store selected participants -->
                             <input type="hidden" id="participants" name="participants" value="">
 
                             <!-- Display selected participants -->
@@ -166,12 +188,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
                             <script>
                                 document.addEventListener("DOMContentLoaded", function () {
+                                    const searchInput = document.getElementById("search-participants");
                                     const participants = document.querySelectorAll(".participant");
+                                    const participantsList = document.getElementById("participants-list");
                                     const selectedParticipantsList = document.getElementById("selected-participants");
                                     const hiddenInput = document.getElementById("participants");
 
                                     let selectedIds = [];
 
+                                    // Search functionality
+                                    searchInput.addEventListener("input", function () {
+                                        const searchText = this.value.toLowerCase();
+
+                                        participants.forEach(participant => {
+                                            const name = participant.textContent.toLowerCase();
+                                            if (name.includes(searchText)) {
+                                                participant.style.display = "block";
+                                            } else {
+                                                participant.style.display = "none";
+                                            }
+                                        });
+                                    });
+
+                                    // Selection functionality
                                     participants.forEach(participant => {
                                         participant.addEventListener("click", function () {
                                             const participantId = this.getAttribute("data-id");

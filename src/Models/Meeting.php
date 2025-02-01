@@ -67,23 +67,46 @@ class Meeting {
             throw new \Exception("Failed to prepare statement: " . $this->db->getError());
         }
     }
-    
+
     // Create a new meeting
-    public function createMeeting($date, $startTime, $endTime, $mode, $location, $title, $description, $meetingURL) {
-        $sql = "INSERT INTO meeting (date, start_time, end_time, mode, location, meeting_title, meeting_description, meeting_URL) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
+    public function createMeeting($date, $startTime, $endTime, $mode, $location, $title, $description, $meetingURL, $participants = []) {
+        // insert into meeting table
+        $sql = "INSERT INTO meeting (date, start_time, end_time, mode, location, meeting_title, meeting_description, meeting_URL)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
         if ($stmt = $this->db->prepare($sql)) {
+            // Bind the parameters for the meeting
             $stmt->bind_param("ssssssss", $date, $startTime, $endTime, $mode, $location, $title, $description, $meetingURL);
             
-            if ($stmt->execute()) {
-                return $stmt->insert_id;
-            } else {
-                throw new \Exception("Failed to insert meeting: " . $stmt->error);
+            // Execute the query
+            if (!$stmt->execute()) {
+                throw new \Exception("Failed to create meeting: " . $stmt->error);
             }
+            
+            // Get the ID of the newly inserted meeting
+            $meetingID = $stmt->insert_id;
         } else {
             throw new \Exception("Failed to prepare statement: " . $this->db->getError());
         }
+
+        // Add participants to the users_meeting table
+        if (!empty($participants)) {
+            $sql = "INSERT INTO users_meeting (userID, meetingID) VALUES (?, ?)";
+        
+            foreach ($participants as $userID) {
+                if ($stmt = $this->db->prepare($sql)) {
+                    $stmt->bind_param("ii", $userID, $meetingID);
+                    
+                    // Execute the query for each participant
+                    if (!$stmt->execute()) {
+                        throw new \Exception("Failed to add participant to meeting: " . $stmt->error);
+                    }
+                } else {
+                    throw new \Exception("Failed to prepare statement for adding participant: " . $this->db->getError());
+                }
+            }
+        }
+        return $meetingID;
     }
 
     // Update an existing meeting

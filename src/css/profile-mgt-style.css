@@ -110,7 +110,8 @@ hr {
 
 .profile-image {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-image img {
@@ -120,12 +121,6 @@ hr {
   border: 1px solid #ddd;
   object-fit: cover;
   margin-bottom: 20px;
-}
-
-#imageUploadForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .details {
@@ -159,7 +154,7 @@ hr {
 }
 
 #submit,
-#imageUploadButton {
+#fileUploadButton {
   display: flex;
   background-color: #06509f;
   color: white;
@@ -168,11 +163,11 @@ hr {
   padding: 8px 15px;
   cursor: pointer;
   margin: 15px auto 0 auto;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
 }
 
 #submit:hover,
-#imageUploadButton:hover {
+#fileUploadButton:hover {
   background-color: #053f80;
 }
 

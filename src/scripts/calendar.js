@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
+        cell.setAttribute('data-date', `${year}-${(month + 1).toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`);
+
         // Allow selection of date
         cell.addEventListener("click", function () {
             if (selectedCell) {

@@ -44,6 +44,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
     <link rel="stylesheet" href="/FYPWise-web/src/css/calendar-style.css?v=<?php echo time(); ?>">
     <script src="/FYPWise-web/src/scripts/calendar.js?v=<?php echo time(); ?>"></script>
+    <style>
+        .scrollable-list {
+            max-height: 200px; /* Set a fixed height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .participant {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            color: #06509f;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+            border: 1px solid #06509f;
+        }
+
+        .participant:hover {
+            background-color: #d0e4ff;
+        }
+
+        .participant.selected {
+            background-color: #06509f;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -109,9 +140,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             </div>
                             
                             <div class="form-group">
-                                <label for="participants">Select Participants</label>
-                                <input type="text" id="participants" placeholder="Add participants">
+                                <label>Select Participants</label>
+                                <div id="participants-container">
+                                    <div class="scrollable-list">
+                                        <?php
+                                        $users = $db->query("SELECT id, name, role FROM users WHERE role IN ('lecturer', 'student')");
+                                        foreach ($users as $user) {
+                                            echo "<div class='participant' data-id='{$user['id']}'>";
+                                            echo "{$user['name']} ({$user['role']})";
+                                            echo "</div>";
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- Hidden input field to store selected participants -->
+                            <input type="hidden" id="participants" name="participants" value="">
+
+                            <!-- Display selected participants -->
+                            <div class="form-group">
+                                <label>Participants selected:</label>
+                                <ul id="selected-participants"></ul>
+                            </div>
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    const participants = document.querySelectorAll(".participant");
+                                    const selectedParticipantsList = document.getElementById("selected-participants");
+                                    const hiddenInput = document.getElementById("participants");
+
+                                    let selectedIds = [];
+
+                                    participants.forEach(participant => {
+                                        participant.addEventListener("click", function () {
+                                            const participantId = this.getAttribute("data-id");
+
+                                            // Toggle selection
+                                            if (selectedIds.includes(participantId)) {
+                                                selectedIds = selectedIds.filter(id => id !== participantId);
+                                                this.classList.remove("selected");
+                                            } else {
+                                                selectedIds.push(participantId);
+                                                this.classList.add("selected");
+                                            }
+
+                                            // Update the hidden input value
+                                            hiddenInput.value = selectedIds.join(",");
+
+                                            // Update the selected participants list
+                                            selectedParticipantsList.innerHTML = "";
+                                            selectedIds.forEach(id => {
+                                                let selectedText = document.querySelector(`.participant[data-id='${id}']`).textContent;
+                                                let li = document.createElement("li");
+                                                li.textContent = selectedText;
+                                                selectedParticipantsList.appendChild(li);
+                                            });
+
+                                            // If no participants are selected, show a placeholder message
+                                            if (selectedIds.length === 0) {
+                                                selectedParticipantsList.innerHTML = "<li>No participants selected</li>";
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
 
                             <div class="form-group">
                                 <label for="mode">Mode of Meeting</label>

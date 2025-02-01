@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Empty cells for days before the first day
         for (let i = 0; i < firstDay; i++) {
             const emptyCell = document.createElement("td");
+            emptyCell.classList.add("empty");
             row.appendChild(emptyCell);
         }
 
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to add a calendar cell (date)
     function addCalendarCell(day, row, year, month) {
         const cell = document.createElement("td");
+        cell.classList.add("day");
         cell.textContent = day;
 
         const today = new Date(); // Get current date dynamically

@@ -1,11 +1,11 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
+//use App\Models\SideMenu;
 use App\Models\Proposal;
 use App\Models\Db;
 
 $base = new Base("Proposal Details");
-$sideMenu = new SideMenu();
+//$sideMenu = new SideMenu();
 $db = new Db();
 $proposal = new Proposal($db);
 

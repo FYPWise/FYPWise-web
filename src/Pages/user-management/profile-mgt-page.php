@@ -39,8 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         alt="messages"></button></a>
             <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
         </div>
-        <a href="login?q=logout"><button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button></a>
+        <button id="logout-btn" onclick="showLogoutPopup()"><img src="./src/assets/logout2.png" alt="logout"></button>
     </div>
+    <!-- Logout Confirmation Popup -->
+    <?php include './src/Pages/common-ui/logoutConfirm.html'; ?>
 
     <!-- Main Container -->
     <div class="container">

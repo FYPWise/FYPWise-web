@@ -26,8 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./src/css/footer.css?v=<?php echo time(); ?>">
-    <script src="./src/scripts/profile_form_response.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body>

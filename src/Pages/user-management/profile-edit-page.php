@@ -2,10 +2,12 @@
 use App\Models\Base;
 use App\Models\Db;
 use App\Models\User;
+use App\Models\File;
 
 $base = new Base("Profile Management", ["student", "admin", "lecturer"]);
 $db = new Db();
 $user = new User();
+$file = new File();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['profile'])) {
@@ -13,10 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($existingUser && $_POST['student-id'] != $_SESSION['id']) {
             $error = "ID already in use.";
         } else {
-            $user->update("profile", $_SESSION['role']);
+            $user->update();
         }
     } elseif (isset($_POST['image'])) {
-        $user->update("image", $_SESSION['role']);
+        $file->uploadFile('image', './src/assets/pfp/', 'users', 'filename');
     }
 }
 ?>
@@ -26,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./src/css/footer.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -52,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Profile -->
         <div class="profile">
             <div class="profile-image">
-                <form id="imageUploadForm" method="post" enctype="multipart/form-data">
-                    <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
-                    <input type="file" id="imageUpload" name="image" accept="image/*"  required>
-                    <button type="submit" name="image" id="imageUploadButton">Upload Image</button>
+                <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
+                <form id="UploadForm" method="post" enctype="multipart/form-data">
+                    <input type="file" id="fileUpload" name="image" accept="image/*"  required>
+                    <button type="submit" name="file" id="fileUploadButton">Upload Image</button>
                 </form>
             </div>
             <div class="details">
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="form-group">
                         <label for="email"><strong>Email:</strong></label>
-                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\\d{10}@student\\.mmu\\.edu\\.my' : ($_SESSION['role'] == 'lecturer' ? 'L\\d{3}@lecturer\\.mmu\\.edu\\.my' : 'A\\d{3}@admin\\.mmu\\.edu\\.my'); ?>" title="Please enter your Student Email.">
+                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\\d{10}@student.' : ($_SESSION['role'] == 'lecturer' ? 'L\\d{3}@' : 'A\\d{3}@'); ?>mmu\.edu\.my" title="Please enter your Email.">
                     </div>
                     <?php if ($_SESSION['role'] == 'student') { ?>
                     <div class="form-group">
@@ -129,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <script src="./src/scripts/passwordCheck.js?v=<?php echo time(); ?>"></script>
                 <script>
                     passwordInput.addEventListener('focus', function() {
-                        
+                        tooltip.style.display = 'block';
 
                     });
                     

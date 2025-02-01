@@ -34,7 +34,7 @@ class Proposal {
         $result = $this->db->query($sql);
     
         if (!$result) {
-            throw new \Exception("Database query failed for query: $sql. Error: " . $this->db->getError());
+            throw new \Exception("Database query failed for query: $sql. Error: " . $this->db->conn->error);
         }
     
         $proposals = [];
@@ -130,7 +130,7 @@ class Proposal {
                     throw new \Exception("Failed to update proposal status: " . $stmt->error);
                 }
             } else {
-                throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+                throw new \Exception("Failed to prepare statement: " . $this->db->conn->error);
             }
         } catch (\Exception $e) {
             throw $e;

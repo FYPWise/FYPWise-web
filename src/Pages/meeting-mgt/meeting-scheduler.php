@@ -3,9 +3,21 @@ use App\Models\Base;
 use App\Models\Meeting;
 use App\Models\Db;
 
+// Start session to handle user data
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if the user is logged in, redirect if not
+if (!isset($_SESSION['mySession'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $db = new Db();
 $base = new Base("Schedule a Meeting", ["lecturer", "student"]);
 $meeting = new Meeting($db);
+$userID = $_SESSION['mySession'];
 
 $successMessage = "";
 $errorMessage = "";

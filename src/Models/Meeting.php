@@ -177,20 +177,27 @@ class Meeting {
                 FROM users u
                 JOIN users_meeting um ON u.userID = um.userID
                 WHERE um.meetingID = ?";
-
+    
         if ($stmt = $this->db->prepare($sql)) {
             $stmt->bind_param("i", $meetingID);
             $stmt->execute();
             $result = $stmt->get_result();
-
-            $users = [];
-            while ($row = $result->fetch_assoc()) {
-                $users[] = $row;
+            
+            // Debugging: Check if there are any rows returned
+            if ($result->num_rows > 0) {
+                $users = [];
+                while ($row = $result->fetch_assoc()) {
+                    $users[] = $row;
+                }
+                return $users;
+            } else {
+                // No users found for this meeting
+                return [];  // Empty array if no users
             }
-            return $users;
         } else {
             throw new \Exception("Failed to prepare statement: " . $this->db->getError());
         }
     }
+    
 }
 ?>

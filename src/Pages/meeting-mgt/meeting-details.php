@@ -42,6 +42,7 @@ if ($meetingID) {
 <head>
     <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
     <link rel="stylesheet" href="/FYPWise-web/src/css/meeting-acceptance-style.css">
+</head>
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
@@ -151,7 +152,7 @@ if ($meetingID) {
 
         </div>
         <?php $base->renderFooter() ?>
-    </div>
+  div>
 </body>
 
 </html>

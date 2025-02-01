@@ -64,11 +64,11 @@ $meetingLogs = $meetingLog->getMeetingLogsByUserID($userID);
                                 foreach ($meetingLogs as $log) {
                                     echo "<tr>";
                                     echo "<td><input type='checkbox' class='row-checkbox' value='{$log['meeting_logID']}'></td>";
-                                    echo "<td><a href='meeting-log-update-page.php?id={$log['meeting_logID']}'>{$log['meeting_logID']}</a></td>";
+                                    echo "<td><a href='/FYPWise-web/view-meeting-log-details/{$log['meeting_logID']}'>{$log['meeting_logID']}</a></td>";
                                     echo "<td>{$log['supervisorID']}</td>";
                                     echo "<td>{$log['projectID']}</td>";
                                     echo "<td><a href='/FYPWise-web/view-meeting-details/{$log['meetingID']}'>{$log['meetingID']}</a></td>";
-                                    echo "<td><a href='#'>{$log['file_path']}</a></td>";
+                                    echo "<td>{$log['file_path']}</a></td>";
                                     echo "<td>{$log['submission_date']}</td>";
                                     echo "<td>{$log['status']}</td>";
                                     echo "</tr>";

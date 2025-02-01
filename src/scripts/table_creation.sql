@@ -281,9 +281,11 @@ CREATE TABLE meeting_log (
     meetingID INT NOT NULL,
     studentID INT NOT NULL,
     projectID INT NOT NULL,
+    supervisorID INT NOT NULL,
     FOREIGN KEY (meetingID) REFERENCES meeting(meetingID),
     FOREIGN KEY (studentID) REFERENCES student(userID),
-    FOREIGN KEY (projectID) REFERENCES project(projectID)
+    FOREIGN KEY (projectID) REFERENCES project(projectID),
+    FOREIGN KEY (supervisorID) REFERENCES lecturer(userID)
 );
 -- --------------------------------------------------------
 

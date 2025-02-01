@@ -83,29 +83,7 @@ $taskDates = getTaskDates($db);
             <!-- Container for Calendar and Task -->
             <div class="mini-container1">
                 <!-- Calendar -->
-                <div class="calendar-section">
-                    <!-- Calendar Header -->
-                    <div class="calendar-header">
-                        <button id="prev-month" class="nav-btn">&lt;</button>
-                        <span id="month-display" class="month-display"></span>
-                        <button id="next-month" class="nav-btn">&gt;</button>
-                    </div>
-                    <!-- Calendar Table -->
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S</th>
-                                <th>M</th>
-                                <th>T</th>
-                                <th>W</th>
-                                <th>T</th>
-                                <th>F</th>
-                                <th>S</th>
-                            </tr>
-                        </thead>
-                        <tbody id="calendar"></tbody>
-                    </table>
-                </div>
+                <?php include "./src/Pages/common-ui/calendar.html"; ?>
                 <script>
                     var taskDates = <?php echo json_encode($taskDates); ?>;
                 </script>

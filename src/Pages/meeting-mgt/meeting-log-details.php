@@ -75,13 +75,37 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
                             <input type="hidden" name="meeting_logID" value="<?= htmlspecialchars($meetingLogDetails['meeting_logID'] ?? '') ?>">
 
                             <div class="form-group">
-                                <label for="student-id">Student ID</label>
-                                <p id="student-id"><?= htmlspecialchars($meetingLogDetails['studentID'] ?? 'N/A') ?></p>
+                                <label for="student-name">Student Name</label>
+                                <?php
+                                // Fetch student name from the database
+                                $studentName = 'N/A';
+                                if (isset($meetingLogDetails['studentID'])) {
+                                    $studentID = $meetingLogDetails['studentID'];
+                                    $query = $db->query("SELECT name FROM users WHERE userID = " . $studentID);
+                                    if ($query && $query->num_rows > 0) {
+                                        $result = $query->fetch_assoc();
+                                        $studentName = $result['name'];
+                                    }
+                                }
+                                ?>
+                                <p id="student-name"><?= htmlspecialchars($studentName) ?></p>
                             </div>
 
                             <div class="form-group">
-                                <label for="supervisor-id">Supervisor ID</label>
-                                <p id="supervisor-id"><?= htmlspecialchars($meetingLogDetails['supervisorID'] ?? 'N/A') ?></p>
+                                <label for="supervisor-name">Supervisor Name</label>
+                                <?php
+                                // Fetch supervisor name from the database
+                                $supervisorName = 'N/A';
+                                if (isset($meetingLogDetails['supervisorID'])) {
+                                    $supervisorID = $meetingLogDetails['supervisorID'];
+                                    $query = $db->query("SELECT name FROM users WHERE userID = " . $supervisorID);
+                                    if ($query && $query->num_rows > 0) {
+                                        $result = $query->fetch_assoc();
+                                        $supervisorName = $result['name'];
+                                    }
+                                }
+                                ?>
+                                <p id="supervisor-name"><?= htmlspecialchars($supervisorName) ?></p>
                             </div>
 
                             <div class="form-group">

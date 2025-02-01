@@ -21,3 +21,6 @@ $meetingRoutes->get("/FYPWise-web/view-meeting-log-details/([0-9]+)", function($
     echo "Meeting Log ID received: $meeting_logID";  // Debugging: To check if meeting_logID is captured correctly
     include "src/Pages/meeting-mgt/meeting-log-details.php";
 });
+$meetingRoutes->post("/FYPWise-web/view-meeting-log-details/([0-9]+)", function($meeting_logID) {
+    include "src/Pages/meeting-mgt/meeting-log-details.php";
+});

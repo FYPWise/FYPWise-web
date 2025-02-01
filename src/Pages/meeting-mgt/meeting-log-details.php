@@ -44,7 +44,7 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
 
     try {
         $meetingLog->updateMeetingLogStatus($meeting_logID, $newStatus, $newComment);
-        echo "<script>alert('Meeting Log updated successfully!'); window.location.href='meeting-log-details.php?meeting_logID=$meeting_logID';</script>";
+        echo "<script>alert('Meeting Log updated successfully!');  window.location.reload();</script>";
     } catch (Exception $e) {
         echo "<script>alert('Error updating meeting log: " . htmlspecialchars($e->getMessage()) . "');</script>";
     }
@@ -129,7 +129,7 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
 
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <?php if ($isLecturer): ?>
+                                <?php if ($isLecturer && $meetingLogDetails['status'] !== 'approved'): ?>
                                     <select id="status" name="status" required>
                                         <option value="submitted" <?= ($meetingLogDetails['status'] == 'submitted') ? 'selected' : '' ?>>Submitted</option>
                                         <option value="pending" <?= ($meetingLogDetails['status'] == 'pending') ? 'selected' : '' ?>>Pending</option>
@@ -143,14 +143,14 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
 
                             <div class="form-group">
                                 <label for="comment">Comment</label>
-                                <?php if ($isLecturer): ?>
+                                <?php if ($isLecturer && $meetingLogDetails['status'] !== 'approved'): ?>
                                     <textarea id="comment" name="comment" rows="6"><?= htmlspecialchars($meetingLogDetails['comment'] ?? '') ?></textarea>
                                 <?php else: ?>
                                     <p id="comment"><?= nl2br(htmlspecialchars($meetingLogDetails['comment'] ?? 'No comments')) ?></p>
                                 <?php endif; ?>
                             </div>
 
-                            <?php if ($isLecturer): ?>
+                            <?php if ($isLecturer && $meetingLogDetails['status'] !== 'approved'): ?>
                                 <div class="form-buttons">
                                     <button type="submit" class="btn submit-btn" name="update">Update</button>
                                     <button type="reset" class="btn reset-btn">Reset</button>

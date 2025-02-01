@@ -9,6 +9,15 @@
             $this->db = new Db();
         }
 
+        public function form(){
+            echo'
+            <form id="UploadForm" method="post" enctype="multipart/form-data">
+                <input type="file" id="fileUpload" name="image" accept="image/*"  required>
+                <button type="submit" name="file" id="fileUploadButton">Upload Image</button>
+            </form>
+            ';
+        }
+
         public function uploadFile($fileInputName, $targetDir, $tableName, $columnName) {
             $id = $_SESSION['id'];
             if ($fileInputName == 'image') {

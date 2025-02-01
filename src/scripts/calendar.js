@@ -69,10 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
             cell.classList.add("today");
         }
 
-        // Highlight task dates
-        const formattedDate = `${year}-${(month + 1).toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
-        if (taskDates.includes(formattedDate)) {
-            cell.classList.add("task-date");
+        /// Highlight task dates if taskDates is defined
+        if (typeof taskDates !== 'undefined') {
+            const formattedDate = `${year}-${(month + 1).toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+            if (taskDates.includes(formattedDate)) {
+                cell.classList.add("task-date");
+            }
         }
 
         // Allow selection of date

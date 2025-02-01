@@ -86,6 +86,14 @@ $taskDates = getTaskDates($db);
                 <?php include "./src/Pages/common-ui/calendar.html"; ?>
                 <script>
                     var taskDates = <?php echo json_encode($taskDates); ?>;
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Add event listener for double-click on calendar dates
+                        document.querySelectorAll('td.day').forEach(function(dateElement) {
+                            dateElement.addEventListener('dblclick', function() {
+                                openUpWindow();
+                            });
+                        });
+                    });
                 </script>
                 <!-- Task -->
                 <div class="task-section">

@@ -16,3 +16,4 @@ $meetingRoutes->get("/FYPWise-web/view-meeting-details/([0-9]+)", function($meet
 // Meeting Logs
 $meetingRoutes->get("/FYPWise-web/submit-meeting-log", "Pages/meeting-mgt/meeting-log-submission.php");
 $meetingRoutes->post("/FYPWise-web/submit-meeting-log", "Pages/meeting-mgt/meeting-log-submission.php");
+$meetingRoutes->get("/FYPWise-web/view-meeting-logs", "Pages/meeting-mgt/meeting-logs.php");

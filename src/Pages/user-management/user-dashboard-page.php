@@ -151,6 +151,7 @@ $taskDates = getTaskDates($db);
             <div class="announcement-section">
                 <h2>Announcements</h2>
                 <div class="announcement-box">
+                <?php if ($announcement->getTitle() !== null){ ?>
                     <div class="announcement-header">
                         <img src="./src/assets/pfp/<?php echo $announcement->getFN(); ?>" alt="User" class="user-image">
                         <div class="user-details">
@@ -162,6 +163,9 @@ $taskDates = getTaskDates($db);
                         <h4 class="announcement-title"><?php echo $announcement->getTitle(); ?></h4>
                         <p class="announcement-text"><?php echo $announcement->getDes(); ?></p>
                     </div>
+                <?php } else { ?>
+                <p>No announcement</p>
+                <?php } ?>
                 </div>
             </div>
             <!-- Container for Project progress, submission updates and quick shortcuts -->

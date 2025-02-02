@@ -30,6 +30,7 @@
     <div class="announcement">
         <p class="announcement-caption">Announcements</p>
         <div class="announcement-box">
+            <?php if ($announcement->getTitle() !== null){ ?>
             <div class="announcement-header">
                 <img src="./src/assets/pfp/<?php echo $announcement->getFN();?>" alt="User" class="user-image">
                 <div class="user-details">
@@ -42,6 +43,9 @@
                 <p class="announcement-text"><?php echo $announcement->getDes(); ?>
                 </p>
             </div>
+            <?php } else { ?>
+            <p>No announcement</p>
+            <?php } ?>
         </div>
     </div>
 

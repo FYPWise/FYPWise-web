@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+use App\Models\Base;
+use App\Models\Announcement;
+
+$base = new Base("Manage Announcement", "admin");
+?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
-    <title>History Management Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet"
-        href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
-    <link rel="stylesheet" href="../css/announcements-mgt-style.css">
+    <title>Assign Moderator</title>
     <link rel="stylesheet" href="../css/common-ui.css">
+    <link rel="stylesheet" href="../css/form-style.css">
+    <link rel="stylesheet" href="../css/announcements-mgt-style.css">
+    <link rel="stylesheet" href="../css/moderator-mgt-style.css">
 </head>
 
 <body>
-
     <div id="outer-container">
         <!-- Header Section -->
         <header>
@@ -24,7 +26,6 @@
             <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png" alt="home icon"></a></button>
         </header>
 
-        <!-- Main Content -->
         <div id="main-container">
             <nav id="side-menu">
                 <div class="search-container">
@@ -110,58 +111,35 @@
                     </li>
                 </ul>
             </nav>
-            <!-- Proposal Table Section -->
+
             <div class="content">
-                <div class="table-header-container">
-                    <h2>1211103220's Submission</h2>
+                <section class="main">
+                    <h1 id="page-name">Assign Moderator</h1>
 
-                    <div class="table-buttons">
-                        <button id="edit-btn"><img src="../assets/edit.png" alt="edit"></button>
-                        <button id="filter-btn"><img src="../assets/filter.png" alt="filter"></button>
-                        <button class="create-new-btn" type="button"
-                            onclick="location.href='new-announcement-page.html';"><img
-                                src="../assets/create-new-icon.png" alt="filter"></button>
-                    </div>
-                </div>
+                    <form class="form" id="">
+                        <!-- auto-generated Proposal ID -->
+                        <div class="form-group ">
+                            <label for="project-id">Project ID</label>
+                            <input type="text" id="project-id" name="project-id" required>
+                        </div>
 
+                        <div class="form-group ">
+                            <label for="moderator-id">Moderator ID</label>
+                            <input type="text" id="moderator-id" name="moderator-id" required>
+                        </div>
 
-                <div class="table-name">
-                    <table id="tablename-table">
-                        <thead>
-                            <th class="td-checkbox"><input title="select all" type="checkbox" id="select-all"></th>
-                            <th>Submission</th>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>
-                                </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td class="td-checkbox"><input title="S01" type="checkbox" class="row-checkbox" value="s001"></td>
-                                <td><a href="#">Meeting Log</a></td>
-                                <td>16/12/2024-9AM</td>
-                                <td>Week 1 - 7</td>
-                                <td><button class="more-btn" type="button">⋮</button></td>
-                            </tr>
-                            <tr>
-                                <td class="td-checkbox"><input title="S01" type="checkbox" class="row-checkbox" value="s001"></td>
-                                <td><a href="#">Report Submission</a></td>
-                                <td>31/12/2024-11PM</td>
-                                <td>Chapter 1 - 5</td>
-                                <td><button class="more-btn" type="button">⋮</button></td>
-                            </tr>
-                        </tbody>
-
-
-                    </table>
-                </div>
-
-                <div id="output"></div>
+                        <!-- submit and reset buttons -->
+                        <div class="form-buttons">
+                            <button type="submit" class="btn submit-btn">Submit</button>
+                            <button type="reset" class="btn reset-btn">Reset</button>
+                        </div>
+                    </form>
+                </section>
             </div>
+
+
         </div>
 
-        <!-- footer Section -->
         <footer>
             <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
                     Selangor,
@@ -173,32 +151,17 @@
                 <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
                     Desk</a>
             </div>
-            FYP Wise &copy; <em id="date"></em>Syabel Imran Aida Firzan
+            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
     </div>
 
     <!-- JavaScript -->
-    <script src="../scripts/table_search.js"></script>
-    <script src="../scripts/checkbox.js"></script>
     <script src="../scripts/side-menu.js"></script>
 
     <script>
-        document.querySelectorAll('.status').forEach(cell => {
-            const text = cell.textContent.trim(); // Get the text content of the cell
-            if (text === 'Published') {
-                cell.classList.add('published'); // Add 'published' class
-            } else if (text === 'Unpublished') {
-                cell.classList.add('unpublished'); // Add 'unpublished' class
-            }
-        });
+        document.getElementById("project-id").value = "P001";
     </script>
 
-    <!-- Initialize search functionality -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            initSearch("search-bar", "proposal-table");
-        });
-    </script>
 </body>
 
 </html>

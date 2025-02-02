@@ -162,8 +162,12 @@ form{
   margin-top: 10px;
 }
 
-textarea{
+#formgroup textarea{
   field-sizing: content;
+}
+
+textarea#announcement-description{
+  height: 50%;
 }
 
 .form-group > *:disabled{

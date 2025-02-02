@@ -19,7 +19,7 @@ class Presentation {
         $date = $this->db->escapeString($date);
         $mode = $this->db->escapeString($mode);
         $location = $this->db->escapeString($location);
-        $presentationURL = $this->db->escapeString($presentationURL);
+        $presentationURL = $this->db->escapeString($presentationURL ?? '');
         $status = $this->db->escapeString($status);
         $projectID = $this->db->escapeString($projectID);
 

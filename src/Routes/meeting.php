@@ -24,3 +24,5 @@ $meetingRoutes->get("/FYPWise-web/view-meeting-log-details/([0-9]+)", function($
 $meetingRoutes->post("/FYPWise-web/view-meeting-log-details/([0-9]+)", function($meeting_logID) {
     include "src/Pages/meeting-mgt/meeting-log-details.php";
 });
+$meetingRoutes->get("/FYPWise-web/book-presentation", "Pages/meeting-mgt/presentation-scheduler.php");
+$meetingRoutes->post("/FYPWise-web/book-presentation", "Pages/meeting-mgt/presentation-scheduler.php");

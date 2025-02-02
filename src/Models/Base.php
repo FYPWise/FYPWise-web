@@ -34,7 +34,7 @@ class Base{
             <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
                     for="user-side-menu" class="fas"></label></div>
             <div id="logo" onClick="location.href=\'/FYPWise-web\'" ></div>
-            <button id="home"><a href="/FYPWise-web/dashboard"><img src="./src/assets/home3.png"
+            <button id="home"><a href="/FYPWise-web/dashboard"><img src="/FYPWise-web/src/assets/home3.png"
                         alt="home icon" style="width:25px;"></a></button>
         </header>';
     }

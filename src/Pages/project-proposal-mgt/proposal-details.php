@@ -31,6 +31,8 @@ if ($proposalID) {
         echo "<p>Error: " . $e->getMessage() . "</p>";
     }
 }
+// check if user is admin
+$isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 
 // Handle form submission (only if admin)
 if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
@@ -114,7 +116,7 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
                         <div class="form-group">
                             <label for="status">Status</label>
-                            <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                            <?php if ($isAdmin && ($proposalDetails['status'] !== 'accepted' && $proposalDetails['status'] !== 'rejected')): ?>
                                 <select name="status" required>
                                     <option value="pending" <?php echo ($proposalDetails['status'] === 'pending') ? 'selected' : ''; ?>>Pending</option>
                                     <option value="accepted" <?php echo ($proposalDetails['status'] === 'accepted') ? 'selected' : ''; ?>>Accepted</option>
@@ -127,14 +129,14 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
                         <div class="form-group">
                             <label for="comment">Comment</label>
-                            <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                            <?php if ($isAdmin && ($proposalDetails['status'] !== 'accepted' && $proposalDetails['status'] !== 'rejected')): ?>
                                 <textarea name="comment" rows="4"><?php echo htmlspecialchars($proposalDetails['comment']); ?></textarea>
                             <?php else: ?>
                                 <p><?php echo nl2br(htmlspecialchars($proposalDetails['comment'])); ?></p>
                             <?php endif; ?>
                         </div>
 
-                        <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                        <?php if ($isAdmin && ($proposalDetails['status'] !== 'accepted' && $proposalDetails['status'] !== 'rejected')): ?>
                             <button type="submit" name="update" class="btn submit-btn">Save Changes</button>
                         <?php endif; ?>
                     </form>

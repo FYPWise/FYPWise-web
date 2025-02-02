@@ -207,14 +207,14 @@ $taskDates = getTaskDates($db);
                                 <a href="submit-meeting-log">Submit Meeting Log</a>
                             </div>
                             <div class="task">
-                                <a href="./src/project-management-mgt/project-approval-page.html">Project Approval</a>
+                                <a href="projectplanapproval">Project Approval</a>
                             </div>
                         <?php } else { ?>
                             <div class="task">
-                                <a href="./src/project-management-mgt/project-timeline-planning.html">Assign Moderator</a>
+                                <a href="moderator-management">Assign Moderator</a>
                             </div>
                             <div class="task">
-                                <a href="./src/meeting-mgt/meeting-scheduler-page.html">Make Announcement</a>
+                                <a href="new-announcement">Make Announcement</a>
                             </div>
                             <div class="task">
                                 <a href="new-user">Create Profile</a>

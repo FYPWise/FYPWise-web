@@ -24,3 +24,15 @@ $meetingRoutes->get("/FYPWise-web/view-meeting-log-details/([0-9]+)", function($
 $meetingRoutes->post("/FYPWise-web/view-meeting-log-details/([0-9]+)", function($meeting_logID) {
     include "src/Pages/meeting-mgt/meeting-log-details.php";
 });
+
+// Presentation
+$meetingRoutes->get("/FYPWise-web/book-presentation", "Pages/meeting-mgt/presentation-scheduler.php");
+$meetingRoutes->post("/FYPWise-web/book-presentation", "Pages/meeting-mgt/presentation-scheduler.php");
+$meetingRoutes->get("/FYPWise-web/view-presentations", "Pages/meeting-mgt/presentations-page.php");
+$meetingRoutes->get("/FYPWise-web/view-presentation-details/([0-9]+)", function($presentationID) {
+    echo "Presentation ID received: $presentationID";  // Debugging: To check if presentationID is captured correctly
+    include "src/Pages/meeting-mgt/presentation-details.php";
+});
+$meetingRoutes->post("/FYPWise-web/view-presentation-details/([0-9]+)", function($presentationID) {
+    include "src/Pages/meeting-mgt/presentation-details.php";
+});

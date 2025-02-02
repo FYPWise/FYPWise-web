@@ -3,7 +3,8 @@ use App\Models\Base;
 use App\Models\Db;
 use App\Models\Project;
 
-$base = new Base("Milestone Submission");
+
+$base = new Base("Milestone Submission", ['lecturer']);
 $db = new Db();
 $projectModel = new Project($db);
 
@@ -134,6 +135,9 @@ if (!$milestone) {
     <!-- Outer Container -->
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
+
+        <?php $base->renderMenu(); ?>
+
 
         <div id="main-container">
             <div class="content">

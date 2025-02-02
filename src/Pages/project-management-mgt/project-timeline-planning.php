@@ -4,15 +4,27 @@ use App\Models\Db;
 use App\Models\Project;
 use App\Models\File;
 
-$base = new Base("Project Timeline Planning");
+
+$base = new Base("Project Timeline Planning", ['student']);
 $db = new Db();
 $projectModel = new Project($db);
 $file = new File();
 
-// Fetch all submitted milestones from database
+// Fetch all submitted milestones from the database
 $milestones = $projectModel->getSubmittedMilestones();
 $nextMilestoneID = $projectModel->getNextMilestoneID();
 
+// Handle milestone status update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_milestone'])) {
+    foreach ($_POST['milestoneID'] as $index => $milestoneID) {
+        $status = $_POST['status'][$index];
+        $projectModel->updateMilestoneStatus($milestoneID, $status);
+    }
+    echo "<script>alert('✅ Milestones updated successfully!'); window.location.href='/FYPWise-web/projecttimelineplanning';</script>";
+    exit();
+}
+
+// Handle file uploads
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['gantt_chartbtn'])) {
         $file->uploadFile('gantt_chart', './uploads/Gantt Chart/', 'project_timeline', 'gantt_chart_pdf');
@@ -24,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 20px;
         }
 
-        .milestone-section, .file-upload-section {
+        .milestone-section,
+        .file-upload-section {
             background: white;
             padding: 25px;
             border-radius: 10px;
@@ -69,25 +83,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 15px;
         }
 
-        .milestone-table th, .milestone-table td {
+        .milestone-table th,
+        .milestone-table td {
             padding: 12px;
             border-bottom: 1px solid #ddd;
             text-align: left;
             white-space: nowrap;
         }
 
-        .milestone-table th:nth-child(2),
-        .milestone-table td:nth-child(2) {
-            width: 15%;
-        }
-
-        .milestone-table th:nth-child(3),
-        .milestone-table td:nth-child(3) {
-            width: 30%;
-        }
-
         .milestone-table th {
-            background: #ff4d4d;
+            background: #333;
             color: white;
         }
 
@@ -124,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 20px auto;
             transition: 0.3s;
         }
-
         .add-milestone-btn:hover {
             background: #003399;
         }
@@ -196,9 +200,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </style>
 </head>
+
 <body>
     <div id="outer-container">
         <?php $base->renderHeader() ?>
+
+        <?php $base->renderMenu(); ?>
 
         <div class="container">
             <div class="page-header">Project Timeline Planning</div>
@@ -206,7 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Milestones Section -->
             <div class="milestone-section">
                 <h2 style="text-align: center;">Milestones</h2>
-                <form action="/FYPWise-web/update-milestone-status" method="POST">
+                <form action="" method="POST">
+
                     <table class="milestone-table">
                         <thead>
                             <tr>
@@ -217,15 +225,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($milestones as $milestone) : ?>
+                            <?php foreach ($milestones as $milestone): ?>
                                 <tr>
                                     <td>
-                                        <span class="milestone-id">#<?= htmlspecialchars($milestone['milestoneID']) ?></span> - 
                                         <?= htmlspecialchars($milestone['milestone_title']) ?>
                                     </td>
+
                                     <td><?= htmlspecialchars($milestone['milestone_end_date']) ?></td>
                                     <td>
-                                        <input type="hidden" name="milestoneID[]" value="<?= htmlspecialchars($milestone['milestoneID']) ?>">
+                                        <input type="hidden" name="milestoneID[]"
+                                            value="<?= htmlspecialchars($milestone['milestoneID']) ?>">
+
                                         <select name="status[]" class="status-dropdown">
                                             <option value="not-started" <?= $milestone['status'] == 'not-started' ? 'selected' : '' ?>>Not Started</option>
                                             <option value="in-progress" <?= $milestone['status'] == 'in-progress' ? 'selected' : '' ?>>In Progress</option>
@@ -233,15 +243,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </select>
                                     </td>
                                     <td>
-                                        <button type="submit" name="milestone" class="btn status-btn">Update</button>
+                                        <button type="submit" name="update_milestone" class="btn status-btn">Update</button>
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                 </form>
-                <a href="/FYPWise-web/milestoneform?nextMilestoneID=<?= htmlspecialchars($projectModel->getNextMilestoneID()) ?>" class="btn">Add Milestone</a>
-                </div>
+                <a href="/FYPWise-web/milestoneform?nextMilestoneID=<?= htmlspecialchars($nextMilestoneID) ?>"
+                    class="btn">Add Milestone</a>
+            </div>
 
             <!-- File Upload Section -->
             <div class="file-upload-section">
@@ -272,4 +284,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php $base->renderFooter() ?>
     </div>
 </body>
+
 </html>

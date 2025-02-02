@@ -5,12 +5,15 @@ use App\Models\File;
 $base = new Base("Final Report Submission", ["student"]);
 $finalSubmissionModel = new File();
 
-$finalSubmissionModel->submitFinalReport();
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit_report'])) {
+    $submissionMessage = $finalSubmissionModel->submitFinalReport();
+    echo "<script>alert('" . addslashes($submissionMessage) . "'); window.location.href='/FYPWise-web/final-submission';</script>";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <style>
         body {
@@ -19,7 +22,6 @@ $finalSubmissionModel->submitFinalReport();
             margin: 0;
             padding: 0px;
         }
-
 
         .container {
             width: 50%;
@@ -77,6 +79,8 @@ $finalSubmissionModel->submitFinalReport();
 </head>
 <div id="outer-container">
     <?php $base->renderHeader(); ?>
+    
+    <?php $base->renderMenu(); ?>
 
     <body>
         <div class="container">
@@ -109,5 +113,5 @@ $finalSubmissionModel->submitFinalReport();
         </div>
         <?php $base->renderFooter(); ?>
     </body>
-
+</div>
 </html>

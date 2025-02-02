@@ -4,7 +4,8 @@ use App\Models\Marksheet;
 use App\Models\CriteriaModel;
 use App\Models\Db;
 
-$base = new Base("Marksheet Details");
+
+$base = new Base("Marksheet Details", ['lecturer']);
 $db = new Db();
 $marksheetModel = new Marksheet($db);
 $criteriaModel = new CriteriaModel($db);
@@ -19,13 +20,13 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marksheet Details</title>
+    <link rel="stylesheet" href="../css/common-ui.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
             margin: 0;
             padding: 0;
-            text-align: center;
         }
         .container {
             max-width: 700px;
@@ -45,6 +46,15 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
+
+        /* Darker Header for Criteria, Score, and Comments */
+        th {
+            background-color:rgb(112, 136, 161);
+            color: darkblue;
+            font-size: 1.1em;
+        }
+        td {
+            background-color: #f8f9fa;
         th {
             background-color: #007bff;
             color: blue;
@@ -57,6 +67,8 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            font-weight: bold;
+
         }
         .back-btn:hover {
             background: #0056b3;
@@ -65,36 +77,46 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
 </head>
 <body>
 
-<div class="container">
-    <h2>Marksheet Details</h2>
-    <h3>Marksheet ID: <?= htmlspecialchars($marksheetID) ?></h3>
+<div id="outer-container">
+    <?php $base->renderHeader(); ?>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Criteria</th>
-                <th>Score</th>
-                <th>Comments</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        if (!empty($criteriaScores)) {
-            foreach ($criteriaScores as $row) {
-                echo "<tr>";
-                echo "<td>".htmlspecialchars($row['criteria'])."</td>";
-                echo "<td>".htmlspecialchars($row['score'])."</td>";
-                echo "<td>".htmlspecialchars($row['comment'])."</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='3'>No scores found.</td></tr>";
-        }
-        ?>
-        </tbody>
-    </table>
+    <?php $base->renderMenu(); ?>
 
-    <a href="/FYPWise-web/marksheetpage" class="back-btn">Back to Marksheet</a>
+    <div id="main-container">
+        <div class="container">
+            <h2>Marksheet Details</h2>
+            <h3>Marksheet ID: <?= htmlspecialchars($marksheetID) ?></h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Criteria</th>
+                        <th>Score</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                if (!empty($criteriaScores)) {
+                    foreach ($criteriaScores as $row) {
+                        echo "<tr>";
+                        echo "<td>".htmlspecialchars($row['criteria'])."</td>";
+                        echo "<td>".htmlspecialchars($row['score'])."</td>";
+                        echo "<td>".htmlspecialchars($row['comment'])."</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3'>No scores found.</td></tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+
+            <a href="/FYPWise-web/marksheetpage" class="back-btn">Back to Marksheet</a>
+        </div>
+    </div>
+
+    <?php $base->renderFooter(); ?>
 </div>
 
 </body>

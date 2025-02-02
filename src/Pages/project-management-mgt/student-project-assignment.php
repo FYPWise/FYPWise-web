@@ -3,23 +3,44 @@
 use App\Models\Base;
 use App\Models\Db;
 use App\Models\Project;
-use App\Models\Proposal;
+use App\Models\ProposalFetcher; 
 
-$base = new Base("Student Project Assignment");
+$base = new Base("Student Project Assignment", ['lecturer']);
 $db = new Db();
 $projectModel = new Project($db);
-$proposalModel = new Proposal($db);
+$proposalFetcher = new ProposalFetcher($db); // Use the new ProposalFetcher
 
 $projectID = $_GET['projectID'] ?? null;
 $proposalID = $_GET['proposalID'] ?? null;
 
-$proposal = $proposalModel->getProposalByID($proposalID);
-$project = $projectModel->getProjectById($projectID);
+// Debugging: Ensure `proposalID` is passed
+if (!$proposalID) {
+    die("<script>alert('❌ ERROR: Proposal ID is missing. Please check project linkage.'); window.history.back();</script>");
+}
 
+// Fetch proposal safely using new model
+try {
+    $proposal = $proposalFetcher->fetchProposalByID($proposalID);
+    if (!$proposal) {
+        die("<script>alert('❌ ERROR: No matching proposal found in the database for ID " . htmlspecialchars($proposalID) . "'); window.history.back();</script>");
+    }
+} catch (Exception $e) {
+    die("<script>alert('❌ SQL ERROR: " . addslashes($e->getMessage()) . "');</script>");
+}
+
+// Fetch project details
+try {
+    $project = $projectModel->getProjectById($projectID);
+} catch (Exception $e) {
+    error_log("Project Fetch Error: " . $e->getMessage());
+    $project = null;
+}
+
+// Handling form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
     $startDate = $_POST['start_date'];
     $endDate = $_POST['end_date'];
-    $studentID = $_POST['student']; // User entered Student ID
+    $studentID = $_POST['student'];
 
     // Convert studentID to userID
     $userID = $projectModel->getUserIDByStudentID($studentID);
@@ -41,8 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
         }
     }
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -53,55 +72,82 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
     <title>Assign Advisee</title>
     <link rel="stylesheet" href="../css/common-ui.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        #outer-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header,
+        .footer {
+            width: 100%;
+            background-color: #003366;
+            /* Dark blue */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            min-height: 100vh;
-            background-color: #f4f7f6;
-            margin-top: 80px;
-        }
-
-        .content {
-            width: 90%;
-            max-width: 700px;
+            width: 100%;
+            max-width: 600px;
             background: white;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-top: 100px;
+            /* Push form below header */
         }
 
         .form-title {
-            font-size: 26px;
+            font-size: 28px;
             color: #333;
             margin-bottom: 20px;
             font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
         }
 
         .form-group label {
             font-weight: bold;
             display: block;
-            margin: 10px 0 5px;
             font-size: 16px;
-            text-align: left;
+            margin-bottom: 5px;
         }
 
+        .form-group span,
         .form-group input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 16px;
             background-color: #f9f9f9;
+            display: block;
         }
 
         .form-group span,
@@ -128,16 +174,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
         .form-buttons {
             margin-top: 20px;
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            justify-content: space-between;
         }
 
         .btn {
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 14px 20px;
+            font-size: 18px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
+            font-weight: bold;
+            width: 48%;
             transition: background 0.3s ease-in-out;
         }
 
@@ -159,14 +206,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
             background: #a71d2a;
         }
 
+        /* Full-width fixed footer */
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .content {
-                width: 100%;
+            .container {
+                width: 90%;
                 max-width: 90%;
+                margin-top: 80px;
             }
 
-            .date-container {
+            .form-buttons {
                 flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
     </style>
@@ -175,17 +241,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
+       
 
         <div class="container">
-            <div class="content">
-                <h2 class="form-title">Assign Advisee</h2>
+            <h2 class="form-title">Assign Advisee</h2>
 
+            <?php if (!$proposal): ?>
+                <p style="color: red; font-weight: bold;">❌ Unable to load proposal details.</p>
+            <?php else: ?>
                 <form action="" method="POST">
                     <input type="hidden" name="projectID" value="<?php echo htmlspecialchars($projectID); ?>">
                     <input type="hidden" name="proposalID" value="<?php echo htmlspecialchars($proposalID); ?>">
 
-                    <p><strong>PROPOSAL ID:</strong> <?php echo htmlspecialchars($proposalID); ?></p>
-                    <p><strong>PROJECT ID:</strong> <?php echo htmlspecialchars($projectID); ?></p>
+                    <div class="form-group">
+                        <label><strong>Proposal ID:</strong></label>
+                        <span><?php echo htmlspecialchars($proposalID); ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Project ID:</strong></label>
+                        <span><?php echo htmlspecialchars($projectID); ?></span>
+                    </div>
 
                     <div class="form-group">
                         <label><strong>Proposal Title:</strong></label>
@@ -197,22 +273,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
                         <div><?php echo htmlspecialchars($proposal['proposal_description']); ?></div>
                     </div>
 
-                    <div class="date-container">
-                        <div class="form-group">
-                            <label for="start_date">Start Date:</label>
-                            <input type="date" id="start_date" name="start_date" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="end_date">End Date:</label>
-                            <input type="date" id="end_date" name="end_date" required>
-                        </div>
-                    </div>
-
                     <div class="form-group">
-                    <label for="student">Student ID:</label>
-<input type="text" id="student" name="student" required placeholder="Enter Student ID">
-
+                        <label for="student">Student ID:</label>
+                        <input type="text" id="student" name="student" required placeholder="Enter Student ID">
                     </div>
 
                     <div class="form-buttons">
@@ -220,10 +283,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
                         <button type="button" class="btn cancel-btn" onclick="window.history.back();">Cancel</button>
                     </div>
                 </form>
-            </div>
+            <?php endif; ?>
+
         </div>
 
         <?php $base->renderFooter(); ?>
     </div>
 </body>
+
+
 </html>

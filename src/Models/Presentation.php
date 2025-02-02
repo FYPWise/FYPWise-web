@@ -59,5 +59,36 @@ class Presentation {
             return [];
         }
     }
+
+    public function getPresentationByID($presentationID) {
+        $presentationID = $this->db->escapeString($presentationID);
+    
+        $sql = "SELECT 
+                    p.*, 
+                    pr.projectID, 
+                    pr.studentID, 
+                    u1.name AS studentName,
+                    lp.lecturerID AS moderatorID, 
+                    u2.name AS moderatorName,
+                    l2.userID AS supervisorID,
+                    u3.name AS supervisorName
+                FROM presentation p
+                INNER JOIN project pr ON p.projectID = pr.projectID
+                INNER JOIN users u1 ON pr.studentID = u1.userID
+                LEFT JOIN lecturer_project lp ON pr.projectID = lp.projectID AND lp.lecturer_role = 'moderator'
+                LEFT JOIN users u2 ON lp.lecturerID = u2.userID
+                INNER JOIN lecturer_project l ON pr.projectID = l.projectID AND l.lecturer_role = 'supervisor'
+                INNER JOIN lecturer l2 ON l.lecturerID = l2.userID
+                LEFT JOIN users u3 ON l2.userID = u3.userID
+                WHERE p.presentationID = '$presentationID'";
+    
+        $result = $this->db->query($sql);
+    
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }    
 }
 ?>

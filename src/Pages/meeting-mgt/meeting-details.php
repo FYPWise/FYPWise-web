@@ -152,7 +152,7 @@ if ($meetingID) {
 
         </div>
         <?php $base->renderFooter() ?>
-  div>
+    </div>
 </body>
 
 </html>

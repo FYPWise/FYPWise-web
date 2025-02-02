@@ -63,7 +63,7 @@ $allPresentations = $presentation->getAllPresentations();
                                 foreach ($allPresentations as $presentation) {
                                     echo "<tr>";
                                     echo "<td><input type='checkbox' class='row-checkbox' value='{$presentation['presentationID']}'></td>";
-                                    echo "<td>{$presentation['presentationID']}</td>";
+                                    echo "<td><a href='/FYPWise-web/view-presentation-details/{$presentation['presentationID']}'>{$presentation['presentationID']}</a></td>";
                                     echo "<td>{$presentation['projectID']}</td>";
                                     echo "<td>{$presentation['date']}</td>";
                                     echo "<td>" . date('H:i', strtotime($presentation['start_time'])) . " - " . date('H:i', strtotime($presentation['end_time'])) . "</td>";

@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Base;
 use App\Models\Db;
 use App\Models\Project;
@@ -65,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,6 +148,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
             font-size: 16px;
             background-color: #f9f9f9;
             display: block;
+        }
+
+        .form-group span,
+        .form-group div {
+            display: block;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .date-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .date-container .form-group {
+            flex: 1;
         }
 
         .form-buttons {
@@ -263,10 +284,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
                     </div>
                 </form>
             <?php endif; ?>
+
         </div>
 
         <?php $base->renderFooter(); ?>
     </div>
 </body>
+
 
 </html>

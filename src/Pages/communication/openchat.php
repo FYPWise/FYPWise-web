@@ -36,7 +36,7 @@ if ($chat->loadChat($id)) {
             </section>
         </li>
 
-    <?php } 
+    <?php } ?> </ul>  <?php
 }else{ 
     $latestId = "null";
     ?>

@@ -82,6 +82,7 @@ $userID = $_SESSION['userID'] ?? null; // Retrieve userID from session
                                         } else {
                                             echo "<td><span class='error-text'>❌ No Proposal ID Found</span></td>";
                                         }
+
                                     }
 
                                     echo "<td>" . htmlspecialchars($row['project_status']) . "</td>";

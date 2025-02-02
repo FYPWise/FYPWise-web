@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Proposal;
 use App\Models\Db;
 
-$base = new Base("Proposal Details");
+$base = new Base("Proposal Details", ["admin", "lecturer"]);
 $db = new Db();
 $proposal = new Proposal($db);
 
@@ -31,6 +31,8 @@ if ($proposalID) {
         echo "<p>Error: " . $e->getMessage() . "</p>";
     }
 }
+// check if user is admin
+$isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 
 // Handle form submission (only if admin)
 if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
@@ -39,7 +41,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
     try {
         $proposal->updateProposalStatus($proposalID, $newStatus, $newComment);
-        echo "<script>alert('Proposal status updated successfully!'); window.location.reload();</script>";
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
     } catch (Exception $e) {
         echo "<script>alert('Error updating proposal: " . $e->getMessage() . "');</script>";
     }
@@ -47,8 +50,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 ?>
 
 <head>
-    <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css">
-    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div id="outer-container">
@@ -114,7 +117,7 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
                         <div class="form-group">
                             <label for="status">Status</label>
-                            <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                            <?php if ($isAdmin && ($proposalDetails['status'] !== 'accepted' && $proposalDetails['status'] !== 'rejected')): ?>
                                 <select name="status" required>
                                     <option value="pending" <?php echo ($proposalDetails['status'] === 'pending') ? 'selected' : ''; ?>>Pending</option>
                                     <option value="accepted" <?php echo ($proposalDetails['status'] === 'accepted') ? 'selected' : ''; ?>>Accepted</option>
@@ -127,14 +130,14 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
                         <div class="form-group">
                             <label for="comment">Comment</label>
-                            <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                            <?php if ($isAdmin && ($proposalDetails['status'] !== 'accepted' && $proposalDetails['status'] !== 'rejected')): ?>
                                 <textarea name="comment" rows="4"><?php echo htmlspecialchars($proposalDetails['comment']); ?></textarea>
                             <?php else: ?>
                                 <p><?php echo nl2br(htmlspecialchars($proposalDetails['comment'])); ?></p>
                             <?php endif; ?>
                         </div>
 
-                        <?php if ($isAdmin && $proposalDetails['status'] !== 'accepted'): ?>
+                        <?php if ($isAdmin && ($proposalDetails['status'] !== 'accepted' && $proposalDetails['status'] !== 'rejected')): ?>
                             <button type="submit" name="update" class="btn submit-btn">Save Changes</button>
                         <?php endif; ?>
                     </form>

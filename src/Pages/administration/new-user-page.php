@@ -9,7 +9,7 @@ function getNewLecturerID() {
     return $user->getNewLecturerID();
 }
 
-$newLecturerID = getNewLecturerID();
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,6 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user->create($_POST['role']);
     echo"created";
 }
+
+$newLecturerID = getNewLecturerID();
 ?>
 
 <head>
@@ -51,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <div class="form-group ">
                             <label for="user-id">User ID</label>
-                            <input class="disabled" type="text" id="user-id" name="id" required disabled>
+                            <input class="disabled" type="text" id="user-id" name="id" required>
                         </div>
 
                         <div class="form-group">
@@ -63,10 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="position">Position</label>
                             <select id="position" name="position" required>
                                 <option value="" disabled selected>Select Lecturer's Position</option>
-                                <option value="student">Professor</option>
-                                <option value="student">Associate Professor</option>
-                                <option value="student">Senior Lecturer</option>
-                                <option value="lecturer">Lecturer</option>
+                                <option value="Professor">Professor</option>
+                                <option value="Associate Professor">Associate Professor</option>
+                                <option value="Senior Lecturer">Senior Lecturer</option>
+                                <option value="Lecturer">Lecturer</option>
                             </select>
                         </div>
 

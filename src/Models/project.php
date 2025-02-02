@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Db;
+use App\Models\User;
 
 class Project {
     private $db;
@@ -203,6 +204,17 @@ class Project {
         }
     }
    
+
+                echo "<pre>✅ SUCCESS: Project updated successfully!</pre>";
+                return true;
+            } else {
+                echo "<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>";
+            }
+        } else {
+            echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>";
+        }
+        return false;
+    }
     
     
     public function getAllProjectTimelines() {
@@ -312,7 +324,7 @@ class Project {
                     m.milestone_title,  
                     m.milestone_description,  
                     m.milestone_start_date, 
-                    m.milestone_end_date, 
+                    m.milestone_end_date,
                     COALESCE(pt.status, 'not-started') AS status 
                 FROM milestone m
                 LEFT JOIN project_timeline pt ON m.timelineID = pt.timelineID
@@ -326,7 +338,6 @@ class Project {
     
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
     
 
 public function getTimelineFiles()
@@ -469,6 +480,46 @@ public function submitFinalReport($projectID) {
     }
 }
 
+public function getModerator($id){
+    $sql = "SELECT lp.lecturerID
+            FROM `lecturer_project`lp
+            JOIN project p ON lp.projectID = p.projectID
+            WHERE p.projectID = $id ;";
+
+    $result = $this->db->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array();
+        $user = new User();
+        $user->readUserId($row[0]);
+
+        return $user->getId();
+    }else{
+        return null;
+    }
+}
+
+public function assignModerator($id, $projectID){
+    $user = new User();
+
+    if($user->readId($id) && $user->getRole() == "lecturer"){
+        $userID = $user->getUserID();
+
+        $sql = "INSERT INTO `lecturer_project`(`projectID`, `lecturerID`, `lecturer_role`) VALUES ('$projectID','$userID','moderator')";
+
+        $result = $this->db->query($sql);
+
+        if ($result){
+            return true;
+        }else{
+            return "sql error";
+        }
+    }else{
+        return $user->getRole();
+    }
+
+    
+}
 
 
 }

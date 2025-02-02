@@ -113,7 +113,7 @@ class User{
             $row = $result->fetch_row();
             $id = explode("L", $row[0]);
             $id = intval( $id[1] );
-
+            $id++;
             if ($id < 10){
                 $head = "L00";
             }elseif ($id <100){
@@ -122,7 +122,7 @@ class User{
                 $head = "L";
             }
 
-            $newID = $head . strval($id+1);
+            $newID = $head . strval($id);
             
             
             return $newID;
@@ -155,6 +155,7 @@ class User{
                 'lecturer' => "INSERT INTO lecturer (userID, lecturerID, position) VALUES ('$userId', '$id', '$position')"
             };
             
+            echo $tableSql;
             $this->db->query($tableSql);
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->conn->error;

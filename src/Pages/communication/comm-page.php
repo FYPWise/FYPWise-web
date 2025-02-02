@@ -51,6 +51,11 @@ $chat->loadChat('1');
                     </ul>
 
                 </div>
+
+                <div class="main" id="send-message">    
+                    <textarea id="messagebox" type="text" name="message"> </textarea>
+                    <button id="sendbutton">Send</button>
+                </div>
             </div>
 
 
@@ -58,6 +63,7 @@ $chat->loadChat('1');
 
         <script>
             
+            let Gid = 0;
             var outerContainer = document.getElementById("outer-container");
 
             outerContainer.scrollTop = outerContainer.scrollHeight;
@@ -81,7 +87,9 @@ $chat->loadChat('1');
                 xmlhttp.send();
                 
                 interval = setInterval(function() {
+                    Gid = id;
                     checkNewMessage(id, latestId);
+                    console.log(id);
                 }, 1000);
 
                 
@@ -127,6 +135,26 @@ $chat->loadChat('1');
                     
                     }
             }
+
+            function sendMessage(content, id){
+            if (id !== ""){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        document.getElementById("messagebox").value = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "sendMessage?content="+content+"&id="+id, true);
+                xmlhttp.send();
+                }
+            }
+
+            var sendbutton =document.getElementById('sendbutton');
+            sendbutton.addEventListener('click', function(e){
+                var content =document.getElementById('messagebox').value;
+                e.preventDefault();
+                sendMessage(content, Gid)
+            });
         </script>
 
         <?php $base->renderFooter() ?>

@@ -24,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit(); // Stop further execution
     }
 }
-
 ?>
 
 <body>

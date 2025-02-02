@@ -4,6 +4,7 @@ use App\Models\Db;
 use App\Models\Project;
 use App\Models\File;
 
+
 $base = new Base("Project Timeline Planning", ['student']);
 $db = new Db();
 $projectModel = new Project($db);
@@ -128,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 20px auto;
             transition: 0.3s;
         }
-
         .add-milestone-btn:hover {
             background: #003399;
         }
@@ -175,6 +175,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .btn:hover {
             background: #003399;
         }
+
+        /* Responsive Design */
+        @media screen and (max-width: 900px) {
+            .container {
+                padding: 15px;
+            }
+
+            .milestone-table th, .milestone-table td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .milestone-table th:nth-child(2),
+            .milestone-table td:nth-child(2) {
+                width: 20%;
+            }
+
+            .milestone-table th:nth-child(3),
+            .milestone-table td:nth-child(3) {
+                width: 35%;
+            }
+        }
+
     </style>
 </head>
 
@@ -191,6 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="milestone-section">
                 <h2 style="text-align: center;">Milestones</h2>
                 <form action="" method="POST">
+
                     <table class="milestone-table">
                         <thead>
                             <tr>
@@ -211,6 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <td>
                                         <input type="hidden" name="milestoneID[]"
                                             value="<?= htmlspecialchars($milestone['milestoneID']) ?>">
+
                                         <select name="status[]" class="status-dropdown">
                                             <option value="not-started" <?= $milestone['status'] == 'not-started' ? 'selected' : '' ?>>Not Started</option>
                                             <option value="in-progress" <?= $milestone['status'] == 'in-progress' ? 'selected' : '' ?>>In Progress</option>
@@ -219,6 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </td>
                                     <td>
                                         <button type="submit" name="update_milestone" class="btn status-btn">Update</button>
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

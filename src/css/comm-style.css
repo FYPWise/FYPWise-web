@@ -60,6 +60,11 @@ body:has(.menubutton > input:checked) #chat-container {
   z-index: 2;
 }
 
+.content{
+  position: relative;
+  overflow-x: hidden;
+}
+
 #page-side {
   background-color: #f4f4f4;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
@@ -164,6 +169,7 @@ body:has(.menubutton > input:checked) #chat-container {
   padding-left: 20px;
   margin-left: 250px;
   padding-right: 20px;
+  margin-bottom: 50px;
 }
 
 #chat-container ul {
@@ -199,7 +205,7 @@ body:has(.menubutton > input:checked) #chat-container {
   bottom: 0;
 }
 
-.chat-received .chat-bubble::after {
+/* .chat-received .chat-bubble::after {
   border-right: 10px solid #c9def5;
   translate: -8px 0;
 }
@@ -208,7 +214,7 @@ body:has(.menubutton > input:checked) #chat-container {
   border-left: 10px solid #fac8c9;
   right: 0;
   translate: 8px 0;
-}
+} */
 
 .chat-text {
   padding: 5px 10px 5px 5px;
@@ -233,6 +239,15 @@ body:has(.menubutton > input:checked) #chat-container {
 .chat-sended {
   text-align: right;
   margin-left: auto;
+}
+
+#send-message{
+  position: absolute;
+  bottom: 0;
+}
+
+#messagebox{
+  resize: none;
 }
 
 @media screen and (max-width: 650px) {

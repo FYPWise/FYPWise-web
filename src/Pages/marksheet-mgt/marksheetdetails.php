@@ -4,6 +4,7 @@ use App\Models\Marksheet;
 use App\Models\CriteriaModel;
 use App\Models\Db;
 
+
 $base = new Base("Marksheet Details", ['lecturer']);
 $db = new Db();
 $marksheetModel = new Marksheet($db);
@@ -34,7 +35,6 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
         }
         table {
             width: 100%;
@@ -46,6 +46,7 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
+
         /* Darker Header for Criteria, Score, and Comments */
         th {
             background-color:rgb(112, 136, 161);
@@ -54,6 +55,9 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
         }
         td {
             background-color: #f8f9fa;
+        th {
+            background-color: #007bff;
+            color: blue;
         }
         .back-btn {
             display: inline-block;
@@ -64,6 +68,7 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+
         }
         .back-btn:hover {
             background: #0056b3;

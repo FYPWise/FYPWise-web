@@ -1,3 +1,9 @@
+<?php
+    use App\Models\Announcement;
+    $announcement = new Announcement();
+    $announcement->latest();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -24,20 +30,22 @@
     <div class="announcement">
         <p class="announcement-caption">Announcements</p>
         <div class="announcement-box">
+            <?php if ($announcement->getTitle() !== null){ ?>
             <div class="announcement-header">
-                <img src="./src/assets/madam mohana.png" alt="User" class="user-image">
+                <img src="./src/assets/pfp/<?php echo $announcement->getFN();?>" alt="User" class="user-image">
                 <div class="user-details">
-                    <p class="user-name">Madam Mohana</p>
-                    <p class="announcement-time">11:36 AM &nbsp; | &nbsp; 16/10</p>
+                    <p class="user-name"><?php echo $announcement->getName(); ?></p>
+                    <p class="announcement-time"><?php echo $announcement->getTime(); ?> &nbsp; | &nbsp; <?php echo $announcement->getDate(); ?></p>
                 </div>
             </div>
             <div class="announcement-content">
-                <h4 class="announcement-title">Meeting Log Submission</h4>
-                <p class="announcement-text">
-                    Make sure to submit your meeting logs by 20 December 2024.<br>
-                    Your Submission should consist meeting log 1 - 3 with the supervisor signature.
+                <h4 class="announcement-title"><?php echo $announcement->getTitle(); ?></h4>
+                <p class="announcement-text"><?php echo $announcement->getDes(); ?>
                 </p>
             </div>
+            <?php } else { ?>
+            <p>No announcement</p>
+            <?php } ?>
         </div>
     </div>
 

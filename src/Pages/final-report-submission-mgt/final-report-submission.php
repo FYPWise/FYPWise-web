@@ -1,9 +1,9 @@
 <?php
 use App\Models\Base;
-use App\Models\FinalSubmissionModel;
+use App\Models\File;
 
 $base = new Base("Final Report Submission", ["student"]);
-$finalSubmissionModel = new FinalSubmissionModel();
+$finalSubmissionModel = new File();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit_report'])) {
     $submissionMessage = $finalSubmissionModel->submitFinalReport();

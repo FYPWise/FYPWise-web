@@ -43,7 +43,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
     try {
         $presentation->updatePresentationStatus($presentationID, $newStatus);
-        echo "<script>alert('Presentation updated successfully!');  window.location.reload();</script>";
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
     } catch (Exception $e) {
         echo "<script>alert('Error updating presentation: " . htmlspecialchars($e->getMessage()) . "');</script>";
     }
@@ -51,8 +52,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 ?>
 
 <head>
-    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
-    <link rel="stylesheet" href="/FYPWise-web/src/css/meeting-acceptance-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/meeting-acceptance-style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div id="outer-container">

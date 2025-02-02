@@ -7,8 +7,6 @@ $base = new Base("Manage Announcement", "admin");
 $ann = new Announcement();
 
 $announcements = $ann->find();
-
-echo $announcements[0];
 ?>
 
 <head>

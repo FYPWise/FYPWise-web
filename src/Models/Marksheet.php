@@ -7,15 +7,24 @@ use App\Models\Db;
 class Marksheet {
     private $db;
 
-    public function __construct() {
-        require_once 'DB.php';
-        $this->db = new Db();
+    public function __construct(Db $db) {
+        $this->db = $db;
     }
 
-   
     public function getAllMarksheet() {
         $sql = "SELECT * FROM marksheet";
-        return $this->db->query($sql);
+        $result = $this->db->query($sql);
+
+        if (!$result) {
+            throw new \Exception("Database query failed for query: $sql. Error: " . $this->db->getError());
+        }
+    
+        $marksheet = [];
+        while ($row = $result->fetch_assoc()) {
+            $marksheet[] = $row;
+        }
+    
+        return $marksheet;
     }
 
     public function getMarksheetById($marksheetID) {

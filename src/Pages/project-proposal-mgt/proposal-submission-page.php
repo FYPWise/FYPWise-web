@@ -7,24 +7,45 @@ use App\Models\Base;
 use App\Models\Proposal;
 use App\Models\Db;
 
-$base = new Base("Proposal Submission");
+// debugging and error logging
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Start session to handle user data
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if the user is logged in, redirect if not
+if (!isset($_SESSION['mySession'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$base = new Base("Proposal Submission", "lecturer");
 $db = new Db();
 $proposal = new Proposal($db);
 
 // Form submission handling
 $successMessage = "";
 $errorMessage = "";
+$missingFields = [];
+$userID = $_SESSION['mySession']; 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     // Validate form fields server-side
-    if (
-        empty($_POST['proposal-title']) || 
-        empty($_POST['description']) || 
-        empty($_POST['submission-date']) || 
-        empty($_POST['specialisation']) || 
-        empty($_POST['category']) || 
-        empty($_POST['supervisor-id'])
-    ) {
-        $errorMessage = "Please fill out all required fields.";
+    if (empty($_POST['proposal-title'])) $missingFields[] = "Proposal Title";
+    if (empty($_POST['description'])) $missingFields[] = "Description";
+    if (empty($_POST['submission-date'])) $missingFields[] = "Submission Date";
+    if (empty($_POST['specialisation'])) $missingFields[] = "Specialisation";
+    if (empty($_POST['category'])) $missingFields[] = "Category";
+    if (empty($_POST['supervisor-id'])) $missingFields[] = "Supervisor ID";
+    if (!isset($_FILES['proposal_file']) || $_FILES['proposal_file']['error'] !== UPLOAD_ERR_OK) {
+        $missingFields[] = "Proposal File";
+    }
+
+    if (!empty($missingFields)) {
+        $errorMessage = "Please fill out all required fields: " . implode(", ", $missingFields);
     } else {
         // Process the form data (insert into DB)
         try {
@@ -34,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 $_POST['submission-date'],
                 $_POST['specialisation'],
                 $_POST['category'],
-                $_POST['supervisor-id']
+                $_POST['supervisor-id'],
+                $_FILES['proposal_file']
             );
             $successMessage = "Proposal submitted successfully!";
         } catch (\Exception $e) {
@@ -63,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             <div class="content">
                 <section class="main">
                     <h1 id="page-name"><?php echo $base->getTitle() ?></h1>
-                    <form class="form" id="proposalForm" method="POST" action="" onsubmit="return validateForm()">
+                    <form class="form" id="proposalForm" method="POST" action="" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="proposal-title">Proposal Title</label>
                             <input type="text" id="proposal-title" name="proposal-title" required>
@@ -102,10 +124,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             </select>
                         </div>
 
-                        <!-- TBD : Supervisor ID should be fetched from the database -->
+                        <!-- Supervisor ID and Name fetched from the database -->
                         <div class="form-group">
-                            <label for="supervisor-id">Supervisor ID</label>
-                            <input type="text" id="supervisor-id" name="supervisor-id" required>
+                            <label for="supervisor-id">Supervisor</label>
+                            <?php
+                            $supervisor = $db->query("SELECT userID, id, name FROM users WHERE userID = '$userID'")->fetch_assoc();
+                            if ($supervisor) {
+                                echo "<input type='hidden' id='supervisor-id' name='supervisor-id' value='{$supervisor['userID']}' />";
+                                echo "<p>{$supervisor['name']} (ID: {$supervisor['id']})</p>";
+                            } else {
+                                echo "<p>Supervisor not found.</p>";
+                            }
+                            ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="proposal-file">Proposal File</label>
+                            <div class="file-input-container">
+                                <div class="fake-input">
+                                    <span id="file-name">Choose a file to upload </span>
+                                    <span class="upload-icon"><i class="fa fa-upload"></i></span>
+                                </div>
+                                <input type="file" id="proposal-file" name="proposal_file" required>
+                            </div>
                         </div>
 
                         <!-- Submit and Reset Buttons -->
@@ -114,24 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             <button type="reset" class="btn reset-btn">Reset</button>
                         </div>
                     </form>
-
-                    <script>
-                        // Client-side form validation
-                        function validateForm() {
-                            var title = document.getElementById('proposal-title').value;
-                            var description = document.getElementById('description').value;
-                            var submissionDate = document.getElementById('submission-date').value;
-                            var specialisation = document.getElementById('specialisation').value;
-                            var category = document.getElementById('category').value;
-                            var supervisorId = document.getElementById('supervisor-id').value;
-
-                            if (!title || !description || !submissionDate || !specialisation || !category || !supervisorId) {
-                                alert("Please fill out all required fields.");
-                                return false;
-                            }
-                            return true;
-                        }
-                    </script>
             </section>
             </div>
         </div>

@@ -95,6 +95,7 @@ CREATE TABLE proposal (
     specialisation VARCHAR(30),
     category ENUM('application-based', 'research-based', 'application-research-based') NOT NULL,
     supervisorID INT NOT NULL,
+    proposal_file VARCHAR(255),
     PRIMARY KEY (proposalID),
     FOREIGN KEY (supervisorID) REFERENCES lecturer(userID)
 );
@@ -201,6 +202,7 @@ CREATE TABLE project_submission (
     project_description TEXT NOT NULL,
     project_status VARCHAR(50) NOT NULL,
     project_category VARCHAR(50) NOT NULL,
+    project_file VARCHAR(255) NOT NULL,
     studentID INT NOT NULL,
     projectID INT NOT NULL,
     FOREIGN KEY (studentID) REFERENCES student(userID),

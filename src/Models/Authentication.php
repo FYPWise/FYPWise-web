@@ -45,6 +45,20 @@ class Authentication{
                     $row = mysqli_fetch_array($lecturerRes);
                     $_SESSION["position"] = $row['position'];
                 }
+
+                // Fetch project data
+                $projectSql = "SELECT * FROM project WHERE studentID = '{$_SESSION["mySession"]}'";
+                $projectRes = $this->db->query($projectSql);
+                if ($projectRow = mysqli_fetch_array($projectRes)) {
+                    $_SESSION["projectID"] = $projectRow['projectID'];
+                    $_SESSION["project_title"] = $projectRow['project_title'];
+                    $_SESSION["project_start_date"] = $projectRow['start_date'];
+                    $_SESSION["project_end_date"] = $projectRow['end_date'];
+                    $_SESSION["project_description"] = $projectRow['project_description'];
+                    $_SESSION["project_status"] = $projectRow['project_status'];
+                    $_SESSION["project_proposalID"] = $projectRow['proposalID'];
+                }
+
                 header('location:dashboard');
             } else {
                 $_SESSION["Invalid"] = true;

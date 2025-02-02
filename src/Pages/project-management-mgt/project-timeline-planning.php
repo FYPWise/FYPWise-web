@@ -15,12 +15,11 @@ $nextMilestoneID = $projectModel->getNextMilestoneID();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['gantt_chartbtn'])) {
-        $file->ganttChart();
+        $file->uploadFile('gantt_chart', './uploads/Gantt Chart/', 'project_timeline', 'gantt_chart_pdf');
     } elseif (isset($_POST['flow_chartbtn'])) {
-        $file->flowChart();
+        $file->uploadFile('flow_chart', './uploads/Flow Chart/', 'project_timeline', 'flow_chart_pdf');
     }
 }
-
 ?>
 
 <!DOCTYPE html>

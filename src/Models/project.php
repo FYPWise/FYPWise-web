@@ -62,10 +62,10 @@ class Project {
                     p.project_description,
                     p.start_date,
                     p.end_date,
-                    COALESCE(u_student.name, 'Unassigned') AS student_name,
-                    u_supervisor.name AS supervisor_name,
+                    COALESCE(s.name, 'Unassigned') AS student_name,
+                    u.name AS supervisor_name,
                     p.project_status,
-                    p.proposalID
+                    u_moderator.name AS moderator_name
                 FROM 
                     project p
                 LEFT JOIN 
@@ -77,9 +77,9 @@ class Project {
                 LEFT JOIN 
                     lecturer l ON pr.supervisorID = l.userID
                 LEFT JOIN 
-                    users u_supervisor ON l.userID = u_supervisor.userID
+                    users u ON l.userID = u.userID
                 WHERE p.projectID = ?;";
-    
+
         if ($stmt = $this->db->prepare($sql)) {
             $stmt->bind_param("i", $projectID);
             $stmt->execute();
@@ -89,6 +89,7 @@ class Project {
             throw new \Exception("Database query failed: " . mysqli_error($this->db->conn));
         }
     }
+
 
 
     // Add a new project

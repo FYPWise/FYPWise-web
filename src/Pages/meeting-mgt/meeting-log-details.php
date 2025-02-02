@@ -116,7 +116,7 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
                             <div class="form-group">
                                 <label for="file">Meeting Log File</label>
                                 <p id="file">
-                                    <a href="../uploads/<?= htmlspecialchars($meetingLogDetails['file_path'] ?? '') ?>" target="_blank">
+                                    <a href="../uploads/meeting-logs/<?= htmlspecialchars($meetingLogDetails['file_path'] ?? '') ?>" target="_blank">
                                         <?= htmlspecialchars($meetingLogDetails['file_path'] ?? 'No file uploaded') ?>
                                     </a>
                                 </p>

@@ -19,7 +19,7 @@ class CriteriaModel {
             $result = $stmt->get_result();
             return $result->fetch_all(MYSQLI_ASSOC);
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
 
@@ -30,7 +30,7 @@ class CriteriaModel {
             $stmt->bind_param("isssi", $score, $criteria, $comment, $marksheetID, $evaluatorID);
             return $stmt->execute();
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
 

@@ -33,7 +33,7 @@ class Marksheet {
             $result = $stmt->get_result();
             return $result->fetch_assoc();
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
 
@@ -49,7 +49,7 @@ class Marksheet {
             
             return $row['total'] ?? 0; // Return total score or 0 if none found
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
     
@@ -62,7 +62,7 @@ class Marksheet {
             $stmt->bind_param("ii", $totalScore, $marksheetID);
             return $stmt->execute();
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
 }

@@ -55,6 +55,8 @@
                 <li class="inner-dropdown-list"><a class="menu-button"
                         href="/FYPWise-web/new-meeting">Create New</a>
                 </li>
+                <li class="inner-dropdown-list"><a class="menu-button" href="/FYPWise-web/view-meeting-logs">View Meeting Logs</a>
+                </li>
 
                 <li class="inner-dropdown-list"><a class="menu-button" href="/FYPWise-web/submit-meeting-log">Submit Meeting Log</a>
                 </li>

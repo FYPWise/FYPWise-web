@@ -38,12 +38,12 @@ header {
 }
 
 .aboutus-image {
-  width: 1.5em;
+  width: 1.7em;
   transition: 0.2s ease-in-out;
 }
 
 .aboutus-image:hover {
-  width: 1.7em;
+  width: 1.9em;
 }
 
 /* Logo */

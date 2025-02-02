@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Popup container - can be anything you want */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* The close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .popup-buttons button {
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-buttons .yes-btn {
+            background-color: #06509f;
+        }
+
+        .popup-buttons .yes-btn:hover {
+            background-color: #053f80;
+        }
+
+        .popup-buttons .no-btn {
+            background-color: #ec2227;
+        }
+
+        .popup-buttons .no-btn:hover {
+            background-color: #c22e31;
+        }
+    </style>
+</head>
+<body>
+    <div id="logoutPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="hideLogoutPopup()">&times;</span>
+            <p>Are you sure you want to log out?</p>
+            <div class="popup-buttons">
+                <button onclick="confirmLogout()" class="yes-btn">Yes</button>
+                <button onclick="hideLogoutPopup()" class="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showLogoutPopup() {
+            document.getElementById('logoutPopup').style.display = 'block';
+        }
+
+        function hideLogoutPopup() {
+            document.getElementById('logoutPopup').style.display = 'none';
+        }
+
+        function confirmLogout() {
+            window.location.href = "login?q=logout";
+        }
+    </script>
+</body>
+</html>

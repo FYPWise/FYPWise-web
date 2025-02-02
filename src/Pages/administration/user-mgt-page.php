@@ -1,13 +1,17 @@
 <?php
 use App\Models\Base;
-use App\Models\SideMenu;
+use App\Models\User;
 
-$base = new Base("Page Skeleton", "admin");
-$SideMenu = new SideMenu();
+$base = new Base("Manage User", "admin");
+
+if(isset($_GET['view'])){
+    $userID = $_GET['view'];
+    $user = new User($userID);
+}
+
 ?>
 
 <head>
-    <link rel="stylesheet" href="./src/css/announcements-mgt-style.css">
     <link rel="stylesheet" href="./src/css/user-mgt-style.css">
 </head>
 
@@ -19,24 +23,26 @@ $SideMenu = new SideMenu();
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $SideMenu->render(); ?>
+            <?php $base->renderMenu() ?>
 
             <div class="content">
                 <div class="table-header-container">
                     <h2>User Management</h2>
 
-                    <div class="table-buttons">
+                    <div>
                         <input type="text" id="search-bar-id" placeholder="UserID...">
-                        <button id="filter-btn"><img src="./src/assets/filter.png" alt="filter"></button>
                         <button class="create-new-btn" type="button"
-                            onclick="location.href='/FYPWise-Web/new-user';"><img
-                                src="./src/assets/create-new-icon.png" alt="filter"></button>
+                            onclick="location.href='new-user';"></button>
                     </div>
                 </div>
 
 
                 <div id="table-name">
-                        <h1 id="textHint" onclick="focusOnSearchBar()">Search Account by User ID</h1>
+                        <?php if(isset($_GET['view'])){
+                            echo $user->getUserID(); echo $user->getName();
+                        }else{
+                            echo '<h1 id="textHint" onclick="focusOnSearchBar()">Search Account by User ID</h1>';
+                        } ?>
                 </div>
 
                 <div id="output"></div>
@@ -72,19 +78,6 @@ $SideMenu = new SideMenu();
                     }
                 };
                 xmlhttp.open("GET", "userlist?userid="+userID, true);
-                xmlhttp.send();
-            }
-        }
-
-        function viewUser(userID){
-            if (userID !== ""){
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function(){
-                    if (this.readyState == 4 && this.status == 200){
-                        document.getElementById("table-name").innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "viewUser?userid="+userID, true);
                 xmlhttp.send();
             }
         }

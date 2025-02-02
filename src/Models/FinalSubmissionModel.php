@@ -2,45 +2,43 @@
 namespace App\Models;
 
 use App\Models\Db;
-use PDO;
-use PDOException;
 
 class FinalSubmissionModel {
     private $db;
 
-    public function __construct(PDO $db) {
-        $this->db = $db;
-    }
-
-    public function getStudentDetails($userID) {
-        try {
-            $sql = "SELECT u.name, s.studentID, p.project_title
-                    FROM users u
-                    JOIN student s ON u.userID = s.userID
-                    -- LEFT JOIN project_submission ps ON s.studentID = ps.studentID
-                    LEFT JOIN project p ON s.userID = p.studentID
-                    WHERE u.userID = :userID";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            die("Database error: " . $e->getMessage());
-        }
-    }
-
-    public function submitFinalReport($studentID, $filePath) {
-        try {
-            $sql = "INSERT INTO final_report (studentID, report_file, submission_date) 
-                    VALUES (:studentID, :filePath, NOW())";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':studentID', $studentID, PDO::PARAM_INT);
-            $stmt->bindParam(':filePath', $filePath, PDO::PARAM_STR);
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Submission error: " . $e->getMessage());
-            die("<script>alert('Database error: Unable to submit file. Check logs.');</script>");
-        }
+    public function __construct() {
+        $this->db = new Db();
     }
     
+    public function submitFinalReport() {
+        if (isset($_POST['submit_report'])){
+            $userID = $_SESSION['mySession'];
+            $studentID = $_SESSION['id'];
+            $projectID = $_SESSION['projectID'];
+            $projectStartDate = $_SESSION["project_start_date"];
+            $projectDescription = $_SESSION["project_description"];
+            $projectStatus = "submitted";
+            $projectCategory = "final-report";
+
+            $newFileName = $studentID . '.pdf';
+            $uploadFileDir = './uploads/Final Submission/';
+            $dest_path = $uploadFileDir . $newFileName;
+
+            if (move_uploaded_file($_FILES['report_file']['tmp_name'], $dest_path)) {
+
+                // Insert into database
+                $sql = "INSERT INTO project_submission (start_date, end_date, project_description, project_status, project_category, project_file, studentID, projectID) 
+                        VALUES ($projectStartDate, NOW(), '$projectDescription', '$projectStatus', '$projectCategory', '$newFileName', '$userID', '$projectID')";
+                
+                if ($this->db->query($sql)) {
+                    $message = "File is successfully uploaded and data is inserted into the database.";
+                } else {
+                    $message =  "There was an error inserting the data into the database.";
+                }
+            } else {
+                $message =  "There was an error moving the uploaded file.";
+            }
+            return $message;
+        }
+    }
 }

@@ -2,14 +2,24 @@
 use App\Models\Base;
 use App\Models\Db;
 use App\Models\Project;
+use App\Models\File;
 
 $base = new Base("Project Timeline Planning");
 $db = new Db();
 $projectModel = new Project($db);
+$file = new File();
 
 // Fetch all submitted milestones from database
 $milestones = $projectModel->getSubmittedMilestones();
 $nextMilestoneID = $projectModel->getNextMilestoneID();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['gantt_chartbtn'])) {
+        $file->uploadFile('gantt_chart', './uploads/Gantt Chart/', 'project_timeline', 'gantt_chart_pdf');
+    } elseif (isset($_POST['flow_chartbtn'])) {
+        $file->uploadFile('flow_chart', './uploads/Flow Chart/', 'project_timeline', 'flow_chart_pdf');
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -223,7 +233,7 @@ $nextMilestoneID = $projectModel->getNextMilestoneID();
                                         </select>
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn status-btn">Update</button>
+                                        <button type="submit" name="milestone" class="btn status-btn">Update</button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -238,22 +248,22 @@ $nextMilestoneID = $projectModel->getNextMilestoneID();
                 <h2 style="text-align: center;">Upload Gantt & Flow Charts</h2>
 
                 <!-- Gantt Chart Upload -->
-                <form action="/FYPWise-web/upload-gantt-chart" method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="file-upload">
                         <label for="gantt_chart">Gantt Chart (Upload PDF)</label>
                         <input type="file" name="gantt_chart" accept=".pdf">
                         <br>
-                        <button type="submit" class="btn">Submit</button>
+                        <button type="submit" name="gantt_chartbtn" class="btn">Submit</button>
                     </div>
                 </form>
 
                 <!-- Flow Chart Upload -->
-                <form action="/FYPWise-web/upload-flow-chart" method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="file-upload">
                         <label for="flow_chart">Flow Chart (Upload PDF)</label>
                         <input type="file" name="flow_chart" accept=".pdf">
                         <br>
-                        <button type="submit" class="btn">Submit</button>
+                        <button type="submit" name="flow_chartbtn" class="btn">Submit</button>
                     </div>
                 </form>
             </div>

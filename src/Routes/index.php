@@ -1,46 +1,26 @@
 <?php
 
-use App\NewRouter;
+use App\Router;
 
-$router = new NewRouter();
+$router = new Router();
 
 // User
-$router->get("/FYPWise-web/", "Pages/user-management/home-page.php");
-$router->get("/FYPWise-web/about-us", "Pages/user-management/about-us-page.html");
-$router->get("/FYPWise-web/login", "Pages/user-management/login-page.php");
-$router->post("/FYPWise-web/login","Pages/user-management/login-page.php");
-$router->get("/FYPWise-web/register","Pages/user-management/student-registration-page.php");
-$router->get("/FYPWise-web/dashboard","Pages/user-management/user-dashboard-page.php");
-$router->get("/FYPWise-web/profilemanagement","Pages/user-management/profile-mgt-page.php");
+include "user.php";
+$router->include($userRoutes);
 
 // Admin
-$router->get("/FYPWise-web/new-user", "Pages/administration/new-user-page.php");
-$router->get("/FYPWise-web/manage-user", "Pages/administration/user-mgt-page.php");
-$router->get("/FYPWise-web/userlist", "Pages/administration/userlist.php");
-$router->get("/FYPWise-web/viewUser", "Pages/administration/viewUser.php");
-
-// Testing
-$router->get("/FYPWise-web/test","Pages/common-ui/page-skeleton.php");
+include "admin.php";
+$router->include($adminRoutes);
 
 // Proposal Management
-$router->get("/FYPWise-web/test","Pages/project-proposal-mgt/new-proposals-management-page.php");
-$router->get("/FYPWise-web/proposal","Pages/project-proposal-mgt/proposal-management-page.php");
-$router->get("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
-    // echo "Proposal ID received: $proposalID";  // Debugging: To check if proposalID is captured correctly
-    include "src/Pages/project-proposal-mgt/proposal-details.php";
-});
-$router->post("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
-    include "src/Pages/project-proposal-mgt/proposal-details.php";
-});
-$router->get("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/proposal-submission-page.php");
-$router->post("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/proposal-submission-page.php");
-
+include "proposal.php";
+$router->include($proposalRoutes);
 
 //marksheet management
 $router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
 $router->post("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
 $router->get("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php");
-$router->post("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php");
+$router->post("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php"); 
 $router->get("/FYPWise-web/criteriapage/([a-zA-Z0-9_-]+)", function($marksheetID) {
     $_GET['marksheetID'] = $marksheetID; 
     include "src/Pages/marksheet-mgt/criteriascore.php";
@@ -49,13 +29,15 @@ $router->get("/FYPWise-web/marksheetdetails/([0-9]+)", function($marksheetID) {
     $_GET['marksheetID'] = $marksheetID; 
     include "src/Pages/marksheet-mgt/marksheetdetails.php";
 });
+include "marksheet.php";
+$router->include($marksheetRoutes);
 
+//communication management
+include "comm.php";
+$router->include($commRoutes);
 
-//final submission management
-$router->get("/FYPWise-web/finalsubmission","Pages/final-report-submission-mgt/final-report-submission.php");
-$router->get("/FYPWise-web/finalsubmission/([0-9]+)", function($projectID) {
-    include "src/Pages/final-report-submission-mgt/final-report-submission.php";
-});
+include "meeting.php";
+$router->include($meetingRoutes);
 
 //project management
 $router->get("/FYPWise-web/milestoneform","Pages/project-management-mgt/milestone-form.php");
@@ -69,5 +51,10 @@ $router->get("/FYPWise-web/projectmanagement","Pages/project-management-mgt/proj
 $router->get("/FYPWise-web/studentprojectassignment","Pages/project-management-mgt/student-project-assignment.php");
 $router->post("/FYPWise-web/studentprojectassignment","Pages/project-management-mgt/student-project-assignment.php");
 $router->get("/FYPWise-web/supervisorprojecttimeline","Pages/project-management-mgt/supervisor-project-timeline.php");
+include "final.php";
+$router->include($final);
+
+include "project.php";
+$router->include($project);
 
 $router->dispatch();

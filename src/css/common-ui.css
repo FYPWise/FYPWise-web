@@ -174,6 +174,7 @@ header h2 {
   width: 0;
   transition: width 300ms;
   overflow-x: hidden;
+  position: fixed;
 }
 
 #side-menu-shortcuts {
@@ -267,6 +268,12 @@ body:has(.menubutton > input:checked) #side-menu {
 
 body:has(.menubutton > input:checked) .content {
   width: 80vw;
+}
+
+#fileUploadButton {
+  background-color: #06509f;
+  color: white;
+  border: none;
 }
 
 @media screen and (max-width: 650px) {

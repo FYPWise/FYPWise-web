@@ -28,7 +28,7 @@
 }
 
 .nav-btn:hover {
-    color: #054b8b;
+    color: #003366;
 }
 
 /* Calendar Table */
@@ -48,6 +48,7 @@
     border: none;
     width: 5em;
     color: gray;
+    transition: 0.3s ease all;
 }
 
 .calendar-section table th {
@@ -56,7 +57,13 @@
 }
 
 .calendar-section table td:hover {
-    background-color: #e8f4ff;
+    background-color: #003366;
+}
+
+/* Task Date */
+.calendar-section .task-date {
+    background-color: #ec2227;
+    color: white;
 }
 
 /* Highlight Today */

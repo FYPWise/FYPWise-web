@@ -3,17 +3,25 @@
 namespace App\Models;
 use App\Models\Head;
 use App\Models\Authentication;
+use App\Models\SideMenu;
 
 class Base{
     private $pageTitle;
     private $head;
     private $auth;
-    private $role;
+    private $sideMenu;
+    private $roles = [];
 
-    public function __construct($pageTitle) {
+    public function __construct($pageTitle, $roles = null) {
         $this->pageTitle = $pageTitle;
         $this->head = new Head($pageTitle);
         $this->auth = new Authentication();
+        if (isset($_SESSION["role"])) $this->sideMenu = new SideMenu($_SESSION["role"]);
+
+        if ($roles) {
+            is_array($roles) ? $this->roles = $roles : $this->roles = [$roles];
+            $this->authenticateUser();
+        }
     }
 
     public function getTitle(){
@@ -47,7 +55,21 @@ class Base{
         </footer>';
     }
 
+    public function renderMenu(){
+        $this->sideMenu->render();
+    }
+
     public function authenticateUser(){
-        
+        if (!isset($_SESSION['mySession'])) { // if not logged in
+            header('Location: login');
+            exit();
+        }
+
+        if ($this->roles){
+            if(!in_array($_SESSION['role'], $this->roles)){
+                include(ROOT_DIR . "/src/Pages/common-ui/403.php");
+                exit();
+            }
+        }
     }
 }

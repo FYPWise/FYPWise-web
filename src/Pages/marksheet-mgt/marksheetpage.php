@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Marksheet;
 use App\Models\Db;
 
-$base = new Base("Marksheet Page");
+$base = new Base("Marksheet", ['lecturer']);
 $db = new Db();
 $marksheetModel = new Marksheet($db);
 ?>
@@ -73,6 +73,10 @@ $marksheetModel = new Marksheet($db);
         <?php $base->renderHeader(); ?>
 
         <div id="main-container">
+
+            <!-- Side Menu -->
+            <?php $base->renderMenu(); ?>
+
             <div class="content">
                 <section class="main">
                     <h1 id="page-name"><?php echo $base->getTitle(); ?></h1>

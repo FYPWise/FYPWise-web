@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Db;
+use App\Models\User;
 
 class Project {
     private $db;
@@ -409,6 +410,47 @@ public function getLatestTimelineID() {
     $result = $this->db->query($sql);
     $row = $result->fetch_assoc();
     return $row ? $row['timelineID'] : null;
+}
+
+public function getModerator($id){
+    $sql = "SELECT lp.lecturerID
+            FROM `lecturer_project`lp
+            JOIN project p ON lp.projectID = p.projectID
+            WHERE p.projectID = $id ;";
+
+    $result = $this->db->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array();
+        $user = new User();
+        $user->readUserId($row[0]);
+
+        return $user->getId();
+    }else{
+        return null;
+    }
+}
+
+public function assignModerator($id, $projectID){
+    $user = new User();
+
+    if($user->readId($id) && $user->getRole() == "lecturer"){
+        $userID = $user->getUserID();
+
+        $sql = "INSERT INTO `lecturer_project`(`projectID`, `lecturerID`, `lecturer_role`) VALUES ('$projectID','$userID','moderator')";
+
+        $result = $this->db->query($sql);
+
+        if ($result){
+            return true;
+        }else{
+            return "sql error";
+        }
+    }else{
+        return $user->getRole();
+    }
+
+    
 }
 
 

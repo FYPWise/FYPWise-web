@@ -12,3 +12,5 @@ $adminRoutes->get("/FYPWise-web/manage-announcements", "Pages/administration/ann
 $adminRoutes->get("/FYPWise-web/new-announcement", "Pages/administration/new-announcement-page.php");
 
 $adminRoutes->get("/FYPWise-web/moderator-management", "Pages/administration/moderator-project-mgt-page.php");
+$adminRoutes->get("/FYPWise-web/assign-moderator", "Pages/administration/assign-moderator-page.php");
+$adminRoutes->post("/FYPWise-web/assign-moderator", "Pages/administration/assign-moderator-page.php");

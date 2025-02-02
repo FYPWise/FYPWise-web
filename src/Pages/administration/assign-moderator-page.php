@@ -1,126 +1,57 @@
 <?php
 use App\Models\Base;
-use App\Models\Announcement;
+use App\Models\Project;
+use App\Models\Db;
 
 $base = new Base("Manage Announcement", "admin");
+$project = new project(new Db());
+
+if(isset($_GET['id'])){
+    $projectId = $_GET['id'];
+}else{
+    $projectId = '';
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST"){
+    $id = $_POST['moderator-id'];
+    $projectID = $_POST['project-id'];
+
+    if ($project->assignModerator($id, $projectID)){
+        header('location:moderator-management');
+    }else{
+        echo'
+            <script> alert("Invalid Moderator ID"); </script>
+        ';
+    }
+}
+
 ?>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
-    <title>Assign Moderator</title>
-    <link rel="stylesheet" href="../css/common-ui.css">
-    <link rel="stylesheet" href="../css/form-style.css">
-    <link rel="stylesheet" href="../css/announcements-mgt-style.css">
-    <link rel="stylesheet" href="../css/moderator-mgt-style.css">
+    <link rel="stylesheet" href="src/css/form-style.css">
+    <link rel="stylesheet" href="src/css/announcements-mgt-style.css">
+    <link rel="stylesheet" href="src/css/moderator-mgt-style.css">
 </head>
 
 <body>
     <div id="outer-container">
-        <!-- Header Section -->
-        <header>
-            <div class="menubutton"><input title="side-menu" type="checkbox" id="user-side-menu"><label
-                    for="user-side-menu" class="fas"></label></div>
-            <div id="logo"></div>
-            <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png" alt="home icon"></a></button>
-        </header>
+        <?php $base->renderHeader() ?>
 
+        <!-- Main Content -->
         <div id="main-container">
-            <nav id="side-menu">
-                <div class="search-container">
-                    <input type="text" id="search-bar" placeholder="Search">
-                </div>
-                <ul id="side-menu-shortcuts">
 
-                    <!-- Dropdown List -->
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">User Management</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/user-dashboard-page.html">Admin Dashboard</a>
-                            </li>
-
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/about-us-page.html">About Us</a>
-                            </li>
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../user-management-mgt/about-us-page.html">About Us</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button"><span class="menu-label">Project & Proposal</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../project-proposal-mgt/proposal-management-page.html">All
-                                    Proposal</a>
-                            </li>
-
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../project-proposal-mgt/proposal-submission-page.html">New Proposal</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Meeting & Presentation</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../meeting-mgt/presentation-management-page.html">All Presentations</a>
-                            </li>
-
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                href="../meeting-mgt/presentation-scheduler.html">New Presentations</a>
-                        </li>
-                        </ul>
-                    </li>
-
-                    <li class="side-menu-dropdown-list">
-                        <button onclick="location.href='../communication/comm-page.html'" class="menu-button"><span
-                                class="menu-label">Communication</span>
-                    </li>
-
-                    <!-- Dropdown List -->
-                    <li class="side-menu-dropdown-list">
-                        <button class="menu-button dropdown-button">
-                            <span class="menu-label">Administration</span>
-                            <span class="expand-icon"></span>
-                        </button>
-
-                        <!-- Inner Dropdown List -->
-                        <ul class="inner-dropdown">
-                            <li class="inner-dropdown-list"><a class="menu-button"
-                                    href="../administration/new-user-page.html">Add User</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+            <!-- Side Menu -->
+            <?php $base->renderMenu() ?>
 
             <div class="content">
                 <section class="main">
                     <h1 id="page-name">Assign Moderator</h1>
 
-                    <form class="form" id="">
+                    <form class="form" id="" method="POST">
                         <!-- auto-generated Proposal ID -->
                         <div class="form-group ">
                             <label for="project-id">Project ID</label>
-                            <input type="text" id="project-id" name="project-id" required>
+                            <input type="text" id="project-id" name="project-id" value="<?php echo $projectId?>" required readonly>
                         </div>
 
                         <div class="form-group ">
@@ -140,27 +71,9 @@ $base = new Base("Manage Announcement", "admin");
 
         </div>
 
-        <footer>
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
-                    Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
-                    Desk</a>
-            </div>
-            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
-        </footer>
+        <?php $base->renderFooter() ?>
     </div>
 
-    <!-- JavaScript -->
-    <script src="../scripts/side-menu.js"></script>
-
-    <script>
-        document.getElementById("project-id").value = "P001";
-    </script>
 
 </body>
 

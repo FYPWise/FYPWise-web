@@ -198,13 +198,10 @@ $taskDates = getTaskDates($db);
                             </div>
                         <?php } elseif($_SESSION['role'] == 'lecturer') { ?>
                             <div class="task">
-                                <a href="projecttimelineplanning">Project Timeline Planning</a>
+                                <a href="supervisorprojecttimeline">Project Timeline Planning</a>
                             </div>
                             <div class="task">
                                 <a href="new-meeting">Schedule a Meeting</a>
-                            </div>
-                            <div class="task">
-                                <a href="submit-meeting-log">Submit Meeting Log</a>
                             </div>
                             <div class="task">
                                 <a href="projectplanapproval">Project Approval</a>

@@ -31,9 +31,7 @@ class MeetingLog {
         $studentID = $_SESSION['mySession'];
     
         // Handle file upload using the File class
-        $targetDir = "uploads/";  
-        $columnName = 'file_path'; 
-        $tableName = 'meeting_log';
+        $targetDir = "uploads/meeting-logs/";  
     
         // Check if the file input exists and handle the file upload
         if (isset($_FILES[$fileInputName]) && $_FILES[$fileInputName]['error'] === UPLOAD_ERR_OK) {
@@ -43,8 +41,8 @@ class MeetingLog {
                 // Insert the meeting log data
                 $fileName = $uploadSuccess; // Use the file name returned from uploadMLFile
                 $status = 'pending';  // Initial status == pending
-                $sql = "INSERT INTO meeting_log (submission_date, file_path, status, updated_at, meetingID, studentID, projectID)
-                        VALUES ('$submissionDate', '$fileName', '$status', NOW(), '$meetingID', '$studentID', '$projectID')";
+                $sql = "INSERT INTO meeting_log (submission_date, file_path, status, updated_at, meetingID, studentID, projectID, supervisorID)
+                        VALUES ('$submissionDate', '$fileName', '$status', NOW(), '$meetingID', '$studentID', '$projectID', '$supervisorID')";
     
                 if ($this->db->query($sql)) {
                     return "Meeting log submitted successfully.";

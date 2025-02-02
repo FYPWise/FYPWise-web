@@ -9,13 +9,19 @@
             $this->db = new Db();
         }
 
-        public function form(){
-            echo'
-            <form id="UploadForm" method="post" enctype="multipart/form-data">
-                <input type="file" id="fileUpload" name="image" accept="image/*"  required>
-                <button type="submit" name="file" id="fileUploadButton">Upload Image</button>
+        public function form($type, $text){
+            echo"
+            <form id='UploadForm' method='post' enctype='multipart/form-data'>
+                <input type='file' id='fileUpload' name='image' accept='$type' required>
+                <button type='submit' name='file' id='fileUploadButton'>$text</button>
             </form>
-            ';
+            ";
+
+            /* Types:
+            1. images: 'images/*'  Images only
+            2. pdf: 'application/pdf' pdf only
+            3. doc: '.doc, .docx' Word documents (DOC, DOCX)
+            */
         }
 
         public function uploadFile($fileInputName, $targetDir, $tableName, $columnName) {

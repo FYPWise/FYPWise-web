@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $user->update();
         }
-    } elseif (isset($_POST['image'])) {
+    } elseif (isset($_POST['file'])) {
         $file->uploadFile('image', './src/assets/pfp/', 'users', 'filename');
     }
 }
@@ -54,10 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="profile">
             <div class="profile-image">
                 <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
-                <form id="UploadForm" method="post" enctype="multipart/form-data">
-                    <input type="file" id="fileUpload" name="image" accept="image/*"  required>
-                    <button type="submit" name="file" id="fileUploadButton">Upload Image</button>
-                </form>
+                <?php $file->form('image/*', 'Upload Image'); ?>
             </div>
             <div class="details">
                 <form id="profileForm" method="post">

@@ -1,13 +1,20 @@
 <?php
 use App\Models\Base;
 use App\Models\User;
+use App\Models\project;
+use App\Models\Db;
 
-$base = new Base("Manage User", "admin");
+$base = new Base("Assign Moderator", "admin");
 
 if(isset($_GET['view'])){
     $userID = $_GET['view'];
     $user = new User($userID);
 }
+
+
+$projectC = new project(new Db());
+
+$projects = $projectC->getAllProjects();
 
 ?>
 
@@ -38,33 +45,32 @@ if(isset($_GET['view'])){
                 </div>
 
 
-                <div class="table-name">
+                <div id="table-name">
                     <table id="tablename-table">
                         <thead>
                             <th>Project ID</th>
                             <th>Moderator Assigned</th>
-                            <th>Status</th>
                             <th>
                                 </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td><a href="#">P001</a></td>
-                                <td>M012454</td>
-                                <td>
-                                    <p class="assign-status">Assigned</p>
-                                </td>
-                                <td><button class="more-btn" type="button">⋮</button></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">P002</a></td>
-                                <td></td>
-                                <td>
-                                    <p class="assign-status">Unassigned</p>
-                                </td>
-                                <td><button class="more-btn" type="button">⋮</button></td>
-                            </tr>
+
+                            <?php
+                            
+                            foreach($projects as $project){
+                                $moderatorID = $projectC->getModerator($project['projectID']);
+                                if($moderatorID == null){
+                                    $moderatorID = "Unassigned";
+                                }
+                                echo '<tr>';
+                                echo '<td><a href="assign-moderator?id='.$project['projectID'].'">'.$project['projectID'].'</a></td>';
+                                echo '<td>'.$moderatorID.'</td>';
+                                echo '<td><button class="more-btn" type="button">⋮</button></td>';
+                                echo '</tr>';
+                            }
+                            
+                            ?>
                         </tbody>
 
 
@@ -76,19 +82,7 @@ if(isset($_GET['view'])){
         </div>
 
         <!-- footer Section -->
-        <footer>
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
-                    Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
-                    Desk</a>
-            </div>
-            FYP Wise &copy; <em id="date"></em>Syabel Imran Aida Firzan
-        </footer>
+        <?php $base->renderFooter() ?>
     </div>
 
     <!-- JavaScript -->

@@ -22,12 +22,18 @@ foreach ($timelineFiles as $file) {
 
 // Fetch all milestones from the database
 $milestones = $projectModel->getAllMilestones();
-$milestoneTitles = array_column($milestones, 'milestone_title');
-$milestoneIDs = array_column($milestones, 'milestoneID');
+$milestoneList = [];
+
+foreach ($milestones as $milestone) {
+    $milestoneList[] = [
+        'id' => $milestone['milestoneID'],
+        'title' => $milestone['milestone_title']
+    ];
+}
 
 // Default milestone values (if no milestones exist)
-$firstMilestoneID = $milestoneIDs[0] ?? null;
-$firstMilestoneTitle = $milestoneTitles[0] ?? "No Milestones Available";
+$currentMilestoneIndex = 0;
+$firstMilestone = $milestoneList[$currentMilestoneIndex] ?? ['id' => null, 'title' => "No Milestones Available"];
 ?>
 
 <body>
@@ -46,9 +52,10 @@ $firstMilestoneTitle = $milestoneTitles[0] ?? "No Milestones Available";
                     <!-- Gantt Chart Section -->
                     <div class="chart-box" style="margin-bottom: 20px; padding: 15px; border-radius: 8px; background: #f8f9fa;">
                         <div class="chart-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Gantt Chart</div>
-                        <div class="chart-content" style="margin-bottom: 10px;">
+                        <div class="chart-content" style="margin-bottom: 10px; text-align: center;">
                             <?php if ($ganttChart): ?>
-                                <a href="<?= htmlspecialchars($ganttChart) ?>" target="_blank" class="chart-link" style="color: #007bff; text-decoration: none;">📄 View Gantt Chart</a>
+                                <iframe src="./uploads/Gantt Chart/<?= htmlspecialchars($ganttChart) ?>" width="100%" height="500px" style="border: 1px solid #ddd;"></iframe>
+                                <br><a href="<?= htmlspecialchars($ganttChart) ?>" target="_blank" class="chart-link" style="color: #007bff; text-decoration: none;">📄 Open in New Tab</a>
                             <?php else: ?>
                                 <p style="color: red;">No Gantt Chart uploaded</p>
                             <?php endif; ?>
@@ -58,9 +65,10 @@ $firstMilestoneTitle = $milestoneTitles[0] ?? "No Milestones Available";
                     <!-- Flow Chart Section -->
                     <div class="chart-box" style="margin-bottom: 20px; padding: 15px; border-radius: 8px; background: #f8f9fa;">
                         <div class="chart-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Flow Chart</div>
-                        <div class="chart-content" style="margin-bottom: 10px;">
+                        <div class="chart-content" style="margin-bottom: 10px; text-align: center;">
                             <?php if ($flowChart): ?>
-                                <a href="<?= htmlspecialchars($flowChart) ?>" target="_blank" class="chart-link" style="color: #007bff; text-decoration: none;">📄 View Flow Chart</a>
+                                <iframe src="<?= htmlspecialchars($flowChart) ?>" width="100%" height="500px" style="border: 1px solid #ddd;"></iframe>
+                                <br><a href="<?= htmlspecialchars($flowChart) ?>" target="_blank" class="chart-link" style="color: #007bff; text-decoration: none;">📄 Open in New Tab</a>
                             <?php else: ?>
                                 <p style="color: red;">No Flow Chart uploaded</p>
                             <?php endif; ?>
@@ -71,13 +79,19 @@ $firstMilestoneTitle = $milestoneTitles[0] ?? "No Milestones Available";
                     <div class="chart-box" style="padding: 15px; border-radius: 8px; background: #f8f9fa; text-align: center;">
                         <div class="chart-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Milestones</div>
                         <div class="milestone-navigation" style="display: flex; justify-content: center; gap: 10px; align-items: center;">
-                            <button class="nav-arrow" style="background: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;" onclick="navigateMilestone(-1)">&#8592;</button>
-                            <a href="/FYPWise-web/milestonesubmission?milestoneID=<?= htmlspecialchars($firstMilestoneID) ?>" id="milestone-link" class="milestone-link" style="color: #007bff; text-decoration: none; font-weight: bold;">
-                                <?= htmlspecialchars($firstMilestoneTitle) ?>
+                            <button class="nav-arrow" style="background: #007bff; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-size: 14px;" onclick="navigateMilestone(-1)">&#8592;</button>
+                            <a href="/FYPWise-web/milestonesubmission?milestoneID=<?= htmlspecialchars($firstMilestone['id']) ?>" id="milestone-link" class="milestone-link" style="color: #007bff; text-decoration: none; font-weight: bold;">
+                                <?= htmlspecialchars($firstMilestone['title']) ?>
                             </a>
-                            <button class="nav-arrow" style="background: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;" onclick="navigateMilestone(1)">&#8594;</button>
+                            <button class="nav-arrow" style="background: #007bff; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-size: 14px;" onclick="navigateMilestone(1)">&#8594;</button>
                         </div>
                     </div>
+
+                    <!-- Back Button (Smaller) -->
+                    <div style="margin-top: 15px; text-align: center;">
+                        <a href="/FYPWise-web/projectplanapproval" class="back-btn" style="display: inline-block; background: #dc3545; color: white; padding: 10px 16px; font-size: 14px; font-weight: bold; border-radius: 6px; text-decoration: none;">⬅ Back</a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -86,8 +100,7 @@ $firstMilestoneTitle = $milestoneTitles[0] ?? "No Milestones Available";
     </div>
 
     <script>
-        let milestones = <?= json_encode($milestoneTitles) ?>;
-        let milestoneIDs = <?= json_encode($milestoneIDs) ?>;
+        let milestones = <?= json_encode($milestoneList) ?>;
         let currentMilestoneIndex = 0;
         const milestoneLink = document.getElementById("milestone-link");
 
@@ -101,8 +114,9 @@ $firstMilestoneTitle = $milestoneTitles[0] ?? "No Milestones Available";
                 currentMilestoneIndex = milestones.length - 1;
             }
 
-            milestoneLink.innerText = milestones[currentMilestoneIndex];
-            milestoneLink.href = `/FYPWise-web/milestonesubmission?milestoneID=${milestoneIDs[currentMilestoneIndex]}`;
+            milestoneLink.innerText = milestones[currentMilestoneIndex].title;
+            milestoneLink.href = `/FYPWise-web/milestonesubmission?milestoneID=${milestones[currentMilestoneIndex].id}`;
         }
     </script>
 </body>
+

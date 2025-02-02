@@ -7,7 +7,15 @@ $base = new Base("Project Management");
 $db = new Db();
 $project = new Project($db);
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$userID = $_SESSION['userID'] ?? null; // Retrieve userID from session
+
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <link rel="stylesheet" href="../css/common-ui.css">
     <style>
@@ -24,11 +32,16 @@ $project = new Project($db);
         .assign-btn:hover {
             background-color: darkgreen;
         }
+
+        .error-text {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div id="outer-container">
-        <?php $base->renderHeader() ?>
+        <?php $base->renderHeader(); ?>
 
         <div id="main-container">
             <div class="content">
@@ -52,22 +65,31 @@ $project = new Project($db);
                             if (!empty($projects)) {
                                 foreach ($projects as $row) {
                                     echo "<tr>";
-                                    echo "<td><a href='/project/{$row['projectID']}'>" . htmlspecialchars($row['project_title']) . "</a></td>";
+                                    echo "<td><a href='/project/" . urlencode($row['projectID']) . "'>" . htmlspecialchars($row['project_title']) . "</a></td>";
 
-                                    if ($row['student_name'] !== 'Unassigned') {
+                                    if (!empty($row['student_name']) && $row['student_name'] !== 'Unassigned') {
                                         echo "<td>" . htmlspecialchars($row['student_name']) . "</td>";
                                     } else {
-                                        echo "<td><a href='/FYPWise-web/studentprojectassignment?projectID=" . htmlspecialchars($row['projectID']) . "&proposalID=" . htmlspecialchars($row['proposalID']) . "' class='assign-btn'>Assign Advisee</a></td>";
+                                        if (!empty($row['proposalID'])) { 
+                                            echo "<td>
+                                                <a href='/FYPWise-web/studentprojectassignment?projectID=" . 
+                                                    urlencode($row['projectID']) . "&proposalID=" . 
+                                                    urlencode($row['proposalID']) . "' class='assign-btn'>Assign Advisee</a>
+                                                <br><small>Proposal ID: " . htmlspecialchars($row['proposalID']) . "</small>
+                                            </td>";
+                                        } else {
+                                            echo "<td><span class='error-text'>❌ No Proposal ID Found</span></td>";
+                                        }
                                     }
 
                                     echo "<td>" . htmlspecialchars($row['project_status']) . "</td>";
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='3'>No projects found</td></tr>";
+                                echo "<tr><td colspan='3' class='error-text'>No projects found</td></tr>";
                             }
                         } catch (Exception $e) {
-                            echo "<tr><td colspan='3'>Error: " . $e->getMessage() . "</td></tr>";
+                            echo "<tr><td colspan='3' class='error-text'>Error: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -75,7 +97,7 @@ $project = new Project($db);
             </div>
         </div>
 
-        <?php $base->renderFooter() ?>
+        <?php $base->renderFooter(); ?>
     </div>
 </body>
 </html>

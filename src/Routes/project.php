@@ -16,5 +16,8 @@ $project->get("/FYPWise-web/projectmanagement","Pages/project-management-mgt/pro
 $project->get("/FYPWise-web/studentprojectassignment","Pages/project-management-mgt/student-project-assignment.php");
 $project->post("/FYPWise-web/studentprojectassignment","Pages/project-management-mgt/student-project-assignment.php");
 $project->get("/FYPWise-web/supervisorprojecttimeline","Pages/project-management-mgt/supervisor-project-timeline.php");
+$project->get("/FYPWise-web/createproject","Pages/project-management-mgt/create-new-project.php");
+$project->post("/FYPWise-web/createproject","Pages/project-management-mgt/create-new-project.php");
+
 
 ?>

@@ -194,17 +194,15 @@ class Project {
             $stmt->bind_param("ssii", $startDate, $endDate, $userID, $projectID);
     
             if ($stmt->execute()) {
-                echo "<pre>✅ SUCCESS: Project updated successfully!</pre>";
                 return true;
             } else {
-                echo "<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>";
+                die("<pre>❌ SQL ERROR: " . $stmt->error . "</pre>");
             }
         } else {
-            echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>";
+            die("<pre>❌ QUERY PREPARATION ERROR: " . $this->db->getError() . "</pre>");
         }
-        return false;
     }
-    
+   
     
     
     public function getAllProjectTimelines() {
@@ -315,20 +313,20 @@ class Project {
                     m.milestone_description,  
                     m.milestone_start_date, 
                     m.milestone_end_date, 
-                    pt.status 
+                    COALESCE(pt.status, 'not-started') AS status 
                 FROM milestone m
-                JOIN project_timeline pt ON m.timelineID = pt.timelineID
-                WHERE pt.status IN ('not-started', 'in-progress', 'completed')
-                ORDER BY m.milestoneID ASC";
-    
+                LEFT JOIN project_timeline pt ON m.timelineID = pt.timelineID
+                ORDER BY m.milestoneID ASC";  // Ensure all milestones are retrieved
+        
         $result = $this->db->query($sql);
-    
+        
         if (!$result) {
             throw new \Exception("Database query failed: " . mysqli_error($this->db->conn));
         }
     
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    
     
 
 public function getTimelineFiles()
@@ -410,6 +408,67 @@ public function getLatestTimelineID() {
     $row = $result->fetch_assoc();
     return $row ? $row['timelineID'] : null;
 }
+
+public function createNewProject($proposalID, $projectTitle, $startDate, $endDate, $projectDescription) {
+    $sql = "INSERT INTO project (proposalID, project_title, start_date, end_date, project_description, project_status) 
+            VALUES (?, ?, ?, ?, ?, 'approved')";
+    
+    if ($stmt = $this->db->prepare($sql)) {
+        $stmt->bind_param("issss", $proposalID, $projectTitle, $startDate, $endDate, $projectDescription);
+        return $stmt->execute();
+    } else {
+        return false;
+    }
+}
+
+
+public function getAcceptedProposals() {
+    $sql = "
+        SELECT p.proposalID, p.proposal_title, ps.status 
+        FROM proposal p
+        JOIN proposal_status ps ON p.proposalID = ps.proposalID
+        WHERE ps.status = 'accepted'
+    ";
+    return $this->db->query($sql);
+}
+
+public function createProject($proposalID, $projectTitle, $startDate, $endDate, $projectDescription) {
+    if (empty($proposalID) || $proposalID == 0) {
+        throw new \Exception("❌ Error: Proposal ID cannot be empty.");
+    }
+
+    $sql = "INSERT INTO project (proposalID, project_title, start_date, end_date, project_description, project_status) 
+            VALUES (?, ?, ?, ?, ?, 'approved')";
+    
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param("issss", $proposalID, $projectTitle, $startDate, $endDate, $projectDescription);
+    
+    return $stmt->execute();
+}
+
+
+public function assignAdvisee($projectID, $studentID) {
+    $sql = "UPDATE project SET studentID = ?, project_status = 'ongoing' WHERE projectID = ?";
+    
+    if ($stmt = $this->db->prepare($sql)) {
+        $stmt->bind_param("ii", $studentID, $projectID);
+        return $stmt->execute();
+    } else {
+        return false;
+    }
+}
+
+public function submitFinalReport($projectID) {
+    $sql = "UPDATE project SET project_status = 'submitted' WHERE projectID = ?";
+    
+    if ($stmt = $this->db->prepare($sql)) {
+        $stmt->bind_param("i", $projectID);
+        return $stmt->execute();
+    } else {
+        return false;
+    }
+}
+
 
 
 }

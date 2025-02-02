@@ -175,6 +175,15 @@ class Proposal {
             throw $e;
         }
     }
+
+    public function getAcceptedProposals() {
+        $sql = "SELECT p.proposalID, p.proposal_title 
+                FROM proposal p
+                JOIN proposal_status ps ON p.proposalID = ps.proposalID
+                WHERE ps.status = 'accepted'";
+        return $this->db->query($sql);
+    }
+    
     
 }
 ?>

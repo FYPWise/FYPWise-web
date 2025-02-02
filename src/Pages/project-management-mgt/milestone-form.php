@@ -114,11 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
         <form method="POST">
             <input type="hidden" name="milestoneID" value="<?= htmlspecialchars($nextMilestoneID) ?>">
             <input type="hidden" name="timelineID" value="<?= htmlspecialchars($timelineID) ?>">
-
-            <div class="form-group">
-                <label>Milestone ID</label>
-                <p><?= htmlspecialchars($nextMilestoneID) ?></p>
-            </div>
+            <input type="hidden" name="milestoneID" value="<?= htmlspecialchars($nextMilestoneID) ?>">
+            
             <div class="form-group">
                 <label>Milestone Title</label>
                 <input type="text" name="milestone-title" placeholder="Enter milestone title..." required>

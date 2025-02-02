@@ -94,7 +94,7 @@ if (isset($_POST['submit'])){
                     <div class="submit-btn"><button  id="submit" name="submit" type="submit" form="testform" value="sign-up" class="submit" >Sign Up</button></div>
                 </div>
             </form>
-        <div class="login-caption"><p>Already have an account? <a href="login-page.html">Login</a></p></div>
+        <div class="login-caption"><p>Already have an account? <a href="/FYPWise-web/login">Login</a></p></div>
         <!-- Footer -->
         <?php $base->renderFooter() ?>
         <script src="./src/scripts/passwordCheck.js"></script>

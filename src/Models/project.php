@@ -195,16 +195,6 @@ class Project {
             $stmt->bind_param("ssii", $startDate, $endDate, $userID, $projectID);
     
             if ($stmt->execute()) {
-                return true;
-            } else {
-                die("<pre>❌ SQL ERROR: " . $stmt->error . "</pre>");
-            }
-        } else {
-            die("<pre>❌ QUERY PREPARATION ERROR: " . $this->db->getError() . "</pre>");
-        }
-    }
-   
-
                 echo "<pre>✅ SUCCESS: Project updated successfully!</pre>";
                 return true;
             } else {

@@ -6,19 +6,6 @@ use App\Models\User;
 $base = new Base("Profile Management", ["student", "admin", "lecturer"]);
 $db = new Db();
 $user = new User();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['profile'])) {
-        $existingUser = $user->find($_POST['student-id']);
-        if ($existingUser && $_POST['student-id'] != $_SESSION['id']) {
-            $error = "ID already in use.";
-        } else {
-            $user->update("profile", $_SESSION['role']);
-        }
-    } elseif (isset($_POST['image'])) {
-        $user->update("image", $_SESSION['role']);
-    }
-}
 ?>
 
 <!DOCTYPE html>

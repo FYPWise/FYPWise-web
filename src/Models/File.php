@@ -31,7 +31,9 @@
             $target = $targetDir . $fileName;
 
             $userId = $_SESSION['mySession'];
-            $projectId = $_SESSION['projectID'];
+            if ($_SESSION['role'] == 'student') {
+                $projectId = $_SESSION['projectID'];
+            }
 
             
             $sql = $fileInputName == 'image'? "UPDATE $tableName SET $columnName='$fileName' WHERE userID='$userId'": 

@@ -33,5 +33,31 @@ class Presentation {
             return "Error: " . $this->db->conn->error;
         }
     }
+
+    public function getPresentationsByUserID($userID) {
+        $userID = $this->db->escapeString($userID);
+
+        $sql = "SELECT * FROM presentation WHERE projectID IN (SELECT projectID FROM project WHERE studentID = '$userID')";
+
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
+    }
+
+    public function getAllPresentations() {
+        $sql = "SELECT * FROM presentation";
+
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return [];
+        }
+    }
 }
 ?>

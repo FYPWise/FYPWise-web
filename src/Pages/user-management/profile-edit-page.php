@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
         <div class="icons">
             <a href="/FYPWise-web"><button id="sidebar-btn"><img src="./src/assets/home3.png" alt="home"></button></a>
-            <a href="Communication"><button id="sidebar-btn"><img src="./src/assets/messages1.png"
+            <a href="communication"><button id="sidebar-btn"><img src="./src/assets/messages1.png"
                         alt="messages"></button></a>
             <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
         </div>

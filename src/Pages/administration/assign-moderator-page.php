@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+use App\Models\Base;
+use App\Models\Announcement;
+
+$base = new Base("Manage Announcement", "admin");
+?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentation Scheduler</title>
     <link rel="icon" type="image/x-icon" href="../assets/main_logo.png">
+    <title>Assign Moderator</title>
     <link rel="stylesheet" href="../css/common-ui.css">
-    <link rel="stylesheet" href="../css/calendar-style.css">
     <link rel="stylesheet" href="../css/form-style.css">
-    <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/65dc1b4fb1cd6bf31e730421533dafc7?family=ITC+Avant+Garde+Gothic+W02+Md">
+    <link rel="stylesheet" href="../css/announcements-mgt-style.css">
+    <link rel="stylesheet" href="../css/moderator-mgt-style.css">
 </head>
 
 <body>
@@ -22,8 +26,6 @@
             <button id="home"><a href="../user-management-mgt/user-dashboard-page.html"><img src="../assets/home.png" alt="home icon"></a></button>
         </header>
 
-        <!-- Main Content -->
-        <!-- Side Menu -->
         <div id="main-container">
             <nav id="side-menu">
                 <div class="search-container">
@@ -44,6 +46,9 @@
                                     href="../user-management-mgt/user-dashboard-page.html">Admin Dashboard</a>
                             </li>
 
+                            <li class="inner-dropdown-list"><a class="menu-button"
+                                    href="../user-management-mgt/about-us-page.html">About Us</a>
+                            </li>
                             <li class="inner-dropdown-list"><a class="menu-button"
                                     href="../user-management-mgt/about-us-page.html">About Us</a>
                             </li>
@@ -108,72 +113,31 @@
             </nav>
 
             <div class="content">
-                <h2 class="form-title">Presentation Scheduler</h2>
-                <hr />
-                <form class="form" id="presentationForm">
-                    <div class="form-group">
-                        <label for="presentation-id">Presentation ID</label>
-                        <p id="presentation-id" class="presentation-id">PRE1</p>
-                    </div>
+                <section class="main">
+                    <h1 id="page-name">Assign Moderator</h1>
 
-                    <div class="form-group">
-                        <label for="title">Presentation Title</label>
-                        <p id="title" class="title">Presentation for FYP1</p>
-                    </div>
+                    <form class="form" id="">
+                        <!-- auto-generated Proposal ID -->
+                        <div class="form-group ">
+                            <label for="project-id">Project ID</label>
+                            <input type="text" id="project-id" name="project-id" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="project-id">Project ID</label>
-                        <p id="project-id" class="project-id">PR1</p>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="date">Presentation Date</label>
-                        <p id="date" class="date">2025-2-15</p>
-                    </div>
+                        <div class="form-group ">
+                            <label for="moderator-id">Moderator ID</label>
+                            <input type="text" id="moderator-id" name="moderator-id" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="time">Presentation Time</label>
-                        <p id="time" class="time">03:00 PM to 03:15 PM</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mode">Mode of Presentation</label>
-                        <p id="mode" class="mode">Online</p>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <p id="location" class="location">MS Teams</p>
-                    </div>
-                    
-
-                    <div class="form-group">
-                        <label for="url">Online Presentation URL</label>
-                        <p id="url" class="url"><a href="#">URL</a></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="moderator-id">Moderator ID</label>
-                        <p id="mod" class="mod">M23</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="supervisor-id">Supervisor ID</label>
-                        <p id="supervisor-id" class="supervisor-id">M43</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="student-id">Student ID</label>
-                        <p id="student-id" class="student-id">1211104230</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <p id="status" class="status">Scheduled</p>
-                    </div>
-                    
-                </form>
+                        <!-- submit and reset buttons -->
+                        <div class="form-buttons">
+                            <button type="submit" class="btn submit-btn">Submit</button>
+                            <button type="reset" class="btn reset-btn">Reset</button>
+                        </div>
+                    </form>
+                </section>
             </div>
+
+
         </div>
 
         <footer>
@@ -189,9 +153,15 @@
             </div>
             FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
         </footer>
-
-        <script src="../scripts/side-menu.js"></script>
     </div>
+
+    <!-- JavaScript -->
+    <script src="../scripts/side-menu.js"></script>
+
+    <script>
+        document.getElementById("project-id").value = "P001";
+    </script>
+
 </body>
 
 </html>

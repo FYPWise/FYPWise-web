@@ -106,4 +106,18 @@ class Chat{
         }
         
     }
+
+    public function sendMessage($id, $content){
+        $user = new User();
+        $thisId = $_SESSION['mySession'];
+
+        if ($user->readId($id)){
+            $otherId = $user->getUserID();
+            $sql = "INSERT INTO `message`(`senderID`, `receiverID`, `messageContent`, `timeStamp`) VALUES ($thisId, $otherId,'$content', NOW());";
+        }else{
+            $sql = "INSERT INTO `message`(`senderID`, `groupID`, `messageContent`, `timeStamp`) VALUES ($thisId, $id,'$content', NOW());";
+        }
+
+        $result = $this->db->query($sql);
+    }
 }

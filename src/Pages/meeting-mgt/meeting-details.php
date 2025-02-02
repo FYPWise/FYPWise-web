@@ -40,8 +40,8 @@ if ($meetingID) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
-    <link rel="stylesheet" href="/FYPWise-web/src/css/meeting-acceptance-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/meeting-acceptance-style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div id="outer-container">

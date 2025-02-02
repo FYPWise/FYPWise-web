@@ -80,6 +80,18 @@ class Announcement{
         }
     }
 
+    public function create($title, $description){
+        $userId = $_SESSION['mySession'];
+        
+        $sql = "INSERT INTO `announcement`(`datetime`, `title`, `description`, `status`, `userID`) VALUES (NOW(), '$title', '$description', 'Active', $userId)";
+
+        $result = $this->db->query($sql);
+
+        if ($result){
+            echo "created";
+        }
+    }
+
     public function find(){
         $sql = "SELECT announcementID from announcement";
 

@@ -29,7 +29,7 @@ $allPresentations = $presentation->getAllPresentations();
 ?>
 
 <head>
-    <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div id="outer-container">

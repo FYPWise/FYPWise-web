@@ -44,20 +44,16 @@ if ($isLecturer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update
 
     try {
         $meetingLog->updateMeetingLogStatus($meeting_logID, $newStatus, $newComment);
-        echo "<script>alert('Meeting Log updated successfully!');  window.location.reload();</script>";
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
     } catch (Exception $e) {
         echo "<script>alert('Error updating meeting log: " . htmlspecialchars($e->getMessage()) . "');</script>";
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Log Details</title>
-    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div id="outer-container">

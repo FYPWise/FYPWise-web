@@ -53,7 +53,13 @@ $project = new Project($db);
                                 foreach ($projects as $row) {
                                     echo "<tr>";
                                     echo "<td><a href='/project/{$row['projectID']}'>" . htmlspecialchars($row['project_title']) . "</a></td>";
-                                    echo "<td>" . ($row['student_name'] !== 'Unassigned' ? htmlspecialchars($row['student_name']) : "<a href='/assign-student' class='assign-btn'>Assign Advisee</a>") . "</td>";
+
+                                    if ($row['student_name'] !== 'Unassigned') {
+                                        echo "<td>" . htmlspecialchars($row['student_name']) . "</td>";
+                                    } else {
+                                        echo "<td><a href='/FYPWise-web/studentprojectassignment?projectID=" . htmlspecialchars($row['projectID']) . "&proposalID=" . htmlspecialchars($row['proposalID']) . "' class='assign-btn'>Assign Advisee</a></td>";
+                                    }
+
                                     echo "<td>" . htmlspecialchars($row['project_status']) . "</td>";
                                     echo "</tr>";
                                 }

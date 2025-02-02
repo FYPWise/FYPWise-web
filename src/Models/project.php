@@ -17,23 +17,28 @@ class Project {
                     p.project_description,
                     p.start_date,
                     p.end_date,
-                    COALESCE(u_student.name, 'Unassigned') AS student_name,
+                    CASE 
+                        WHEN u_student.name IS NOT NULL THEN u_student.name
+                        WHEN s.userID IS NOT NULL THEN 'Unknown Student'
+                        ELSE 'Unassigned'
+                    END AS student_name,
                     u_supervisor.name AS supervisor_name,
-                    p.project_status
+                    p.project_status,
+                    p.proposalID
                 FROM 
                     project p
                 LEFT JOIN 
                     student s ON p.studentID = s.userID
                 LEFT JOIN 
-                    users u_student ON s.userID = u_student.userID  -- Fetch student name correctly
+                    users u_student ON s.userID = u_student.userID  
                 LEFT JOIN 
                     proposal pr ON p.proposalID = pr.proposalID
                 LEFT JOIN 
                     lecturer l ON pr.supervisorID = l.userID
                 LEFT JOIN 
-                    users u_supervisor ON l.userID = u_supervisor.userID -- Fetch supervisor name correctly
+                    users u_supervisor ON l.userID = u_supervisor.userID 
                 ORDER BY 
-                    p.projectID ASC;";
+                    p.projectID ASC";
     
         $result = $this->db->query($sql);
     
@@ -57,21 +62,24 @@ class Project {
                     p.project_description,
                     p.start_date,
                     p.end_date,
-                    COALESCE(s.name, 'Unassigned') AS student_name,
-                    u.name AS supervisor_name,
-                    p.project_status
+                    COALESCE(u_student.name, 'Unassigned') AS student_name,
+                    u_supervisor.name AS supervisor_name,
+                    p.project_status,
+                    p.proposalID
                 FROM 
                     project p
                 LEFT JOIN 
                     student s ON p.studentID = s.userID
                 LEFT JOIN 
+                    users u_student ON s.userID = u_student.userID 
+                LEFT JOIN 
                     proposal pr ON p.proposalID = pr.proposalID
                 LEFT JOIN 
                     lecturer l ON pr.supervisorID = l.userID
                 LEFT JOIN 
-                    users u ON l.userID = u.userID
+                    users u_supervisor ON l.userID = u_supervisor.userID
                 WHERE p.projectID = ?;";
-
+    
         if ($stmt = $this->db->prepare($sql)) {
             $stmt->bind_param("i", $projectID);
             $stmt->execute();
@@ -81,7 +89,6 @@ class Project {
             throw new \Exception("Database query failed: " . mysqli_error($this->db->conn));
         }
     }
-
 
 
     // Add a new project
@@ -140,10 +147,14 @@ class Project {
 
     // Update milestone status
     public function updateMilestoneStatus($milestoneID, $status) {
-        $sql = "UPDATE milestone SET status = ? WHERE milestoneID = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("si", $status, $milestoneID);
-        return $stmt->execute();
+        $sql = "UPDATE project_timeline SET status = ? WHERE timelineID = ?";
+        
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("si", $status, $milestoneID);
+            return $stmt->execute();
+        } else {
+            throw new \Exception("Database query failed: " . $this->db->getError());
+        }
     }
 
     // Retrieve all project assignments
@@ -173,4 +184,190 @@ class Project {
         $stmt->bind_param("si", $status, $projectID);
         return $stmt->execute();
     }
+    public function updateProjectAssignment($projectID, $startDate, $endDate, $userID) {
+        $sql = "UPDATE project 
+                SET start_date = ?, end_date = ?, studentID = ? 
+                WHERE projectID = ?";
+    
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("ssii", $startDate, $endDate, $userID, $projectID);
+    
+            if ($stmt->execute()) {
+                echo "<pre>✅ SUCCESS: Project updated successfully!</pre>";
+                return true;
+            } else {
+                echo "<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>";
+            }
+        } else {
+            echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>";
+        }
+        return false;
+    }
+    
+    
+    
+    public function getAllProjectTimelines() {
+        $sql = "SELECT 
+                    pt.timelineID,
+                    pt.start_date,
+                    pt.end_date,
+                    pt.status,
+                    m.milestone_title,
+                    COALESCE(u_student.name, 'Unassigned') AS student_name
+                FROM project_timeline pt
+                LEFT JOIN milestone m ON pt.timelineID = m.timelineID
+                LEFT JOIN project p ON pt.projectID = p.projectID
+                LEFT JOIN student s ON p.studentID = s.userID
+                LEFT JOIN users u_student ON s.userID = u_student.userID
+                ORDER BY pt.start_date ASC";
+    
+        $result = $this->db->query($sql);
+    
+        if (!$result) {
+            throw new \Exception("Database query failed: " . mysqli_error($this->db->conn));
+        }
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    
+
+    // Upload Gantt Chart & Flow Chart PDFs
+    public function uploadProjectFiles($timelineID, $ganttChartPath, $flowChartPath) {
+        $sql = "UPDATE project_timeline 
+                SET gantt_chart_pdf = ?, flow_chart_pdf = ? 
+                WHERE timelineID = ?";
+
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("ssi", $ganttChartPath, $flowChartPath, $timelineID);
+            return $stmt->execute();
+        } else {
+            throw new \Exception("Error updating project files: " . $this->db->getError());
+        }
+    }
+
+
+    
+
+    public function saveTimelineFile($timelineID, $filename, $file_type, $file_category, $file_path) {
+        $sql = "INSERT INTO timeline_file (timeline_ID, filename, file_type, file_category, file_path, uploaded_at) 
+                VALUES (?, ?, ?, ?, ?, NOW())";
+    
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("issss", $timelineID, $filename, $file_type, $file_category, $file_path);
+            return $stmt->execute();
+        } else {
+            throw new \Exception("Database error: " . $this->db->getError());
+        }
+    }
+    
+    public function getMilestoneByID($milestoneID) {
+        $sql = "SELECT milestoneID, milestone_title, milestone_description, milestone_start_date, milestone_end_date 
+                FROM milestone 
+                WHERE milestoneID = ?";
+        
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("i", $milestoneID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
+        } else {
+            throw new \Exception("Database query failed: " . $this->db->getError());
+        }
+    }
+    
+    
+    public function saveMilestone($milestoneName, $startDate, $endDate, $timelineID) {
+        $sql = "INSERT INTO milestone (milestone_title, milestone_start_date, milestone_end_date, timelineID) 
+                VALUES (?, ?, ?, ?)";
+        
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("sssi", $milestoneName, $startDate, $endDate, $timelineID);
+            return $stmt->execute();
+        } else {
+            throw new \Exception("Database query failed: " . $this->db->getError());
+        }
+    }
+    
+    public function getNextMilestoneID() {
+        $sql = "SELECT MAX(milestoneID) AS lastID FROM milestone";
+        $result = $this->db->query($sql);
+    
+        if ($row = $result->fetch_assoc()) {
+            return $row['lastID'] ? $row['lastID'] + 1 : 1;
+        }
+        return 1; // Start from 1 if no milestones exist
+    }
+    
+
+    public function getSubmittedMilestones() {
+        $sql = "SELECT 
+                    m.milestoneID, 
+                    m.milestone_title,  
+                    m.milestone_description,  
+                    m.milestone_start_date, 
+                    m.milestone_end_date, 
+                    pt.status 
+                FROM milestone m
+                JOIN project_timeline pt ON m.timelineID = pt.timelineID
+                WHERE pt.status IN ('not-started', 'in-progress', 'completed')
+                ORDER BY m.milestoneID ASC";
+    
+        $result = $this->db->query($sql);
+    
+        if (!$result) {
+            throw new \Exception("Database query failed: " . mysqli_error($this->db->conn));
+        }
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+
+public function getTimelineFiles()
+{
+    $sql = "SELECT timeline_ID, filename, file_category, file_path, uploaded_at 
+            FROM timeline_file 
+            ORDER BY uploaded_at DESC";
+
+    $result = $this->db->query($sql);
+
+    if (!$result) {
+        throw new \Exception("Database query failed: " . mysqli_error($this->db->conn));
+    }
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+public function getStudentIDByUserID($studentID) {
+    $sql = "SELECT studentID FROM student WHERE studentID = ?";
+
+    if ($stmt = $this->db->prepare($sql)) {
+        $stmt->bind_param("s", $studentID); 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        return $row ? $row['studentID'] : null;
+    } else {
+        throw new \Exception("Database query failed: " . $this->db->getError());
+    }
+}
+
+public function getUserIDByStudentID($studentID) {
+    $sql = "SELECT userID FROM student WHERE studentID = ?";
+
+    if ($stmt = $this->db->prepare($sql)) {
+        $stmt->bind_param("s", $studentID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        return $row ? $row['userID'] : null;
+    } else {
+        throw new \Exception("Database query failed: " . $this->db->getError());
+    }
+}
+
+
+
 }

@@ -1,97 +1,229 @@
 <?php
-use App\Models\Base;
 
-$base = new Base("student project assignment");
+use App\Models\Base;
+use App\Models\Db;
+use App\Models\Project;
+use App\Models\Proposal;
+
+$base = new Base("Student Project Assignment");
+$db = new Db();
+$projectModel = new Project($db);
+$proposalModel = new Proposal($db);
+
+$projectID = $_GET['projectID'] ?? null;
+$proposalID = $_GET['proposalID'] ?? null;
+
+$proposal = $proposalModel->getProposalByID($proposalID);
+$project = $projectModel->getProjectById($projectID);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
+    $startDate = $_POST['start_date'];
+    $endDate = $_POST['end_date'];
+    $studentID = $_POST['student']; // User entered Student ID
+
+    // Convert studentID to userID
+    $userID = $projectModel->getUserIDByStudentID($studentID);
+
+    if (!$userID) {
+        echo "<script>alert('❌ Error: No user found for this Student ID. Please check and try again.');</script>";
+    } else {
+        try {
+            $success = $projectModel->updateProjectAssignment($projectID, $startDate, $endDate, $userID);
+
+            if ($success) {
+                echo "<script>alert('✅ Project successfully updated!'); window.location.href='/FYPWise-web/projectmanagement';</script>";
+                exit();
+            } else {
+                echo "<script>alert('❌ Error: Could not update project. Please try again.');</script>";
+            }
+        } catch (Exception $e) {
+            echo "<script>alert('❌ Database Error: " . addslashes($e->getMessage()) . "');</script>";
+        }
+    }
+}
+
+
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Advisee</title>
+    <link rel="stylesheet" href="../css/common-ui.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: #f4f7f6;
+            margin-top: 80px;
+        }
+
+        .content {
+            width: 90%;
+            max-width: 700px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-title {
+            font-size: 26px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group span,
+        .form-group div {
+            display: block;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .date-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .date-container .form-group {
+            flex: 1;
+        }
+
+        .form-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .save-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #0056b3;
+        }
+
+        .cancel-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #a71d2a;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                width: 100%;
+                max-width: 90%;
+            }
+
+            .date-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
 
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
 
-        <!-- Main Content -->
-        <div class="container" style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px; background-color: #f5f5f5; min-height: 100vh;">
-            <div class="content" style="width: 80%; max-width: 900px; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
-                <h2 class="form-title" style="text-align: center; font-size: 26px; color: #333; margin-bottom: 20px;">Assign Advisee</h2>
+        <div class="container">
+            <div class="content">
+                <h2 class="form-title">Assign Advisee</h2>
 
-                <!-- Form Section -->
-                <div class="form assign-form">
-                    <p><strong>PROPOSAL ID:</strong> P1</p>
-                    <p><strong>PROJECT ID:</strong> P1</p>
+                <form action="" method="POST">
+                    <input type="hidden" name="projectID" value="<?php echo htmlspecialchars($projectID); ?>">
+                    <input type="hidden" name="proposalID" value="<?php echo htmlspecialchars($proposalID); ?>">
 
-                    <!-- Editable Proposal Title -->
-                    <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
-                        <label style="font-weight: bold;">Proposal Title:</label>
-                        <span id="title-text">Sentiment Analysis Software for Businesses</span>
-                        <input type="text" id="title-input" class="editable hidden" style="flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ccc; display: none;">
-                        <button class="edit-btn" onclick="toggleEdit('title')" style="background: transparent; border: none; cursor: pointer;">
-                            <img src="/fypwise-web/src/assets/edit.png" alt="Edit" width="20" height="20">
-                        </button>
+                    <p><strong>PROPOSAL ID:</strong> <?php echo htmlspecialchars($proposalID); ?></p>
+                    <p><strong>PROJECT ID:</strong> <?php echo htmlspecialchars($projectID); ?></p>
+
+                    <div class="form-group">
+                        <label><strong>Proposal Title:</strong></label>
+                        <span><?php echo htmlspecialchars($proposal['proposal_title']); ?></span>
                     </div>
 
-                    <!-- Editable Description -->
-                    <div class="form-group" style="margin-top: 15px;">
-                        <label style="font-weight: bold;">Description:</label>
-                        <div id="description-text" style="padding: 10px; background: #f9f9f9; border-radius: 5px;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis nisl diam
-                            inceptos elementum scelerisque eros. Nullam eu dolor adipiscing pellentesque pellentesque vitae diam dui.
-                        </div>
-                        <textarea id="description-input" class="editable hidden" rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-top: 10px; display: none;"></textarea>
-                        <button class="edit-btn" onclick="toggleEdit('description')" style="background: transparent; border: none; cursor: pointer;">
-                            <img src="/fypwise-web/src/assets/edit.png" alt="Edit" width="20" height="20">
-                        </button>
+                    <div class="form-group">
+                        <label><strong>Description:</strong></label>
+                        <div><?php echo htmlspecialchars($proposal['proposal_description']); ?></div>
                     </div>
 
-                    <!-- Start and End Dates -->
-                    <div class="form-group" style="margin-top: 15px; display: flex; justify-content: space-between;">
-                        <div>
-                            <label for="start-date">Start Date:</label>
-                            <input type="date" id="start-date" name="start-date" value="2024-10-31" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <div class="date-container">
+                        <div class="form-group">
+                            <label for="start_date">Start Date:</label>
+                            <input type="date" id="start_date" name="start_date" required>
                         </div>
-                        <div>
-                            <label for="end-date">End Date:</label>
-                            <input type="date" id="end-date" name="end-date" value="2025-05-31" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+
+                        <div class="form-group">
+                            <label for="end_date">End Date:</label>
+                            <input type="date" id="end_date" name="end_date" required>
                         </div>
                     </div>
 
-                    <!-- Category Radio Buttons -->
-                    <div class="form-group" style="margin-top: 15px;">
-                        <label style="font-weight: bold;">Category:</label>
-                        <div style="display: flex; gap: 10px;">
-                            <label><input type="radio" name="category" value="research"> Research-based</label>
-                            <label><input type="radio" name="category" value="application"> Application-based</label>
-                            <label><input type="radio" name="category" value="both"> Research & Application-based</label>
-                        </div>
+                    <div class="form-group">
+                    <label for="student">Student ID:</label>
+<input type="text" id="student" name="student" required placeholder="Enter Student ID">
+
                     </div>
 
-                    <!-- Supervisor & Student ID -->
-                    <div class="form-group" style="margin-top: 15px;">
-                        <label for="supervisor">Supervisor ID:</label>
-                        <input type="text" id="supervisor" name="supervisor" placeholder="Enter Supervisor ID" readonly style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <div class="form-buttons">
+                        <button type="submit" class="btn save-btn" name="save">Save</button>
+                        <button type="button" class="btn cancel-btn" onclick="window.history.back();">Cancel</button>
                     </div>
-
-                    <div class="form-group" style="margin-top: 15px;">
-                        <label for="student">Student ID:</label>
-                        <input type="text" id="student" name="student" placeholder="Enter Student ID" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
-                    </div>
-
-                    <!-- Buttons -->
-                    <div class="form-buttons" style="margin-top: 20px; text-align: center;">
-                        <button class="btn save-btn" onclick="submitForm()" style="background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Save</button>
-                        <button class="btn cancel-btn" style="background: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-left: 10px;">Cancel</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
         <?php $base->renderFooter(); ?>
     </div>
-
-    <script>
-        function toggleEdit(field) {
-            let text = document.getElementById(field + '-text');
-            let input = document.getElementById(field + '-input');
-            text.style.display = text.style.display === 'none' ? 'block' : 'none';
-            input.style.display = input.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
 </body>
+</html>

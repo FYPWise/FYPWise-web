@@ -51,6 +51,20 @@ class CriteriaModel {
         $sql = "DELETE FROM criteria_score WHERE scoreID = '$scoreID'";
         return $this->db->query($sql);
     }
+
+
+    public function getCriteriaScoresByMarksheetID($marksheetID) {
+    $sql = "SELECT * FROM criteria_score WHERE marksheetID = ?";
+    
+    if ($stmt = $this->db->prepare($sql)) {
+        $stmt->bind_param("s", $marksheetID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    } else {
+        throw new \Exception("Database query failed: " . $this->db->getError());
+    }
+}
 }
 
 ?>

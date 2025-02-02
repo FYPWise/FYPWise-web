@@ -17,23 +17,23 @@ USE fypwise;
 -- Insert sample data  for table `user`
 --
 INSERT INTO users (id, name, password, email, role) VALUES
-('1211101935', 'Mohamed Imran Bin Mohamed Yunus', '123', '1211101935@student.mmu.edu.my', 'student'),
-('1211103220', 'Mohamed Firzan RUzain Bin Firdus', '123', '1211103220@student.mmu.edu.my', 'student'),
-('1211103194', 'Nur Farahiya Aida Binti Abd Razak', '123', '1211103194@student.mmu.edu.my', 'student'),
-('1211104230', 'Nur Aisyah Nabila Binti Nahar', '123', '1211104230@student.mmu.edu.my', 'student'),
-('1211017635', 'Ahmad Abu', '123', '1211017635@student.mmu.edu.my', 'student'),
-('1209115403', 'Ali Naki', '123', '1209115403@student.mmu.edu.my', 'student'),
-('1212003221', 'Sarah Humaira', '123', '1212003221@student.mmu.edu.my', 'student'),
-('1213567211', 'Nurul Aliya', '123', '1213567211@student.mmu.edu.my', 'student'),
-('L001', 'Chan Wai Ti', '123', 'L001@mmu.edu.my', 'lecturer'),
-('L002', 'Alif Zulfakar Bin Pokaad', '123', 'L002@mmu.edu.my', 'lecturer'),
-('L003', 'Ervina Efzan Binti Mhd Noor', '123', 'L003@mmu.edu.my', 'lecturer'),
-('L004', 'Em Poh Ping', '123', 'L004@mmu.edu.my', 'lecturer'),
-('L005', 'Ganesh Kumar A/L Krishnan', '123', 'L005@mmu.edu.my', 'lecturer'),
-('L006', 'Jee Kian Siong', '123', 'L006@mmu.edu.my', 'lecturer'),
-('L007', 'Logah A/L Perumal', '123', 'L007@mmu.edu.my', 'lecturer'),
-('L008', 'Muharniza Azinita Binti Musa', '123', 'L008@mmu.edu.my', 'lecturer'),
-('A001', 'Ng Hu', '123', 'A001@mmu.edu.my', 'admin');
+('1211101935', 'Mohamed Imran Bin Mohamed Yunus', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1211101935@student.mmu.edu.my', 'student'),
+('1211103220', 'Muhammad Firzan Ruzain Bin Firdus', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1211103220@student.mmu.edu.my', 'student'),
+('1211103194', 'Nur Farahiya Aida Binti Abd Razak', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1211103194@student.mmu.edu.my', 'student'),
+('1211104230', 'Nur Aisyah Nabila Binti Nahar', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1211104230@student.mmu.edu.my', 'student'),
+('1211017635', 'Ahmad Abu', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1211017635@student.mmu.edu.my', 'student'),
+('1209115403', 'Ali Naki', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1209115403@student.mmu.edu.my', 'student'),
+('1212003221', 'Sarah Humaira', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1212003221@student.mmu.edu.my', 'student'),
+('1213567211', 'Nurul Aliya', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1213567211@student.mmu.edu.my', 'student'),
+('L001', 'Chan Wai Ti', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L001@mmu.edu.my', 'lecturer'),
+('L002', 'Alif Zulfakar Bin Pokaad', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L002@mmu.edu.my', 'lecturer'),
+('L003', 'Ervina Efzan Binti Mhd Noor', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L003@mmu.edu.my', 'lecturer'),
+('L004', 'Em Poh Ping', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L004@mmu.edu.my', 'lecturer'),
+('L005', 'Ganesh Kumar A/L Krishnan', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L005@mmu.edu.my', 'lecturer'),
+('L006', 'Jee Kian Siong', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L006@mmu.edu.my', 'lecturer'),
+('L007', 'Logah A/L Perumal', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L007@mmu.edu.my', 'lecturer'),
+('L008', 'Muharniza Azinita Binti Musa', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'L008@mmu.edu.my', 'lecturer'),
+('A001', 'Ng Hu', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', 'A001@mmu.edu.my', 'admin');
 -- --------------------------------------------------------
 
 --
@@ -300,19 +300,37 @@ INSERT INTO presentation (presentation_title, start_time, end_time, date, mode, 
 -- --------------------------------------------------------
 
 --
--- Insert sample data  for table `message`
---
-
--- --------------------------------------------------------
-
---
 -- Insert sample data  for table `group_chat`
 --
-
+INSERT INTO group_chat (groupID, groupName, createdAt, createdBy) VALUES
+(1, 'Group 1', '2025-01-01 20:18:42', 17),
+(2, 'Group 2', '2025-01-05 20:18:42', 9),
+(3, 'Group 3', '2025-01-31 20:18:42', 16);
 -- --------------------------------------------------------
 
 --
 -- Insert sample data  for table `user_group`
 --
+INSERT INTO user_group (userID, groupID) VALUES
+(17, 1),
+(9, 2),
+(16, 3),
+(1, 1),
+(2, 1),
+(6, 2),
+(3, 3),
+(4, 3),
+(7, 3);
+-- --------------------------------------------------------
 
+--
+-- Insert sample data  for table `message`
+--
+INSERT INTO messages (senderID, receiverID, messageContent, timeStamp) VALUES
+(2, 9, 'testing bossku', '2025-01-01 20:18:42'),
+(9, 2, 'hello hello', '2025-01-01 20:18:48');
+
+INSERT INTO messages (senderID, groupID, messageContent, timeStamp) VALUES
+(17, 1, 'testing bossku', '2025-01-01 20:18:42'),
+(1, 1, 'hello hello', '2025-01-01 20:20:00');
 -- --------------------------------------------------------

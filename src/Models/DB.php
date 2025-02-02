@@ -32,6 +32,10 @@ class Db
     public function close() {
         $this->conn->close();
     }
+
+    public function __destruct(){
+        $this->close();
+    }
     
     
 }

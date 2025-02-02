@@ -24,7 +24,7 @@
   background-color: #e5ffea;
 }
 
-#user-id {
+.disabled{
   pointer-events: none;
   background-color: #cecece;
 }
@@ -36,4 +36,39 @@
 #textHint {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.create-new-btn {
+  width: 20px;
+  height: 20px;
+  background: url("../assets/create-new-icon.png") no-repeat scroll 0 0 transparent;
+  background-size: cover;
+  border: none;
+  margin: auto;
+  vertical-align: middle;
+}
+
+#search-bar-id{
+  vertical-align: middle;
+  max-width: 100px;
+}
+
+.more-btn,
+.search-btn {
+  border: none;
+  font-size:x-large;
+  border-radius: 100%;
+  background: transparent;
+}
+
+.more-btn:hover,
+.search-btn:hover {
+  transform: scale(1.5);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input:disabled{
+ color: black;
 }

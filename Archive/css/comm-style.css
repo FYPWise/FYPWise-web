@@ -161,12 +161,11 @@ body:has(.menubutton > input:checked) #chat-container {
 
 .chat-entry-list {
   margin-bottom: 15px;
+  width: fit-content;
 }
 
 .chat-bubble {
   margin-bottom: 10px;
-  width: fit-content;
-  position: relative;
   border-radius: 5px;
 }
 
@@ -207,6 +206,10 @@ body:has(.menubutton > input:checked) #chat-container {
   text-align: right;
 }
 
+.chat-date {
+  text-align: left;
+}
+
 .chat-time,
 .chat-date {
   padding: 5px;
@@ -215,13 +218,15 @@ body:has(.menubutton > input:checked) #chat-container {
 }
 
 .chat-received {
-  margin-right: 35%;
+  max-width: 80%;
 }
 
-.chat-sended {
-  float: right;
-  margin-left: 35%;
+.chat-sended{
+  text-align: right;
+  margin-left: auto;
+  max-width: 80%;
 }
+
 
 @media screen and (max-width: 650px) {
   .chat-received {

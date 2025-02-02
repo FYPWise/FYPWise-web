@@ -8,17 +8,17 @@ $db = new Db();
 $projectModel = new Project($db);
 
 // Fetch uploaded Gantt and Flow Chart files
-$timelineFiles = $projectModel->getTimelineFiles();
+// $timelineFiles = $projectModel->getTimelineFiles();
 $ganttChart = null;
 $flowChart = null;
 
-foreach ($timelineFiles as $file) {
+/*foreach ($timelineFiles as $file) {
     if ($file['file_category'] === 'gantt_chart') {
         $ganttChart = $file['file_path'];
     } elseif ($file['file_category'] === 'flow_chart') {
         $flowChart = $file['file_path'];
     }
-}
+}*/
 
 // Fetch all milestones from the database
 $milestones = $projectModel->getAllMilestones();

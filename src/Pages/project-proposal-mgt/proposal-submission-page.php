@@ -104,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                                 <option value="Data Science">Data Science</option>
                                 <option value="Cybersecurity">Cybersecurity</option>
                                 <option value="Game Development">Game Development</option>
-                                <option value="Artificial Intelligence">Artificial Intelligence</option>
                             </select>
                         </div>
 

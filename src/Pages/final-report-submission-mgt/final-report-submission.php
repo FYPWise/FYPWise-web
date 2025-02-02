@@ -2,70 +2,14 @@
 use App\Models\Base;
 use App\Models\FinalSubmissionModel;
 
-$base = new Base("Final Report Submission");
-$pdo = new PDO("mysql:host=localhost;dbname=fypwise;charset=utf8", "root", "", [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
-$model = new FinalSubmissionModel($pdo);
+$base = new Base("Final Report Submission", ["student"]);
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-$userID = 3;
-$studentDetails = null;
-
-if ($userID) {
-    $studentDetails = $model->getStudentDetails($userID);
-}
-
-$uploadDir = __DIR__ . '/../../uploads/';
-$uploadOk = 1;
-$allowedTypes = ['pdf', 'doc', 'docx'];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_report'])) {
-    if (!empty($_FILES['report_file']['name']) && isset($studentDetails['student_id'])) {
-        $fileName = basename($_FILES['report_file']['name']);
-        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        $targetFilePath = $uploadDir . $fileName;
-
- 
-        if (!in_array($fileType, $allowedTypes)) {
-            echo "<script>alert('Only PDF, DOC, and DOCX files are allowed.');</script>";
-            $uploadOk = 0;
-        }
-
-    
-        if ($_FILES['report_file']['size'] > 5000000) {
-            echo "<script>alert('File is too large. Max 5MB.');</script>";
-            $uploadOk = 0;
-        }
-
-    
-        if ($uploadOk && move_uploaded_file($_FILES['report_file']['tmp_name'], $targetFilePath)) {
-            $relativeFilePath = 'src/uploads/' . $fileName;
-            $model->submitFinalReport($studentDetails['student_id'], $relativeFilePath);
-            echo "<script>alert('Final report submitted successfully!'); window.location.href=window.location.href;</script>";
-            exit();
-        } else {
-            echo "<script>alert('Error uploading file.');</script>";
-        }
-    } else {
-        echo "<script>alert('Please select a file to upload.');</script>";
-    }
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($base->getTitle(), ENT_QUOTES, 'UTF-8'); ?></title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -139,24 +83,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_report'])) {
                 <div class="form-group">
                     <label>Full Name:</label>
                     <input type="text"
-                        value="<?php echo htmlspecialchars($studentDetails['name'] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
+                        value="<?php echo htmlspecialchars($_SESSION['name'] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
                         readonly>
                 </div>
                 <div class="form-group">
                     <label>Student ID:</label>
                     <input type="text"
-                        value="<?php echo htmlspecialchars($studentDetails['studentID'] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
+                        value="<?php echo htmlspecialchars($_SESSION['id'] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
                         readonly>
                 </div>
                 <div class="form-group">
                     <label>Project Title:</label>
                     <input type="text"
-                        value="<?php echo htmlspecialchars($studentDetails['project_title'] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
+                        value="<?php echo htmlspecialchars($_SESSION['project_title'] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
                         readonly>
                 </div>
                 <div class="form-group">
                     <label>Submit Report:</label>
-                    <input type="file" name="report_file" required>
+                    <input type="file" name="report_file" accept=".doc, .docx, application/pdf" required>
                 </div>
                 <button type="submit" name="submit_report" class="btn-submit">Submit</button>
             </form>

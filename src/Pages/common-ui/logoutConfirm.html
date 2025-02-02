@@ -25,6 +25,7 @@
             width: 80%;
             max-width: 400px;
             text-align: center;
+            padding: 25px;
         }
 
         .closelgout {
@@ -82,7 +83,7 @@
     <div id="logoutPopup" class="popup">
         <div class="popup-content">
             <button class="closelgout" onclick="hideLogoutPopup()">&times;</button>
-            <div class="content">
+            <div class="">
                 <p>Are you sure you want to log out?</p>
                 <div class="popup-buttons">
                     <button onclick="confirmLogout()" class="yes-btn">Yes</button>
@@ -101,7 +102,7 @@
         }
 
         function confirmLogout() {
-            window.location.href = "login?q=logout";
+            window.location.href = "/FYPWise-web/login?q=logout";
         }
     </script>
 </body>

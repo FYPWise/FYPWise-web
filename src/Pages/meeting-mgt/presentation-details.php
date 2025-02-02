@@ -12,12 +12,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if the user is logged in
-if (!isset($_SESSION['mySession'])) {
-    header("Location: login.php");
-    exit();
-}
-
 // Database connection
 $db = new Db();
 $base = new Base("View Presentations", ["lecturer", "student", "admin"]);

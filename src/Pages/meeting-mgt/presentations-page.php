@@ -12,12 +12,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if the user is logged in, redirect if not
-if (!isset($_SESSION['mySession'])) {
-    header("Location: login.php");
-    exit();
-}
-
 $db = new Db();
 $base = new Base("Presentations", ["student", "lecturer", "admin"]);
 $presentation = new Presentation($db);
@@ -71,7 +65,7 @@ $allPresentations = $presentation->getAllPresentations();
                                     echo "<td>{$presentation['status']}</td>";
                                 }
                             } else {
-                                echo "<tr><td colspan='9'>No meeting logs available.</td></tr>";
+                                echo "<tr><td colspan='9'>No presentation available.</td></tr>";
                             }
                             ?>
                         </tbody>

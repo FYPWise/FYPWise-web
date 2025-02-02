@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Db;
 use App\Models\Project;
 
-$base = new Base("Milestone Form");
+$base = new Base("Milestone Form", "student");
 $db = new Db();
 $projectModel = new Project($db);
 

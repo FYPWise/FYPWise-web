@@ -3,9 +3,9 @@ use App\Models\Base;
 use App\Models\User;
 use App\Models\Chat;
 
-$base = new Base("Communication");
+$base = new Base("Communication", ["student", "admin", "lecturer"]);
 
-$user = new User($_SESSION['id']);
+if(isset($_SESSION['id'])) $user = new User($_SESSION['id']);
 $chat = new Chat();
 
 $chats = $chat->getChat();
@@ -64,9 +64,14 @@ $chat->loadChat('1');
         <script>
             
             let Gid = 0;
-            var outerContainer = document.getElementById("outer-container");
 
-            outerContainer.scrollTop = outerContainer.scrollHeight;
+            function scrollDown(){
+
+                setTimeout(function(){
+                    var outerContainer = document.getElementById("outer-container");
+                    outerContainer.scrollTop = outerContainer.scrollHeight + 100;
+                },450);
+            }
 
             let interval;
 
@@ -92,7 +97,7 @@ $chat->loadChat('1');
                     console.log(id);
                 }, 1000);
 
-                
+                scrollDown();
                 }
             }
 

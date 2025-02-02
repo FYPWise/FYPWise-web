@@ -3,12 +3,10 @@ use App\Models\Base;
 use App\Models\Marksheet;
 use App\Models\Db;
 
-$base = new Base("Page Skeleton");
-$marksheet = new Marksheet();
+$base = new Base("Marksheet", ['lecturer']);
 $db = new Db();
+$marksheet = new Marksheet($db);
 
-
-$marksheets = $marksheet->getAllMarksheet();
 ?>
 
 <body>
@@ -19,7 +17,7 @@ $marksheets = $marksheet->getAllMarksheet();
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $base->renderMenu() ?>
+            <?php $base->renderMenu(); ?>
 
             <div class="content">
                 <section class="main">
@@ -27,40 +25,35 @@ $marksheets = $marksheet->getAllMarksheet();
 
                     <!-- Main Content -->
                     <div class="content">
-                        <h2>Marksheet</h2>
                         <div class="table-container">
                             <table>
                                 <thead>
                                     <tr>
                                         <th>Project ID</th>
-                                        <th>Marksheet ID</th>
+                                        <th>Marksheet ID</th> 
                                         <th>Date</th>
                                         <th>Total Score</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php while ($row = mysqli_fetch_assoc($marksheets)) { ?>
-                                        <tr>
-                                            <td><?php echo htmlspecialchars($row['projectID']); ?></td>
-                                            <td><a href="../marksheet-mgt/criteria-score-page.php?marksheetID=<?php echo $row['marksheetID']; ?>"> <?php echo htmlspecialchars($row['marksheetID']); ?></a></td>
-                                            <td><?php echo htmlspecialchars($row['date']); ?></td>
-                                            <td><?php echo htmlspecialchars($row['total_score']); ?></td>
-                                        </tr>
-                                    <?php } ?>
+                                <?php 
+                                    $marksheets = $marksheet->getAllMarksheet();
+                                    if (empty($marksheets)) {
+                                        echo "<tr><td colspan='4'>No marksheets found.</td></tr>";
+                                    } else {
+                                        foreach ($marksheets as $row) {
+                                            echo "<tr>";
+                                            echo "<td>".htmlspecialchars($row['projectID'])."</td>";
+                                            echo "<td><a href='/FYPWise-web/criteriapage/".htmlspecialchars($row['marksheetID'])."'>".htmlspecialchars($row['marksheetID'])."</a></td>";
+                                            echo "<td>".htmlspecialchars($row['date'])."</td>";
+                                            echo "<td>".htmlspecialchars($row['total_score'])."</td>";
+                                            echo "</tr>";
+                                        }
+                                    }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
-
-                        <!-- Insert Form -->
-                        <form action="marksheet-insert.php" method="POST">
-                            <label for="total_score">Total Score:</label>
-                            <input type="number" name="total_score" required>
-                            <label for="date">Date:</label>
-                            <input type="datetime-local" name="date" required>
-                            <label for="projectID">Project ID:</label>
-                            <input type="number" name="projectID" required>
-                            <button type="submit">Insert Marksheet</button>
-                        </form>
                     </div>
                 </section>
             </div>

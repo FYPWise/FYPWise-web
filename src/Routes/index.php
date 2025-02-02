@@ -27,4 +27,7 @@ $router->include($commRoutes);
 include "meeting.php";
 $router->include($meetingRoutes);
 
+include "final.php";
+$router->include($final);
+
 $router->dispatch();

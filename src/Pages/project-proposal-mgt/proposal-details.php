@@ -48,7 +48,7 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
         <div id="main-container">
 
             <!-- Side Menu -->
-            <?php $base->renderMenu() ?>
+            <?php $base->renderMenu(); ?>
 
             <div class="content">
                 <h2 class="form-title">Proposal Details</h2>

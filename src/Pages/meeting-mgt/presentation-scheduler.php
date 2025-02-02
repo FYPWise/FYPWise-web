@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                                 <select id="mode" name="mode" required>
                                     <option value="" disabled selected>Select Mode</option>
                                     <option value="Online">Online</option>
-                                    <option value="Offline">Offline</option>
+                                    <option value="Physical">Physical</option>
                                 </select>
                             </div>
 

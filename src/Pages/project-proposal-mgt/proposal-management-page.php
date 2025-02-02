@@ -64,7 +64,6 @@ $proposal = new Proposal($db);
                                     <th>Proposal ID</th>
                                     <th>Title</th>
                                     <th>Description</th>
-                                    <th>Submission Date</th>
                                     <th>Supervisor</th>
                                     <th>Status</th>
                                     <th>Updated At</th>
@@ -83,7 +82,6 @@ $proposal = new Proposal($db);
                                         echo "<td>{$row['proposalID']}</td>";
                                         echo "<td><a href='/FYPWise-web/proposal/{$row['proposalID']}'>{$row['proposal_title']}</a></td>";
                                         echo "<td>".htmlentities($row['proposal_description'])."</td>"; //htmlentities = for special characters
-                                        echo "<td>{$row['submission_date']}</td>";
                                         echo "<td>{$row['supervisor_name']}</td>";
                                         $status = $row['status'];
                                         if ($status === 'accepted') {

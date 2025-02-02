@@ -219,6 +219,10 @@ header h2 {
   cursor: pointer;
 }
 
+a.menu-button{
+  text-decoration: underline;
+}
+
 .menu-label {
   width: 100%;
   display: flex;

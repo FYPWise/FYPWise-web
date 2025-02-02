@@ -11,7 +11,7 @@ $projectModel = new Project($db);
 $file = new File();
 
 // Fetch all submitted milestones from the database
-$milestones = $projectModel->getSubmittedMilestones();
+$milestones = $projectModel->getSubmittedMilestones($_SESSION['mySession']);
 $nextMilestoneID = $projectModel->getNextMilestoneID();
 
 // Handle milestone status update

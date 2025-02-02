@@ -16,12 +16,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if the user is logged in, redirect if not
-if (!isset($_SESSION['mySession'])) {
-    header("Location: login.php");
-    exit();
-}
-
 $base = new Base("Proposal Submission", "lecturer");
 $db = new Db();
 $proposal = new Proposal($db);

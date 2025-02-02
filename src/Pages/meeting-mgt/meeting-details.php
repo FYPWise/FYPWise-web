@@ -12,13 +12,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if the user is logged in, redirect if not
-if (!isset($_SESSION['mySession'])) {
-    header("Location: login.php");
-    exit();
-}
-
-$base = new Base("Meeting Management");
+$base = new Base("Meeting Management", ["student", "lecturer"]);
 $db = new Db();
 $meeting = new Meeting($db);
 $userID = $_SESSION['mySession']; 

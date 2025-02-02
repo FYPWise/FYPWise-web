@@ -95,10 +95,12 @@ class Project {
 
     // Add a new project
     public function addProject($title, $description, $start_date, $end_date, $supervisorID) {
-        $sql = "INSERT INTO project (project_title, project_description, start_date, end_date, supervisorID) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO project (project_title, project_description, start_date, end_date, supervisorID) VALUES (?, ?, ?, ?, ?);";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("ssssi", $title, $description, $start_date, $end_date, $supervisorID);
-        return $stmt->execute();
+        $stmt->execute();
+        $projectId = $stmt->insert_id;
+        $timelineSql = "(`start_date`, `end_date`, `status`, `projectID`, `gantt_chart_pdf`, `flow_chart_pdf`) VALUES ('$start_date', '$end_date', 'pending', $projectId);";
     }
 
     // Update an existing project
@@ -246,21 +248,6 @@ class Project {
             throw new \Exception("Error updating project files: " . $this->db->getError());
         }
     }
-
-
-    
-
-    public function saveTimelineFile($timelineID, $filename, $file_type, $file_category, $file_path) {
-        $sql = "INSERT INTO timeline_file (timeline_ID, filename, file_type, file_category, file_path, uploaded_at) 
-                VALUES (?, ?, ?, ?, ?, NOW())";
-    
-        if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("issss", $timelineID, $filename, $file_type, $file_category, $file_path);
-            return $stmt->execute();
-        } else {
-            throw new \Exception("Database error: " . $this->db->getError());
-        }
-    }
     
     public function getMilestoneByID($milestoneID) {
         $sql = "SELECT milestoneID, milestone_title, milestone_description, milestone_start_date, milestone_end_date 
@@ -308,7 +295,9 @@ class Project {
     
     
 
-    public function getSubmittedMilestones() {
+    public function getSubmittedMilestones($userId=null) {
+
+
         $sql = "SELECT 
                     m.milestoneID, 
                     m.milestone_title,  
@@ -319,6 +308,17 @@ class Project {
                 FROM milestone m
                 LEFT JOIN project_timeline pt ON m.timelineID = pt.timelineID
                 ORDER BY m.milestoneID ASC";  // Ensure all milestones are retrieved
+
+        if ($userId !== null){
+            $sql = "SELECT m.milestoneID, 
+                        m.milestone_description, 
+                        m.milestone_start_date, 
+                        m.milestone_end_date
+                    FROM milestone m
+                    JOIN project_timeline pt ON m.timelineID = pt.timelineID
+                    JOIN project p ON pt.projectID = p.projectID
+                    WHERE p.studentID = '$userId';";
+        }
         
         $result = $this->db->query($sql);
         

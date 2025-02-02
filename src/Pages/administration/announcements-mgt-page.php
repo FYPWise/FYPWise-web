@@ -13,6 +13,7 @@ echo $announcements[0];
 
 <head>
     <link rel="stylesheet" href="./src/css/announcements-mgt-style.css">
+    <link rel="stylesheet" href="./src/css/form-style.css">
 </head>
 
 
@@ -40,11 +41,21 @@ echo $announcements[0];
 
 
                 <div class="table-name">
+                    <?php
+                            if (isset($_GET["view"])) {
+                                $id = $_GET["view"];
+                                $ann->read($id);
+                                $ann->formView();
+                            }else{ ?>
                     <table id="tablename-table">
+
+                        
+
                         <thead>
                             <th><input title="select all" type="checkbox" id="select-all"></th>
                             <th>Announcement Title</th>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>Description</th>
                             <th>Status</th>
                             <th>
@@ -53,11 +64,14 @@ echo $announcements[0];
 
                         <tbody>
                             <?php
-                            
+
+                                
                                 foreach ($announcements as $id) {
                                     $ann->read($id);
                                     $ann->renderTable();
                                 }
+                            }
+                                
                             
                             ?>
                         </tbody>
@@ -71,26 +85,10 @@ echo $announcements[0];
         </div>
 
         <!-- footer Section -->
-        <footer>
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
-                    Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
-                    Desk</a>
-            </div>
-            FYP Wise &copy; <em id="date"></em>Syabel Imran Aida Firzan
-        </footer>
+        <?php $base->renderFooter(); ?>
     </div>
 
     <!-- JavaScript -->
-    <script src="../scripts/table_search.js"></script>
-    <script src="../scripts/checkbox.js"></script>
-    <script src="../scripts/side-menu.js"></script>
-
     <script>
         document.querySelectorAll('.status').forEach(cell => {
             const text = cell.textContent.trim(); // Get the text content of the cell
@@ -99,13 +97,6 @@ echo $announcements[0];
             } else if (text === 'Archived') {
                 cell.classList.add('unpublished'); // Add 'unpublished' class
             }
-        });
-    </script>
-
-    <!-- Initialize search functionality -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            initSearch("search-bar", "proposal-table");
         });
     </script>
 </body>

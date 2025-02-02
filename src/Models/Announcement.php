@@ -85,8 +85,9 @@ class Announcement{
 
             <tr>
                 <td><input title="'.$this->id.'" type="checkbox" class="row-checkbox" value="'.$this->id.'"></td>
-                <td><a href="#">'.$this->title.'</a></td>
-                <td>16/12/2024-9AM</td>
+                <td><a href="?view='.$this->id.'">'.$this->title.'</a></td>
+                <td>'.$this->date.'</td>
+                <td>'.$this->time.'</td>
                 <td>'.$this->shortDesc.'</td>
                 <td>
                     <p class="status">'.$this->status.'</p>
@@ -95,5 +96,38 @@ class Announcement{
             </tr>
 
         ';
+    }
+
+    public function formView(){
+        ?>
+        <form class="proposal-form" id="proposalForm">
+            <div class="form-group">
+                <label for="announcement-id">Announcement ID</label>
+                <p id="announcement-id" class="announcement-id"><?php echo $this->id ?></p>
+            </div>
+
+            <div class="form-group">
+                <label for="announcement-title">Announcement Title</label>
+                <p id="announcement-title" name="announcement-title"><?php echo $this->title ?></p>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <p id="description" name="description">
+                    <?php echo $this->description ?>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <p id="date" name="date"><?php echo $this->date ?></p>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Time</label>
+                <p id="time" name="time"><?php echo $this->time ?></p>
+            </div>
+        </form>
+        <?php
     }
 }

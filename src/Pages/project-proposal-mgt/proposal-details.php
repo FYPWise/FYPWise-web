@@ -41,7 +41,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
     try {
         $proposal->updateProposalStatus($proposalID, $newStatus, $newComment);
-        echo "<script>alert('Proposal status updated successfully!'); window.location.reload();</script>";
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
     } catch (Exception $e) {
         echo "<script>alert('Error updating proposal: " . $e->getMessage() . "');</script>";
     }

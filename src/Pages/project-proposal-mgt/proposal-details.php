@@ -7,9 +7,19 @@ $base = new Base("Proposal Details");
 $db = new Db();
 $proposal = new Proposal($db);
 
-// Simulating user roles for testing
-$isAdmin = true;
-// $isAdmin = false;
+// simulate admin role
+// $isAdmin = true;
+
+// Start session
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if the user is logged in
+if (!isset($_SESSION['mySession'])) {
+    header("Location: login.php");
+    exit();
+}
 
 // echo "Proposal ID: {$proposalID}";
 $proposalDetails = null;
@@ -91,6 +101,15 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
                         <div class="form-group">
                             <label for="supervisor-name">Supervisor Name</label>
                             <p><?php echo htmlspecialchars($proposalDetails['supervisor_name']); ?></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file">Proposal File</label>
+                            <p id="file">
+                            <a href="/FYPWise-web/uploads/proposals/<?= htmlspecialchars($proposalDetails['proposal_file'] ?? '') ?>" target="_blank">
+                               <?= htmlspecialchars($proposalDetails['proposal_file'] ?? 'No file uploaded') ?>
+                            </a>
+                            </p>
                         </div>
 
                         <div class="form-group">

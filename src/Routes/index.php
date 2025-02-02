@@ -20,6 +20,10 @@ $router->include($proposalRoutes);
 include "marksheet.php";
 $router->include($marksheetRoutes);
 
+//communication management
+include "comm.php";
+$router->include($commRoutes);
+
 include "meeting.php";
 $router->include($meetingRoutes);
 

@@ -4,29 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <script>
-        <?php if (isset($error)) { ?>
-            document.addEventListener('DOMContentLoaded', function() {
-                var modal = document.getElementById('errorModal');
-                var closeBtn = document.getElementsByClassName('close')[0];
-                modal.style.display = 'block';
-                closeBtn.onclick = function() {
-                    modal.style.display = 'none';
-                }
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = 'none';
-                    }
-                }
-            });
-        <?php } ?>
-    </script>
+    <title>ID in use</title>
     <style>
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -40,14 +19,16 @@
         .modal-content {
             background-color: #fefefe;
             margin: 5% auto;
-            padding: 30px;
             border: 1px solid #888;
             width: 30%;
         }
 
         .close {
             position: relative;
-            bottom: 5px;
+            padding: 10px;
+            border: none;
+            background: none;
+            right: 15px;
             color: #aaa;
             float: right;
             font-size: 24px;
@@ -59,11 +40,28 @@
             cursor: pointer;
         }
     </style>
+</head>
+
+<body>
+    <script>
+        <?php if (isset($error)) { ?>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('errorModal');
+                var closeBtn = document.getElementsByClassName('close')[0];
+                modal.style.display = 'block';
+                closeBtn.onclick = function() {
+                    modal.style.display = 'none';
+                }
+            });
+        <?php } ?>
+    </script>
     <!-- Modal -->
     <div id="errorModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p><?php echo $error; ?></p>
+            <button class="close">&times;</button>
+            <div class="content">
+                <p><?php echo $error; ?></p>
+            </div>
         </div>
     </div>
 </body>

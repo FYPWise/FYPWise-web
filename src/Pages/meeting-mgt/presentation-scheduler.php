@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 ?>
 
 <head>
-    <link rel="stylesheet" href="/FYPWise-web/src/css/meeting-style.css">
-    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/meeting-style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="/FYPWise-web/src/css/calendar-style.css?v=<?php echo time(); ?>">
     <script src="/FYPWise-web/src/scripts/calendar.js?v=<?php echo time(); ?>"></script>
     <style>

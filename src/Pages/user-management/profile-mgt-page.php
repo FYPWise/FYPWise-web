@@ -25,9 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=0.1">
-    <link rel="stylesheet" href="./src/css/footer.css?v=0.2">
-    <script src="./src/scripts/profile_form_response.js?v=0.11"></script>
+    <link rel="stylesheet" href="./src/css/profile-mgt-style.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -39,13 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         alt="messages"></button></a>
             <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
         </div>
-        <a href="login?q=logout"><button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button></a>
+        <button id="logout-btn" onclick="showLogoutPopup()"><img src="./src/assets/logout2.png" alt="logout"></button>
     </div>
+    <!-- Logout Confirmation Popup -->
+    <?php include './src/Pages/common-ui/logoutConfirm.html'; ?>
 
     <!-- Main Container -->
     <div class="container">
 
-        <h1>User Profile</h1>
+        <h1>Your Profile</h1>
         <hr>
 
         <!-- Profile -->
@@ -53,70 +53,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="profile-image">
                 <form id="imageUploadForm" method="post" enctype="multipart/form-data">
                     <img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="Profile Image">
-                    <input type="file" id="imageUpload" name="image" accept="image/*" style="display:none;" required>
-                    <button type="submit" name="image" id="imageUploadButton" style="display:none;">Upload Image</button>
                 </form>
             </div>
             <div class="details">
                 <form id="profileForm" method="post">
-                    <div class="form-group">
-                        <label for="name"><strong>Name:</strong></label>
-                        <input type="text" id="name" name="name" value="<?php echo $_SESSION['name']; ?>" pattern="[A-Za-z]+" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="student-id"><strong>ID:</strong></label>
-                        <input type="text" id="student-id" name="student-id" value="<?php echo $_SESSION['id']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\d{10}' : ($_SESSION['role'] == 'lecturer' ? 'L\d{3}' : 'A\d{3}'); ?>" readonly required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email"><strong>Email:</strong></label>
-                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\d{10}@admin\.mmu\.edu\.my' : ($_SESSION['role'] == 'lecturer' ? 'L\d{3}@lecturer\.mmu\.edu\.my' : 'A\d{3}@admin\.mmu\.edu\.my'); ?>" readonly>
-                    </div>
-                    <?php if ($_SESSION['role'] == 'student') { ?>
-                    <div class="form-group">
-                        <label for="specialization"><strong>Specialization:</strong></label>
-                        <select id="specialization" name="specialization" disabled>
-                            <option value="Cybersecurity" <?php if ($_SESSION['specialization'] == 'Cybersecurity') echo 'selected'; ?>>Cybersecurity</option>
-                            <option value="Data Science" <?php if ($_SESSION['specialization'] == 'Data Science') echo 'selected'; ?>>Data Science</option>
-                            <option value="Game Development" <?php if ($_SESSION['specialization'] == 'Game Development') echo 'selected'; ?>>Game Development</option>
-                            <option value="Software Engineering" <?php if ($_SESSION['specialization'] == 'Software Engineering') echo 'selected'; ?>>Software Engineering</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="year"><strong>Year of study:</strong></label>
-                        <select id="year" name="year" disabled>
-                            <option value="1" <?php if ($_SESSION['year'] == '1') echo 'selected'; ?>>1</option>
-                            <option value="2" <?php if ($_SESSION['year'] == '2') echo 'selected'; ?>>2</option>
-                            <option value="3" <?php if ($_SESSION['year'] == '3') echo 'selected'; ?>>3</option>
-                            <option value="4" <?php if ($_SESSION['year'] == '4') echo 'selected'; ?>>4</option>
-                            <option value="5" <?php if ($_SESSION['year'] == '5') echo 'selected'; ?>>5</option>
-                        </select>
-                    </div>
-                    <?php } elseif($_SESSION['role'] == 'lecturer') { ?>
-                    <div class="form-group">
-                        <label for="position"><strong>Position:</strong></label>
-                        <input type="text" id="position" name="position" value="<?php echo $_SESSION['position']; ?>" pattern="[A-Za-z\s]+" readonly>
-                    </div>
-                    <?php } ?>
-                    <div class="form-group password-input" style="display:none;">
-                        <label for="password">New Password:</label>
-                        <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}" required/>
-                        <img id="toggle-password" src="./src/assets/show.png" alt="Show/Hide Password" >
-                        <span id="tooltip" class="tooltip" style="display:none;">
-                            <ul>
-                                <li id="number" class="invalid">Have one number</li>
-                                <li id="uppercase" class="invalid">Have one uppercase character</li>
-                                <li id="lowercase" class="invalid">Have one lowercase character</li>
-                                <li id="special" class="invalid">Have one special character (!@#$%^&*)</li>
-                                <li id="length" class="invalid">Have 8 to 16 characters</li>    
-                            </ul>
-                        </span>
-                    </div>
-                    <div class="form-group password-input cpass" style="display:none;">
-                        <label for="cpass">Confirm Password:</label>
-                        <input id="cpass" name="cpass" type="password" required/>
-                        <span id="error" class="error" hidden>Please ensure your password match.</span>
-                    </div>
-                    <button type="submit" form="profileForm" name="profile" id="edit-btn" onclick="toggleEditMode()">Edit Profile</button>
+                    <?php
+                        function renderInput($label, $value) {
+                            echo '<div class="form-group">';
+                            echo '<label for="name"><strong>' . $label . ':</strong></label>';
+                            echo '<input type="text" id="name" name="name" value="' . $value . '" readonly>';
+                            echo '</div>';
+                        }
+
+                        renderInput('Name', $_SESSION['name']);
+                        renderInput('ID', $_SESSION['id']);
+                        renderInput('Email', $_SESSION['email']);
+
+                        if ($_SESSION['role'] == 'student') {
+                            renderInput('Specialization', $_SESSION['specialization']);
+                            renderInput('Year of study', $_SESSION['year']);
+                        } elseif ($_SESSION['role'] == 'lecturer') {
+                            renderInput('Position', $_SESSION['position']);
+                        }
+                    ?>
+                    <button type="button" form="profileForm" name="profile" id="submit" onclick="window.location.href = 'profileedit';">Edit Profile</button>
                 </form>
                 <script src="./src/scripts/passwordCheck.js"></script>
             </div>

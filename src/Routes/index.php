@@ -24,4 +24,7 @@ $router->include($marksheetRoutes);
 include "comm.php";
 $router->include($commRoutes);
 
+include "meeting.php";
+$router->include($meetingRoutes);
+
 $router->dispatch();

@@ -1,3 +1,10 @@
+:root {
+  --primary-color: #06509f;
+  --secondary-color: #ec2227;
+  --thirtier-color: #f4f4f4;
+  --white: white;
+}
+
 /* General Reset */
 * {
   margin: 0;
@@ -73,14 +80,17 @@ body {
 }
 
 h1 {
-  margin-top: 10px;
+  font-size: 1.7em;
   padding: 1em 1em;
   color: #06509f;
   font-weight: lighter;
 }
 
 hr {
-  margin: 30px 50px 30px 20px;
+    border: 1px solid #ccc;
+    height: 1px;
+    background: #ccc;
+    margin: 0 20px;
 }
 
 /* Profile Section */
@@ -100,7 +110,8 @@ hr {
 
 .profile-image {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-image img {
@@ -142,8 +153,8 @@ hr {
   border: 1px solid black;
 }
 
-#edit-btn,
-#imageUploadButton {
+#submit,
+#fileUploadButton {
   display: flex;
   background-color: #06509f;
   color: white;
@@ -152,11 +163,11 @@ hr {
   padding: 8px 15px;
   cursor: pointer;
   margin: 15px auto 0 auto;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
 }
 
-#edit-btn:hover,
-#imageUploadButton:hover {
+#submit:hover,
+#fileUploadButton:hover {
   background-color: #053f80;
 }
 
@@ -185,7 +196,7 @@ select:focus {
 
 .error {
   text-align: center;
-  font-size: x-small;
+  font-size: xx-large;
   font-weight: bold;
 }
 
@@ -306,7 +317,7 @@ select:focus {
     padding: 5px 0;
   }
 
-  .edit-btn {
+  .submit {
     width: 100%;
     padding: 10px;
   }

@@ -58,9 +58,9 @@ $taskDates = getTaskDates($db);
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=0.7">
-    <link rel="stylesheet" href="./src/css/calendar-style.css?v=0.1">
-    <script src="./src/scripts/calendar.js?v=0.1"></script>
+    <link rel="stylesheet" href="./src/css/user-dashboard-style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./src/css/calendar-style.css?v=<?php echo time(); ?>">
+    <script src="./src/scripts/calendar.js?v=<?php echo time(); ?>"></script>
 </head>
 
 <body>
@@ -75,7 +75,6 @@ $taskDates = getTaskDates($db);
             <div class="header">
                 <h1><?php echo $_SESSION["name"]; ?></h1>
                 <div class="right-header">
-                    <input type="text" placeholder="Search.." />
                     <a href="profilemanagement"><img src="./src/assets/pfp/<?php echo $_SESSION['image'] ?>" alt="User"
                             class="user-image"></a>
                 </div>
@@ -84,31 +83,18 @@ $taskDates = getTaskDates($db);
             <!-- Container for Calendar and Task -->
             <div class="mini-container1">
                 <!-- Calendar -->
-                <div class="calendar-section">
-                    <!-- Calendar Header -->
-                    <div class="calendar-header">
-                        <button id="prev-month" class="nav-btn">&lt;</button>
-                        <span id="month-display" class="month-display"></span>
-                        <button id="next-month" class="nav-btn">&gt;</button>
-                    </div>
-                    <!-- Calendar Table -->
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S</th>
-                                <th>M</th>
-                                <th>T</th>
-                                <th>W</th>
-                                <th>T</th>
-                                <th>F</th>
-                                <th>S</th>
-                            </tr>
-                        </thead>
-                        <tbody id="calendar"></tbody>
-                    </table>
-                </div>
+                <?php include "./src/Pages/common-ui/calendar.html"; ?>
                 <script>
                     var taskDates = <?php echo json_encode($taskDates); ?>;
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Double click for add task
+                        document.querySelectorAll('td.day').forEach(function(dateElement) {
+                            dateElement.addEventListener('dblclick', function() {
+                                var clickedDate = this.getAttribute('data-date');
+                                openUpWindow(clickedDate);
+                            });
+                        });
+                    });
                 </script>
                 <!-- Task -->
                 <div class="task-section">
@@ -144,8 +130,9 @@ $taskDates = getTaskDates($db);
                     var addTaskPopUp = document.querySelector('.addTaskPopUp');
                     var close = document.querySelector('.close');
 
-                    function openUpWindow() {
+                    function openUpWindow(selectedDate) {
                         addTaskPopUp.style.display = 'flex';
+                        document.getElementById('taskDate').value = selectedDate;
                     }
                     function closeUpWindow() {
                         addTaskPopUp.style.display = 'none';

@@ -7,7 +7,7 @@ class Db
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $db_name = 'fypwise';
+    private $db_name = 'fypwiseb';
     public $conn;
 
     public function __construct() {

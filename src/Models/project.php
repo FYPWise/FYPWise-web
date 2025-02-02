@@ -157,7 +157,7 @@ class Project {
             $stmt->bind_param("si", $status, $milestoneID);
             return $stmt->execute();
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
 
@@ -203,7 +203,7 @@ class Project {
                 echo "<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>";
             }
         } else {
-            echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>";
+            echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->conn->error . "</pre>";
         }
         return false;
     }
@@ -245,7 +245,7 @@ class Project {
             $stmt->bind_param("ssi", $ganttChartPath, $flowChartPath, $timelineID);
             return $stmt->execute();
         } else {
-            throw new \Exception("Error updating project files: " . $this->db->getError());
+            throw new \Exception("Error updating project files: " . $this->db->conn->error);
         }
     }
     
@@ -260,7 +260,7 @@ class Project {
             $result = $stmt->get_result();
             return $result->fetch_assoc();
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
     
@@ -277,7 +277,7 @@ class Project {
                 die("<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>");
             }
         } else {
-            die("<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>");
+            die("<pre>❌ ERROR: Query preparation failed - " . $this->db->conn->error . "</pre>");
         }
     }
     
@@ -318,6 +318,19 @@ class Project {
                     JOIN project_timeline pt ON m.timelineID = pt.timelineID
                     JOIN project p ON pt.projectID = p.projectID
                     WHERE p.studentID = '$userId';";
+
+            $sql = "SELECT 
+            m.milestoneID, 
+            m.milestone_title,  
+            m.milestone_description,  
+            m.milestone_start_date, 
+            m.milestone_end_date,
+            COALESCE(pt.status, 'not-started') AS status 
+            FROM milestone m
+            LEFT JOIN project_timeline pt ON m.timelineID = pt.timelineID
+            JOIN project p ON pt.projectID = p.projectID
+            WHERE p.studentID = '$userId' 
+            ORDER BY m.milestoneID ASC";
         }
         
         $result = $this->db->query($sql);
@@ -356,7 +369,7 @@ public function getStudentIDByUserID($studentID) {
 
         return $row ? $row['studentID'] : null;
     } else {
-        throw new \Exception("Database query failed: " . $this->db->getError());
+        throw new \Exception("Database query failed: " . $this->db->conn->error);
     }
 }
 
@@ -371,7 +384,7 @@ public function getUserIDByStudentID($studentID) {
 
         return $row ? $row['userID'] : null;
     } else {
-        throw new \Exception("Database query failed: " . $this->db->getError());
+        throw new \Exception("Database query failed: " . $this->db->conn->error);
     }
 }
 
@@ -398,13 +411,14 @@ public function updateProjectTimelineStatus($timelineID, $status) {
             echo "<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>";
         }
     } else {
-        echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>";
+        echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->conn->error . "</pre>";
     }
     return false;
 }
 
 public function getLatestTimelineID() {
-    $sql = "SELECT timelineID FROM project_timeline ORDER BY timelineID DESC LIMIT 1";
+    $projectid = $_SESSION['projectID'];
+    $sql = "SELECT timelineID FROM project_timeline where projectID = '$projectid'";
     $result = $this->db->query($sql);
     $row = $result->fetch_assoc();
     return $row ? $row['timelineID'] : null;

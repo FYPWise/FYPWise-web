@@ -2,7 +2,7 @@
 use App\Models\Base;
 use App\Models\Meeting;
 use App\Models\Db;
-
+/*
 // debugging and error logging
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 // Start session to handle user data
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}
+}*/
 
 $base = new Base("Meeting Management", ["student", "lecturer"]);
 $db = new Db();

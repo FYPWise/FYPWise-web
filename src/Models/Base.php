@@ -61,7 +61,7 @@ class Base{
 
     public function authenticateUser(){
         if (!isset($_SESSION['mySession'])) { // if not logged in
-            header('Location: login');
+            header('Location: /FYPWise-web');
             exit();
         }
 

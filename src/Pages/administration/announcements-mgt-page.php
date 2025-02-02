@@ -65,11 +65,11 @@ echo $announcements[0];
                         <tbody>
                             <?php
 
-                                
+                                if($announcements){
                                 foreach ($announcements as $id) {
                                     $ann->read($id);
                                     $ann->renderTable();
-                                }
+                                }}
                             }
                                 
                             

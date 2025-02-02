@@ -1,3 +1,5 @@
+<!-- Exmaple page -->
+
 <?php
 use App\Models\Base;
 

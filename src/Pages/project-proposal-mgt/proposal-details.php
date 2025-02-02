@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Proposal;
 use App\Models\Db;
 
-$base = new Base("Proposal Details");
+$base = new Base("Proposal Details", ["admin", "lecturer"]);
 $db = new Db();
 $proposal = new Proposal($db);
 

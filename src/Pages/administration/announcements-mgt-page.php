@@ -38,7 +38,7 @@ $announcements = $ann->find();
                 </div>
 
 
-                <div class="table-name">
+                <div id="table-name">
                     <?php
                             if (isset($_GET["view"])) {
                                 $id = $_GET["view"];
@@ -46,8 +46,6 @@ $announcements = $ann->find();
                                 $ann->formView();
                             }else{ ?>
                     <table id="tablename-table">
-
-                        
 
                         <thead>
                             <th><input title="select all" type="checkbox" id="select-all"></th>

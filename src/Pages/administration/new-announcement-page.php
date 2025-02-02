@@ -6,7 +6,19 @@ $base = new Base("Manage Announcement", "admin");
 
 $ann = new Announcement();
 
+if (isset($_GET["title"])) {
+    $ann->create($_GET['title'], $_GET['description']);
+    echo '
+        <script> alert("Announcement Created") </script>
+    ';
+    unset($_GET['title']);
+    unset($_GET['description']);
+    header('location:manage-announcements');
+}
+
+
 $announcements = $ann->find();
+
 ?>
 
 <head>
@@ -33,18 +45,12 @@ $announcements = $ann->find();
                         <!-- auto-generated Proposal ID -->
                         <div class="form-group ">
                             <label for="announcement-title">Announcement Title*</label>
-                            <input type="text" id="announcement-title" name="announcement-title" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="announcement-date">Proposal Date*</label>
-                            <input type="date" id="announcement-date" name="announcement-date"
-                                onfocus="this.showPicker()" onchange="this.blur()" required>
+                            <input type="text" id="announcement-title" name="title" required>
                         </div>
 
                         <div class="form-group">
                             <label for="announcement-description">Description*</label>
-                            <textarea id="announcement-description" name="announcement-description" rows="6"
+                            <textarea id="announcement-description" name="description" rows="6"
                                 required></textarea>
                         </div>
 
@@ -60,21 +66,8 @@ $announcements = $ann->find();
 
         </div>
 
-        <footer>
-            <h3><a href="https://www.mmu.edu.my/">Multimedia University, Persiaran Multimedia, 63100 Cyberjaya,
-                    Selangor,
-                    Malaysia</a></h3>
-            <div id="side">
-                <a class="link" href="http://www.mmu.edu.my/">MMU Website</a>
-                <a class="link" href="https://online.mmu.edu.my/">MMU Portal</a>
-                <a class="link" href="https://clic.mmu.edu.my/">CLiC</a>
-                <a class="link" href="https://servicedesk.mmu.edu.my/psp/crmprd/?cmd=login&languageCd=ENG&">Service
-                    Desk</a>
-            </div>
-            FYP Wise &copy; <em id="date"></em>Syabell Imran Aida Firzan
-        </footer>
-
-        <script src="../scripts/side-menu.js"></script>
+        <!-- footer Section -->
+        <?php $base->renderFooter(); ?>
     </div>
 </body>
 

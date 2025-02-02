@@ -16,7 +16,7 @@ class Meeting {
         $result = $this->db->query($sql);
         
         if (!$result) {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
         
         $meetings = [];
@@ -42,7 +42,7 @@ class Meeting {
                 throw new \Exception("Meeting not found.");
             }
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            throw new \Exception("Database query failed: " . $this->db->conn->error);
         }
     }
     // Retrieve meetings by user ID
@@ -64,7 +64,7 @@ class Meeting {
             }
             return $meetings;
         } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+            throw new \Exception("Failed to prepare statement: " . $this->db->conn->error);
         }
     }
 
@@ -86,7 +86,7 @@ class Meeting {
             // Get the ID of the newly inserted meeting
             $meetingID = $stmt->insert_id;
         } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+            throw new \Exception("Failed to prepare statement: " . $this->db->conn->error);
         }
 
         // Add participants to the users_meeting table
@@ -102,74 +102,13 @@ class Meeting {
                         throw new \Exception("Failed to add participant to meeting: " . $stmt->error);
                     }
                 } else {
-                    throw new \Exception("Failed to prepare statement for adding participant: " . $this->db->getError());
+                    throw new \Exception("Failed to prepare statement for adding participant: " . $this->db->conn->error);
                 }
             }
         }
         return $meetingID;
     }
 
-    // Update an existing meeting
-    public function updateMeeting($meetingID, $date, $startTime, $endTime, $mode, $location, $title, $description, $meetingURL) {
-        $sql = "UPDATE meeting 
-                SET date = ?, start_time = ?, end_time = ?, mode = ?, location = ?, meeting_title = ?, meeting_description = ?, meeting_URL = ?
-                WHERE meetingID = ?";
-
-        if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("ssssssssi", $date, $startTime, $endTime, $mode, $location, $title, $description, $meetingURL, $meetingID);
-            
-            if (!$stmt->execute()) {
-                throw new \Exception("Failed to update meeting: " . $stmt->error);
-            }
-        } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
-        }
-    }
-
-    // Delete a meeting
-    public function deleteMeeting($meetingID) {
-        $sql = "DELETE FROM meeting WHERE meetingID = ?";
-        
-        if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("i", $meetingID);
-            
-            if (!$stmt->execute()) {
-                throw new \Exception("Failed to delete meeting: " . $stmt->error);
-            }
-        } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
-        }
-    }
-
-    // Add a user to a meeting
-    public function addUserToMeeting($userID, $meetingID) {
-        $sql = "INSERT INTO users_meeting (userID, meetingID) VALUES (?, ?)";
-        
-        if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("ii", $userID, $meetingID);
-            
-            if (!$stmt->execute()) {
-                throw new \Exception("Failed to add user to meeting: " . $stmt->error);
-            }
-        } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
-        }
-    }
-
-    // Remove a user from a meeting
-    public function removeUserFromMeeting($userID, $meetingID) {
-        $sql = "DELETE FROM users_meeting WHERE userID = ? AND meetingID = ?";
-        
-        if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("ii", $userID, $meetingID);
-            
-            if (!$stmt->execute()) {
-                throw new \Exception("Failed to remove user from meeting: " . $stmt->error);
-            }
-        } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
-        }
-    }
 
     // Get users attending a specific meeting
     public function getUsersForMeeting($meetingID) {
@@ -195,7 +134,7 @@ class Meeting {
                 return [];  // Empty array if no users
             }
         } else {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getError());
+            throw new \Exception("Failed to prepare statement: " . $this->db->conn->error);
         }
     }
     

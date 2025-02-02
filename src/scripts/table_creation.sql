@@ -282,9 +282,11 @@ CREATE TABLE meeting_log (
     meetingID INT NOT NULL,
     studentID INT NOT NULL,
     projectID INT NOT NULL,
+    supervisorID INT NOT NULL,
     FOREIGN KEY (meetingID) REFERENCES meeting(meetingID),
     FOREIGN KEY (studentID) REFERENCES student(userID),
-    FOREIGN KEY (projectID) REFERENCES project(projectID)
+    FOREIGN KEY (projectID) REFERENCES project(projectID),
+    FOREIGN KEY (supervisorID) REFERENCES lecturer(userID)
 );
 -- --------------------------------------------------------
 
@@ -325,7 +327,7 @@ CREATE TABLE group_chat (
 CREATE TABLE message (
     messageID INT AUTO_INCREMENT PRIMARY KEY,
     senderID INT NOT NULL,
-    receiverID INT NOT NULL,
+    receiverID INT,
     groupID INT,
     messageContent TEXT NOT NULL,
     timeStamp DATETIME NOT NULL,

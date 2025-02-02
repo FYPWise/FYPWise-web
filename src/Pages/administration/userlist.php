@@ -2,7 +2,7 @@
 
 use App\Models\User;
 
-$userID = $_GET['userid'];
+isset($_GET['userid']) ? $userID = $_GET['userid']: exit();
 
 $user = new User();
 $users = [];

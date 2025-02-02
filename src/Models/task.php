@@ -9,8 +9,6 @@ class task{
     }
 
     public function addTask(){
-        
-
         $taskName = $this->db->escapeString($_POST['taskName']);
         $taskDate = $this->db->escapeString($_POST['taskDate']);
         $userId = $_SESSION['mySession'];
@@ -24,7 +22,6 @@ class task{
     }
 
     public function completeTask(){
-
         $tasks = $_POST['tasks'];
         foreach ($tasks as $taskId) {
             $taskId = $this->db->escapeString($taskId);

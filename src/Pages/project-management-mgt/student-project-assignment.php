@@ -220,6 +220,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["save"])) {
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
+       
 
         <div class="container">
             <h2 class="form-title">Assign Advisee</h2>

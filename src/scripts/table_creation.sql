@@ -165,11 +165,12 @@ CREATE TABLE lecturer_project (
 --
 CREATE TABLE milestone (
     milestoneID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    milestone_name VARCHAR(100) NOT NULL,
+    milestone_title VARCHAR(100) NOT NULL,
+    milestone_description TEXT NOT NULL,
     milestone_start_date DATE NOT NULL,
     milestone_end_date DATE NOT NULL,
     timelineID INT NOT NULL,
-    FOREIGN KEY (timelineID) REFERENCES project_timeline(timelineID)
+    FOREIGN KEY (timelineID) REFERENCES project_timeline(timelineID) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
@@ -184,10 +185,10 @@ CREATE TABLE timeline_file (
     file_size BIGINT NOT NULL,
     file_category ENUM('gantt_chart', 'flow_chart', 'others') NOT NULL,
     file_path VARCHAR(255) NOT NULL,
-    uploaded_at DATETIME NOT NULL,
+    uploaded_at DATETIME NOT NULL DEFAULT NOW(),
     edited_at DATETIME,
-    timeline_ID INT NOT NULL,
-    FOREIGN KEY (timeline_ID) REFERENCES project_timeline(timelineID)
+    timelineID INT NOT NULL,
+    FOREIGN KEY (timelineID) REFERENCES project_timeline(timelineID)
 );
 
 -- --------------------------------------------------------

@@ -130,30 +130,31 @@ INSERT INTO proposal_status (status, comment, updated_at, proposalID) VALUES
 
 INSERT INTO project (project_title, start_date, end_date, project_description, project_status, studentID, proposalID)
 VALUES 
-('AI Chatbot', '2025-01-01', '2025-06-30', 'Developing an AI chatbot for customer service', 'ongoing', NULL, 1),
-('E-Commerce Platform', '2025-02-01', '2025-07-31', 'Building an e-commerce platform for small businesses', 'submitted', NULL, 2),
-('IoT Smart Home', '2025-03-01', '2025-09-30', 'Creating an IoT-based smart home system', 'approved', NULL, 3),
-('Blockchain Wallet', '2025-04-01', '2025-10-31', 'Developing a secure blockchain wallet', 'ongoing', NULL, 4),
-('Data Analysis Tool', '2025-05-01', NULL, 'Designing a data analysis tool for researchers', 'ongoing', NULL, 5),
-('Virtual Reality Game', '2025-06-01', '2025-12-31', 'Creating a VR game for education', 'submitted', NULL, 6),
-('Fitness Tracker App', '2025-07-01', NULL, 'Developing a fitness tracker mobile app', 'approved', NULL, 7),
-('Online Learning Portal', '2025-08-01', '2026-01-31', 'Building an online learning portal for schools', 'ongoing', NULL, 8);
+('AI Chatbot', '2025-01-01', '2025-06-30', 'Developing an AI chatbot for customer service', 'ongoing', 1211101935, 1),
+('E-Commerce Platform', '2025-02-01', '2025-07-31', 'Building an e-commerce platform for small businesses', 'submitted', 1211103220, 2),
+('IoT Smart Home', '2025-03-01', '2025-09-30', 'Creating an IoT-based smart home system', 'approved', 1211103194, 3),
+('Blockchain Wallet', '2025-04-01', '2025-10-31', 'Developing a secure blockchain wallet', 'ongoing', 1211104230, 4),
+('Data Analysis Tool', '2025-05-01', NULL, 'Designing a data analysis tool for researchers', 'ongoing', 1211017635, 5),
+('Virtual Reality Game', '2025-06-01', '2025-12-31', 'Creating a VR game for education', 'submitted', 1209115403, 6),
+('Fitness Tracker App', '2025-07-01', NULL, 'Developing a fitness tracker mobile app', 'approved', 1212003221, 7),
+('Online Learning Portal', '2025-08-01', '2026-01-31', 'Building an online learning portal for schools', 'ongoing', 1213567211, 8);
 
 -- --------------------------------------------------------
 
 --
 -- Insert sample data  for table `project_timeline`
 --
-INSERT INTO project_timeline (timelineID, start_date, end_date, status, projectID)
+INSERT INTO project_timeline (timelineID, start_date, end_date, status, projectID, gantt_chart_pdf, flow_chart_pdf)
 VALUES 
-(1, '2025-01-01', '2025-01-31', 'completed', NULL),
-(2, '2025-02-01', '2025-02-28', 'in-progress', NULL),
-(3, '2025-03-01', '2025-03-31', 'pending', NULL),
-(4, '2025-04-01', '2025-04-30', 'completed', NULL),
-(5, '2025-05-01', '2025-05-31', 'pending', NULL),
-(6, '2025-06-01', '2025-06-30', 'in-progress', NULL),
-(7, '2025-07-01', '2025-07-31', 'pending', NULL),
-(8, '2025-08-01', '2025-08-31', 'completed', NULL);
+(1, '2025-01-01', '2025-01-31', 'completed', 1, NULL,NULL),
+(2, '2025-02-01', '2025-02-28', 'in-progress', 2, NULL, NULL),
+(3, '2025-03-01', '2025-03-31', 'pending', 3, NULL, NULL),
+(4, '2025-04-01', '2025-04-30', 'completed', 4, NULL, NULL),
+(5, '2025-05-01', '2025-05-31', 'pending', 5, NULL, NULL),
+(6, '2025-06-01', '2025-06-30', 'in-progress', 6, NULL, NULL),
+(7, '2025-07-01', '2025-07-31', 'pending', 7, NULL, NULL),
+(8, '2025-08-01', '2025-08-31', 'completed', 8, NULL,NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -180,16 +181,17 @@ INSERT INTO lecturer_project (projectID, lecturerID, lecturer_role) VALUES
 --
 -- Insert sample data  for table `milestone`
 --
-INSERT INTO milestone (milestoneID, milestone_name, milestone_start_date, milestone_end_date, timelineID)
+INSERT INTO milestone (milestoneID, milestone_title, milestone_description, milestone_start_date, milestone_end_date, timelineID)
 VALUES 
-(1, 'Requirement Analysis', '2025-01-01', '2025-01-10', NULL),
-(2, 'Design Phase', '2025-01-11', '2025-01-20', NULL),
-(3, 'Prototype Development', '2025-01-21', '2025-01-30', NULL),
-(4, 'Testing', '2025-02-01', '2025-02-10', NULL),
-(5, 'Deployment', '2025-02-11', '2025-02-20', NULL),
-(6, 'Documentation', '2025-03-01', '2025-03-10', NULL),
-(7, 'Initial Review', '2025-03-11', '2025-03-20', NULL),
-(8, 'Final Review', '2025-03-21', '2025-03-31', NULL);
+(1, 'Requirement Analysis', 'Gather the project requirements and finalize scope', '2025-01-01', '2025-01-10', 1),
+(2, 'Design Phase', 'Create wireframes, UI/UX design, and system architecture', '2025-01-11', '2025-01-20', 2),
+(3, 'Prototype Development', 'Build an initial working prototype of the system', '2025-01-21', '2025-01-30', 3),
+(4, 'Testing', 'Conduct software testing and fix bugs', '2025-02-01', '2025-02-10', 4),
+(5, 'Deployment', 'Deploy the project to a staging or production environment', '2025-02-11', '2025-02-20', 5),
+(6, 'Documentation', 'Prepare technical and user documentation, including manuals', '2025-03-01', '2025-03-10', 6),
+(7, 'Initial Review', 'Conduct a preliminary evaluation of the project', '2025-03-11', '2025-03-20', 7),
+(8, 'Final Review', 'Conduct the final project assessment, ensuring all requirements are met', '2025-03-21', '2025-03-31', 8);
+
 -- --------------------------------------------------------
 
 --
@@ -197,26 +199,26 @@ VALUES
 --
 INSERT INTO timeline_file (timeline_fileID, filename, file_type, file_size, file_category, file_path, uploaded_at, edited_at, timeline_ID)
 VALUES 
-(1, 'gantt_chart.png', 'image', 2048, 'gantt_chart', '/files/gantt_chart.png', '2025-01-05 10:00:00', NULL, NULL),
-(2, 'flow_chart.pdf', 'pdf', 1024, 'flow_chart', '/files/flow_chart.pdf', '2025-01-15 14:30:00', '2025-01-20 09:00:00', NULL),
-(3, 'design_doc.docx', 'docx', 3072, 'others', '/files/design_doc.docx', '2025-01-25 16:00:00', NULL, NULL),
-(4, 'test_plan.pdf', 'pdf', 512, 'others', '/files/test_plan.pdf', '2025-02-05 11:15:00', NULL, NULL),
-(5, 'deployment_notes.txt', 'txt', 256, 'others', '/files/deployment_notes.txt', '2025-02-15 13:00:00', NULL, NULL),
+(1, 'gantt_chart.png', 'image', 2048, 'gantt_chart', '/files/gantt_chart.png', '2025-01-05 10:00:00', NULL, 1),
+(2, 'flow_chart.pdf', 'pdf', 1024, 'flow_chart', '/files/flow_chart.pdf', '2025-01-15 14:30:00', '2025-01-20 09:00:00', 2),
+(3, 'design_doc.docx', 'docx', 3072, 'others', '/files/design_doc.docx', '2025-01-25 16:00:00', NULL, 3),
+(4, 'test_plan.pdf', 'pdf', 512, 'others', '/files/test_plan.pdf', '2025-02-05 11:15:00', NULL, 4),
+(5, 'deployment_notes.txt', 'txt', 256, 'others', '/files/deployment_notes.txt', '2025-02-15 13:00:00', NULL, 5),
 (6, 'doc_manual.pdf', 'pdf', 1024, 'others', '/files/doc_manual.pdf', '2025-03-05 09:45:00', NULL, NULL),
-(7, 'final_review_notes.docx', 'docx', 2048, 'others', '/files/final_review_notes.docx', '2025-03-25 14:30:00', NULL, NULL),
-(8, 'initial_review.png', 'image', 1024, 'others', '/files/initial_review.png', '2025-03-15 10:00:00', NULL, NULL);
+(7, 'final_review_notes.docx', 'docx', 2048, 'others', '/files/final_review_notes.docx', '2025-03-25 14:30:00', NULL, 6),
+(8, 'initial_review.png', 'image', 1024, 'others', '/files/initial_review.png', '2025-03-15 10:00:00', NULL, 7);
 -- --------------------------------------------------------
 
-INSERT INTO project_submission (start_date, end_date, project_description, project_status, project_category, studentID, projectID)
+INSERT INTO project_submission (start_date, end_date, project_description, project_status, project_category, studentID, projectID.project_file)
 VALUES
-('2025-01-01', '2025-06-30', 'Developing an AI chatbot for customer service', 'submitted', 'Software Engineering', NULL, NULL),
-('2025-02-01', '2025-07-31', 'Building an e-commerce platform for small businesses', 'approved', 'E-commerce', NULL, NULL),
-('2025-03-01', '2025-09-30', 'Creating an IoT-based smart home system', 'pending', 'Internet of Things', NULL, NULL),
-('2025-04-01', '2025-10-31', 'Developing a secure blockchain wallet', 'submitted', 'Blockchain', NULL, NULL),
-('2025-05-01', '2025-11-30', 'Designing a data analysis tool for researchers', 'rejected', 'Data Science', NULL, NULL),
-('2025-06-01', '2025-12-31', 'Creating a VR game for education', 'approved', 'Game Development', NULL, NULL),
-('2025-07-01', '2026-01-31', 'Developing a fitness tracker mobile app', 'pending', 'Health & Fitness', NULL, NULL),
-('2025-08-01', '2026-02-28', 'Building an online learning portal for schools', 'submitted', 'Education', NULL, NULL);
+('2025-01-01', '2025-06-30', 'Developing an AI chatbot for customer service', 'submitted', 'Software Engineering', 1, 1,NULL),
+('2025-02-01', '2025-07-31', 'Building an e-commerce platform for small businesses', 'approved', 'E-commerce', 2, 2,NULL),
+('2025-03-01', '2025-09-30', 'Creating an IoT-based smart home system', 'pending', 'Internet of Things', 3, 3,NULL),
+('2025-04-01', '2025-10-31', 'Developing a secure blockchain wallet', 'submitted', 'Blockchain', 4, 4,NULL),
+('2025-05-01', '2025-11-30', 'Designing a data analysis tool for researchers', 'rejected', 'Data Science', 5, 5,NULL),
+('2025-06-01', '2025-12-31', 'Creating a VR game for education', 'approved', 'Game Development', 6, 6,NULL),
+('2025-07-01', '2026-01-31', 'Developing a fitness tracker mobile app', 'pending', 'Health & Fitness', 7, 7,NULL),
+('2025-08-01', '2026-02-28', 'Building an online learning portal for schools', 'submitted', 'Education', 8, 8,NULL);
 
 -- --------------------------------------------------------
 
@@ -225,14 +227,14 @@ VALUES
 --
 INSERT INTO marksheet (marksheetID, total_score, date, projectID)
 VALUES 
-(1, 85, '2025-01-31 15:00:00', NULL),
-(2, 90, '2025-02-28 15:00:00', NULL),
-(3, 88, '2025-03-31 15:00:00', NULL),
-(4, 80, '2025-04-30 15:00:00', NULL),
-(5, 95, '2025-05-31 15:00:00', NULL),
-(6, 78, '2025-06-30 15:00:00', NULL),
-(7, 82, '2025-07-31 15:00:00', NULL),
-(8, 89, '2025-08-31 15:00:00', NULL);
+(1, 85, '2025-01-31 15:00:00', 1),
+(2, 90, '2025-02-28 15:00:00', 2),
+(3, 88, '2025-03-31 15:00:00', 3),
+(4, 80, '2025-04-30 15:00:00', 4),
+(5, 95, '2025-05-31 15:00:00', 5),
+(6, 78, '2025-06-30 15:00:00', 6),
+(7, 82, '2025-07-31 15:00:00', 7),
+(8, 89, '2025-08-31 15:00:00', 8);
 
 -- --------------------------------------------------------
 
@@ -241,14 +243,14 @@ VALUES
 --
 INSERT INTO criteria_score (scoreID, score, criteria, comment, marksheetID, evaluatorID)
 VALUES 
-(1, 25, 'project_mgt', 'Well-organized project management', NULL, NULL),
-(2, 30, 'execution', 'Excellent execution of tasks', NULL, NULL),
-(3, 20, 'report', 'Good but needs improvement', NULL, NULL),
-(4, 15, 'oral_presentation', 'Clear presentation', NULL, NULL),
-(5, 10, 'research_paper', 'Requires further detail', NULL, NULL),
-(6, 25, 'project_mgt', 'Satisfactory management', NULL, NULL),
-(7, 28, 'execution', 'Great execution', NULL, NULL),
-(8, 20, 'poster_presentation', 'Engaging and creative', NULL, NULL);
+(1, 25, 'project_mgt', 'Well-organized project management', 1, NULL),
+(2, 30, 'execution', 'Excellent execution of tasks', 2, NULL),
+(3, 20, 'report', 'Good but needs improvement', 3, NULL),
+(4, 15, 'oral_presentation', 'Clear presentation', 4, NULL),
+(5, 10, 'research_paper', 'Requires further detail', 5, NULL),
+(6, 25, 'project_mgt', 'Satisfactory management', 6, NULL),
+(7, 28, 'execution', 'Great execution', 7, NULL),
+(8, 20, 'poster_presentation', 'Engaging and creative', 8, NULL);
 
 -- --------------------------------------------------------
 

@@ -1,9 +1,30 @@
 <?php
 use App\Models\Base;
-//use App\Models\SideMenu;
+use App\Models\Db;
+use App\Models\Project;
 
 $base = new Base("Project Plan Approval");
-//$SideMenu = new SideMenu();
+$db = new Db();
+$projectModel = new Project($db);
+
+// Fetch project timelines from database
+$projectTimelines = $projectModel->getAllProjectTimelines();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $timelineID = $_POST['timelineID'] ?? null;
+    $newStatus = $_POST['status'] ?? null;
+
+    if ($timelineID && $newStatus) {
+        $success = $projectModel->updateProjectTimelineStatus($timelineID, $newStatus);
+        if ($success) {
+            echo "✅ Status updated successfully!";
+        } else {
+            echo "❌ Error updating status!";
+        }
+        exit(); // Stop further execution
+    }
+}
+
 ?>
 
 <body>
@@ -12,13 +33,10 @@ $base = new Base("Project Plan Approval");
 
         <!-- Main Content -->
         <div id="main-container">
-
-           
-
-             <!-- Main Content -->
-             <div class="content">
+            <div class="content">
                 <h2 class="form-title">Approve Project Plan</h2>
                 <hr>
+
                 <div class="table-container">
                     <table>
                         <thead>
@@ -29,57 +47,40 @@ $base = new Base("Project Plan Approval");
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="../project-management-mgt/supervisor-project-timeline.html">T1</a></td>
-                                <td>Luigi Mario</td>
-                                <td>
-                                    <select class="status-dropdown" onchange="updateStatus(this)">
-                                        <option value="On-going" selected>On-going</option>
-                                        <option value="Approved">Approved</option>
-                                        <option value="Pending">Pending</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="../project-management-mgt/supervisor-project-timeline.html">T2</a></td>
-                                <td>Gracie Abrams</td>
-                                <td>
-                                    <select class="status-dropdown" onchange="updateStatus(this)">
-                                        <option value="On-going">On-going</option>
-                                        <option value="Approved" selected>Approved</option>
-                                        <option value="Pending">Pending</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="../project-management-mgt/supervisor-project-timeline.html">T3</a></td>
-                                <td>Lee Zii Jia</td>
-                                <td>
-                                    <select class="status-dropdown" onchange="updateStatus(this)">
-                                        <option value="On-going">On-going</option>
-                                        <option value="Approved">Approved</option>
-                                        <option value="Pending" selected>Pending</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T4</a></td><td>Maria Sharapova</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going" selected>On-going</option><option value="Approved">Approved</option><option value="Pending">Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T5</a></td><td>Roger Federer</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved" selected>Approved</option><option value="Pending">Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T6</a></td><td>Venus Williams</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved">Approved</option><option value="Pending" selected>Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T7</a></td><td>Serena Williams</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going" selected>On-going</option><option value="Approved">Approved</option><option value="Pending">Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T8</a></td><td>Andy Murray</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved" selected>Approved</option><option value="Pending">Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T9</a></td><td>Novak Djokovic</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved">Approved</option><option value="Pending" selected>Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T10</a></td><td>Rafael Nadal</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going" selected>On-going</option><option value="Approved">Approved</option><option value="Pending">Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T11</a></td><td>Coco Gauff</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved" selected>Approved</option><option value="Pending">Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T12</a></td><td>Naomi Osaka</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved">Approved</option><option value="Pending" selected>Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T13</a></td><td>Simona Halep</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved">Approved</option><option value="Pending" selected>Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T14</a></td><td>Stan Wawrinka</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going">On-going</option><option value="Approved">Approved</option><option value="Pending" selected>Pending</option></select></td></tr>
-                            <tr><td><a href="../project-management-mgt/supervisor-project-timeline.html">T15</a></td><td>Victoria Azarenka</td><td><select class="status-dropdown" onchange="updateStatus(this)"><option value="On-going" selected>On-going</option><option value="Approved">Approved</option><option value="Pending">Pending</option></select></td></tr>
+                            <?php if (!empty($projectTimelines)): ?>
+                                <?php foreach ($projectTimelines as $row): ?>
+                                    <tr>
+                                        <td>
+                                            <a
+                                                href="/FYPWise-web/supervisorprojecttimeline?timelineID=<?php echo htmlspecialchars($row['timelineID']); ?>">
+                                                <?php echo htmlspecialchars($row['timelineID']); ?>
+                                            </a>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($row['student_name'] ?? 'Unassigned'); ?></td>
+                                        <td>
+                                        <form class="status-form">
+                                                <input type="hidden" name="timelineID"
+                                                    value="<?php echo $row['timelineID']; ?>">
+                                                <select name="status" class="status-dropdown">
+                                                    <option value="pending" <?php echo ($row['status'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
+                                                    <option value="in-progress" <?php echo ($row['status'] == 'in-progress') ? 'selected' : ''; ?>>In Progress</option>
+                                                    <option value="completed" <?php echo ($row['status'] == 'completed') ? 'selected' : ''; ?>>Completed</option>
+                                                </select>
+
+                                                <button type="submit">Update</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="4">No project plans found</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
         </div>
 
         <?php $base->renderFooter() ?>
@@ -87,3 +88,28 @@ $base = new Base("Project Plan Approval");
 </body>
 
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".status-form").forEach(form => {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent page reload
+            
+            let formData = new FormData(this);
+
+            fetch("/FYPWise-web/projectplanapproval", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Response:", data);
+                alert("✅ Status updated successfully!"); // Show success message
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("❌ Error updating status. Please try again.");
+            });
+        });
+    });
+});
+</script>

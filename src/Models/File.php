@@ -26,13 +26,16 @@
 
         public function uploadFile($fileInputName, $targetDir, $tableName, $columnName) {
             $id = $_SESSION['id'];
-            if ($fileInputName == 'image') {
-                $fileName = $id . ".png";
-            }
+
             $fileName = $fileInputName == 'image'? $id . ".png": $id.".pdf";
             $target = $targetDir . $fileName;
+
             $userId = $_SESSION['mySession'];
-            $sql = "UPDATE $tableName SET $columnName='$fileName' WHERE userID='$userId'";
+            $projectId = $_SESSION['projectID'];
+
+            
+            $sql = $fileInputName == 'image'? "UPDATE $tableName SET $columnName='$fileName' WHERE userID='$userId'": 
+                                                "UPDATE $tableName SET $columnName='$fileName' WHERE projectID='$projectId'";
     
             if ($this->db->query($sql)) {
                 if (move_uploaded_file($_FILES[$fileInputName]["tmp_name"], $target)) {

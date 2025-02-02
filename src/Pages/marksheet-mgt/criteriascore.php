@@ -1,21 +1,33 @@
 <?php
-
 use App\Models\Base;
 use App\Models\CriteriaModel;
-//use App\Models\SideMenu;
 use App\Models\Db;
 
 $base = new Base("Criteria Score Page");
-//$sideMenu = new SideMenu();
 $db = new Db();
 $criteriaModel = new CriteriaModel($db);
 
-$marksheetID = isset($_GET['marksheetID']) ? htmlspecialchars($_GET['marksheetID']) : 'Unknown';
-echo "<h2>Criteria Score for Marksheet ID: $marksheetID</h2>";
+// Get marksheet ID from URL or default to an empty value
+$marksheetID = isset($_GET['marksheetID']) ? htmlspecialchars($_GET['marksheetID']) : '';
 
 $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
 
+// Convert the retrieved data into an associative array for easy access
+$scoresData = [];
+foreach ($criteriaScores as $score) {
+    $scoresData[$score['criteria']] = [
+        'score' => $score['score'],
+        'comment' => $score['comment']
+    ];
+}
+
+// Handle form submission (Updating Scores)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (!isset($_POST['marksheetID'], $_POST['evaluatorID'])) {
+        echo "<script>alert('❌ Missing required fields!'); history.back();</script>";
+        exit();
+    }
+
     $marksheetID = $_POST['marksheetID'];
     $evaluatorID = $_POST['evaluatorID'];
     $scores = $_POST['scores'];
@@ -23,19 +35,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     foreach ($scores as $criteria => $score) {
         $comment = $comments[$criteria] ?? '';
-        $criteriaModel->insertCriteriaScore($score, $criteria, $comment, $marksheetID, $evaluatorID);
+
+        // Check if score exists for the criteria
+        if (isset($scoresData[$criteria])) {
+            // Update existing score
+            $criteriaModel->updateCriteriaScoreByMarksheet($marksheetID, $criteria, $score, $comment);
+        } else {
+            // Insert new score if not already recorded
+            $criteriaModel->insertCriteriaScore($score, $criteria, $comment, $marksheetID, $evaluatorID);
+        }
     }
 
-    header("Location: " . $_SERVER["HTTP_REFERER"]);
+    echo "<script>alert('✅ Criteria scores updated successfully!'); window.location.href='/FYPWise-web/marksheetpage';</script>";
     exit();
-
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin: 0;
             padding: 0;
         }
-
         .form-container {
             max-width: 600px;
             margin: 2em auto;
@@ -59,7 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             box-sizing: border-box;
             text-align: center;
         }
-
         .header-info {
             margin-bottom: 1.5em;
             text-align: center;
@@ -67,12 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-weight: bold;
             color: #06509f;
         }
-
         .header-info span {
             color: black;
             font-weight: normal;
         }
-
         .criteria-section {
             margin-bottom: 1.5em;
             border: 1px solid #ddd;
@@ -81,19 +94,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background-color: #f9f9f9;
             text-align: left;
         }
-
         .criteria-section h3 {
             margin: 0 0 10px;
             color: #06509f;
             font-size: 1.2em;
         }
-
         .criteria-input {
             display: flex;
             flex-direction: column;
             gap: 0.8em;
         }
-
         .criteria-input input,
         .criteria-input textarea {
             width: 100%;
@@ -103,14 +113,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-size: 1em;
             box-sizing: border-box;
         }
-
         .form-buttons {
             display: flex;
             justify-content: center;
             gap: 1em;
             margin-top: 1.5em;
         }
-
         .btn {
             padding: 0.75em 1.5em;
             border: none;
@@ -119,43 +127,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
             color: #fff;
         }
-
         .btn.submit {
             background-color: #4CAF50;
         }
-
         .btn.cancel {
             background-color: #e74c3c;
         }
-
         .btn:hover {
             opacity: 0.9;
         }
     </style>
 </head>
-
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
 
-        <!-- Main Content -->
         <div id="main-container">
-            <!-- Side Menu -->
-            
-
             <div class="content">
                 <section class="main">
                     <h1 id="page-name"><?php echo $base->getTitle(); ?></h1>
 
                     <div class="form-container">
                         <div class="header-info">
-                            Marksheet ID: <span></span><br>
-                            Evaluator ID: <span></span>
+                            Marksheet ID: <span><?php echo $marksheetID; ?></span>
                         </div>
 
-                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                            <input type="hidden" name="marksheetID" value="MK001">
-                            <input type="hidden" name="evaluatorID" value="M123">
+                        <form method="POST" action="/FYPWise-web/criteriapage">
+                            <input type="hidden" name="marksheetID" value="<?php echo htmlspecialchars($marksheetID); ?>">
+
+                            <!-- Evaluator ID Input Field -->
+                            <div class="criteria-section">
+                                <h3>Evaluator ID</h3>
+                                <div class="criteria-input">
+                                    <input type="text" name="evaluatorID" placeholder="Enter Evaluator ID" required>
+                                </div>
+                            </div>
 
                             <?php
                             $criteriaLabels = [
@@ -169,23 +175,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             ];
 
                             foreach ($criteriaLabels as $key => $label) {
+                                $existingScore = $scoresData[$key]['score'] ?? '';
+                                $existingComment = $scoresData[$key]['comment'] ?? '';
+
                                 echo "<div class='criteria-section'>
                                         <h3>$label</h3>
                                         <div class='criteria-input'>
-                                            <input type='number' name='scores[$key]' placeholder='Enter Score' required>
-                                            <textarea name='comments[$key]' rows='3' placeholder='Add Comments (if any)'></textarea>
+                                            <input type='number' name='scores[$key]' value='$existingScore' placeholder='Enter Score' required>
+                                            <textarea name='comments[$key]' rows='3' placeholder='Add Comments (if any)'>$existingComment</textarea>
                                         </div>
                                       </div>";
                             }
                             ?>
 
                             <div class="form-buttons">
-                                <button type="submit" class="btn submit">Submit</button>
-                                <button type="reset" class="btn cancel">Cancel</button>
+                                <button type="submit" class="btn submit">Save Changes</button>
+                                <button type="reset" class="btn cancel">Reset</button>
                             </div>
                         </form>
                     </div>
-
                 </section>
             </div>
         </div>
@@ -193,5 +201,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php $base->renderFooter(); ?>
     </div>
 </body>
-
 </html>

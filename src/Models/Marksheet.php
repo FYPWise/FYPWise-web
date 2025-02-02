@@ -11,53 +11,58 @@ class Marksheet {
         $this->db = $db;
     }
 
+    // Fetch all marksheets and dynamically calculate total scores
     public function getAllMarksheet() {
-        $sql = "SELECT * FROM marksheet";
+        $sql = "SELECT m.*, COALESCE(SUM(cs.score), 0) AS total_score
+                FROM marksheet m
+                LEFT JOIN criteria_score cs ON m.marksheetID = cs.marksheetID
+                GROUP BY m.marksheetID
+                ORDER BY m.date DESC";
+
         $result = $this->db->query($sql);
-
-        if (!$result) {
-            throw new \Exception("Database query failed for query: $sql. Error: " . $this->db->getError());
-        }
-    
-        $marksheet = [];
-        while ($row = $result->fetch_assoc()) {
-            $marksheet[] = $row;
-        }
-    
-        return $marksheet;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Get a specific marksheet by ID
     public function getMarksheetById($marksheetID) {
-        $marksheetID = $this->db->escapeString($marksheetID);
-        $sql = "SELECT * FROM marksheet WHERE marksheetID = '$marksheetID'";
-        return $this->db->query($sql);
+        $sql = "SELECT * FROM marksheet WHERE marksheetID = ?";
+
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("i", $marksheetID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
+        } else {
+            throw new \Exception("Database query failed: " . $this->db->getError());
+        }
     }
 
- 
-    public function insertMarksheet($totalScore, $date, $projectID) {
-        $totalScore = $this->db->escapeString($totalScore);
-        $date = $this->db->escapeString($date);
-        $projectID = $this->db->escapeString($projectID);
+    // Get total score for a specific marksheet
+    public function getTotalScore($marksheetID) {
+        $sql = "SELECT SUM(score) AS total FROM criteria_score WHERE marksheetID = ?";
 
-        $sql = "INSERT INTO marksheet (total_score, date, projectID) VALUES ('$totalScore', '$date', '$projectID')";
-        return $this->db->query($sql);
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("i", $marksheetID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            
+            return $row['total'] ?? 0; // Return total score or 0 if none found
+        } else {
+            throw new \Exception("Database query failed: " . $this->db->getError());
+        }
     }
+    
+    // Function to update total score in marksheet table (if needed)
+    public function updateTotalScore($marksheetID) {
+        $totalScore = $this->getTotalScore($marksheetID);
+        $sql = "UPDATE marksheet SET total_score = ? WHERE marksheetID = ?";
 
-
-    public function updateMarksheet($marksheetID, $totalScore) {
-        $marksheetID = $this->db->escapeString($marksheetID);
-        $totalScore = $this->db->escapeString($totalScore);
-
-        $sql = "UPDATE marksheet SET total_score = '$totalScore' WHERE marksheetID = '$marksheetID'";
-        return $this->db->query($sql);
-    }
-
-
-    public function deleteMarksheet($marksheetID) {
-        $marksheetID = $this->db->escapeString($marksheetID);
-        $sql = "DELETE FROM marksheet WHERE marksheetID = '$marksheetID'";
-        return $this->db->query($sql);
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("ii", $totalScore, $marksheetID);
+            return $stmt->execute();
+        } else {
+            throw new \Exception("Database query failed: " . $this->db->getError());
+        }
     }
 }
-
-?>

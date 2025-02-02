@@ -36,26 +36,20 @@ header h2 {
   padding: 10px;
 }
 
-#top-bar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-#top-bar > span {
-  padding: 5px;
-}
-
 .create-new-btn {
   width: 20px;
   height: 20px;
+  background: url("../assets/create-new-icon.png") no-repeat scroll 0 0 transparent;
+  background-size: cover;
+  border: none;
+  margin: auto;
+  vertical-align: middle;
 }
 
-.create-new-btn img{
-  width: 20px;
-  height: 20px;
+#search-bar-id{
+  vertical-align: middle;
+  max-width: 100px;
 }
-
 .more-btn,
 .search-btn {
   border: none;
@@ -161,4 +155,42 @@ a {
 
 .td-checkbox{
   width: 2px;
+}
+
+form{
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+textarea{
+  field-sizing: content;
+}
+
+.form-group > *:disabled{
+  color: black;
+  opacity: 1;
+  
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.form-group select{
+  width: auto;
+  opacity: 1;
+}
+
+body:has(#active:checked) select {
+  color: white;
+  background-color: green;
+}
+
+/* body:has(#active:not(:checked)) select {
+  color: white;
+  background-color: red;
+} */
+
+body:has(#archived:checked) select {
+  color: white;
+  background-color: red;
 }

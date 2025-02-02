@@ -2,7 +2,7 @@
 use App\Models\Base;
 use App\Models\Announcement;
 
-$base = new Base("Manage User", "admin");
+$base = new Base("Manage Announcement", "admin");
 
 $ann = new Announcement();
 
@@ -12,8 +12,8 @@ echo $announcements[0];
 ?>
 
 <head>
-    <link rel="stylesheet" href="./src/css/announcements-mgt-style.css">
     <link rel="stylesheet" href="./src/css/form-style.css">
+    <link rel="stylesheet" href="./src/css/announcements-mgt-style.css">
 </head>
 
 
@@ -35,7 +35,7 @@ echo $announcements[0];
                     <div>
                         <input type="text" id="search-bar-id" placeholder="UserID...">
                         <button class="create-new-btn" type="button"
-                            onclick="location.href='new-user';"></button>
+                            onclick="location.href='new-announcement';"></button>
                     </div>
                 </div>
 

@@ -108,14 +108,12 @@ class Announcement{
 
             <div class="form-group">
                 <label for="announcement-title">Announcement Title</label>
-                <p id="announcement-title" name="announcement-title"><?php echo $this->title ?></p>
+                <input id="announcement-title" name="announcement-title" value="<?php echo $this->title ?>" disabled>
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <p id="description" name="description">
-                    <?php echo $this->description ?>
-                </p>
+                <textarea type="text" id="description" name="description" disabled> <?php echo $this->description ?> </textarea>
             </div>
 
             <div class="form-group">
@@ -127,6 +125,16 @@ class Announcement{
                 <label for="time">Time</label>
                 <p id="time" name="time"><?php echo $this->time ?></p>
             </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" name="status" required disabled>
+                    <option id="active" value="active" <?php echo $this->status=='Active' ? 'selected': ''  ?>> Active </option>
+                    <option id="archived" value="archived" <?php echo $this->status=='Archived' ? 'selected': ''  ?>> Archived </option>
+                </select>
+            </div>
+
+            <button>edit</button>
         </form>
         <?php
     }

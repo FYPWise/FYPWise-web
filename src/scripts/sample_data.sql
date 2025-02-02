@@ -183,7 +183,7 @@ INSERT INTO lecturer_project (projectID, lecturerID, lecturer_role) VALUES
 --
 INSERT INTO milestone (milestoneID, milestone_title, milestone_description, milestone_start_date, milestone_end_date, timelineID)
 VALUES 
-(1, 'Requirement Analysis', 'Gather project requirements and finalize scope', '2025-01-01', '2025-01-10', 1),
+(1, 'Requirement Analysis', 'Gather the project requirements and finalize scope', '2025-01-01', '2025-01-10', 1),
 (2, 'Design Phase', 'Create wireframes, UI/UX design, and system architecture', '2025-01-11', '2025-01-20', 2),
 (3, 'Prototype Development', 'Build an initial working prototype of the system', '2025-01-21', '2025-01-30', 3),
 (4, 'Testing', 'Conduct software testing and fix bugs', '2025-02-01', '2025-02-10', 4),

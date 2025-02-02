@@ -4,4 +4,5 @@
     $final = new Router();
 
     $final->get("/FYPWise-web/final-submission", "Pages/final-report-submission-mgt/final-report-submission.php");
+    $final->post("/FYPWise-web/final-submission", "Pages/final-report-submission-mgt/final-report-submission.php");
 ?>

@@ -3,7 +3,9 @@ use App\Models\Base;
 use App\Models\FinalSubmissionModel;
 
 $base = new Base("Final Report Submission", ["student"]);
+$finalSubmissionModel = new FinalSubmissionModel();
 
+$finalSubmissionModel->submitFinalReport();
 ?>
 
 <!DOCTYPE html>
@@ -95,12 +97,12 @@ $base = new Base("Final Report Submission", ["student"]);
                 <div class="form-group">
                     <label>Project Title:</label>
                     <input type="text"
-                        value="<?php echo htmlspecialchars($_SESSION['project_title'] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
+                        value="<?php echo htmlspecialchars($_SESSION["project_title"] ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?>"
                         readonly>
                 </div>
                 <div class="form-group">
                     <label>Submit Report:</label>
-                    <input type="file" name="report_file" accept=".doc, .docx, application/pdf" required>
+                    <input type="file" name="report_file" accept="application/pdf" required>
                 </div>
                 <button type="submit" name="submit_report" class="btn-submit">Submit</button>
             </form>

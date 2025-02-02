@@ -43,9 +43,6 @@
                     echo "Sorry, there was an error uploading your file.";
                     return false;
                 }
-            } else {
-                echo "File is not the required type.";
-                return false;
             }
         }
     }

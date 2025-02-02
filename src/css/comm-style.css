@@ -236,7 +236,8 @@ body:has(.menubutton > input:checked) #chat-container {
 }
 
 @media screen and (max-width: 650px) {
-  .chat-received {
+
+  /* .chat-received {
     margin-right: 0;
   }
 
@@ -244,7 +245,7 @@ body:has(.menubutton > input:checked) #chat-container {
     float: right;
     margin-right: 15px;
     margin-left: 0;
-  }
+  } */
 
   #page-side {
     background-color: #f4f4f4;

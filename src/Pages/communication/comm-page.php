@@ -8,12 +8,9 @@ $base = new Base("Communication");
 $user = new User($_SESSION['id']);
 $chat = new Chat();
 
-$chats = $chat->getChat($user);
+$chats = $chat->getChat();
 
-foreach ($chats as $chat) {
-    echo $chat['type']. "".$chat['id'];
-    echo "-----";
-}
+$chat->loadChat('1');
 ?>
 
 <link rel="stylesheet" href="./src/css/comm-style.css">
@@ -34,7 +31,7 @@ foreach ($chats as $chat) {
                     <ul id="chat-menu">
                         <?php foreach ($chats as $chat){ ?>
                             <li class="chat-menu-list">
-                                <button type="button" class="chat-button">
+                                <button type="button" class="chat-button" name="<?php echo $chat['type'] ?>" id="<?php echo $chat['id'] ?>">
                                     <span class="chat-label"><?php echo $chat['name'] ?></span>
                                     <span class="chat-icon <?php echo $chat['type'] ?>-chat-icon"></span>
                                 </button>
@@ -179,17 +176,77 @@ foreach ($chats as $chat) {
         </div>
 
         <script>
+            
+            var outerContainer = document.getElementById("outer-container");
+
+            outerContainer.scrollTop = outerContainer.scrollHeight;
+
+            let interval;
+
+            function openChat(id, type){
+            if (id !== ""){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        document.getElementById("chat-container").innerHTML = this.responseText;
+
+                        var scripts = document.getElementById("chat-container").getElementsByTagName("script");
+                        for (var i = 0; i < scripts.length; i++) {
+                            eval(scripts[i].innerHTML); // Execute script code
+                        }
+                    }
+                };
+                xmlhttp.open("GET", "openchat?id="+id+"&type="+type, true);
+                xmlhttp.send();
+                
+                interval = setInterval(function() {
+                    checkNewMessage(id, latestId);
+                }, 1000);
+
+                
+                }
+            }
+
             var chatButton = document.getElementsByClassName("chat-button");
 
             for (i = 0; i < chatButton.length; i++) {
                 chatButton[i].addEventListener("click", function () {
                     this.classList.add("chat-button-active");
+                    this.setAttribute("disabled", "true");
+                    if (typeof interval === 'number'){
+                        clearInterval(interval);
+                    }else{
+                        console.log(typeof interval);
+                    }
+                    openChat(this.getAttribute('id'), this.getAttribute('name'));
                     for (j = 0; j < chatButton.length; j++) {
                         if (this != chatButton[j]) {
                             chatButton[j].classList.remove("chat-button-active");
+                            chatButton[j].removeAttribute("disabled");
                         }
                     }
                 });
+            }
+
+            function checkNewMessage(id, latest){
+                if (id !== ""){
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function(){
+                        if (this.readyState == 4 && this.status == 200){
+                            var chatList = document.getElementsByClassName("chat-list")[0];
+                            chatList.innerHTML += this.responseText;
+
+                            var scripts = chatList.getElementsByTagName("script");
+                            for (var i = 0; i < scripts.length; i++) {
+                                eval(scripts[i].innerHTML); // Execute script code
+                            }
+                        }
+                    };
+                    xmlhttp.open("GET", "newMessage?id="+id+"&latest="+latest, true);
+                    xmlhttp.send();
+                    
+                    }
+                console.log(id +","+ latestId);
             }
         </script>
 

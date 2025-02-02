@@ -87,6 +87,24 @@ class User{
         }
     }
 
+    public function readUserId($userId){
+        $userId = $this->db->escapeString($userId);
+        $userSql = "SELECT * from users where userID='$userId' ";
+        $result = $this->db->query($userSql);
+
+        if ($result->num_rows == 1){
+            $user = $result->fetch_object();
+            $this->id = $user->id;
+            $this->name = $user->name;
+            $this->email = $user->email;
+            $this->role = $user->role;
+            $this->userID = $user->userID;
+            return 1;
+        }else{
+            return false;
+        }
+    }
+
     public function getNewLecturerID(){
         $sql = "SELECT lecturerID FROM `lecturer` ORDER BY `lecturer`.`lecturerID` DESC";
         $result = $this->db->query($sql);

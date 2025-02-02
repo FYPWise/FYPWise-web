@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <label for="supervisor-id">Supervisor</label>
                             <select id="supervisor-id" name="supervisor-id" required>
                                 <?php
-                                $supervisors = $db->query("SELECT id, name FROM users WHERE role IN ('lecturer')");
+                                $supervisors = $db->query("SELECT userID, id, name FROM users WHERE role IN ('lecturer')");
                                 foreach ($supervisors as $supervisor) {
-                                    echo "<option value=\"{$supervisor['id']}\">{$supervisor['id']} {$supervisor['name']}</option>";
+                                    echo "<option value=\"{$supervisor['userID']}\">{$supervisor['id']} - {$supervisor['name']}</option>";
                                 }
                                 ?>
                             </select>

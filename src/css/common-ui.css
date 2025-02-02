@@ -174,7 +174,6 @@ header h2 {
   width: 0;
   transition: width 300ms;
   overflow-x: hidden;
-  position: fixed;
 }
 
 #side-menu-shortcuts {

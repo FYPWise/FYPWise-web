@@ -300,37 +300,19 @@ INSERT INTO presentation (presentation_title, start_time, end_time, date, mode, 
 -- --------------------------------------------------------
 
 --
+-- Insert sample data  for table `message`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Insert sample data  for table `group_chat`
 --
-INSERT INTO group_chat (groupID, groupName, createdAt, createdBy) VALUES
-(1, 'Group 1', '2025-01-01 20:18:42', 17),
-(2, 'Group 2', '2025-01-05 20:18:42', 9),
-(3, 'Group 3', '2025-01-31 20:18:42', 16);
+
 -- --------------------------------------------------------
 
 --
 -- Insert sample data  for table `user_group`
 --
-INSERT INTO user_group (userID, groupID) VALUES
-(17, 1),
-(9, 2),
-(16, 3),
-(1, 1),
-(2, 1),
-(6, 2),
-(3, 3),
-(4, 3),
-(7, 3);
--- --------------------------------------------------------
 
---
--- Insert sample data  for table `message`
---
-INSERT INTO messages (senderID, receiverID, messageContent, timeStamp) VALUES
-(2, 9, 'testing bossku', '2025-01-01 20:18:42'),
-(9, 2, 'hello hello', '2025-01-01 20:18:48');
-
-INSERT INTO messages (senderID, groupID, messageContent, timeStamp) VALUES
-(17, 1, 'testing bossku', '2025-01-01 20:18:42'),
-(1, 1, 'hello hello', '2025-01-01 20:20:00');
 -- --------------------------------------------------------

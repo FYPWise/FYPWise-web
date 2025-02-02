@@ -13,6 +13,8 @@ class Announcement{
     private $userID;
     private $db;
     private $shortDesc;
+    private $filename;
+    private $name;
 
     public function __construct(){
         $this->db = new Db();
@@ -26,12 +28,28 @@ class Announcement{
         return $this->time;
     }
 
+    public function getTitle(){
+        return $this->title;
+    }
+
+    public function getDes(){
+        return $this->description;
+    }
+
     public function getStatus(){
         return $this->status;
     }
 
     public function getUserID(){
         return $this->userID;
+    }
+
+    public function getFN(){
+        return $this->filename;
+    }
+
+    public function getName(){
+        return $this->name;
     }
 
     public function read($id){
@@ -89,6 +107,37 @@ class Announcement{
             return $list;
         }else{
             return false;
+        }
+    }
+
+    public function latest(){
+        $sql = "SELECT a.*, u.filename, u.name 
+                FROM announcement a 
+                JOIN users u ON a.userID = u.userID
+                WHERE a.status = 'Active'
+                ORDER BY a.datetime DESC LIMIT 1";
+    
+        $result = $this->db->query($sql);
+    
+        if ($result->num_rows == 1){
+            $row = $result->fetch_assoc();
+            $dateTime = new \DateTime($row['datetime']);
+            $date = $dateTime->format('d-m-Y');
+            $time = $dateTime->format('h:i:s A');
+    
+            $description = $row["description"];
+            $shortDesc = (strlen($description) > 50) ? substr($description, 0, 50-3). '...' : $description;
+    
+            $this->id = $row["announcementID"];
+            $this->title = $row["title"];
+            $this->description = $description;
+            $this->shortDesc = $shortDesc;
+            $this->date = $date;
+            $this->time = $time;
+            $this->status = $row["status"];
+            $this->userID = $row["userID"];
+            $this->filename = $row["filename"];
+            $this->name = $row["name"];
         }
     }
 

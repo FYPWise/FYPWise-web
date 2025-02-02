@@ -277,17 +277,23 @@ class Project {
     }
     
     
-    public function saveMilestone($milestoneName, $startDate, $endDate, $timelineID) {
-        $sql = "INSERT INTO milestone (milestone_title, milestone_start_date, milestone_end_date, timelineID) 
-                VALUES (?, ?, ?, ?)";
-        
+    public function saveMilestone($milestoneTitle, $milestoneDescription, $startDate, $endDate, $timelineID) {
+        $sql = "INSERT INTO milestone (milestone_title, milestone_description, milestone_start_date, milestone_end_date, timelineID) 
+                VALUES (?, ?, ?, ?, ?)";
+    
         if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("sssi", $milestoneName, $startDate, $endDate, $timelineID);
-            return $stmt->execute();
+            $stmt->bind_param("ssssi", $milestoneTitle, $milestoneDescription, $startDate, $endDate, $timelineID);
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                die("<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>");
+            }
         } else {
-            throw new \Exception("Database query failed: " . $this->db->getError());
+            die("<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>");
         }
     }
+    
+    
     
     public function getNextMilestoneID() {
         $sql = "SELECT MAX(milestoneID) AS lastID FROM milestone";
@@ -368,6 +374,40 @@ public function getUserIDByStudentID($studentID) {
     }
 }
 
+public function updateProjectTimelineStatus($timelineID, $status) {
+    $sql = "UPDATE project_timeline SET status = ? WHERE timelineID = ?";
+
+    if ($stmt = $this->db->prepare($sql)) {
+        $stmt->bind_param("si", $status, $timelineID);
+
+        if ($stmt->execute()) {
+            // Fetch the updated row to confirm the update
+            $check_sql = "SELECT status FROM project_timeline WHERE timelineID = ?";
+            $check_stmt = $this->db->prepare($check_sql);
+            $check_stmt->bind_param("i", $timelineID);
+            $check_stmt->execute();
+            $result = $check_stmt->get_result();
+            $updated_row = $result->fetch_assoc();
+
+            echo "<pre>✅ SUCCESS: Timeline ID $timelineID updated to $status</pre>";
+            echo "<pre>🔍 CHECK: New status in DB: " . ($updated_row['status'] ?? 'Not Found') . "</pre>";
+
+            return true;
+        } else {
+            echo "<pre>❌ ERROR: SQL execution failed - " . $stmt->error . "</pre>";
+        }
+    } else {
+        echo "<pre>❌ ERROR: Query preparation failed - " . $this->db->getError() . "</pre>";
+    }
+    return false;
+}
+
+public function getLatestTimelineID() {
+    $sql = "SELECT timelineID FROM project_timeline ORDER BY timelineID DESC LIMIT 1";
+    $result = $this->db->query($sql);
+    $row = $result->fetch_assoc();
+    return $row ? $row['timelineID'] : null;
+}
 
 
 }

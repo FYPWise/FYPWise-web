@@ -58,6 +58,7 @@ $router->post("/FYPWise-web/milestoneform","Pages/project-management-mgt/milesto
 $router->get("/FYPWise-web/milestonesubmission",page: "Pages/project-management-mgt/milestone-submission.php");
 $router->post("/FYPWise-web/milestonesubmission",page: "Pages/project-management-mgt/milestone-submission.php");
 $router->get("/FYPWise-web/projectplanapproval","Pages/project-management-mgt/project-plan-approval.php");
+$router->post("/FYPWise-web/projectplanapproval","Pages/project-management-mgt/project-plan-approval.php");
 $router->get("/FYPWise-web/projecttimelineplanning","Pages/project-management-mgt/project-timeline-planning.php");
 $router->get("/FYPWise-web/projectmanagement","Pages/project-management-mgt/projectmanagement.php");
 $router->get("/FYPWise-web/studentprojectassignment","Pages/project-management-mgt/student-project-assignment.php");

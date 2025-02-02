@@ -15,11 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newStatus = $_POST['status'] ?? null;
 
     if ($timelineID && $newStatus) {
-        $projectModel->updateProjectTimelineStatus($timelineID, $newStatus);
-        header("Location: /FYPWise-web/projectplanapproval?success=1"); 
-        exit();
+        $success = $projectModel->updateProjectTimelineStatus($timelineID, $newStatus);
+        if ($success) {
+            echo "✅ Status updated successfully!";
+        } else {
+            echo "❌ Error updating status!";
+        }
+        exit(); // Stop further execution
     }
 }
+
 ?>
 
 <body>
@@ -46,19 +51,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php foreach ($projectTimelines as $row): ?>
                                     <tr>
                                         <td>
-                                            <a href="/FYPWise-web/supervisorprojecttimeline?timelineID=<?php echo htmlspecialchars($row['timelineID']); ?>">
+                                            <a
+                                                href="/FYPWise-web/supervisorprojecttimeline?timelineID=<?php echo htmlspecialchars($row['timelineID']); ?>">
                                                 <?php echo htmlspecialchars($row['timelineID']); ?>
                                             </a>
                                         </td>
                                         <td><?php echo htmlspecialchars($row['student_name'] ?? 'Unassigned'); ?></td>
                                         <td>
-                                            <form method="POST">
-                                                <input type="hidden" name="timelineID" value="<?php echo $row['timelineID']; ?>">
+                                        <form class="status-form">
+                                                <input type="hidden" name="timelineID"
+                                                    value="<?php echo $row['timelineID']; ?>">
                                                 <select name="status" class="status-dropdown">
                                                     <option value="pending" <?php echo ($row['status'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
-                                                    <option value="on-going" <?php echo ($row['status'] == 'on-going') ? 'selected' : ''; ?>>On-going</option>
-                                                    <option value="approved" <?php echo ($row['status'] == 'approved') ? 'selected' : ''; ?>>Approved</option>
+                                                    <option value="in-progress" <?php echo ($row['status'] == 'in-progress') ? 'selected' : ''; ?>>In Progress</option>
+                                                    <option value="completed" <?php echo ($row['status'] == 'completed') ? 'selected' : ''; ?>>Completed</option>
                                                 </select>
+
                                                 <button type="submit">Update</button>
                                             </form>
                                         </td>
@@ -78,4 +86,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php $base->renderFooter() ?>
     </div>
 </body>
+
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".status-form").forEach(form => {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent page reload
+            
+            let formData = new FormData(this);
+
+            fetch("/FYPWise-web/projectplanapproval", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Response:", data);
+                alert("✅ Status updated successfully!"); // Show success message
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("❌ Error updating status. Please try again.");
+            });
+        });
+    });
+});
+</script>

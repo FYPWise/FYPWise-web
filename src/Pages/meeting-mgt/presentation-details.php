@@ -43,7 +43,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
     try {
         $presentation->updatePresentationStatus($presentationID, $newStatus);
-        echo "<script>alert('Presentation updated successfully!');  window.location.reload();</script>";
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
     } catch (Exception $e) {
         echo "<script>alert('Error updating presentation: " . htmlspecialchars($e->getMessage()) . "');</script>";
     }

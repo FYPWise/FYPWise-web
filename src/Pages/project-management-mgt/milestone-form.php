@@ -8,7 +8,7 @@ $db = new Db();
 $projectModel = new Project($db);
 
 // Get next milestone ID and timeline ID
-$nextMilestoneID = $_GET['nextMilestoneID'] ?? $projectModel->getNextMilestoneID();
+$nextMilestoneID = $projectModel->getNextMilestoneID();
 $timelineID = $_POST['timelineID'] ?? $projectModel->getLatestTimelineID(); // Ensure timelineID is set
 
 // Handle form submission

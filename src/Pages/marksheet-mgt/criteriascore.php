@@ -7,28 +7,46 @@ $base = new Base("Criteria Score Page");
 $db = new Db();
 $criteriaModel = new CriteriaModel($db);
 
-$marksheetID = isset($_GET['marksheetID']) ? htmlspecialchars($_GET['marksheetID']) : 'Unknown';
+// Get marksheet ID from URL or default to an empty value
+$marksheetID = isset($_GET['marksheetID']) ? htmlspecialchars($_GET['marksheetID']) : '';
 
 $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
 
+// Convert the retrieved data into an associative array for easy access
+$scoresData = [];
+foreach ($criteriaScores as $score) {
+    $scoresData[$score['criteria']] = [
+        'score' => $score['score'],
+        'comment' => $score['comment']
+    ];
+}
+
+// Handle form submission (Updating Scores)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $marksheetID = $_POST['marksheetID'];
-    $evaluatorID = $_POST['evaluatorID'];
-    
-    if (empty($evaluatorID)) {
-        echo "<script>alert('Evaluator ID is required!'); history.back();</script>";
+    if (!isset($_POST['marksheetID'], $_POST['evaluatorID'])) {
+        echo "<script>alert('❌ Missing required fields!'); history.back();</script>";
         exit();
     }
 
+    $marksheetID = $_POST['marksheetID'];
+    $evaluatorID = $_POST['evaluatorID'];
     $scores = $_POST['scores'];
     $comments = $_POST['comments'];
 
     foreach ($scores as $criteria => $score) {
         $comment = $comments[$criteria] ?? '';
-        $criteriaModel->insertCriteriaScore($score, $criteria, $comment, $marksheetID, $evaluatorID);
+
+        // Check if score exists for the criteria
+        if (isset($scoresData[$criteria])) {
+            // Update existing score
+            $criteriaModel->updateCriteriaScoreByMarksheet($marksheetID, $criteria, $score, $comment);
+        } else {
+            // Insert new score if not already recorded
+            $criteriaModel->insertCriteriaScore($score, $criteria, $comment, $marksheetID, $evaluatorID);
+        }
     }
 
-    header("Location: " . $_SERVER["HTTP_REFERER"]);
+    echo "<script>alert('✅ Criteria scores updated successfully!'); window.location.href='/FYPWise-web/marksheetpage';</script>";
     exit();
 }
 ?>
@@ -134,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             Marksheet ID: <span><?php echo $marksheetID; ?></span>
                         </div>
 
-                        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                        <form method="POST" action="/FYPWise-web/criteriapage">
                             <input type="hidden" name="marksheetID" value="<?php echo htmlspecialchars($marksheetID); ?>">
 
                             <!-- Evaluator ID Input Field -->
@@ -157,19 +175,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             ];
 
                             foreach ($criteriaLabels as $key => $label) {
+                                $existingScore = $scoresData[$key]['score'] ?? '';
+                                $existingComment = $scoresData[$key]['comment'] ?? '';
+
                                 echo "<div class='criteria-section'>
                                         <h3>$label</h3>
                                         <div class='criteria-input'>
-                                            <input type='number' name='scores[$key]' placeholder='Enter Score' required>
-                                            <textarea name='comments[$key]' rows='3' placeholder='Add Comments (if any)'></textarea>
+                                            <input type='number' name='scores[$key]' value='$existingScore' placeholder='Enter Score' required>
+                                            <textarea name='comments[$key]' rows='3' placeholder='Add Comments (if any)'>$existingComment</textarea>
                                         </div>
                                       </div>";
                             }
                             ?>
 
                             <div class="form-buttons">
-                                <button type="submit" class="btn submit">Submit</button>
-                                <button type="reset" class="btn cancel">Cancel</button>
+                                <button type="submit" class="btn submit">Save Changes</button>
+                                <button type="reset" class="btn cancel">Reset</button>
                             </div>
                         </form>
                     </div>

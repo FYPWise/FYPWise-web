@@ -300,10 +300,11 @@ class Project {
         $result = $this->db->query($sql);
     
         if ($row = $result->fetch_assoc()) {
-            return $row['lastID'] ? $row['lastID'] + 1 : 1;
+            return $row['lastID'] ? $row['lastID'] + 1 : 1; // Start from 1 if no milestones exist
         }
-        return 1; // Start from 1 if no milestones exist
+        return 1;
     }
+    
     
 
     public function getSubmittedMilestones() {

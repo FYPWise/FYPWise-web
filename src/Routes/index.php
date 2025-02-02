@@ -40,9 +40,14 @@ $router->post("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/propos
 $router->get("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
 $router->post("/FYPWise-web/marksheetpage","Pages/marksheet-mgt/marksheetpage.php");
 $router->get("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php");
+$router->post("/FYPWise-web/criteriapage","Pages/marksheet-mgt/criteriascore.php");
 $router->get("/FYPWise-web/criteriapage/([a-zA-Z0-9_-]+)", function($marksheetID) {
     $_GET['marksheetID'] = $marksheetID; 
     include "src/Pages/marksheet-mgt/criteriascore.php";
+});
+$router->get("/FYPWise-web/marksheetdetails/([0-9]+)", function($marksheetID) {
+    $_GET['marksheetID'] = $marksheetID; 
+    include "src/Pages/marksheet-mgt/marksheetdetails.php";
 });
 
 

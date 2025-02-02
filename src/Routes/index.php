@@ -16,9 +16,6 @@ $router->include($adminRoutes);
 include "proposal.php";
 $router->include($proposalRoutes);
 
-
-
-
 //marksheet management
 include "marksheet.php";
 $router->include($marksheetRoutes);

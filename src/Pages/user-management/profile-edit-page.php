@@ -32,17 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <div class="sidebar">
-        <img src="./src/assets/main_logo_white.png" alt="Logo" class="logo">
+        <div class="menubutton">
+            <input title="side-menu" type="checkbox" id="user-side-menu">
+            <label for="user-side-menu" class="fas sidebar-btn"></label>
+        </div>
         <div class="icons">
-            <a href="/FYPWise-web"><button id="sidebar-btn"><img src="./src/assets/home3.png" alt="home"></button></a>
             <a href="communication"><button id="sidebar-btn"><img src="./src/assets/messages1.png"
                         alt="messages"></button></a>
             <a href="dashboard"><button id="sidebar-btn"><img src="./src/assets/dashboard1.png" alt="dashboard"></button></a>
         </div>
-        <button id="logout-btn" onclick="showLogoutPopup()"><img src="./src/assets/logout2.png" alt="logout"></button>
+        <button id="logout-btn"><img src="./src/assets/logout2.png" alt="logout"></button>
     </div>
-    <!-- Logout Confirmation Popup -->
-    <?php include './src/Pages/common-ui/logoutConfirm.html'; ?>
+    <?php 
+        $base->renderMenu();
+    ?>
 
     <!-- Main Container -->
     <div class="container">

@@ -41,7 +41,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
     try {
         $proposal->updateProposalStatus($proposalID, $newStatus, $newComment);
-        echo "<script>alert('Proposal status updated successfully!'); window.location.reload();</script>";
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
     } catch (Exception $e) {
         echo "<script>alert('Error updating proposal: " . $e->getMessage() . "');</script>";
     }
@@ -49,8 +50,8 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 ?>
 
 <head>
-    <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css">
-    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/proposal-management-style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/FYPWise-web/src/css/form-style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div id="outer-container">

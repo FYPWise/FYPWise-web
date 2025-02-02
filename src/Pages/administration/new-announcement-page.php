@@ -16,6 +16,9 @@ if (isset($_GET["title"])) {
     header('location:manage-announcements');
 }
 
+
+$announcements = $ann->find();
+
 ?>
 
 <head>

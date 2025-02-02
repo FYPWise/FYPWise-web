@@ -33,12 +33,8 @@ body {
   align-items: center;
 }
 
-.sidebar .logo {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
 .icons {
+  padding-top: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,13 +58,28 @@ body {
 }
 
 #sidebar-btn:hover, #logout-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.06);
   background-color: rgba(0, 0, 0, 0.3);
 }
 
 #logout-btn {
   margin-top: auto; 
   margin-bottom: 0; 
+}
+
+body:has(.menubutton > input:checked) #side-menu {
+  width: 250px;
+}
+
+
+#side-menu {
+    background-color: #f4f4f4;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: width 300ms;
+    overflow-x: hidden;
+    margin-left: 80px;
+    position: fixed;
 }
 
 /* Main Content */
@@ -245,6 +256,25 @@ select:focus {
     margin-left: 0;
   }
 
+  body:has(.menubutton > input:checked) #side-menu {
+    max-height: 100%;
+    width: 100%;
+    height: max-content;
+    overflow-y: visible;
+  }
+
+  #side-menu {
+      background-color: #f4f4f4;
+      box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+      height: 0px;
+      width: 100%;
+      transition: max-height 300ms;
+      margin-left: 0px;
+      position: relative;
+      overflow-x:visible;
+      overflow-y: hidden;
+  }
+
   .profile {
     flex-direction: column;
     text-align: center;
@@ -272,16 +302,12 @@ select:focus {
     align-items: center;
     justify-content: space-between;
     padding: 0;
+    padding-left: 10px;
   }
 
-  .sidebar .logo {
-    width: 50px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-bottom: 0;
-}
-
   .icons {
+      padding-top: 0px;
+      padding-left: 40px;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -324,5 +350,26 @@ select:focus {
 
   #toggle-password {
     top: 37px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  #side-menu {
+      background-color: #f4f4f4;
+      box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+      height: 0px;
+      width: 100%;
+      transition: max-height 300ms;
+      margin-left: 0px;
+      position: relative;
+      overflow-x:visible;
+      overflow-y: hidden;
+  }
+
+  body:has(.menubutton > input:checked) #side-menu {
+      max-height: 100%;
+      width: 100%;
+      height: auto;
+      overflow-y: visible;
   }
 }

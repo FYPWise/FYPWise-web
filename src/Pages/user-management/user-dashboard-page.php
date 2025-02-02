@@ -188,23 +188,23 @@ $taskDates = getTaskDates($db);
                     <div class="task-container">
                         <?php if ($_SESSION['role'] == 'student') { ?>
                             <div class="task">
-                                <a href="./src/project-management-mgt/project-timeline-planning.html">Project Timeline Planning</a>
+                                <a href="projecttimelineplanning">Project Timeline Planning</a>
                             </div>
                             <div class="task">
-                                <a href="./src/meeting-mgt/meeting-scheduler-page.html">Schedule a Meeting</a>
+                                <a href="new-meeting">Schedule a Meeting</a>
                             </div>
                             <div class="task">
-                                <a href="./src/meeting-mgt/meeting-log-page.html">Submit Meeting Log</a>
+                                <a href="submit-meeting-log">Submit Meeting Log</a>
                             </div>
                         <?php } elseif($_SESSION['role'] == 'lecturer') { ?>
                             <div class="task">
-                                <a href="./src/project-management-mgt/project-timeline-planning.html">Project Timeline Planning</a>
+                                <a href="projecttimelineplanning">Project Timeline Planning</a>
                             </div>
                             <div class="task">
-                                <a href="./src/meeting-mgt/meeting-scheduler-page.html">Schedule a Meeting</a>
+                                <a href="new-meeting">Schedule a Meeting</a>
                             </div>
                             <div class="task">
-                                <a href="./src/meeting-mgt/meeting-log-page.html">Submit Meeting Log</a>
+                                <a href="submit-meeting-log">Submit Meeting Log</a>
                             </div>
                             <div class="task">
                                 <a href="./src/project-management-mgt/project-approval-page.html">Project Approval</a>

@@ -33,3 +33,6 @@ $meetingRoutes->get("/FYPWise-web/view-presentation-details/([0-9]+)", function(
     echo "Presentation ID received: $presentationID";  // Debugging: To check if presentationID is captured correctly
     include "src/Pages/meeting-mgt/presentation-details.php";
 });
+$meetingRoutes->post("/FYPWise-web/view-presentation-details/([0-9]+)", function($presentationID) {
+    include "src/Pages/meeting-mgt/presentation-details.php";
+});

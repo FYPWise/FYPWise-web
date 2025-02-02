@@ -90,5 +90,18 @@ class Presentation {
             return null;
         }
     }    
+
+    public function updatePresentationStatus($presentationID, $status) {
+        $presentationID = $this->db->escapeString($presentationID);
+        $status = $this->db->escapeString($status);
+
+        $sql = "UPDATE presentation SET status = '$status' WHERE presentationID = '$presentationID'";
+
+        if ($this->db->query($sql)) {
+            return "Presentation status updated successfully.";
+        } else {
+            return "Error: " . $this->db->conn->error;
+        }
+    }
 }
 ?>

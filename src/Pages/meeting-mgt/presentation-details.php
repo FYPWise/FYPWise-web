@@ -20,7 +20,7 @@ if (!isset($_SESSION['mySession'])) {
 
 // Database connection
 $db = new Db();
-$base = new Base("View Meetings", ["lecturer", "student", "admin"]);
+$base = new Base("View Presentations", ["lecturer", "student", "admin"]);
 $presentation = new Presentation($db);
 
 $userID = $_SESSION['mySession']; 
@@ -40,13 +40,12 @@ if ($presentationID) {
 // Handle form submission (only if admin)
 if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $newStatus = $_POST['status'];
-    $newComment = $_POST['comment'];
 
     try {
-        $meetingLog->updateMeetingLogStatus($meeting_logID, $newStatus, $newComment);
-        echo "<script>alert('Meeting Log updated successfully!');  window.location.reload();</script>";
+        $presentation->updatePresentationStatus($presentationID, $newStatus);
+        echo "<script>alert('Presentation updated successfully!');  window.location.reload();</script>";
     } catch (Exception $e) {
-        echo "<script>alert('Error updating meeting log: " . htmlspecialchars($e->getMessage()) . "');</script>";
+        echo "<script>alert('Error updating presentation: " . htmlspecialchars($e->getMessage()) . "');</script>";
     }
 }
 ?>
@@ -69,7 +68,7 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
                 <section class="main">
                     <h1 id="page-name"><?php echo $base->getTitle() ?></h1>
                     <!-- Presentation Form -->
-                    <form class="form" id="presentationForm">
+                    <form class="form" id="presentationForm"  method="POST">
                     <?php if ($presentationDetails): ?>
                             <div class="form-group">
                                 <label for="presentation-id">Presentation ID</label>
@@ -106,10 +105,12 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
                                 <p id="location" class="location"><?php echo htmlspecialchars($presentationDetails['location'] ?? ''); ?></p>
                             </div>
 
+                            <?php if ($presentationDetails['mode'] === 'online'): ?>
                             <div class="form-group">
                                 <label for="url">Online Presentation URL</label>
                                 <p id="url" class="url"><a href="<?php echo htmlspecialchars($presentationDetails['presentation_URL'] ?? '#'); ?>">URL</a></p>
                             </div>
+                            <?php endif; ?>
 
                             <div class="form-group">
                                 <label for="moderator-id">Moderator ID</label>
@@ -128,10 +129,25 @@ if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])
 
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <p id="status" class="status"><?php echo htmlspecialchars($presentationDetails['status'] ?? ''); ?></p>
+                                <?php if ($isAdmin): ?>
+                                    <select id="status" name="status" required>
+                                        <option value="scheduled" <?= ($presentationDetails['status'] == 'scheduled') ? 'selected' : '' ?>>Scheduled</option>
+                                        <option value="postponed" <?= ($presentationDetails['status'] == 'postponed') ? 'selected' : '' ?>>Postponed</option>
+                                        <option value="presented" <?= ($presentationDetails['status'] == 'presented') ? 'selected' : '' ?>>Presented</option>
+                                    </select>
+                                <?php else: ?>
+                                    <p id="status"><?= htmlspecialchars($presentationDetails['status'] ?? 'N/A') ?></p>
+                                <?php endif; ?>
                             </div>
                         <?php else: ?>
                             <p>No presentation found with the given ID.</p>
+                        <?php endif; ?>
+
+                        <?php if ($isAdmin): ?>
+                                <div class="form-buttons">
+                                    <button type="submit" class="btn submit-btn" name="update">Update</button>
+                                    <button type="reset" class="btn reset-btn">Reset</button>
+                                </div>
                         <?php endif; ?>
                     </form>
                 </section>

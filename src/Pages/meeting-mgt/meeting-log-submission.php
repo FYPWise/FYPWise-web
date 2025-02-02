@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="form-group">
                             <label for="supervisor-id">Supervisor</label>
                             <select id="supervisor-id" name="supervisor-id" required>
+                                <option value="" disabled selected>Select Supervisor</option>
                                 <?php
                                 $supervisors = $db->query("SELECT userID, id, name FROM users WHERE role IN ('lecturer')");
                                 foreach ($supervisors as $supervisor) {
@@ -82,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="form-group">
                             <label for="project-id">Project</label>
                             <select id="project-id" name="project-id" required>
+                                <option value="" disabled selected>Select Project</option>
                                 <?php
                                 $projects = $db->query("SELECT projectID, project_title FROM project WHERE studentID = '$userID'");
                                 foreach ($projects as $project) {
@@ -94,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="form-group">
                             <label for="meeting-id">Meeting</label>
                             <select id="meeting-id" name="meeting-id" required>
+                                <option value="" disabled selected>Select Meeting</option>
                                 <?php
                                 $meetings = $meeting->getMeetingsByUserID($userID);
                                 foreach ($meetings as $meeting) {

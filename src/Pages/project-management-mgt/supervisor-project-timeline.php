@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Db;
 use App\Models\Project;
 
-$base = new Base("Supervisor Project Timeline");
+$base = new Base("Supervisor Project Timeline", ['lecturer']);
 $db = new Db();
 $projectModel = new Project($db);
 
@@ -39,6 +39,8 @@ $firstMilestone = $milestoneList[$currentMilestoneIndex] ?? ['id' => null, 'titl
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
+
+        <?php $base->renderMenu(); ?>
 
         <div class="content">
             <div id="main-container" style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px; background-color: #f5f5f5;">

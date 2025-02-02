@@ -4,7 +4,7 @@ use App\Models\Db;
 use App\Models\Project;
 use App\Models\File;
 
-$base = new Base("Project Timeline Planning");
+$base = new Base("Project Timeline Planning", ['student']);
 $db = new Db();
 $projectModel = new Project($db);
 $file = new File();
@@ -181,6 +181,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div id="outer-container">
         <?php $base->renderHeader() ?>
+
+        <?php $base->renderMenu(); ?>
 
         <div class="container">
             <div class="page-header">Project Timeline Planning</div>

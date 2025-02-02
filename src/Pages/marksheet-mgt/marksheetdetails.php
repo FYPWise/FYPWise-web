@@ -4,7 +4,7 @@ use App\Models\Marksheet;
 use App\Models\CriteriaModel;
 use App\Models\Db;
 
-$base = new Base("Marksheet Details");
+$base = new Base("Marksheet Details", ['lecturer']);
 $db = new Db();
 $marksheetModel = new Marksheet($db);
 $criteriaModel = new CriteriaModel($db);
@@ -74,6 +74,8 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
 
 <div id="outer-container">
     <?php $base->renderHeader(); ?>
+
+    <?php $base->renderMenu(); ?>
 
     <div id="main-container">
         <div class="container">

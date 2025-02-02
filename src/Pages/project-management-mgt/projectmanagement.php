@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Project;
 use App\Models\Db;
 
-$base = new Base("Project Management");
+$base = new Base("Project Management", ['lecturer']);
 $db = new Db();
 $project = new Project($db);
 
@@ -42,6 +42,8 @@ $userID = $_SESSION['userID'] ?? null; // Retrieve userID from session
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
+
+        <?php $base->renderMenu(); ?>
 
         <div id="main-container">
             <div class="content">

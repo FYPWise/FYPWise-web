@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\Db;
 use App\Models\Project;
 
-$base = new Base("Project Plan Approval");
+$base = new Base("Project Plan Approval", ['lecturer']);
 $db = new Db();
 $projectModel = new Project($db);
 
@@ -31,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="outer-container">
         <?php $base->renderHeader() ?>
 
+        <?php $base->renderMenu(); ?>
+        
         <!-- Main Content -->
         <div id="main-container">
             <div class="content">

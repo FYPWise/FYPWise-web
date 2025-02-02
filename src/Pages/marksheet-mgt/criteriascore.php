@@ -3,7 +3,7 @@ use App\Models\Base;
 use App\Models\CriteriaModel;
 use App\Models\Db;
 
-$base = new Base("Criteria Score Page");
+$base = new Base("Criteria Score Page", ['lecturer']);
 $db = new Db();
 $criteriaModel = new CriteriaModel($db);
 
@@ -141,6 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <div id="outer-container">
         <?php $base->renderHeader(); ?>
+
+        <?php $base->renderMenu(); ?>
 
         <div id="main-container">
             <div class="content">

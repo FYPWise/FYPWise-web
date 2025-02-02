@@ -79,6 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit_report'])) {
 </head>
 <div id="outer-container">
     <?php $base->renderHeader(); ?>
+    
+    <?php $base->renderMenu(); ?>
 
     <body>
         <div class="container">

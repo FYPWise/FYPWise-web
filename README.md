@@ -28,11 +28,12 @@ The application provides various features to assist students, lecturers, and adm
 5. **Search & Filtering**: Users can search for projects, filter based on category, and view detailed project information.
 
 ## Setup Instructions
-1. Install dependencies using Composer
+1. Ensure FYPWise-web is located/cloned in 'XAMPP/htdocs'
+2. Install dependencies using Composer
    ```
    php composer.phar install
    ```
-2. Set up the database
+3. Set up the database
 4. Run the application in XAMPP starting with http://localhost/FYPWise-web/
 
 ## Additional Notes

@@ -6,11 +6,6 @@ use App\Models\Db;
 
 $base = new Base("Assign Moderator", "admin");
 
-if(isset($_GET['view'])){
-    $userID = $_GET['view'];
-    $user = new User($userID);
-}
-
 
 $projectC = new project(new Db());
 

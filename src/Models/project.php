@@ -488,7 +488,7 @@ public function getModerator($id){
     $sql = "SELECT lp.lecturerID
             FROM `lecturer_project`lp
             JOIN project p ON lp.projectID = p.projectID
-            WHERE p.projectID = $id ;";
+            WHERE p.projectID = $id AND lp.lecturer_role = 'moderator';";
 
     $result = $this->db->query($sql);
 

@@ -49,7 +49,7 @@ if (isset($_POST['submit'])){
                     </div>
                     <div class="email-input">
                         <label for="email">Student Email:</label>
-                        <input id="email" name="email" placeholder="1211030429@student.mmu.edu.my" pattern="\d{10}@student\.mmu\.edu\.my" type="email" required/>
+                        <input id="email" name="email" placeholder="1211030429@student.mmu.edu.my" type="email" readonly/>
                     </div>
                     <div class="password-input">
                         <label for="password">Password:</label>
@@ -94,6 +94,16 @@ if (isset($_POST['submit'])){
                     <div class="submit-btn"><button  id="submit" name="submit" type="submit" form="testform" value="sign-up" class="submit" >Sign Up</button></div>
                 </div>
             </form>
+            <script>
+                document.getElementById("id").addEventListener("input", function() {
+                    let studentId = this.value;
+                    let emailField = document.getElementById("email");
+
+                    if (/^\d{0,10}$/.test(studentId)) {
+                        emailField.value = studentId ? studentId + "@student.mmu.edu.my" : "";
+                    }
+                });
+            </script>
         <div class="login-caption"><p>Already have an account? <a href="/FYPWise-web/login">Login</a></p></div>
         <!-- Footer -->
         <?php $base->renderFooter() ?>

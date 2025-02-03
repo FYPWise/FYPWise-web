@@ -9,27 +9,24 @@
             display: none;
             position: fixed;
             z-index: 1;
-            left: 0;
-            top: 0;
             width: 100%;
             height: 100%; 
             overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.6);
         }
 
         .popup-content {
             background-color: #fefefe;
             margin: 15% auto;
             border: 1px solid #888;
-            width: 80%;
+            width: 100%;
             max-width: 400px;
             text-align: center;
-            padding: 25px;
+            position: relative;
         }
 
         .closelgout {
-            position: relative;
+            position: absolute;
             padding: 10px;
             border: none;
             background: none;
@@ -45,6 +42,10 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        .contentpp{
+            padding: 30px;
         }
 
         .popup-buttons {
@@ -83,7 +84,7 @@
     <div id="logoutPopup" class="popup">
         <div class="popup-content">
             <button class="closelgout" onclick="hideLogoutPopup()">&times;</button>
-            <div class="">
+            <div class="contentpp">
                 <p>Are you sure you want to log out?</p>
                 <div class="popup-buttons">
                     <button onclick="confirmLogout()" class="yes-btn">Yes</button>

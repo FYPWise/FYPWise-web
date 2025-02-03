@@ -23,6 +23,8 @@
             width: 30%;
         }
 
+        
+
         .close {
             position: relative;
             padding: 10px;
@@ -59,7 +61,7 @@
     <div id="errorModal" class="modal">
         <div class="modal-content">
             <button class="close">&times;</button>
-            <div class="content">
+            <div class="contentpp">
                 <p><?php echo $error; ?></p>
             </div>
         </div>

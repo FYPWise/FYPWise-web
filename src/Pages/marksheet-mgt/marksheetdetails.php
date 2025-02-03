@@ -55,6 +55,7 @@ $criteriaScores = $criteriaModel->getCriteriaScoresByMarksheetID($marksheetID);
         }
         td {
             background-color: #f8f9fa;
+        }
         th {
             background-color: #007bff;
             color: blue;

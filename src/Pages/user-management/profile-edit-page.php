@@ -67,11 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="form-group">
                         <label for="student-id"><strong>ID:</strong></label>
-                    <input type="text" id="student-id" name="student-id" value="<?php echo $_SESSION['id']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\\d{10}' : ($_SESSION['role'] == 'lecturer' ? 'L\\d{3}' : 'A\\d{3}'); ?>" title="Please enter your Student ID.">
+                    <input type="text" id="student-id" name="student-id" value="<?php echo $_SESSION['id']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\\d{10}' : ($_SESSION['role'] == 'lecturer' ? 'L\\d{3}' : 'A\\d{3}'); ?>" title="Please ensure your ID.">
                     </div>
                     <div class="form-group">
                         <label for="email"><strong>Email:</strong></label>
-                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" pattern="<?php echo $_SESSION['role'] == 'student' ? '\\d{10}@student.' : ($_SESSION['role'] == 'lecturer' ? 'L\\d{3}@' : 'A\\d{3}@'); ?>mmu\.edu\.my" title="Please enter your Email.">
+                        <input type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" readonly>
                     </div>
                     <?php if ($_SESSION['role'] == 'student') { ?>
                     <div class="form-group">
@@ -136,6 +136,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     passwordInput.addEventListener('blur', function() {
                         tooltip.style.display = 'none';
+                    });
+
+                    document.getElementById("student-id").addEventListener("input", function() {
+                        let studentId = this.value;
+                        let emailField = document.getElementById("email");
+
+                        if (/^\d{0,10}$/.test(studentId)) {
+                            <?php if($_SESSION['role']=='student'): ?>
+                                emailField.value = studentId ? studentId + "@student.mmu.edu.my" : "";
+                            <?php else: ?>
+                                emailField.value = studentId ? studentId + "@mmu.edu.my" : "";
+                            <?php endif; ?>
+                            
+                        }
                     });
                 </script>
             </div>

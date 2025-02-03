@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS fypwise;
+
+USE fypwise;
+
 CREATE TABLE users (
   userID int(11) NOT NULL AUTO_INCREMENT
   , id varchar(10) NOT NULL

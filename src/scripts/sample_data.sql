@@ -1,3 +1,5 @@
+USE fypwise;
+
 INSERT INTO `users` (`userID`, `id`, `name`, `password`, `email`, `role`, `filename`) VALUES
  (1, '1211101935', 'Mohamed Imran Bin Mohamed Yunus', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1211101935@student.mmu.edu.my', 'student', '1211101935.png'),
  (2, '1211103220', 'Muhammad Firzan Ruzain Bin Firdus', '$2a$12$6ZeKG2MvTrC3DkHUfSNn3ePaIjI4jtPo1VkcH6HGb0luvZ8ttyFtq', '1211103220@student.mmu.edu.my', 'student', 'Default_pfp.jpg'),

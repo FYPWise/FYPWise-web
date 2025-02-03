@@ -33,6 +33,7 @@ if ($chat->getLatestMessage() !== $latestId) {
                     </div>
             </section>
         </li>
+    </ul>
 
     <?php 
 

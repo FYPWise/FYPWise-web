@@ -92,6 +92,19 @@ class Announcement{
         }
     }
 
+    public function update($id, $title, $description, $status){
+        $sql = "UPDATE `announcement`
+        SET `description` = '$description',
+        title = '$title',
+        datetime = NOW(),
+        status = '$status'
+        WHERE `announcement`.`announcementID` = $id;";
+
+        $result = $this->db->query($sql);
+
+        return $result;
+    }
+
     public function find(){
         $sql = "SELECT announcementID from announcement";
 
@@ -161,20 +174,21 @@ class Announcement{
 
     public function formView(){
         ?>
-        <form class="proposal-form" id="proposalForm">
+        <button id="back-btn" onclick="location.href='/FYPWise-web/manage-announcements'"></button>
+        <form class="form" id="proposalForm">
             <div class="form-group">
                 <label for="announcement-id">Announcement ID</label>
-                <p id="announcement-id" class="announcement-id"><?php echo $this->id ?></p>
+                <input id="announcement-id" name="id" readonly value="<?php echo $this->id ?>">
             </div>
 
             <div class="form-group">
                 <label for="announcement-title">Announcement Title</label>
-                <input id="announcement-title" name="announcement-title" value="<?php echo $this->title ?>" disabled>
+                <input id="announcement-title" name="title" value="<?php echo $this->title ?>" disabled>
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea type="text" id="description" name="description" disabled> <?php echo $this->description ?> </textarea>
+                <textarea type="text" id="description" name="description" disabled><?php echo $this->description ?> </textarea>
             </div>
 
             <div class="form-group">
@@ -195,8 +209,14 @@ class Announcement{
                 </select>
             </div>
 
-            <button>edit</button>
+            <div class="button-container">
+                <button id="edit-btn">Edit</button>
+                <button id="save-btn" disabled>Save</button>
+                <button id="cancel-btn" disabled>Cancel</button>
+            </div>
+            
         </form>
+        
         <?php
     }
 }

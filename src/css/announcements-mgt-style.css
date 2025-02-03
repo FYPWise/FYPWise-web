@@ -157,15 +157,6 @@ a {
   width: 2px;
 }
 
-form{
-  margin-left: 40px;
-  margin-top: 10px;
-}
-
-#formgroup textarea{
-  field-sizing: content;
-}
-
 textarea#announcement-description{
   height: 50%;
 }
@@ -197,4 +188,54 @@ body:has(#active:checked) select {
 body:has(#archived:checked) select {
   color: white;
   background-color: red;
+}
+
+textarea#description{
+  min-height: 200px;
+}
+
+.button-container{
+  display: flex;
+  justify-content: start;
+}
+
+.button-container button{
+  margin: 10px;
+  padding: 10px;
+  width: 10rem;
+}
+
+.form{
+  max-width: 1061px;
+  margin: auto;
+}
+
+#announcement-id{
+  background: transparent;
+  border: none;
+}
+
+#table-name{
+  position: relative;
+}
+
+#back-btn{
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  background: transparent;
+  background: url('/FYPWise-web/src/assets/back-icon.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: 0.2s ease;
+}
+
+#back-btn:hover{
+  transform: scale(1.5);
+}
+
+nav#side-menu {
+    z-index: 1;
 }

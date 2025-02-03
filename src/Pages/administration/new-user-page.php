@@ -14,8 +14,11 @@ function getNewLecturerID() {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = new User();
-    $user->create($_POST['role']);
-    echo"created";
+    if($user->create($_POST['role'])){
+        echo'<script>alert ("User Successfully Created"); location.href="/FYPWise-web/manage-user"  </script>';
+    }else{
+        echo'<script> alert("Id is registered") </script>';
+    }
 }
 
 $newLecturerID = getNewLecturerID();

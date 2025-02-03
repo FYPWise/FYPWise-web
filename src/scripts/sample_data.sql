@@ -202,8 +202,8 @@ INSERT INTO group_chat(groupName, createdAt, createdBy) VALUES
 INSERT INTO message(senderID, receiverID, groupID, messageContent, timeStamp) VALUES
 (2, 9, NULL, 'Hello Sir.', '2025-01-01 09:00:00'),
 (9, 2, NULL, 'Hello kid.', '2025-01-01 11:00:00'),
-(2, NULL, 1, 'Do we have presentation today?', '2025-02-03 09:00:00'),
-(3, NULL, 1, 'I dont think so bro.', '2025-02-03 11:00:00');
+(2, NULL, 1, 'Do we have presentation today?', '2025-02-02 09:00:00'),
+(3, NULL, 1, 'I dont think so bro.', '2025-02-03 11:00:00');
 
 INSERT INTO user_group(userID, groupID) VALUES
 (9,1),

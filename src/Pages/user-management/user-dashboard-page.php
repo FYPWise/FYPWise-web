@@ -191,6 +191,9 @@ $taskDates = getTaskDates($db);
                                     <p>End: {$milestone['milestone_end_date']}</p>
                                     <p>Status: {$milestone['status']}</p>
                                 </div>";
+                        } 
+                        if(count($milestones) == 0) {
+                            echo "No project milestone.";
                         }
                         ?>
                     </div>
@@ -211,6 +214,9 @@ $taskDates = getTaskDates($db);
                                     <p>Category: {$submission['project_category']}</p>
                                     <p>Submitted: {$submission['end_date']}</p>
                                     </div>";
+                        }
+                        if(count($submissions) == 0) {
+                            echo "No submissions made.";
                         }
                         ?>
                     </div>

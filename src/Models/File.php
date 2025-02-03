@@ -31,7 +31,6 @@
             $target = $targetDir . $fileName;
 
             $userId = $_SESSION['mySession'];
-            $projectId = $_SESSION['projectID'];
             if ($_SESSION['role'] == 'student') {
                 $projectId = $_SESSION['projectID'];
             }

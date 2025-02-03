@@ -20,6 +20,7 @@ $meeting = new Meeting($db);
 $userID = $_SESSION['mySession'];
 
 $meetingLogs = $meetingLog->getMeetingLogsByUserID($userID);
+$meetingLogSv = $meetingLog->getMeetingLogsBySupervisorID($userID)
 
 ?>
 <head>
@@ -54,8 +55,16 @@ $meetingLogs = $meetingLog->getMeetingLogsByUserID($userID);
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($meetingLogs)) {
-                                foreach ($meetingLogs as $log) {
+                            if ($_SESSION['role'] == 'student') {
+                                $logs = $meetingLogs;
+                            } elseif ($_SESSION['role'] == 'lecturer') {
+                                $logs = $meetingLogSv;
+                            } else {
+                                $logs = [];
+                            }
+
+                            if (!empty($logs)) {
+                                foreach ($logs as $log) {
                                     echo "<tr>";
                                     echo "<td><input type='checkbox' class='row-checkbox' value='{$log['meeting_logID']}'></td>";
                                     echo "<td><a href='/FYPWise-web/view-meeting-log-details/{$log['meeting_logID']}'>{$log['meeting_logID']}</a></td>";

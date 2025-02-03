@@ -20,6 +20,15 @@ class MeetingLog {
         $result = $this->db->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    
+    // Retrieve meeting logs by userID (supervisor)
+    public function getMeetingLogsBySupervisorID($supervisorID) {
+        $supervisorID = $this->db->escapeString($supervisorID);
+        $sql = "SELECT * FROM meeting_log WHERE supervisorID = '$supervisorID'";
+        $result = $this->db->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 
     // Submit meeting log
     public function submitMeetingLog($supervisorID, $projectID, $meetingID, $fileInputName, $submissionDate) {

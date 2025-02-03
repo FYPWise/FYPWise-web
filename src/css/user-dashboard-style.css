@@ -317,6 +317,7 @@ hr {
 
 .announcement-content {
     margin-top: 10px;
+    text-align: justify;
 }
 
 .announcement-title {
@@ -345,6 +346,32 @@ hr {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pp, .ss{
+    gap:10px;
+    font-size: x-small;
+}
+
+.pp h4 {
+    flex: 1;
+    min-width: 90px;
+    font-weight: bold;
+}
+
+.pp p {
+    flex: 1;
+    min-width: 60px;
+}
+
+.ss h4 {
+    flex: 1;
+    min-width: 100px;
+}
+
+.ss p {
+    flex: 1; /* Makes all <p> elements take equal width */
+    min-width: 60px;
 }
 
 .task-container a {

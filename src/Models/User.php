@@ -155,7 +155,6 @@ class User{
                 'lecturer' => "INSERT INTO lecturer (userID, lecturerID, position) VALUES ('$userId', '$id', '$position')"
             };
             
-            echo $tableSql;
             $this->db->query($tableSql);
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->conn->error;
@@ -257,5 +256,65 @@ class User{
             echo "Error: " . $sql . "<br>" . $this->db->conn->error;
         }
     }
+
+    public function projectProgress($userID, $role){
+
+        // Base query
+        $sql = "SELECT p.project_title, m.milestone_title,
+        DATE_FORMAT(m.milestone_start_date, '%d %b') AS milestone_start_date, 
+        DATE_FORMAT(m.milestone_end_date, '%d %b') AS milestone_end_date, 
+        pt.status 
+        FROM project p
+        JOIN project_timeline pt ON p.projectID = pt.projectID
+        JOIN milestone m ON pt.timelineID = m.timelineID";
+
+        // Modify WHERE clause based on role
+        if ($role == 'student') {
+        $sql .= " WHERE p.studentID = $userID";
+        } elseif ($role == 'lecturer') {
+        $sql .= " JOIN lecturer_project lp ON p.projectID = lp.projectID
+            WHERE lp.lecturerID = $userID";
+        }
+
+        // Add ORDER BY clause for sorting by milestone end date (if needed)
+        $sql .= " ORDER BY milestone_end_date ASC";
+
+        $result = $this->db->query($sql . " LIMIT 5");
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function submissionUpdates($userID, $role) {
+        if ($role == 'student') {
+            $query = "SELECT p.project_title, 
+                        ps.project_description, 
+                        ps.project_status, 
+                        ps.project_category,
+                        DATE_FORMAT(ps.end_date , '%d %b') AS end_date
+                    FROM project_submission ps
+                    JOIN project p ON ps.projectID = p.projectID
+                    WHERE ps.studentID = $userID;
+                    ";
+        } elseif ($role == 'lecturer') {
+            $query = "SELECT u.name, p.project_title, ps.project_status, ps.project_category, 
+                        DATE_FORMAT(ps.end_date , '%d %b') AS end_date
+                    FROM project_submission ps
+                    JOIN project p ON ps.projectID = p.projectID
+                    JOIN student s ON ps.studentID = s.userID
+                    JOIN users u ON s.userID = u.userID
+                    JOIN lecturer_project lp ON p.projectID = lp.projectID
+                    WHERE lp.lecturerID = $userID";
+        } elseif ($role == 'admin') {
+            $query = "SELECT u.name, p.project_title, ps.project_status, ps.project_category, ps.end_date 
+                    FROM project_submission ps
+                    JOIN project p ON ps.projectID = p.projectID
+                    JOIN student s ON ps.studentID = s.userID
+                    JOIN users u ON s.userID = u.userID";
+        }
+
+        $result = $this->db->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
 
 }

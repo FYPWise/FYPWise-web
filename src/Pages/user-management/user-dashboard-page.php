@@ -4,6 +4,10 @@ use App\Models\Base;
 use App\Models\Db;
 use App\Models\task;
 use App\Models\Announcement;
+use App\Models\User;
+
+$userId = $_SESSION['mySession'];
+$role = $_SESSION['role'];
 
 $task = new task();
 $announcement = new Announcement();
@@ -18,6 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $base = new Base("Dashboard", ["student", "lecturer", "admin"]);
 $db = new Db();
+$projectModel = new User();
+$milestones = $projectModel->projectProgress($userId, $role);
+$submissions = $projectModel->submissionUpdates($userId, $role);
 
 
 function task($db) {
@@ -171,22 +178,48 @@ $taskDates = getTaskDates($db);
             <!-- Container for Project progress, submission updates and quick shortcuts -->
             <div class="mini-container2">
                 <!-- Project Progress Section -->
+                 <?php if($role != 'admin'):?>
                 <div class="project-progress-section task-section">
                     <h2>Project Progress</h2>
                     <div class="task-container">
+                    <?php
+                        foreach($milestones as $milestone){
+                            echo "<div class='task pp'>
+                                    <h4>{$milestone['project_title']}</h4>
+                                    <p>Milestone: {$milestone['milestone_title']}</p>
+                                    <p>Start: {$milestone['milestone_start_date']}</p>
+                                    <p>End: {$milestone['milestone_end_date']}</p>
+                                    <p>Status: {$milestone['status']}</p>
+                                </div>";
+                        }
+                        ?>
                     </div>
                 </div>
+                <?php endif; ?>
                 <!-- Submission Updates Section -->
                 <div class="submission-updates-section task-section">
-                    <h2><?php echo $_SESSION['role'] == 'student' ? 'Submission Updates': 'Student Monitoring'; ?></h2>
+                    <h2><?php echo $role == 'student' ? 'Submission Updates': 'Student Monitoring'; ?></h2>
                     <div class="task-container">
+                        <?php
+                        foreach($submissions as $submission){
+                            echo "<div class='task ss'>";
+                                if ($role != 'student') {
+                                    echo "<h4>Student: {$submission['name']}</h4>";
+                                }
+                                echo "<p>Title: {$submission['project_title']}</p>
+                                    <p>Status: {$submission['project_status']}</p>
+                                    <p>Category: {$submission['project_category']}</p>
+                                    <p>Submitted: {$submission['end_date']}</p>
+                                    </div>";
+                        }
+                        ?>
                     </div>
                 </div>
                 <!-- Quick Shortcuts Section -->
                 <div class="quick-shortcuts-section task-section">
                     <h2>Quick Shortcuts</h2>
                     <div class="task-container">
-                        <?php if ($_SESSION['role'] == 'student') { ?>
+                        <?php if ($role == 'student') { ?>
                             <div class="task">
                                 <a href="projecttimelineplanning">Project Timeline Planning</a>
                             </div>
@@ -196,7 +229,7 @@ $taskDates = getTaskDates($db);
                             <div class="task">
                                 <a href="submit-meeting-log">Submit Meeting Log</a>
                             </div>
-                        <?php } elseif($_SESSION['role'] == 'lecturer') { ?>
+                        <?php } elseif($role == 'lecturer') { ?>
                             <div class="task">
                                 <a href="supervisorprojecttimeline">Project Timeline Planning</a>
                             </div>

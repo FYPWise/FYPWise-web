@@ -52,9 +52,9 @@ $chat->loadChat('1');
 
                 </div>
 
-                <div class="main" id="send-message">    
-                    <textarea id="messagebox" type="text" name="message"> </textarea>
-                    <button id="sendbutton">Send</button>
+                <div id="send-message">    
+                    <textarea id="messagebox" type="text" name="message" placeholder="Write message here..."></textarea>
+                    <button id="sendbutton"></button>
                 </div>
             </div>
 
@@ -65,12 +65,9 @@ $chat->loadChat('1');
             
             let Gid = 0;
 
-            function scrollDown(){
-
-                setTimeout(function(){
-                    var outerContainer = document.getElementById("outer-container");
-                    outerContainer.scrollTop = outerContainer.scrollHeight + 100;
-                },450);
+            function scrollDown(e){
+                var outerContainer = document.getElementById("outer-container");
+                outerContainer.scrollTop = outerContainer.scrollHeight + 100;
             }
 
             let interval;
@@ -86,18 +83,19 @@ $chat->loadChat('1');
                         for (var i = 0; i < scripts.length; i++) {
                             eval(scripts[i].innerHTML); // Execute script code
                         }
+                        
                     }
                 };
+                xmlhttp.onloadend= function(e){
+                    scrollDown(e);
+                }
                 xmlhttp.open("GET", "openchat?id="+id+"&type="+type, true);
                 xmlhttp.send();
                 
                 interval = setInterval(function() {
                     Gid = id;
                     checkNewMessage(id, latestId);
-                    console.log(id);
                 }, 1000);
-
-                scrollDown();
                 }
             }
 
@@ -133,11 +131,14 @@ $chat->loadChat('1');
                             for (var i = 0; i < scripts.length; i++) {
                                 eval(scripts[i].innerHTML); // Execute script code
                             }
+
+                            if (this.responseText !== ''){
+                                scrollDown();
+                            }
                         }
                     };
                     xmlhttp.open("GET", "newMessage?id="+id+"&latest="+latest, true);
                     xmlhttp.send();
-                    
                     }
             }
 
@@ -146,7 +147,7 @@ $chat->loadChat('1');
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function(){
                     if (this.readyState == 4 && this.status == 200){
-                        document.getElementById("messagebox").value = this.responseText;
+                        document.getElementById("messagebox").value = "";
                     }
                 };
                 xmlhttp.open("GET", "sendMessage?content="+content+"&id="+id, true);
@@ -158,7 +159,16 @@ $chat->loadChat('1');
             sendbutton.addEventListener('click', function(e){
                 var content =document.getElementById('messagebox').value;
                 e.preventDefault();
-                sendMessage(content, Gid)
+                str = content.replace(/['<>*?]/g, "\\$&");
+                sendMessage(str, Gid)
+            });
+
+            var messageBox = document.getElementById("messagebox");
+
+            messageBox.addEventListener("keypress", function(event){
+                if (event.key == "Enter"){
+                    sendbutton.click();
+                }
             });
         </script>
 

@@ -7,6 +7,20 @@ $base = new Base("Manage Announcement", "admin");
 $ann = new Announcement();
 
 $announcements = $ann->find();
+
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    $status = $_GET['status'];
+    $title = $_GET['title'];
+    $description = $_GET['description'];
+
+    if ($ann->update($id, $title, $description, $status)) {
+        echo'
+        <script> alert("Announcement Successfully Updated") </script>
+        ';
+        header('location:/FYPWise-web/manage-announcements?view='.$id);
+    }
+}
 ?>
 
 <head>
@@ -94,6 +108,49 @@ $announcements = $ann->find();
                 cell.classList.add('unpublished'); // Add 'unpublished' class
             }
         });
+
+        var editbtn = document.getElementById("edit-btn");
+        var savebtn = document.getElementById("save-btn");
+        var cancelbtn = document.getElementById("cancel-btn");
+        var textAreas = document.getElementsByTagName("textarea");
+        var titleInput = document.getElementById("announcement-title");
+        var statusSelect = document.getElementById("status");
+
+        function edit(){
+            enable(savebtn);
+            enable(cancelbtn);
+            disable(editbtn);
+
+            for (i = 0; i< textAreas.length; i++){
+                enable(textAreas[i]);
+            }
+            
+            enable(statusSelect);
+            enable(titleInput);
+        }
+
+        function cancel(){
+            location.reload();
+        }
+
+        function enable(btn){
+            btn.removeAttribute("disabled");
+        }
+
+        function disable(btn){
+            btn.setAttribute("disabled", "true");
+        }
+
+        editbtn.onclick = function(e){
+            e.preventDefault();
+            edit();
+        }
+
+        cancelbtn.onclick = function(e){
+            e.preventDefault();
+            cancel();
+        }
+
     </script>
 </body>
 

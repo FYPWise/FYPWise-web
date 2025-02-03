@@ -241,13 +241,33 @@ body:has(.menubutton > input:checked) #chat-container {
   margin-left: auto;
 }
 
-#send-message{
-  position: absolute;
-  bottom: 0;
+#send-message {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+    padding-left: 250px;
+    display: flex;
+    align-items: end;
 }
 
 #messagebox{
   resize: none;
+  width: 98%;
+  max-height: 40px;
+  border: 1px solid black;
+  font-size: 0.9rem;
+  padding: 10px 10px;
+}
+
+#sendbutton{
+  min-width: 40px;
+  height: 40px;
+  background:transparent;
+  background-image: url("/FYPWise-web/src/assets/send-icon.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 650px) {

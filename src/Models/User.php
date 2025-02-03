@@ -136,6 +136,10 @@ class User{
         $password = $this->db->escapeString($_POST['password']);
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
+        if ($this->readId($id) ){
+            return false;
+        }else{
+
         switch ($role) {
             case 'student':
                 $specialization = $this->db->escapeString($_POST['specialization']);
@@ -157,8 +161,10 @@ class User{
             
             echo $tableSql;
             $this->db->query($tableSql);
+            return true;
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->conn->error;
+        }
         }
     }
 

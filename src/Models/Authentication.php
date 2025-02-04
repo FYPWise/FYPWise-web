@@ -57,6 +57,8 @@ class Authentication{
                     $_SESSION["project_description"] = $projectRow['project_description'];
                     $_SESSION["project_status"] = $projectRow['project_status'];
                     $_SESSION["project_proposalID"] = $projectRow['proposalID'];
+                }  else {
+                    $_SESSION["projectID"] = 0;
                 }
 
                 header('location:dashboard');

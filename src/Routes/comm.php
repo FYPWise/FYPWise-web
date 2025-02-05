@@ -8,3 +8,4 @@ $commRoutes->get("/FYPWise-web/communication", "Pages/communication/comm-page.ph
 $commRoutes->get("/FYPWise-web/openchat", "Pages/communication/openchat.php");
 $commRoutes->get("/FYPWise-web/newMessage", "Pages/communication/newMessage.php");
 $commRoutes->get("/FYPWise-web/sendMessage", "Pages/communication/sendMessage.php");
+?>

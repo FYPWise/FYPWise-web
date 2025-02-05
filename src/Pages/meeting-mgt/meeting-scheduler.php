@@ -12,6 +12,7 @@ $db = new Db();
 $base = new Base("Schedule a Meeting", ["lecturer", "student"]);
 $meeting = new Meeting($db);
 $userID = $_SESSION['mySession'];
+$role = $_SESSION['role'];
 
 $successMessage = "";
 $errorMessage = "";
@@ -201,6 +202,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                                     const hiddenInput = document.getElementById("participants");
 
                                     let selectedIds = [];
+                                    selectedIds.push(<?php echo $userID ?>);
+                                    update();
+                                    function update(){
+                                        // Update the selected participants list
+                                        selectedParticipantsList.innerHTML = "";
+                                        selectedIds.forEach(id => {
+                                            let selectedText = document.querySelector(`.participant[data-id='${id}']`).textContent;
+                                            let li = document.createElement("li");
+                                            li.textContent = selectedText;
+                                            selectedParticipantsList.appendChild(li);
+                                        });
+
+                                        // If no participants are selected, show a placeholder message
+                                        if (selectedIds.length === 0) {
+                                            selectedParticipantsList.innerHTML = "<li>No participants selected</li>";
+                                        }
+                                    };
 
                                     // Search functionality
                                     searchInput.addEventListener("input", function () {
@@ -232,20 +250,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
                                             // Update the hidden input value
                                             hiddenInput.value = selectedIds.join(",");
-
-                                            // Update the selected participants list
-                                            selectedParticipantsList.innerHTML = "";
-                                            selectedIds.forEach(id => {
-                                                let selectedText = document.querySelector(`.participant[data-id='${id}']`).textContent;
-                                                let li = document.createElement("li");
-                                                li.textContent = selectedText;
-                                                selectedParticipantsList.appendChild(li);
-                                            });
-
-                                            // If no participants are selected, show a placeholder message
-                                            if (selectedIds.length === 0) {
-                                                selectedParticipantsList.innerHTML = "<li>No participants selected</li>";
-                                            }
+                                            update();
+                                            
                                         });
                                     });
                                 });

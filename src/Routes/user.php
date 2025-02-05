@@ -16,3 +16,4 @@ $userRoutes->post("/FYPWise-web/dashboard","Pages/user-management/user-dashboard
 $userRoutes->get("/FYPWise-web/profilemanagement","Pages/user-management/profile-mgt-page.php");
 $userRoutes->get("/FYPWise-web/profileedit","Pages/user-management/profile-edit-page.php");
 $userRoutes->post("/FYPWise-web/profileedit","Pages/user-management/profile-edit-page.php");
+?>

@@ -14,3 +14,4 @@ $proposalRoutes->post("/FYPWise-web/proposal/([0-9]+)", function($proposalID) {
 });
 $proposalRoutes->get("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/proposal-submission-page.php");
 $proposalRoutes->post("/FYPWise-web/submit-proposal", "Pages/project-proposal-mgt/proposal-submission-page.php");
+?>

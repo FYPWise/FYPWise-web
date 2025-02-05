@@ -40,3 +40,4 @@ include "project.php";
 $router->include($project);
 
 $router->dispatch();
+?>

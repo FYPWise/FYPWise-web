@@ -21,3 +21,4 @@ class SideMenu{
         include __DIR__ . $this->sideMenu;
     }
 }
+?>

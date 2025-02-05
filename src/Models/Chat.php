@@ -121,3 +121,4 @@ class Chat{
         $result = $this->db->query($sql);
     }
 }
+?>

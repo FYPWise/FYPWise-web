@@ -80,3 +80,4 @@ class Authentication{
         return isset($_SESSION['mySession']);
     }
 }
+?>

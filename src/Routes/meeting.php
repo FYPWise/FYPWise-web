@@ -36,3 +36,4 @@ $meetingRoutes->get("/FYPWise-web/view-presentation-details/([0-9]+)", function(
 $meetingRoutes->post("/FYPWise-web/view-presentation-details/([0-9]+)", function($presentationID) {
     include "src/Pages/meeting-mgt/presentation-details.php";
 });
+?>

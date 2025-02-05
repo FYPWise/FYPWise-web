@@ -16,3 +16,4 @@ $marksheetRoutes->get("/FYPWise-web/marksheetdetails/([0-9]+)", function($marksh
     $_GET['marksheetID'] = $marksheetID; 
     include "src/Pages/marksheet-mgt/marksheetdetails.php";
 });
+?>
